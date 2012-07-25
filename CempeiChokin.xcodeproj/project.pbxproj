@@ -37,20 +37,20 @@
 		E98EA59315BFB8A10019AED5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E98EA59515BFB8A10019AED5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E98EA59715BFB8A10019AED5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		E98EA59B15BFB8A10019AED5 /* CempeiChokin-Info.plist */ = {isa = PBXFileReference; path = "CempeiChokin-Info.plist"; sourceTree = "<group>"; };
+		E98EA59B15BFB8A10019AED5 /* CempeiChokin-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CempeiChokin-Info.plist"; sourceTree = "<group>"; };
 		E98EA59D15BFB8A10019AED5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E98EA59F15BFB8A10019AED5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		E98EA5A115BFB8A10019AED5 /* CempeiChokin-Prefix.pch */ = {isa = PBXFileReference; path = "CempeiChokin-Prefix.pch"; sourceTree = "<group>"; };
-		E98EA5A215BFB8A10019AED5 /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		E98EA5A115BFB8A10019AED5 /* CempeiChokin-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CempeiChokin-Prefix.pch"; sourceTree = "<group>"; };
+		E98EA5A215BFB8A10019AED5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E98EA5A315BFB8A10019AED5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		E98EA5A615BFB8A10019AED5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		E98EA5A815BFB8A10019AED5 /* ViewController.h */ = {isa = PBXFileReference; path = ViewController.h; sourceTree = "<group>"; };
+		E98EA5A815BFB8A10019AED5 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		E98EA5A915BFB8A10019AED5 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		E98EA5B015BFB8A20019AED5 /* CempeiChokinTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CempeiChokinTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E98EA5B115BFB8A20019AED5 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		E98EA5B915BFB8A20019AED5 /* CempeiChokinTests-Info.plist */ = {isa = PBXFileReference; path = "CempeiChokinTests-Info.plist"; sourceTree = "<group>"; };
+		E98EA5B915BFB8A20019AED5 /* CempeiChokinTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CempeiChokinTests-Info.plist"; sourceTree = "<group>"; };
 		E98EA5BB15BFB8A20019AED5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		E98EA5BD15BFB8A20019AED5 /* CempeiChokinTests.h */ = {isa = PBXFileReference; path = CempeiChokinTests.h; sourceTree = "<group>"; };
+		E98EA5BD15BFB8A20019AED5 /* CempeiChokinTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CempeiChokinTests.h; sourceTree = "<group>"; };
 		E98EA5BE15BFB8A20019AED5 /* CempeiChokinTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CempeiChokinTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
