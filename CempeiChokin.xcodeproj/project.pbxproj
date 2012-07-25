@@ -1,0 +1,445 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E98EA59415BFB8A10019AED5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98EA59315BFB8A10019AED5 /* UIKit.framework */; };
+		E98EA59615BFB8A10019AED5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98EA59515BFB8A10019AED5 /* Foundation.framework */; };
+		E98EA59815BFB8A10019AED5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98EA59715BFB8A10019AED5 /* CoreGraphics.framework */; };
+		E98EA59E15BFB8A10019AED5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E98EA59C15BFB8A10019AED5 /* InfoPlist.strings */; };
+		E98EA5A015BFB8A10019AED5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E98EA59F15BFB8A10019AED5 /* main.m */; };
+		E98EA5A415BFB8A10019AED5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E98EA5A315BFB8A10019AED5 /* AppDelegate.m */; };
+		E98EA5A715BFB8A10019AED5 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E98EA5A515BFB8A10019AED5 /* MainStoryboard.storyboard */; };
+		E98EA5AA15BFB8A10019AED5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E98EA5A915BFB8A10019AED5 /* ViewController.m */; };
+		E98EA5B215BFB8A20019AED5 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98EA5B115BFB8A20019AED5 /* SenTestingKit.framework */; };
+		E98EA5B315BFB8A20019AED5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98EA59315BFB8A10019AED5 /* UIKit.framework */; };
+		E98EA5B415BFB8A20019AED5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98EA59515BFB8A10019AED5 /* Foundation.framework */; };
+		E98EA5BC15BFB8A20019AED5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E98EA5BA15BFB8A20019AED5 /* InfoPlist.strings */; };
+		E98EA5BF15BFB8A20019AED5 /* CempeiChokinTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E98EA5BE15BFB8A20019AED5 /* CempeiChokinTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E98EA5B515BFB8A20019AED5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E98EA58615BFB8A10019AED5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E98EA58E15BFB8A10019AED5;
+			remoteInfo = CempeiChokin;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		E98EA58F15BFB8A10019AED5 /* CempeiChokin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CempeiChokin.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E98EA59315BFB8A10019AED5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		E98EA59515BFB8A10019AED5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		E98EA59715BFB8A10019AED5 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		E98EA59B15BFB8A10019AED5 /* CempeiChokin-Info.plist */ = {isa = PBXFileReference; path = "CempeiChokin-Info.plist"; sourceTree = "<group>"; };
+		E98EA59D15BFB8A10019AED5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E98EA59F15BFB8A10019AED5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E98EA5A115BFB8A10019AED5 /* CempeiChokin-Prefix.pch */ = {isa = PBXFileReference; path = "CempeiChokin-Prefix.pch"; sourceTree = "<group>"; };
+		E98EA5A215BFB8A10019AED5 /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		E98EA5A315BFB8A10019AED5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		E98EA5A615BFB8A10019AED5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		E98EA5A815BFB8A10019AED5 /* ViewController.h */ = {isa = PBXFileReference; path = ViewController.h; sourceTree = "<group>"; };
+		E98EA5A915BFB8A10019AED5 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		E98EA5B015BFB8A20019AED5 /* CempeiChokinTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CempeiChokinTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E98EA5B115BFB8A20019AED5 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		E98EA5B915BFB8A20019AED5 /* CempeiChokinTests-Info.plist */ = {isa = PBXFileReference; path = "CempeiChokinTests-Info.plist"; sourceTree = "<group>"; };
+		E98EA5BB15BFB8A20019AED5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E98EA5BD15BFB8A20019AED5 /* CempeiChokinTests.h */ = {isa = PBXFileReference; path = CempeiChokinTests.h; sourceTree = "<group>"; };
+		E98EA5BE15BFB8A20019AED5 /* CempeiChokinTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CempeiChokinTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E98EA58C15BFB8A10019AED5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E98EA59415BFB8A10019AED5 /* UIKit.framework in Frameworks */,
+				E98EA59615BFB8A10019AED5 /* Foundation.framework in Frameworks */,
+				E98EA59815BFB8A10019AED5 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E98EA5AC15BFB8A10019AED5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E98EA5B215BFB8A20019AED5 /* SenTestingKit.framework in Frameworks */,
+				E98EA5B315BFB8A20019AED5 /* UIKit.framework in Frameworks */,
+				E98EA5B415BFB8A20019AED5 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E98EA58415BFB8A10019AED5 = {
+			isa = PBXGroup;
+			children = (
+				E98EA59915BFB8A10019AED5 /* CempeiChokin */,
+				E98EA5B715BFB8A20019AED5 /* CempeiChokinTests */,
+				E98EA59215BFB8A10019AED5 /* Frameworks */,
+				E98EA59015BFB8A10019AED5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E98EA59015BFB8A10019AED5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E98EA58F15BFB8A10019AED5 /* CempeiChokin.app */,
+				E98EA5B015BFB8A20019AED5 /* CempeiChokinTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E98EA59215BFB8A10019AED5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E98EA59315BFB8A10019AED5 /* UIKit.framework */,
+				E98EA59515BFB8A10019AED5 /* Foundation.framework */,
+				E98EA59715BFB8A10019AED5 /* CoreGraphics.framework */,
+				E98EA5B115BFB8A20019AED5 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E98EA59915BFB8A10019AED5 /* CempeiChokin */ = {
+			isa = PBXGroup;
+			children = (
+				E98EA5A215BFB8A10019AED5 /* AppDelegate.h */,
+				E98EA5A315BFB8A10019AED5 /* AppDelegate.m */,
+				E98EA5A515BFB8A10019AED5 /* MainStoryboard.storyboard */,
+				E98EA5A815BFB8A10019AED5 /* ViewController.h */,
+				E98EA5A915BFB8A10019AED5 /* ViewController.m */,
+				E98EA59A15BFB8A10019AED5 /* Supporting Files */,
+			);
+			path = CempeiChokin;
+			sourceTree = "<group>";
+		};
+		E98EA59A15BFB8A10019AED5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E98EA59B15BFB8A10019AED5 /* CempeiChokin-Info.plist */,
+				E98EA59C15BFB8A10019AED5 /* InfoPlist.strings */,
+				E98EA59F15BFB8A10019AED5 /* main.m */,
+				E98EA5A115BFB8A10019AED5 /* CempeiChokin-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E98EA5B715BFB8A20019AED5 /* CempeiChokinTests */ = {
+			isa = PBXGroup;
+			children = (
+				E98EA5BD15BFB8A20019AED5 /* CempeiChokinTests.h */,
+				E98EA5BE15BFB8A20019AED5 /* CempeiChokinTests.m */,
+				E98EA5B815BFB8A20019AED5 /* Supporting Files */,
+			);
+			path = CempeiChokinTests;
+			sourceTree = "<group>";
+		};
+		E98EA5B815BFB8A20019AED5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E98EA5B915BFB8A20019AED5 /* CempeiChokinTests-Info.plist */,
+				E98EA5BA15BFB8A20019AED5 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E98EA58E15BFB8A10019AED5 /* CempeiChokin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E98EA5C215BFB8A20019AED5 /* Build configuration list for PBXNativeTarget "CempeiChokin" */;
+			buildPhases = (
+				E98EA58B15BFB8A10019AED5 /* Sources */,
+				E98EA58C15BFB8A10019AED5 /* Frameworks */,
+				E98EA58D15BFB8A10019AED5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CempeiChokin;
+			productName = CempeiChokin;
+			productReference = E98EA58F15BFB8A10019AED5 /* CempeiChokin.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E98EA5AF15BFB8A10019AED5 /* CempeiChokinTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E98EA5C515BFB8A20019AED5 /* Build configuration list for PBXNativeTarget "CempeiChokinTests" */;
+			buildPhases = (
+				E98EA5AB15BFB8A10019AED5 /* Sources */,
+				E98EA5AC15BFB8A10019AED5 /* Frameworks */,
+				E98EA5AD15BFB8A10019AED5 /* Resources */,
+				E98EA5AE15BFB8A10019AED5 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E98EA5B615BFB8A20019AED5 /* PBXTargetDependency */,
+			);
+			name = CempeiChokinTests;
+			productName = CempeiChokinTests;
+			productReference = E98EA5B015BFB8A20019AED5 /* CempeiChokinTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E98EA58615BFB8A10019AED5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "Nakano Asami";
+			};
+			buildConfigurationList = E98EA58915BFB8A10019AED5 /* Build configuration list for PBXProject "CempeiChokin" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = E98EA58415BFB8A10019AED5;
+			productRefGroup = E98EA59015BFB8A10019AED5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E98EA58E15BFB8A10019AED5 /* CempeiChokin */,
+				E98EA5AF15BFB8A10019AED5 /* CempeiChokinTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E98EA58D15BFB8A10019AED5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E98EA59E15BFB8A10019AED5 /* InfoPlist.strings in Resources */,
+				E98EA5A715BFB8A10019AED5 /* MainStoryboard.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E98EA5AD15BFB8A10019AED5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E98EA5BC15BFB8A20019AED5 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E98EA5AE15BFB8A10019AED5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E98EA58B15BFB8A10019AED5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E98EA5A015BFB8A10019AED5 /* main.m in Sources */,
+				E98EA5A415BFB8A10019AED5 /* AppDelegate.m in Sources */,
+				E98EA5AA15BFB8A10019AED5 /* ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E98EA5AB15BFB8A10019AED5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E98EA5BF15BFB8A20019AED5 /* CempeiChokinTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E98EA5B615BFB8A20019AED5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E98EA58E15BFB8A10019AED5 /* CempeiChokin */;
+			targetProxy = E98EA5B515BFB8A20019AED5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E98EA59C15BFB8A10019AED5 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E98EA59D15BFB8A10019AED5 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		E98EA5A515BFB8A10019AED5 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E98EA5A615BFB8A10019AED5 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+		E98EA5BA15BFB8A20019AED5 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E98EA5BB15BFB8A20019AED5 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E98EA5C015BFB8A20019AED5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		E98EA5C115BFB8A20019AED5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E98EA5C315BFB8A20019AED5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CempeiChokin/CempeiChokin-Prefix.pch";
+				INFOPLIST_FILE = "CempeiChokin/CempeiChokin-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		E98EA5C415BFB8A20019AED5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CempeiChokin/CempeiChokin-Prefix.pch";
+				INFOPLIST_FILE = "CempeiChokin/CempeiChokin-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		E98EA5C615BFB8A20019AED5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CempeiChokin.app/CempeiChokin";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CempeiChokin/CempeiChokin-Prefix.pch";
+				INFOPLIST_FILE = "CempeiChokinTests/CempeiChokinTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		E98EA5C715BFB8A20019AED5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CempeiChokin.app/CempeiChokin";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CempeiChokin/CempeiChokin-Prefix.pch";
+				INFOPLIST_FILE = "CempeiChokinTests/CempeiChokinTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E98EA58915BFB8A10019AED5 /* Build configuration list for PBXProject "CempeiChokin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E98EA5C015BFB8A20019AED5 /* Debug */,
+				E98EA5C115BFB8A20019AED5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E98EA5C215BFB8A20019AED5 /* Build configuration list for PBXNativeTarget "CempeiChokin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E98EA5C315BFB8A20019AED5 /* Debug */,
+				E98EA5C415BFB8A20019AED5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		E98EA5C515BFB8A20019AED5 /* Build configuration list for PBXNativeTarget "CempeiChokinTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E98EA5C615BFB8A20019AED5 /* Debug */,
+				E98EA5C715BFB8A20019AED5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E98EA58615BFB8A10019AED5 /* Project object */;
+}
