@@ -17,6 +17,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
