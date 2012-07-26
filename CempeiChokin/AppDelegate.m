@@ -2,8 +2,8 @@
 //  AppDelegate.m
 //  CempeiChokin
 //
-//  Created by Asami Nakano on 12/07/25.
-//  Copyright (c) 2012年 Nakano Asami. All rights reserved.
+//  Created by CEMPEI on 12/07/25.
+//  Copyright (c) 2012年 CEMPEI. All rights reserved.
 //
 
 #import "AppDelegate.h"
