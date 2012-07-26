@@ -20,6 +20,7 @@
 		E98EA5B415BFB8A20019AED5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98EA59515BFB8A10019AED5 /* Foundation.framework */; };
 		E98EA5BC15BFB8A20019AED5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E98EA5BA15BFB8A20019AED5 /* InfoPlist.strings */; };
 		E98EA5BF15BFB8A20019AED5 /* CempeiChokinTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E98EA5BE15BFB8A20019AED5 /* CempeiChokinTests.m */; };
+		E98EA5CC15BFC9E80019AED5 /* graph.png in Resources */ = {isa = PBXBuildFile; fileRef = E98EA5CB15BFC9E80019AED5 /* graph.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		E98EA5BB15BFB8A20019AED5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E98EA5BD15BFB8A20019AED5 /* CempeiChokinTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CempeiChokinTests.h; sourceTree = "<group>"; };
 		E98EA5BE15BFB8A20019AED5 /* CempeiChokinTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CempeiChokinTests.m; sourceTree = "<group>"; };
+		E98EA5CB15BFC9E80019AED5 /* graph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = graph.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 		E98EA59915BFB8A10019AED5 /* CempeiChokin */ = {
 			isa = PBXGroup;
 			children = (
+				E98EA5C915BFC97C0019AED5 /* Resource */,
 				E98EA5A215BFB8A10019AED5 /* AppDelegate.h */,
 				E98EA5A315BFB8A10019AED5 /* AppDelegate.m */,
 				E98EA5A515BFB8A10019AED5 /* MainStoryboard.storyboard */,
@@ -149,6 +152,22 @@
 				E98EA5BA15BFB8A20019AED5 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E98EA5C915BFC97C0019AED5 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				E98EA5CA15BFC9BE0019AED5 /* Image */,
+			);
+			name = Resource;
+			sourceTree = "<group>";
+		};
+		E98EA5CA15BFC9BE0019AED5 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				E98EA5CB15BFC9E80019AED5 /* graph.png */,
+			);
+			name = Image;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -224,6 +243,7 @@
 			files = (
 				E98EA59E15BFB8A10019AED5 /* InfoPlist.strings in Resources */,
 				E98EA5A715BFB8A10019AED5 /* MainStoryboard.storyboard in Resources */,
+				E98EA5CC15BFC9E80019AED5 /* graph.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
