@@ -12,6 +12,7 @@
 		E95EED9E15C26D8D00F2A89E /* BudgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EED9D15C26D8D00F2A89E /* BudgetViewController.m */; };
 		E95EEDA415C26EAB00F2A89E /* GoalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EEDA315C26EAB00F2A89E /* GoalViewController.m */; };
 		E95EEDA715C270B700F2A89E /* DepositViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EEDA615C270B700F2A89E /* DepositViewController.m */; };
+		E95EEDAA15C273B200F2A89E /* Methods.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EEDA915C273B200F2A89E /* Methods.m */; };
 		E98EA59415BFB8A10019AED5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98EA59315BFB8A10019AED5 /* UIKit.framework */; };
 		E98EA59615BFB8A10019AED5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98EA59515BFB8A10019AED5 /* Foundation.framework */; };
 		E98EA59815BFB8A10019AED5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98EA59715BFB8A10019AED5 /* CoreGraphics.framework */; };
@@ -48,6 +49,8 @@
 		E95EEDA315C26EAB00F2A89E /* GoalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalViewController.m; sourceTree = "<group>"; };
 		E95EEDA515C270B700F2A89E /* DepositViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DepositViewController.h; sourceTree = "<group>"; };
 		E95EEDA615C270B700F2A89E /* DepositViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DepositViewController.m; sourceTree = "<group>"; };
+		E95EEDA815C273B200F2A89E /* Methods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Methods.h; sourceTree = "<group>"; };
+		E95EEDA915C273B200F2A89E /* Methods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Methods.m; sourceTree = "<group>"; };
 		E98EA58F15BFB8A10019AED5 /* CempeiChokin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CempeiChokin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E98EA59315BFB8A10019AED5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E98EA59515BFB8A10019AED5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -210,6 +213,8 @@
 		E9B4BC4F15C235DC00E92B3D /* AddMethods */ = {
 			isa = PBXGroup;
 			children = (
+				E95EEDA815C273B200F2A89E /* Methods.h */,
+				E95EEDA915C273B200F2A89E /* Methods.m */,
 			);
 			name = AddMethods;
 			sourceTree = "<group>";
@@ -329,6 +334,7 @@
 				E95EED9E15C26D8D00F2A89E /* BudgetViewController.m in Sources */,
 				E95EEDA415C26EAB00F2A89E /* GoalViewController.m in Sources */,
 				E95EEDA715C270B700F2A89E /* DepositViewController.m in Sources */,
+				E95EEDAA15C273B200F2A89E /* Methods.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
