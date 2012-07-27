@@ -8,7 +8,10 @@
 
 #import "GoalViewController.h"
 
-@interface GoalViewController ()
+@interface GoalViewController (){
+    @private
+    NSString *tempValue; // 金額の保持に使う
+}
 @end
 
 @implementation GoalViewController
@@ -26,23 +29,14 @@
 {
     [super viewDidLoad];
     
-    // Numberpadが表示された時にキャンセルと完了のボタンがあるツールバーを表示させる
-    // Toolbarの設定
     UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
     numberToolbar.barStyle = UIBarStyleBlackTranslucent;
-    // Barの上にキャンセルとバント完了ボタンを追加する
     numberToolbar.items = @[[[UIBarButtonItem alloc]initWithTitle:@"キャンセル" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelNumberPad)],
                            [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-                           [[UIBarButtonItem alloc]initWithTitle:@"次へ" style:UIBarButtonItemStyleDone target:self action:@selector(doneWithNumberPad)]];
+                           [[UIBarButtonItem alloc]initWithTitle:@"完了" style:UIBarButtonItemStyleDone target:self action:@selector(doneWithNumberPad)]];
     [numberToolbar sizeToFit];
     ValueTextField.inputAccessoryView = numberToolbar;
-    // Toolbarの設定ここまで
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewDidUnload
@@ -61,9 +55,8 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-// 名前の設定
 - (IBAction)NameTextField_end:(id)sender {
-    // いつかここに値を保存する処理を書こう
+    // TODO: いつかここに値を保存する処理を書こう
     [ValueTextField becomeFirstResponder];  //ValueTextFieldに移動
 }
 
@@ -71,41 +64,50 @@
 - (IBAction)ValueTextField_begin:(id)sender {
     // 既に値が入力されていた場合，表示されている値を数値に戻す (例)10,000円→10000
     if([ValueTextField.text hasSuffix:@"円"]){
-        NSString *tempValue;
         tempValue = ValueTextField.text;
-        tempValue = [tempValue substringToIndex:[tempValue length]-1];
+        NSString *tempValue2 = [tempValue substringToIndex:[tempValue length]-1]; // 円を消す(=語尾から一文字消す)
         NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
         [fmt setPositiveFormat:@"#,##0"];
-        NSNumber *temp = [fmt numberFromString:tempValue];
-        ValueTextField.text = [NSString stringWithFormat:@"%@",temp];
+        NSNumber *temp = [fmt numberFromString:tempValue2];            // ,を消す感じにする
+        ValueTextField.text = [NSString stringWithFormat:@"%@",temp];  // 消していく
     }
 }
 
 - (IBAction)ValueTextField_end:(id)sender {
-    // いつかここに値を保存する処理を書こう
+    // TODO: いつかここに値を保存する処理を書こう
     [PeriodTextField becomeFirstResponder];  //PeriodTextFieldに移動したい
 }
 
-//  期間の設定
+// 期間の設定
 - (IBAction)PeriodTextField_end:(id)sender {
-    //ここでドラムを隠す
+    // TODO: ここでドラムを隠す
 }
 
-// Numberpadに追加したキャンセルボタンの動作
+
+
 -(void)cancelNumberPad{
+    // 既に値が入っていた場合
+    if(tempValue != @"")
+        ValueTextField.text = tempValue;   // 元に戻す
+    // そうでもなかった場合
+    else
+        ValueTextField.text = @"";         // 値を消す
     [ValueTextField resignFirstResponder]; // NumberPad消す(=テキストフィールドを選択していない状態にする)
-    ValueTextField.text = @"";             // で，値を消す
 }
 
-// 完了ボタンの動作
 -(void)doneWithNumberPad{
+    // 値が入っている場合
+    if([ValueTextField.text length] >= 1) {
+        NSNumber *value = [NSNumber numberWithInt:[ValueTextField.text intValue]]; // 文字を数値に変換
+        NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];                 // 形式変えるアレ
+        [fmt setPositiveFormat:@"#,##0"];                                          // 形式の指定
+        NSString *temp = [fmt stringForObjectValue:value];                         // アレ
+        ValueTextField.text = [NSString stringWithFormat:@"%@円",temp];            // 表示変える
+        // TODO: いつかここに値を保存する処理を書こう
+        // ???: ていうかここに移動するPeriodTextFieldに移動する処理書くんじゃね？
+    }
     [ValueTextField resignFirstResponder];                                     // NumberPad消す
-    NSNumber *value = [NSNumber numberWithInt:[ValueTextField.text intValue]]; // テキストフィールドの文字を数値に変換
-    NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];                 // 形式変えるアレ
-    [fmt setPositiveFormat:@"#,##0"];                                          // 形式の指定
-    NSString *temp = [fmt stringForObjectValue:value];                         // アレ
-    ValueTextField.text = [NSString stringWithFormat:@"%@円",temp];            // 表示変える
-    // いつかここに値を保存する処理を書こう
 }
+
 
 @end
