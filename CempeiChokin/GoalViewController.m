@@ -31,7 +31,7 @@
     numberToolbar.barStyle = UIBarStyleBlackTranslucent;
     numberToolbar.items = @[[[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelNumberPad)],
                            [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
-                           [[UIBarButtonItem alloc]initWithTitle:@"Apply" style:UIBarButtonItemStyleDone target:self action:@selector(doneWithNumberPad)]];
+                           [[UIBarButtonItem alloc]initWithTitle:@"Next" style:UIBarButtonItemStyleDone target:self action:@selector(doneWithNumberPad)]];
     [numberToolbar sizeToFit];
     ValueTextField.inputAccessoryView = numberToolbar;
     
@@ -62,10 +62,6 @@
     [ValueTextField becomeFirstResponder];  //ValueTextFieldに移動
 }
 
-- (IBAction)ValueTextField_end:(id)sender {
-    [PeriodTextField becomeFirstResponder];  //PeriodTextFieldに移動したい
-}
-
 - (IBAction)PeriodTextField_end:(id)sender {
     //ここでドラムを隠す
 }
@@ -80,7 +76,15 @@
 -(void)doneWithNumberPad{
     //NSString *numberFromTheKeyboard = ValueTextField.text;
     [ValueTextField resignFirstResponder];
+    [PeriodTextField becomeFirstResponder];  //PeriodTextFieldに移動したい
 }
-
+/*
+ 
+ NSNumber *val = @10000;
+ NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
+ [fmt setPositiveFormat:@"#,##0.00;0.00;-#,##0.00"];
+ NSString *str = [fmt stringForObjectValue:val];
+ 
+ */
 
 @end
