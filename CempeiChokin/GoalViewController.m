@@ -8,10 +8,7 @@
 
 #import "GoalViewController.h"
 
-@interface GoalViewController (){
-    @private
-    NSString *tempValue;
-}
+@interface GoalViewController ()
 @end
 
 @implementation GoalViewController
@@ -64,13 +61,17 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+// 名前の設定
 - (IBAction)NameTextField_end:(id)sender {
+    // いつかここに値を保存する処理を書こう
     [ValueTextField becomeFirstResponder];  //ValueTextFieldに移動
 }
 
+// 金額の設定
 - (IBAction)ValueTextField_begin:(id)sender {
     // 既に値が入力されていた場合，表示されている値を数値に戻す (例)10,000円→10000
     if([ValueTextField.text hasSuffix:@"円"]){
+        NSString *tempValue;
         tempValue = ValueTextField.text;
         tempValue = [tempValue substringToIndex:[tempValue length]-1];
         NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
@@ -81,9 +82,11 @@
 }
 
 - (IBAction)ValueTextField_end:(id)sender {
+    // いつかここに値を保存する処理を書こう
     [PeriodTextField becomeFirstResponder];  //PeriodTextFieldに移動したい
 }
 
+//  期間の設定
 - (IBAction)PeriodTextField_end:(id)sender {
     //ここでドラムを隠す
 }
@@ -96,15 +99,13 @@
 
 // 完了ボタンの動作
 -(void)doneWithNumberPad{
-    [ValueTextField resignFirstResponder]; // NumberPad消す(=テキストフィールドを選択していない状態にする)
-    NSNumber *value = [NSNumber numberWithInt:[ValueTextField.text intValue]];                  // テキストフィールドの文字を数値に変換
-    NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];                                  // 形式変えるアレ
-    [fmt setPositiveFormat:@"#,##0"];                                                           // 形式の指定
-    NSString *temp = [fmt stringForObjectValue:value];                                          // アレ
-    ValueTextField.text = [NSString stringWithFormat:@"%@円",temp];                             // 表示変える
+    [ValueTextField resignFirstResponder];                                     // NumberPad消す
+    NSNumber *value = [NSNumber numberWithInt:[ValueTextField.text intValue]]; // テキストフィールドの文字を数値に変換
+    NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];                 // 形式変えるアレ
+    [fmt setPositiveFormat:@"#,##0"];                                          // 形式の指定
+    NSString *temp = [fmt stringForObjectValue:value];                         // アレ
+    ValueTextField.text = [NSString stringWithFormat:@"%@円",temp];            // 表示変える
     // いつかここに値を保存する処理を書こう
-    // このままだともっかい押した時に点が残ってて許されない感じになるのでどうしよう
 }
-
 
 @end
