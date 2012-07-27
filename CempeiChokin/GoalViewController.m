@@ -9,7 +9,6 @@
 #import "GoalViewController.h"
 
 @interface GoalViewController ()
-
 @end
 
 @implementation GoalViewController
@@ -27,13 +26,17 @@
 {
     [super viewDidLoad];
     
+    // Numberpadが表示された時にキャンセルと完了のボタンがあるツールバーを表示させる
+    // Toolbarの設定
     UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
     numberToolbar.barStyle = UIBarStyleBlackTranslucent;
-    numberToolbar.items = @[[[UIBarButtonItem alloc]initWithTitle:@"Cancel" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelNumberPad)],
+    // Barの上にキャンセルとバント完了ボタンを追加する
+    numberToolbar.items = @[[[UIBarButtonItem alloc]initWithTitle:@"キャンセル" style:UIBarButtonItemStyleBordered target:self action:@selector(cancelNumberPad)],
                            [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
                            [[UIBarButtonItem alloc]initWithTitle:@"Next" style:UIBarButtonItemStyleDone target:self action:@selector(doneWithNumberPad)]];
     [numberToolbar sizeToFit];
     ValueTextField.inputAccessoryView = numberToolbar;
+    // Toolbarの設定ここまで
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -58,7 +61,9 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+// 名前の設定
 - (IBAction)NameTextField_end:(id)sender {
+    // いつかここに値を保存する処理を書こう
     [ValueTextField becomeFirstResponder];  //ValueTextFieldに移動
 }
 
@@ -66,13 +71,13 @@
     //ここでドラムを隠す
 }
 
-
-
+// Numberpadに追加したキャンセルボタンの動作
 -(void)cancelNumberPad{
-    [ValueTextField resignFirstResponder];
-    ValueTextField.text = @"";
+    [ValueTextField resignFirstResponder]; // NumberPad消す(=テキストフィールドを選択していない状態にする)
+    ValueTextField.text = @"";             // で，値を消す
 }
 
+// 完了ボタンの動作
 -(void)doneWithNumberPad{
     //NSString *numberFromTheKeyboard = ValueTextField.text;
     [ValueTextField resignFirstResponder];
