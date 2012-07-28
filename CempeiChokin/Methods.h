@@ -8,6 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Methods : NSObject
+@interface Methods : NSObject{
+
+}
+
+- (NSString *)addComma:(NSString *)number;
+- (NSString *)deleteComma:(NSString *)string;
 
 @end
