@@ -47,6 +47,8 @@
     ValueTextField = nil;
     PeriodTextField = nil;
     DoneButton = nil;
+    pickerView = nil;
+    PeriodDate = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -72,9 +74,23 @@
     }
 }
 
+- (IBAction)PeriodTextField_begin:(id)sender {
+    pickerView.hidden = 0;
+    [PeriodTextField resignFirstResponder];
+}
+
 // 期間の設定
 - (IBAction)PeriodTextField_end:(id)sender {
     // TODO: ここでドラムを隠す
+    pickerView.hidden = 1;
+}
+
+// FIXME: ここどうにかしないとアレ
+- (IBAction)PeriodTextField_Done:(id)sender {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat =@"yyyy年M月d日";
+    PeriodTextField.text = [formatter stringFromDate:PeriodDate.date];
+    pickerView.hidden = 1;
 }
 
 // Numberpadに追加したボタンの動作

@@ -17,10 +17,16 @@
     
     //ボタン
     __weak IBOutlet UIButton *DoneButton;           //完了
+    
+    //ビュー
+    __weak IBOutlet UIView *pickerView;
+    __weak IBOutlet UIDatePicker *PeriodDate;
 }
 
 - (IBAction)NameTextField_end:(id)sender;
 - (IBAction)ValueTextField_begin:(id)sender;
+- (IBAction)PeriodTextField_begin:(id)sender;
 - (IBAction)PeriodTextField_end:(id)sender;
+- (IBAction)PeriodTextField_Done:(id)sender;
 
 @end
