@@ -82,7 +82,6 @@
 // 期間の設定
 - (IBAction)PeriodTextField_end:(id)sender {
     // TODO: ここでドラムを隠す
-    pickerView.hidden = 1;
 }
 
 // FIXME: ここどうにかしないとアレ
@@ -108,6 +107,7 @@
     // 値が入っている場合
     if([ValueTextField.text length] >= 1) {
         ValueTextField.text = [NSString stringWithFormat:@"%@円",[_method addComma:ValueTextField.text]]; // 表示変える
+        [ValueTextField resignFirstResponder]; // NumberPad消す
         [PeriodTextField becomeFirstResponder]; // PeriodTextFieldに移動
     }
     [ValueTextField resignFirstResponder]; // NumberPad消す
