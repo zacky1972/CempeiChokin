@@ -36,6 +36,13 @@
 {
     [super viewDidLoad];
     _method = [Methods alloc];
+    
+    [_method loadData:nil];
+    if(1!=1){//もしデータを入力している場合
+    NameTextField.text = [_method loadName:nil];
+    ValueTextField.text = [_method loadValue:nil];
+    PeriodTextField.text = [_method loadPeriod:nil];
+    }
 }
 
 - (void)viewDidUnload
@@ -156,6 +163,10 @@
     [actionSheet addSubview: datePicker];
     [actionSheet showInView: self.view];
     [actionSheet setBounds: CGRectMake(0, 0, 320, 500)];
+}
+
+- (IBAction)DoneButton_down:(id)sender {
+    [_method saveName:NameTextField.text Value:ValueTextField.text Period:PeriodTextField.text]; // 保存する
 }
 
 // DatePickerが完了したときの

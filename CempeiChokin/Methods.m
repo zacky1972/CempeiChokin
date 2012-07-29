@@ -13,6 +13,27 @@
 
 @implementation Methods
 
+//Data.plistを読み込む
+- (void)loadData:(id)sender{
+    path = [[NSBundle mainBundle] pathForResource:@"Data" ofType:@"plist"];
+    root = [[NSDictionary alloc] initWithContentsOfFile:path];
+    goal = [root objectForKey:@"Goal"];
+    initgoal = [root objectForKey:@"InitGoal"];
+}
+
+
+//正直この3つはまとめたい
+- (NSString *)loadName:(id)sender{return [goal objectForKey:@"Name"];}//名前を読み込んで返す
+- (NSString *)loadValue:(id)sender{return [goal objectForKey:@"Value"];}//金額を読み込んで返す
+- (NSString *)loadPeriod:(id)sender{return [goal objectForKey:@"Period"];}//期限を読み込んで返す
+
+//目標のあれこれを一気に保存する
+- (void)saveName:(NSString *)name Value:(NSString *)value Period:(NSString *)period{
+    [goal setObject:@"Name" forKey:name];
+    [goal setObject:@"Value" forKey:value];
+    [goal setObject:@"Period" forKey:period];
+}
+
 // 10000 → 10,000 にするやつ
 - (NSString *)addComma:(NSString *)number{
     NSNumber *value = [NSNumber numberWithInt:[number intValue]];     // 文字を数値に変換
