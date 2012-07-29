@@ -658,7 +658,6 @@
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
                                                     <connections>
                                                         <action selector="ValueTextField_begin:" destination="NwY-zI-POI" eventType="editingDidBegin" id="5CL-ee-Pcv"/>
-                                                        <action selector="ValueTextField_end:" destination="NwY-zI-POI" eventType="editingDidEndOnExit" id="kD7-iL-yoO"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="金額" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="0JB-EP-nyF">
@@ -686,7 +685,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
-                                                        <action selector="PeriodTextField_end:" destination="NwY-zI-POI" eventType="editingDidEndOnExit" id="HJB-eN-mEa"/>
+                                                        <action selector="PeriodTextField_begin:" destination="NwY-zI-POI" eventType="editingDidBegin" id="8JR-lG-sR5"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="期間" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="I68-jf-m0t">
@@ -1137,9 +1136,8 @@
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalViewController.h"/>
             <relationships>
                 <relationship kind="action" name="NameTextField_end:"/>
-                <relationship kind="action" name="PeriodTextField_end:"/>
+                <relationship kind="action" name="PeriodTextField_begin:"/>
                 <relationship kind="action" name="ValueTextField_begin:"/>
-                <relationship kind="action" name="ValueTextField_end:"/>
                 <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="NameTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="PeriodTextField" candidateClass="UITextField"/>
