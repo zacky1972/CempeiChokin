@@ -81,11 +81,6 @@
     }
 }
 
-- (IBAction)ValueTextField_end:(id)sender {
-    // いつかここに値を保存する処理を書こう
-    [PeriodTextField becomeFirstResponder];  //PeriodTextFieldに移動したい
-}
-
 //  期間の設定
 - (IBAction)PeriodTextField_end:(id)sender {
     //ここでドラムを隠す
@@ -106,14 +101,7 @@
     NSString *temp = [fmt stringForObjectValue:value];                         // アレ
     ValueTextField.text = [NSString stringWithFormat:@"%@円",temp];            // 表示変える
     // いつかここに値を保存する処理を書こう
+    [PeriodTextField becomeFirstResponder];                                    // PeriodTextFieldに移動する
 }
-/*
- 
- NSNumber *val = @10000;
- NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];
- [fmt setPositiveFormat:@"#,##0.00;0.00;-#,##0.00"];
- NSString *str = [fmt stringForObjectValue:val];
- 
- */
 
 @end
