@@ -21,6 +21,6 @@
 
 - (IBAction)NameTextField_end:(id)sender;
 - (IBAction)ValueTextField_begin:(id)sender;
-- (IBAction)PeriodTextField_end:(id)sender;
+- (IBAction)PeriodTextField_begin:(id)sender;
 
 @end

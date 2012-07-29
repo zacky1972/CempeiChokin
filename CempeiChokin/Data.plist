@@ -2,23 +2,29 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Name</key>
-	<string></string>
-	<key>Value</key>
-	<integer>0</integer>
-	<key>Period</key>
-	<date>2012-07-27T15:18:29Z</date>
-	<key>Start</key>
-	<date>2012-07-27T15:22:16Z</date>
-	<key>Finish</key>
-	<date>2012-07-27T15:22:50Z</date>
+	<key>Now</key>
+	<dict>
+		<key>Start</key>
+		<date>2012-07-27T15:22:16Z</date>
+		<key>Finish</key>
+		<date>2012-07-27T15:22:50Z</date>
+		<key>Deposit</key>
+		<integer>0</integer>
+		<key>Budget</key>
+		<integer>0</integer>
+		<key>Norma</key>
+		<integer>0</integer>
+	</dict>
+	<key>Goal</key>
+	<dict>
+		<key>Name</key>
+		<string></string>
+		<key>Value</key>
+		<integer>0</integer>
+		<key>Period</key>
+		<date>2012-07-27T15:18:29Z</date>
+	</dict>
 	<key>InitGoal</key>
 	<false/>
-	<key>Deposit</key>
-	<integer>0</integer>
-	<key>Norma</key>
-	<integer>0</integer>
-	<key>Budget</key>
-	<integer>0</integer>
 </dict>
 </plist>

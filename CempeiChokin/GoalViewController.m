@@ -87,11 +87,18 @@
     // TODO: Numberpad表示させてる時に期日のところ押したらなんかバグるからいつかどうにかしよう
 }
 
-//  期間の設定
-- (IBAction)PeriodTextField_end:(id)sender {
-    //ここでドラムを隠す
+// Numberpadに追加したボタンの動作
+-(void)doneNumberPad{
+    // 値が入っている場合
+    if([ValueTextField.text length] >= 1) {
+        ValueTextField.text = [NSString stringWithFormat:@"%@円",[_method addComma:ValueTextField.text]]; // 表示変える
+        [ValueTextField resignFirstResponder];  // NumberPad消す
+        [PeriodTextField becomeFirstResponder]; // PeriodTextFieldに移動
+    }
+    [ValueTextField resignFirstResponder]; // NumberPad消す
 }
 
+// Numberpadに追加したキャンセルボタンの動作
 -(void)cancelNumberPad{
     // 既に値が入っていた場合
     if(tempValue != @"")
@@ -102,16 +109,69 @@
     [ValueTextField resignFirstResponder]; // NumberPad消す(=テキストフィールドを選択していない状態にする)
 }
 
-// 完了ボタンの動作
--(void)doneWithNumberPad{
-    [ValueTextField resignFirstResponder];                                     // NumberPad消す
-    NSNumber *value = [NSNumber numberWithInt:[ValueTextField.text intValue]]; // テキストフィールドの文字を数値に変換
-    NSNumberFormatter *fmt = [[NSNumberFormatter alloc] init];                 // 形式変えるアレ
-    [fmt setPositiveFormat:@"#,##0"];                                          // 形式の指定
-    NSString *temp = [fmt stringForObjectValue:value];                         // アレ
-    ValueTextField.text = [NSString stringWithFormat:@"%@円",temp];            // 表示変える
-    // いつかここに値を保存する処理を書こう
-    [PeriodTextField becomeFirstResponder];                                    // PeriodTextFieldに移動する
+#pragma mark - 期日の設定
+- (IBAction)PeriodTextField_begin:(id)sender {
+    // Toolbarつくる
+    UIToolbar* datePickerToolbar = [[UIToolbar alloc] initWithFrame: CGRectMake(0, 0, 320, 44)];
+    datePickerToolbar.barStyle = UIBarStyleBlackTranslucent;
+    
+    // Toolbarのボタンつくる
+    UIBarButtonItem *done =
+    [[UIBarButtonItem alloc] initWithTitle: @"完了"
+                                     style: UIBarButtonItemStyleBordered
+                                    target: self
+                                    action: @selector(doneWithDatePicker)];
+    UIBarButtonItem *cancel =
+    [[UIBarButtonItem alloc] initWithTitle: @"キャンセル"
+                                     style: UIBarButtonItemStyleBordered
+                                    target: self
+                                    action: @selector(cancelWithDatePicker)];
+    UIBarButtonItem *frexibleSpace =
+    [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace
+                                                  target: nil
+                                                  action: nil];
+    // ボタンをToolbarにつける
+    datePickerToolbar.items = @[cancel,frexibleSpace,done]; // キャンセル [スペース] 完了
+    [datePickerToolbar sizeToFit]; // なんかフィットさせる
+    
+    // DatePickerつくる
+    datePicker =[[UIDatePicker alloc] initWithFrame: CGRectMake(0, 44, 320, 216)];
+    datePicker.datePickerMode = UIDatePickerModeDate; // 年月日までモード
+    if(tempDate)
+        datePicker.date = tempDate; // 入力しなおした時の初期値は前に入れた奴にする
+    datePicker.minimumDate = [NSDate date]; // 設定できる範囲は今日から
+    datePicker.maximumDate = [NSDate dateWithTimeIntervalSinceNow:86400*365*10]; // 10年後まで
+    
+    // ActionSheetをつくる
+    actionSheet =
+    [[UIActionSheet alloc] initWithTitle: nil
+                                delegate: nil
+                       cancelButtonTitle: nil
+                  destructiveButtonTitle: nil
+                       otherButtonTitles: nil];
+    actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+    
+    // ActionSheetを表示させる
+    [actionSheet addSubview: datePickerToolbar];
+    [actionSheet addSubview: datePicker];
+    [actionSheet showInView: self.view];
+    [actionSheet setBounds: CGRectMake(0, 0, 320, 500)];
+}
+
+// DatePickerが完了したときの
+-(void)doneWithDatePicker{ // 値をテキストフィールドに入れる
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat =@"yyyy年M月d日"; // 表示を変える
+    tempDate = datePicker.date; // 保持しておく
+    PeriodTextField.text = [formatter stringFromDate:tempDate]; // 文字入力する
+    [PeriodTextField resignFirstResponder]; // フォーカス外す
+    [actionSheet dismissWithClickedButtonIndex:0 animated:YES]; // ActionSheet消す
+}
+
+// DatePickerがキャンセルした時の
+-(void)cancelWithDatePicker{ // 特に何もしない
+    [PeriodTextField resignFirstResponder];
+    [actionSheet dismissWithClickedButtonIndex:0 animated:YES];
 }
 
 @end

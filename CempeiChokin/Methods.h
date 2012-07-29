@@ -11,11 +11,10 @@
 @interface Methods : NSObject{
 
 }
+- (void)LoadData:(id)sender;                //データを読み込む
+- (void)WriteData:(id)sender;               //初期化をする時の動作
 
 - (NSString *)addComma:(NSString *)number;
 - (NSString *)deleteComma:(NSString *)string;
-
-- (void)LoadData:(id)sender;                //データを読み込む
-- (void)WriteData:(id)sender;               //初期化をする時の動作
 
 @end
