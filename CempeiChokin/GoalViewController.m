@@ -37,12 +37,11 @@
     [super viewDidLoad];
     _method = [Methods alloc];
     
+    //設定がしてあったらデータをとってくる
     [_method loadData:nil];
-    if(1!=1){//もしデータを入力している場合
-    NameTextField.text = [_method loadName:nil];
-    ValueTextField.text = [_method loadValue:nil];
-    PeriodTextField.text = [_method loadPeriod:nil];
-    }
+    if([_method loadName:nil]!=nil)NameTextField.text = [_method loadName:nil];
+    if([_method loadValue:nil]!=nil)ValueTextField.text = [_method loadValue:nil];
+    if([_method loadPeriod:nil]!=nil)PeriodTextField.text = [_method loadPeriod:nil];
 }
 
 - (void)viewDidUnload
@@ -59,6 +58,7 @@
 #pragma mark - 名前の設定
 - (IBAction)NameTextField_end:(id)sender {
     // TODO: いつかここに値を保存する処理を書こう
+    // ???: 一括で保存してみた！
     [ValueTextField becomeFirstResponder];  //ValueTextFieldに移動
 }
 
@@ -165,10 +165,6 @@
     [actionSheet setBounds: CGRectMake(0, 0, 320, 500)];
 }
 
-- (IBAction)DoneButton_down:(id)sender {
-    [_method saveName:NameTextField.text Value:ValueTextField.text Period:PeriodTextField.text]; // 保存する
-}
-
 // DatePickerが完了したときの
 -(void)doneWithDatePicker{ // 値をテキストフィールドに入れる
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -183,6 +179,11 @@
 -(void)cancelWithDatePicker{ // 特に何もしない
     [PeriodTextField resignFirstResponder];
     [actionSheet dismissWithClickedButtonIndex:0 animated:YES];
+}
+
+// 決定ボタンが押されたときの
+- (IBAction)DoneButton_down:(id)sender {
+    //[_method saveName:NameTextField.text Value:ValueTextField.text Period:PeriodTextField.text]; // 保存する
 }
 
 @end

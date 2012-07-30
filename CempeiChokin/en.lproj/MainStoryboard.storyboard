@@ -853,7 +853,7 @@
         <scene sceneID="4BQ-tA-qmL">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jqq-01-Icf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController id="zXJ-SR-lRM" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Init" id="zXJ-SR-lRM" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="eZ1-02-JRK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1126,33 +1126,6 @@
     <resources>
         <image name="graph.png" width="180" height="180"/>
     </resources>
-    <classes>
-        <class className="BudgetViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BudgetViewController.h"/>
-        </class>
-        <class className="DepositViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DepositViewController.h"/>
-        </class>
-        <class className="GoalViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="DoneButton_down:"/>
-                <relationship kind="action" name="NameTextField_end:"/>
-                <relationship kind="action" name="PeriodTextField_begin:"/>
-                <relationship kind="action" name="ValueTextField_begin:"/>
-                <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="NameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="PeriodTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="ValueTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="MainViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>
-        </class>
-        <class className="OptionViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/OptionViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

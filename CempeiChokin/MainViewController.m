@@ -27,6 +27,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    //TODO: ここで初期設定がなければ画面飛ぶ
+    //http://hhageru.blog.fc2.com/blog-entry-37.html
+    //[self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Init"] animated:YES];こんなんかな
 }
 
 - (void)viewDidUnload

@@ -18,13 +18,13 @@
 	<key>Goal</key>
 	<dict>
 		<key>Name</key>
-		<string>てすと</string>
+		<string></string>
 		<key>Value</key>
-		<string>0</string>
+		<string></string>
 		<key>Period</key>
-		<string>2012年07月27日</string>
+		<string></string>
 	</dict>
 	<key>InitGoal</key>
-	<integer>0</integer>
+	<false/>
 </dict>
 </plist>

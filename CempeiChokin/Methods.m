@@ -22,7 +22,7 @@
 }
 
 
-//正直この3つはまとめたい
+// FIXME: 正直この3つはまとめたい
 - (NSString *)loadName:(id)sender{return [goal objectForKey:@"Name"];}//名前を読み込んで返す
 - (NSString *)loadValue:(id)sender{return [goal objectForKey:@"Value"];}//金額を読み込んで返す
 - (NSString *)loadPeriod:(id)sender{return [goal objectForKey:@"Period"];}//期限を読み込んで返す
