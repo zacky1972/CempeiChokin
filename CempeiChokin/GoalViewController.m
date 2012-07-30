@@ -74,6 +74,8 @@
     // Toolbarつくる
     UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
     numberToolbar.barStyle = UIBarStyleBlackTranslucent;
+    
+    // Toolbarのボタンたち
     UIBarButtonItem *done =
     [[UIBarButtonItem alloc] initWithTitle: @"次へ"
                                      style: UIBarButtonItemStyleDone
@@ -88,7 +90,7 @@
     [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace
                                                   target: nil
                                                   action: nil];
-    numberToolbar.items = @[cancel,frexibleSpace,done]; // キャンセル [スペース] 完了
+    numberToolbar.items = @[cancel,frexibleSpace,done]; // ツールバーにのせる (キャンセル| [スペース] | 完了)
     [numberToolbar sizeToFit];                          // なんかフィットさせる
     ValueTextField.inputAccessoryView = numberToolbar;  // キーボードの上につけるときはこれ使うのかな？
     // TODO: Numberpad表示させてる時に期日のところ押したらなんかバグるからいつかどうにかしよう
@@ -138,7 +140,7 @@
                                                   target: nil
                                                   action: nil];
     // ボタンをToolbarにつける
-    datePickerToolbar.items = @[cancel,frexibleSpace,done]; // キャンセル [スペース] 完了
+    datePickerToolbar.items = @[cancel,frexibleSpace,done]; // ツールバーにのせる (キャンセル| [スペース] | 完了)
     [datePickerToolbar sizeToFit]; // なんかフィットさせる
     
     // DatePickerつくる
@@ -149,7 +151,7 @@
     datePicker.minimumDate = [NSDate date]; // 設定できる範囲は今日から
     datePicker.maximumDate = [NSDate dateWithTimeIntervalSinceNow:86400*365*10]; // 10年後まで
     
-    // ActionSheetをつくる
+    // 空のActionSheetをつくる
     actionSheet =
     [[UIActionSheet alloc] initWithTitle: nil
                                 delegate: nil
@@ -159,10 +161,10 @@
     actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
     
     // ActionSheetを表示させる
-    [actionSheet addSubview: datePickerToolbar];
-    [actionSheet addSubview: datePicker];
-    [actionSheet showInView: self.view];
-    [actionSheet setBounds: CGRectMake(0, 0, 320, 500)];
+    [actionSheet addSubview: datePickerToolbar]; // Toolbarのっける
+    [actionSheet addSubview: datePicker];        // DatePickerのっける
+    [actionSheet showInView: self.view];         // 画面上に表示させる
+    [actionSheet setBounds: CGRectMake(0, 0, 320, 500)]; // 場所とサイズ決める(x,y.width,height)
 }
 
 // DatePickerが完了したときの
