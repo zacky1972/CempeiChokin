@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E95EED9515C26A7300F2A89E /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EED9415C26A7300F2A89E /* MainViewController.m */; };
+		E95EED9B15C26C2600F2A89E /* OptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EED9A15C26C2600F2A89E /* OptionViewController.m */; };
+		E95EED9E15C26D8D00F2A89E /* BudgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EED9D15C26D8D00F2A89E /* BudgetViewController.m */; };
+		E95EEDA415C26EAB00F2A89E /* GoalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EEDA315C26EAB00F2A89E /* GoalViewController.m */; };
+		E95EEDA715C270B700F2A89E /* DepositViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EEDA615C270B700F2A89E /* DepositViewController.m */; };
+		E95EEDAA15C273B200F2A89E /* Methods.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EEDA915C273B200F2A89E /* Methods.m */; };
 		E98EA59415BFB8A10019AED5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98EA59315BFB8A10019AED5 /* UIKit.framework */; };
 		E98EA59615BFB8A10019AED5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98EA59515BFB8A10019AED5 /* Foundation.framework */; };
 		E98EA59815BFB8A10019AED5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98EA59715BFB8A10019AED5 /* CoreGraphics.framework */; };
@@ -14,13 +20,13 @@
 		E98EA5A015BFB8A10019AED5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E98EA59F15BFB8A10019AED5 /* main.m */; };
 		E98EA5A415BFB8A10019AED5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E98EA5A315BFB8A10019AED5 /* AppDelegate.m */; };
 		E98EA5A715BFB8A10019AED5 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E98EA5A515BFB8A10019AED5 /* MainStoryboard.storyboard */; };
-		E98EA5AA15BFB8A10019AED5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E98EA5A915BFB8A10019AED5 /* ViewController.m */; };
 		E98EA5B215BFB8A20019AED5 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98EA5B115BFB8A20019AED5 /* SenTestingKit.framework */; };
 		E98EA5B315BFB8A20019AED5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98EA59315BFB8A10019AED5 /* UIKit.framework */; };
 		E98EA5B415BFB8A20019AED5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98EA59515BFB8A10019AED5 /* Foundation.framework */; };
 		E98EA5BC15BFB8A20019AED5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E98EA5BA15BFB8A20019AED5 /* InfoPlist.strings */; };
 		E98EA5BF15BFB8A20019AED5 /* CempeiChokinTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E98EA5BE15BFB8A20019AED5 /* CempeiChokinTests.m */; };
 		E98EA5CC15BFC9E80019AED5 /* graph.png in Resources */ = {isa = PBXBuildFile; fileRef = E98EA5CB15BFC9E80019AED5 /* graph.png */; };
+		E9FE2E1215C2E58900282242 /* Data.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9FE2E1115C2E58900282242 /* Data.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +40,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E95EED9315C26A7300F2A89E /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		E95EED9415C26A7300F2A89E /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		E95EED9915C26C2600F2A89E /* OptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionViewController.h; sourceTree = "<group>"; };
+		E95EED9A15C26C2600F2A89E /* OptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionViewController.m; sourceTree = "<group>"; };
+		E95EED9C15C26D8D00F2A89E /* BudgetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BudgetViewController.h; sourceTree = "<group>"; };
+		E95EED9D15C26D8D00F2A89E /* BudgetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BudgetViewController.m; sourceTree = "<group>"; };
+		E95EEDA215C26EAB00F2A89E /* GoalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalViewController.h; sourceTree = "<group>"; };
+		E95EEDA315C26EAB00F2A89E /* GoalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalViewController.m; sourceTree = "<group>"; };
+		E95EEDA515C270B700F2A89E /* DepositViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DepositViewController.h; sourceTree = "<group>"; };
+		E95EEDA615C270B700F2A89E /* DepositViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DepositViewController.m; sourceTree = "<group>"; };
+		E95EEDA815C273B200F2A89E /* Methods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Methods.h; sourceTree = "<group>"; };
+		E95EEDA915C273B200F2A89E /* Methods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Methods.m; sourceTree = "<group>"; };
 		E98EA58F15BFB8A10019AED5 /* CempeiChokin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CempeiChokin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E98EA59315BFB8A10019AED5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E98EA59515BFB8A10019AED5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -45,8 +63,6 @@
 		E98EA5A215BFB8A10019AED5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E98EA5A315BFB8A10019AED5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		E98EA5A615BFB8A10019AED5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
-		E98EA5A815BFB8A10019AED5 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		E98EA5A915BFB8A10019AED5 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		E98EA5B015BFB8A20019AED5 /* CempeiChokinTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CempeiChokinTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E98EA5B115BFB8A20019AED5 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		E98EA5B915BFB8A20019AED5 /* CempeiChokinTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CempeiChokinTests-Info.plist"; sourceTree = "<group>"; };
@@ -54,6 +70,7 @@
 		E98EA5BD15BFB8A20019AED5 /* CempeiChokinTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CempeiChokinTests.h; sourceTree = "<group>"; };
 		E98EA5BE15BFB8A20019AED5 /* CempeiChokinTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CempeiChokinTests.m; sourceTree = "<group>"; };
 		E98EA5CB15BFC9E80019AED5 /* graph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = graph.png; sourceTree = "<group>"; };
+		E9FE2E1115C2E58900282242 /* Data.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Data.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,12 +130,12 @@
 		E98EA59915BFB8A10019AED5 /* CempeiChokin */ = {
 			isa = PBXGroup;
 			children = (
-				E98EA5C915BFC97C0019AED5 /* Resource */,
+				E9B4BC4F15C235DC00E92B3D /* AddMethods */,
+				E9B4BC4C15C234B600E92B3D /* ViewControllers */,
+				E98EA5C915BFC97C0019AED5 /* Resources */,
 				E98EA5A215BFB8A10019AED5 /* AppDelegate.h */,
 				E98EA5A315BFB8A10019AED5 /* AppDelegate.m */,
 				E98EA5A515BFB8A10019AED5 /* MainStoryboard.storyboard */,
-				E98EA5A815BFB8A10019AED5 /* ViewController.h */,
-				E98EA5A915BFB8A10019AED5 /* ViewController.m */,
 				E98EA59A15BFB8A10019AED5 /* Supporting Files */,
 			);
 			path = CempeiChokin;
@@ -154,20 +171,55 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		E98EA5C915BFC97C0019AED5 /* Resource */ = {
+		E98EA5C915BFC97C0019AED5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				E98EA5CA15BFC9BE0019AED5 /* Image */,
+				E9B4BC4E15C234FA00E92B3D /* Datas */,
+				E98EA5CA15BFC9BE0019AED5 /* Images */,
 			);
-			name = Resource;
+			name = Resources;
 			sourceTree = "<group>";
 		};
-		E98EA5CA15BFC9BE0019AED5 /* Image */ = {
+		E98EA5CA15BFC9BE0019AED5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
 				E98EA5CB15BFC9E80019AED5 /* graph.png */,
 			);
-			name = Image;
+			name = Images;
+			sourceTree = "<group>";
+		};
+		E9B4BC4C15C234B600E92B3D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E95EED9315C26A7300F2A89E /* MainViewController.h */,
+				E95EED9415C26A7300F2A89E /* MainViewController.m */,
+				E95EEDA215C26EAB00F2A89E /* GoalViewController.h */,
+				E95EEDA315C26EAB00F2A89E /* GoalViewController.m */,
+				E95EED9C15C26D8D00F2A89E /* BudgetViewController.h */,
+				E95EED9D15C26D8D00F2A89E /* BudgetViewController.m */,
+				E95EEDA515C270B700F2A89E /* DepositViewController.h */,
+				E95EEDA615C270B700F2A89E /* DepositViewController.m */,
+				E95EED9915C26C2600F2A89E /* OptionViewController.h */,
+				E95EED9A15C26C2600F2A89E /* OptionViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		E9B4BC4E15C234FA00E92B3D /* Datas */ = {
+			isa = PBXGroup;
+			children = (
+				E9FE2E1115C2E58900282242 /* Data.plist */,
+			);
+			name = Datas;
+			sourceTree = "<group>";
+		};
+		E9B4BC4F15C235DC00E92B3D /* AddMethods */ = {
+			isa = PBXGroup;
+			children = (
+				E95EEDA815C273B200F2A89E /* Methods.h */,
+				E95EEDA915C273B200F2A89E /* Methods.m */,
+			);
+			name = AddMethods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,6 +296,7 @@
 				E98EA59E15BFB8A10019AED5 /* InfoPlist.strings in Resources */,
 				E98EA5A715BFB8A10019AED5 /* MainStoryboard.storyboard in Resources */,
 				E98EA5CC15BFC9E80019AED5 /* graph.png in Resources */,
+				E9FE2E1215C2E58900282242 /* Data.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,7 +333,12 @@
 			files = (
 				E98EA5A015BFB8A10019AED5 /* main.m in Sources */,
 				E98EA5A415BFB8A10019AED5 /* AppDelegate.m in Sources */,
-				E98EA5AA15BFB8A10019AED5 /* ViewController.m in Sources */,
+				E95EED9515C26A7300F2A89E /* MainViewController.m in Sources */,
+				E95EED9B15C26C2600F2A89E /* OptionViewController.m in Sources */,
+				E95EED9E15C26D8D00F2A89E /* BudgetViewController.m in Sources */,
+				E95EEDA415C26EAB00F2A89E /* GoalViewController.m in Sources */,
+				E95EEDA715C270B700F2A89E /* DepositViewController.m in Sources */,
+				E95EEDAA15C273B200F2A89E /* Methods.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,6 +508,7 @@
 				E98EA5C415BFB8A20019AED5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E98EA5C515BFB8A20019AED5 /* Build configuration list for PBXNativeTarget "CempeiChokinTests" */ = {
 			isa = XCConfigurationList;
@@ -458,6 +517,7 @@
 				E98EA5C715BFB8A20019AED5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -5,11 +5,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="jRe-Xx-rwu">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qtH-Ps-AuJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="raj-cK-qeg" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="raj-cK-qeg" customClass="MainViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NLR-e6-dBe">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -109,7 +109,7 @@
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gR4-1v-94F">
-                                <rect key="frame" x="264" y="234" width="36" height="35"/>
+                                <rect key="frame" x="114" y="317" width="36" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="〆">
@@ -123,6 +123,30 @@
                                     <segue destination="1EJ-OK-hO4" kind="modal" modalTransitionStyle="flipHorizontal" id="QYp-yu-xXA"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sue-ty-QXb">
+                                <rect key="frame" x="20" y="317" width="41" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="今">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="a92-hG-HPf">
+                                <rect key="frame" x="69" y="318" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="先">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -130,11 +154,11 @@
             </objects>
             <point key="canvasLocation" x="-484" y="1466"/>
         </scene>
-        <!--Table View Controller - 欲しいものの設定-->
+        <!--Goal View Controller - 欲しいものの設定-->
         <scene sceneID="n59-DL-nV4">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qOq-Ta-O7c" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="5l7-9T-UdO" sceneMemberID="viewController">
+                <tableViewController id="5l7-9T-UdO" customClass="GoalViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="S5G-Al-1ec">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -246,11 +270,11 @@
             </objects>
             <point key="canvasLocation" x="-8" y="3110"/>
         </scene>
-        <!--Table View Controller - 期間と予算の設定-->
+        <!--Budget View Controller - 期間と予算の設定-->
         <scene sceneID="I9q-6r-azc">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t8m-BJ-VvH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="S9U-Jq-u8j" sceneMemberID="viewController">
+                <tableViewController id="S9U-Jq-u8j" customClass="BudgetViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="EqS-Fl-JTS">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -386,11 +410,11 @@
             </objects>
             <point key="canvasLocation" x="1339" y="3408"/>
         </scene>
-        <!--Table View Controller - オプション-->
+        <!--Option View Controller - オプション-->
         <scene sceneID="vhf-gC-qbQ">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WQw-0Y-2Pn" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="xhn-WK-ACz" sceneMemberID="viewController">
+                <tableViewController id="xhn-WK-ACz" customClass="OptionViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="g5U-9o-01H">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -557,11 +581,11 @@
             </objects>
             <point key="canvasLocation" x="1339" y="3998"/>
         </scene>
-        <!--Table View Controller - 欲しいものの設定-->
+        <!--Goal View Controller - 欲しいものの設定-->
         <scene sceneID="z3P-Rn-CRg">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tom-lx-FMO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="NwY-zI-POI" sceneMemberID="viewController">
+                <tableViewController id="NwY-zI-POI" customClass="GoalViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" bounces="NO" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="nDO-Xl-Wov">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -582,6 +606,7 @@
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
+                                        <action selector="DoneButton_down:" destination="NwY-zI-POI" eventType="touchUpInside" id="J8b-FI-R6T"/>
                                         <segue destination="XRW-za-pcs" kind="push" id="s4t-uk-5xa"/>
                                     </connections>
                                 </button>
@@ -591,19 +616,22 @@
                         <sections>
                             <tableViewSection headerTitle="欲しいもの" id="pP7-HN-G7A">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="aI0-qC-YOa">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="aI0-qC-YOa">
                                         <rect key="frame" x="0.0" y="46" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="デジカメ" textAlignment="right" minimumFontSize="17" id="t4m-Li-muS">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="デジカメ" textAlignment="right" minimumFontSize="17" id="t4m-Li-muS">
                                                     <rect key="frame" x="60" y="6" width="231" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="textColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                    <connections>
+                                                        <action selector="NameTextField_end:" destination="NwY-zI-POI" eventType="editingDidEndOnExit" id="FJi-Ik-4PI"/>
+                                                    </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="名前" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="tV5-U6-mcB">
                                                     <rect key="frame" x="10" y="11" width="34" height="21"/>
@@ -616,19 +644,22 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Ds5-Jg-h8W">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Ds5-Jg-h8W">
                                         <rect key="frame" x="0.0" y="91" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="50,000円" textAlignment="right" minimumFontSize="17" id="a9E-oJ-fCf">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="50,000円" textAlignment="right" minimumFontSize="17" id="a9E-oJ-fCf">
                                                     <rect key="frame" x="60" y="6" width="231" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="textColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
+                                                    <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
+                                                    <connections>
+                                                        <action selector="ValueTextField_begin:" destination="NwY-zI-POI" eventType="editingDidBegin" id="5CL-ee-Pcv"/>
+                                                    </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="金額" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="0JB-EP-nyF">
                                                     <rect key="frame" x="10" y="11" width="34" height="21"/>
@@ -641,19 +672,22 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="AoJ-p3-iWP">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="AoJ-p3-iWP">
                                         <rect key="frame" x="0.0" y="135" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="2012年9月13日" textAlignment="right" minimumFontSize="17" id="SS3-tH-9ie">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="2012年9月13日" textAlignment="right" minimumFontSize="17" id="SS3-tH-9ie">
                                                     <rect key="frame" x="60" y="6" width="231" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="textColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="PeriodTextField_begin:" destination="NwY-zI-POI" eventType="editingDidBegin" id="8JR-lG-sR5"/>
+                                                    </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="期間" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="I68-jf-m0t">
                                                     <rect key="frame" x="10" y="11" width="34" height="21"/>
@@ -671,15 +705,21 @@
                         </sections>
                     </tableView>
                     <navigationItem key="navigationItem" title="欲しいものの設定" id="Uct-BO-hEZ"/>
+                    <connections>
+                        <outlet property="DoneButton" destination="Bgm-oX-tgd" id="8bY-a0-7aZ"/>
+                        <outlet property="NameTextField" destination="t4m-Li-muS" id="77R-OY-rwL"/>
+                        <outlet property="PeriodTextField" destination="SS3-tH-9ie" id="nLU-sd-z5c"/>
+                        <outlet property="ValueTextField" destination="a9E-oJ-fCf" id="hUF-wX-JeN"/>
+                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="518" y="618"/>
         </scene>
-        <!--Table View Controller - 期間と予算の設定-->
+        <!--Budget View Controller - 期間と予算の設定-->
         <scene sceneID="QlV-E8-EXO">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xDr-wJ-NyC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="XRW-za-pcs" sceneMemberID="viewController">
+                <tableViewController id="XRW-za-pcs" customClass="BudgetViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="M1a-Tw-I47">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -716,7 +756,7 @@
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="2012年7月20日" textAlignment="right" minimumFontSize="17" id="eWg-Gh-frN">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="2012年7月20日" textAlignment="right" minimumFontSize="17" id="eWg-Gh-frN">
                                                     <rect key="frame" x="60" y="6" width="231" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="textColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -741,7 +781,7 @@
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="2012年8月20日" textAlignment="right" minimumFontSize="17" id="skJ-y8-DPG">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="2012年8月20日" textAlignment="right" minimumFontSize="17" id="skJ-y8-DPG">
                                                     <rect key="frame" x="60" y="6" width="231" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="textColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -770,8 +810,8 @@
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="120,000円" textAlignment="right" minimumFontSize="17" id="ku5-o0-ucT">
-                                                    <rect key="frame" x="60" y="6" width="231" height="31"/>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="120,000" textAlignment="right" minimumFontSize="17" id="ku5-o0-ucT">
+                                                    <rect key="frame" x="60" y="6" width="215" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="textColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -782,6 +822,13 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="円" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="534-Y0-eAK">
+                                                    <rect key="frame" x="257" y="11" width="34" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                             </subviews>
@@ -806,7 +853,7 @@
         <scene sceneID="4BQ-tA-qmL">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jqq-01-Icf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController id="zXJ-SR-lRM" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Init" id="zXJ-SR-lRM" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="eZ1-02-JRK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -820,11 +867,11 @@
             </objects>
             <point key="canvasLocation" x="-8" y="618"/>
         </scene>
-        <!--Table View Controller - 期間と予算の設定-->
+        <!--Budget View Controller - 期間と予算の設定-->
         <scene sceneID="1Hs-VP-Mfn">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ttg-ZL-Zv6" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="iwI-JE-99H" sceneMemberID="viewController">
+                <tableViewController id="iwI-JE-99H" customClass="BudgetViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="AUJ-3P-llp">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -962,11 +1009,11 @@
             </objects>
             <point key="canvasLocation" x="867" y="1466"/>
         </scene>
-        <!--Table View Controller - 前回の貯金-->
+        <!--Deposit View Controller - 前回の貯金-->
         <scene sceneID="k6Q-d3-zw7">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1S4-uX-CpO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="ppr-eV-5bM" sceneMemberID="viewController">
+                <tableViewController id="ppr-eV-5bM" customClass="DepositViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="N65-Gj-lmK">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1018,8 +1065,8 @@
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="10,000円" textAlignment="right" minimumFontSize="17" id="cls-ho-OXQ">
-                                                    <rect key="frame" x="60" y="6" width="231" height="31"/>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="10,000" textAlignment="right" minimumFontSize="17" id="cls-ho-OXQ">
+                                                    <rect key="frame" x="60" y="6" width="213" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="textColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1030,6 +1077,13 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="円" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="SRz-Za-OUM">
+                                                    <rect key="frame" x="255" y="11" width="34" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                             </subviews>
@@ -1072,11 +1126,6 @@
     <resources>
         <image name="graph.png" width="180" height="180"/>
     </resources>
-    <classes>
-        <class className="ViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

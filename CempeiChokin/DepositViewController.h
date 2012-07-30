@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  DepositViewController.h
 //  CempeiChokin
 //
 //  Created by CEMPEI on 12/07/25.
@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Methods.h"
 
-@interface ViewController : UIViewController
+@interface DepositViewController : UITableViewController
 
 @end
