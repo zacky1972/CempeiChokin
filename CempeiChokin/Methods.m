@@ -21,13 +21,26 @@
     root = [[NSDictionary alloc] initWithContentsOfFile:path];
     goal = [root objectForKey:@"Goal"];
     initgoal = [root objectForKey:@"InitGoal"];
+    NSLog(@"%@",[root objectForKey:@"Goal"]);
+    NSLog(@"%@",goal);
+
 }
 
 // TODO: なぜか読み込みができない
 // FIXME: 正直この3つはまとめたい
-- (NSString *)loadName:(id)sender{NSLog(@"loadname"); return nil;/*[goal objectForKey:@"Name"];*/}      //名前を読み込んで返す
-- (NSString *)loadValue:(id)sender{NSLog(@"loadvalue");return nil;/*[goal objectForKey:@"Value"];*/}    //金額を読み込んで返す
-- (NSString *)loadPeriod:(id)sender{NSLog(@"loadperiod");return nil;/*[goal objectForKey:@"Period"];*/}  //期限を読み込んで返す
+- (NSString *)loadName:(id)sender{
+    return [goal objectForKey:@"Name"];
+}      //名前を読み込んで返す
+
+- (NSString *)loadValue:(id)sender{
+    NSLog(@"loadvalue:%@",[goal objectForKey:@"Value"]);
+    return [goal objectForKey:@"Value"];
+}    //金額を読み込んで返す
+
+- (NSString *)loadPeriod:(id)sender{
+    NSLog(@"loadperiod:%@",[goal objectForKey:@"Period"]);
+    return [goal objectForKey:@"Period"];
+}  //期限を読み込んで返す
 
 //目標のあれこれを一気に保存する
 - (void)saveName:(NSString *)name Value:(NSString *)value Period:(NSString *)period{
