@@ -9,6 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "Methods.h"
 
-@interface BudgetViewController : UITableViewController
+@interface BudgetViewController : UITableViewController{
+    __weak IBOutlet UITextField *startDateTextField;
+    __weak IBOutlet UITextField *endDateTextField;
+    __weak IBOutlet UITextField *budgetTextField;
+    
+}
+- (IBAction)startDateTextField_begin:(id)sender;
+- (IBAction)endDateTextField_begin:(id)sender;
+- (IBAction)budgetTextField_end:(id)sender;
 
 @end
