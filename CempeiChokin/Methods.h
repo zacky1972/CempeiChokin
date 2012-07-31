@@ -15,11 +15,12 @@
     NSMutableDictionary *root;
     NSMutableDictionary *goal;
     NSMutableDictionary *now;
-    NSNumber *initgoal;
 }
 
+-(BOOL)searchGoal;                              //初期設定が必要かどうか
+
 //値をいじる感じの
-- (BOOL) initData;                    //Data.plistを作成
+- (BOOL)initData;                    //Data.plistを作成
 - (void)makeDataPath:(id)sender;                //Date.plistへのpathを作成
 - (void)loadData:(id)sender;                    //Data.plistから引っ張ってくる
 - (NSString *)loadName:(id)sender;              //名前を読み込んで返す

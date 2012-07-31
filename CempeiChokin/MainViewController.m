@@ -34,7 +34,8 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     // 初期設定画面の表示
-    if(1){ // TODO: 条件かこう
+    
+    if([_method searchGoal] == 0){ // TODO: 条件かこう
     [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Init"] animated:YES];
     }
 }

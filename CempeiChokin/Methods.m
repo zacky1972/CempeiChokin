@@ -13,6 +13,23 @@
 
 @implementation Methods
 
+- (BOOL)searchGoal{
+    [self makeDataPath:nil];
+    if( [[NSFileManager defaultManager] fileExistsAtPath:path] == NO ){                     //Data.plistがなかったら
+        NSLog(@"ファイルなかった！");
+        return 0;
+    }else{                      //あったら
+        NSLog(@"ファイるあった！");
+        [self loadData:nil];
+        if([goal objectForKey:@"Name"]==nil || [goal objectForKey:@"Value"] ==nil || [goal objectForKey:@"Period"] ==nil || [now objectForKey:@"Start"] ==nil || [now objectForKey:@"End"] ==nil || [now objectForKey:@"Budget"] ==nil ){
+            NSLog(@"ぬけがあった！");
+            return 0;
+        }
+        NSLog(@"せっっていおわってる！");
+        return 1;
+    }
+}
+
 //Date.plistへのpathを作成
 - (void)makeDataPath:(id)sender{
     NSString *home = NSHomeDirectory();
@@ -37,7 +54,6 @@
     root = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
     goal = [root objectForKey:@"Goal"];
     now = [root objectForKey:@"Now"];
-    initgoal = [root objectForKey:@"InitGoal"];
 }
 
 // FIXME: 正直この3つはまとめたい
