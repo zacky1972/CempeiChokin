@@ -23,23 +23,21 @@
 //Data.plistの初期設定
 - (void)initData:(id)sender{
     [self makeDataPath:nil];
-    NSLog(@"%@",path);
     if( [[NSFileManager defaultManager] fileExistsAtPath:path] == NO ){                     //Data.plistがなかったら
-        NSLog(@"make Data.plist!!");
         [[NSFileManager defaultManager] createFileAtPath:path contents:nil attributes:nil]; //作成する
     }else{                      //あったら
-        NSLog(@"Data load");
         [self loadData:nil];    //読み込み
     }
 }
 
 //Data.plistからひっぱってくる
 - (void)loadData:(id)sender{
-    root = [[NSDictionary alloc] initWithContentsOfFile:path];
+    NSLog(@"loadData!");
+    root = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
     goal = [root objectForKey:@"Goal"];
     now = [root objectForKey:@"Now"];
     initgoal = [root objectForKey:@"InitGoal"];
-
+    NSLog(@"root:%@",root);
 }
 
 // FIXME: 正直この3つはまとめたい
@@ -53,23 +51,26 @@
     [goal setObject:name forKey:@"Name"];       //とりあえずgoalに値を上書き
     [goal setObject:value forKey:@"Value"];
     [goal setObject:period forKey:@"Period"];
-    NSLog(@"goal:%@",goal);
-    root = [[NSDictionary alloc] init];
-    root = [NSDictionary dictionaryWithObject:goal forKey:@"Goal"];
-    NSLog(@"root:%@",root);
+    [root setObject:goal forKey:@"Goal"];
+    NSLog(@"goalをいれたroot:%@",root);
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
 }
 
 // FIXME: 正直この3つはまとめたい
 - (NSString *)loadStart:(id)sender{return [now objectForKey:@"Start"];}      //名前を読み込んで返す
-- (NSString *)loadFinish:(id)sender{return [now objectForKey:@"Finish"];}    //金額を読み込んで返す
+- (NSString *)loadEnd:(id)sender{return [now objectForKey:@"End"];}    //金額を読み込んで返す
 - (NSString *)loadBudget:(id)sender{return [now objectForKey:@"Budget"];}    //期限を読み込んで返す
 
 //予算のあれこれを一気に保存する
-- (void)saveStart:(NSString *)start Finish:(NSString *)finish Budget:(NSString *)budget{
+- (void)saveStart:(NSString *)start End:(NSString *)end Budget:(NSString *)budget{
+    now = [[NSMutableDictionary alloc] init];
     [now setObject:start forKey:@"Start"];       //とりあえずnowに値を上書き
-    [now setObject:finish forKey:@"Finish"];
+    [now setObject:end forKey:@"End"];
     [now setObject:budget forKey:@"Budget"];
+    NSLog(@"now:%@",now);
+    [root setObject:now forKey:@"Now"];
+    //root = [NSMutableDictionary dictionaryWithObject:now forKey:@"Now"];
+    NSLog(@"nowをいれたroot:%@",root);
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
 }
 

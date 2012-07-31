@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E2617" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="raj-cK-qeg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="raj-cK-qeg">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
@@ -740,6 +740,7 @@
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
+                                        <action selector="DoneButton_down:" destination="XRW-za-pcs" eventType="touchUpInside" id="9k4-YH-E44"/>
                                         <segue destination="raj-cK-qeg" kind="modal" modalTransitionStyle="flipHorizontal" id="uJm-A0-8rn"/>
                                     </connections>
                                 </button>
@@ -1137,6 +1138,7 @@
         <class className="BudgetViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/BudgetViewController.h"/>
             <relationships>
+                <relationship kind="action" name="DoneButton_down:"/>
                 <relationship kind="action" name="budgetTextField_begin:"/>
                 <relationship kind="action" name="endDateTextField_begin:"/>
                 <relationship kind="action" name="startDateTextField_begin:"/>

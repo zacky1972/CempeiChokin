@@ -9,7 +9,7 @@
 #import "BudgetViewController.h"
 
 @interface BudgetViewController (){
-    Methods *method;
+    Methods *_method;
     
     NSDate *tempStartDate;
     NSDate *tempEndDate;
@@ -28,9 +28,14 @@
 {
     [super viewDidLoad];
     
-    method = [Methods alloc];
+    _method = [Methods alloc];
+    //設定がしてあったらデータをとってくる
+    if([_method loadStart:nil]!=nil)startDateTextField.text = [_method loadName:nil];
+    if([_method loadEnd:nil]!=nil)endDateTextField.text = [_method loadValue:nil];
+    if([_method loadBudget:nil]!=nil)budgetTextField.text = [_method loadPeriod:nil];
+    
     tempStartDate = [NSDate date];
-    startDateTextField.text = [method formatterDate:tempStartDate];
+    startDateTextField.text = [_method formatterDate:tempStartDate];
     
     // ツールバーとかデータピッカー
     datePickerToolbar = [[UIToolbar alloc] initWithFrame: CGRectMake(0, 0, 320, 44)];
@@ -90,11 +95,11 @@
 
 -(void)doneWithDatePicker{ // 値をテキストフィールドに入れる
     tempStartDate = datePicker.date;
-    startDateTextField.text = [method formatterDate:tempStartDate]; // 文字入力する
+    startDateTextField.text = [_method formatterDate:tempStartDate]; // 文字入力する
     [startDateTextField resignFirstResponder]; // フォーカス外す
     if([tempStartDate earlierDate:tempEndDate] == tempEndDate ){
         tempEndDate = [NSDate dateWithTimeInterval:86400 sinceDate:tempStartDate];
-        endDateTextField.text = [method formatterDate:tempEndDate];
+        endDateTextField.text = [_method formatterDate:tempEndDate];
     }
     [actionSheet dismissWithClickedButtonIndex:0 animated:YES]; // ActionSheet消す
 }
@@ -142,7 +147,7 @@
 
 - (void)doneWithDatePicker2{ // 値をテキストフィールドに入れる
     tempEndDate = datePicker.date;
-    endDateTextField.text = [method formatterDate:tempEndDate]; // 文字入力する
+    endDateTextField.text = [_method formatterDate:tempEndDate]; // 文字入力する
     [endDateTextField resignFirstResponder]; // フォーカス外す
     [actionSheet dismissWithClickedButtonIndex:0 animated:YES]; // ActionSheet消す
     [budgetTextField becomeFirstResponder];  //budgetTextFieldに移動
@@ -161,7 +166,7 @@
     if([budgetTextField.text hasSuffix:@"円"]){
         tempValue = budgetTextField.text;
         NSString *tempValue2 = [tempValue substringToIndex:[tempValue length]-1]; // 円を消す(=語尾から一文字消す)
-        budgetTextField.text = [NSString stringWithFormat:@"%@",[method deleteComma:tempValue2]];  // ,消す
+        budgetTextField.text = [NSString stringWithFormat:@"%@",[_method deleteComma:tempValue2]];  // ,消す
     }
     // Toolbarつくる
     UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
@@ -191,7 +196,7 @@
 -(void)doneNumberPad{
     // 値が入っている場合
     if([budgetTextField.text length] >= 1) {
-        budgetTextField.text = [NSString stringWithFormat:@"%@円",[method addComma:budgetTextField.text]]; // 表示変える
+        budgetTextField.text = [NSString stringWithFormat:@"%@円",[_method addComma:budgetTextField.text]]; // 表示変える
         [budgetTextField resignFirstResponder];  // NumberPad消す
     }
     [budgetTextField resignFirstResponder]; // NumberPad消す
@@ -206,6 +211,13 @@
     else
         budgetTextField.text = @"";         // 値を消す
     [budgetTextField resignFirstResponder]; // NumberPad消す(=テキストフィールドを選択していない状態にする)
+}
+
+#pragma DoneButton
+
+- (IBAction)DoneButton_down:(id)sender {
+    
+    [_method saveStart:startDateTextField.text End:endDateTextField.text Budget:budgetTextField.text];
 }
 
 @end
