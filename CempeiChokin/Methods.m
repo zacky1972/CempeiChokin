@@ -21,8 +21,6 @@
     root = [[NSDictionary alloc] initWithContentsOfFile:path];
     goal = [root objectForKey:@"Goal"];
     initgoal = [root objectForKey:@"InitGoal"];
-    NSLog(@"%@",[root objectForKey:@"Goal"]);
-    NSLog(@"%@",goal);
 
 }
 
