@@ -56,7 +56,7 @@
     [goal setObject:name forKey:@"Name"];       //とりあえずgoalに値を上書き
     [goal setObject:value forKey:@"Value"];
     [goal setObject:period forKey:@"Period"];
-    root = [[NSMutableDictionary alloc] init];
+    //root = [[NSMutableDictionary alloc] init];
     [root setObject:goal forKey:@"Goal"];
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
 }
@@ -69,12 +69,11 @@
 //予算のあれこれを一気に保存する
 - (void)saveStart:(NSString *)start End:(NSString *)end Budget:(NSString *)budget{
     now = [[NSMutableDictionary alloc] init];
-    [now setObject:start forKey:@"Start"];
+    [now setObject:start forKey:@"Start"];      //とりあえずnowに値を上書き
     [now setObject:budget forKey:@"Budget"];
     [now setObject:end forKey:@"End"];
     [root setObject:now forKey:@"Now"];
-    [root setObject:now forKey:@"Now"];
-    //root = [NSMutableDictionary dictionaryWithObject:now forKey:@"Now"];
+    [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
 }
 
 #pragma mark - Formatter系
