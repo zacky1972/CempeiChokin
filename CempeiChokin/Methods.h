@@ -15,18 +15,26 @@
     NSDictionary *root;
     NSMutableDictionary *goal;
     NSDictionary *dumy;
-    NSDictionary *now;
+    NSMutableDictionary *now;
     NSNumber *initgoal;
 }
 
 //値をいじる感じの
-- (void)loadData:(id)sender;                    //Data.plistを読み込む
+- (void)initData:(id)sender;                    //Data.plistを作成
+- (void)makeDataPath:(id)sender;                //Date.plistへのpathを作成
+- (void)loadData:(id)sender;                    //Data.plistから引っ張ってくる
 - (NSString *)loadName:(id)sender;              //名前を読み込んで返す
 - (NSString *)loadValue:(id)sender;             //金額を読み込んで返す
 - (NSString *)loadPeriod:(id)sender;            //期限を読み込んで返す
 - (void)saveName:(NSString *)name
             Value:(NSString *)value
             Period:(NSString *)period;          //目標のあれこれを一気に保存する
+- (NSString *)loadStart:(id)sender;             //名前を読み込んで返す
+- (NSString *)loadFinish:(id)sender;            //金額を読み込んで返す
+- (NSString *)loadBudget:(id)sender;            //期限を読み込んで返す
+- (void)saveStart:(NSString *)start
+            Finish:(NSString *)finish
+            Budget:(NSString *)budget;          //予算のあれこれを一気に保存する
 
 //数字の表示する感じの
 - (NSString *)addComma:(NSString *)number;      // 10000 → 10,000 にするやつ

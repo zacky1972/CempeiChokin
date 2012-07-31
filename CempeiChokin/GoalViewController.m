@@ -38,7 +38,7 @@
     _method = [Methods alloc];
     
     //設定がしてあったらデータをとってくる
-    [_method loadData:nil];
+    [_method initData:nil];
     if([_method loadName:nil]!=nil)NameTextField.text = [_method loadName:nil];
     if([_method loadValue:nil]!=nil)ValueTextField.text = [_method loadValue:nil];
     if([_method loadPeriod:nil]!=nil)PeriodTextField.text = [_method loadPeriod:nil];
@@ -187,7 +187,11 @@
 - (IBAction)DoneButton_down:(id)sender {
     // TODO: 決定ボタンで保存するようにしたい
     //       入力途中でおちたら空になっちゃうので，それはどうしようか
-    [_method saveName:NameTextField.text Value:ValueTextField.text Period:PeriodTextField.text]; // 保存する
+    if(NameTextField.text != nil && ValueTextField.text != nil && PeriodTextField.text != nil){
+        
+    }else {
+        [_method saveName:NameTextField.text Value:ValueTextField.text Period:PeriodTextField.text]; // 保存する
+    }
 }
 
 @end

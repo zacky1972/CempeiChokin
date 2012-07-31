@@ -26,7 +26,6 @@
 		E98EA5BC15BFB8A20019AED5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E98EA5BA15BFB8A20019AED5 /* InfoPlist.strings */; };
 		E98EA5BF15BFB8A20019AED5 /* CempeiChokinTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E98EA5BE15BFB8A20019AED5 /* CempeiChokinTests.m */; };
 		E98EA5CC15BFC9E80019AED5 /* graph.png in Resources */ = {isa = PBXBuildFile; fileRef = E98EA5CB15BFC9E80019AED5 /* graph.png */; };
-		E9FE2E2215C6C5D900282242 /* data.plist in Resources */ = {isa = PBXBuildFile; fileRef = E9FE2E2115C6C5D900282242 /* data.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,7 +69,6 @@
 		E98EA5BD15BFB8A20019AED5 /* CempeiChokinTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CempeiChokinTests.h; sourceTree = "<group>"; };
 		E98EA5BE15BFB8A20019AED5 /* CempeiChokinTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CempeiChokinTests.m; sourceTree = "<group>"; };
 		E98EA5CB15BFC9E80019AED5 /* graph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = graph.png; sourceTree = "<group>"; };
-		E9FE2E2115C6C5D900282242 /* data.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = data.plist; path = "../../../../../Library/Application Support/iPhone Simulator/5.1/Applications/79A4FF98-AB4C-4444-8F96-F1DABD2C6F69/Documents/data.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,7 +206,6 @@
 		E9B4BC4E15C234FA00E92B3D /* Datas */ = {
 			isa = PBXGroup;
 			children = (
-				E9FE2E2115C6C5D900282242 /* data.plist */,
 			);
 			name = Datas;
 			sourceTree = "<group>";
@@ -296,7 +293,6 @@
 				E98EA59E15BFB8A10019AED5 /* InfoPlist.strings in Resources */,
 				E98EA5A715BFB8A10019AED5 /* MainStoryboard.storyboard in Resources */,
 				E98EA5CC15BFC9E80019AED5 /* graph.png in Resources */,
-				E9FE2E2215C6C5D900282242 /* data.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
