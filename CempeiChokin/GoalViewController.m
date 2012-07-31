@@ -187,11 +187,7 @@
 - (IBAction)DoneButton_down:(id)sender {
     // TODO: 決定ボタンで保存するようにしたい
     //       入力途中でおちたら空になっちゃうので，それはどうしようか
-    if(NameTextField.text != nil && ValueTextField.text != nil && PeriodTextField.text != nil){
-        
-    }else {
-        [_method saveName:NameTextField.text Value:ValueTextField.text Period:PeriodTextField.text]; // 保存する
-    }
+    [_method saveName:NameTextField.text Value:ValueTextField.text Period:PeriodTextField.text]; // 保存する
 }
 
 @end

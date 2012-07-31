@@ -49,10 +49,14 @@
 
 //目標のあれこれを一気に保存する
 - (void)saveName:(NSString *)name Value:(NSString *)value Period:(NSString *)period{
+    goal = [[NSMutableDictionary alloc] init];
     [goal setObject:name forKey:@"Name"];       //とりあえずgoalに値を上書き
     [goal setObject:value forKey:@"Value"];
     [goal setObject:period forKey:@"Period"];
-    
+    NSLog(@"goal:%@",goal);
+    root = [[NSDictionary alloc] init];
+    root = [NSDictionary dictionaryWithObject:goal forKey:@"Goal"];
+    NSLog(@"root:%@",root);
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
 }
 
@@ -66,10 +70,10 @@
     [now setObject:start forKey:@"Start"];       //とりあえずnowに値を上書き
     [now setObject:finish forKey:@"Finish"];
     [now setObject:budget forKey:@"Budget"];
-    
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
 }
 
+#pragma mark - Formatter系
 // 10000 → 10,000 にするやつ
 - (NSString *)addComma:(NSString *)number{
     NSNumber *value = [NSNumber numberWithInt:[number intValue]];     // 文字を数値に変換
