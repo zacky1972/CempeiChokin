@@ -38,6 +38,9 @@
     _method = [Methods alloc];
     
     //設定がしてあったらデータをとってくる
+    BOOL atodeKesu = [_method initData];
+    atodeKesu = NO;
+    // TODO: あとで消そう
     if([_method loadName:nil]!=nil)NameTextField.text = [_method loadName:nil];
     if([_method loadValue:nil]!=nil)ValueTextField.text = [_method loadValue:nil];
     if([_method loadPeriod:nil]!=nil)PeriodTextField.text = [_method loadPeriod:nil];
