@@ -14,7 +14,6 @@
     NSString *path;
     NSMutableDictionary *root;
     NSMutableDictionary *goal;
-    NSDictionary *dumy;
     NSMutableDictionary *now;
     NSNumber *initgoal;
 }

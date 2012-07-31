@@ -24,6 +24,7 @@
 - (void)initData:(id)sender{
     [self makeDataPath:nil];
     if( [[NSFileManager defaultManager] fileExistsAtPath:path] == NO ){                     //Data.plistがなかったら
+        root = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
         [[NSFileManager defaultManager] createFileAtPath:path contents:nil attributes:nil]; //作成する
     }else{                      //あったら
         [self loadData:nil];    //読み込み
@@ -33,7 +34,6 @@
 //Data.plistからひっぱってくる
 - (void)loadData:(id)sender{
     NSLog(@"loadData!");
-    root = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
     goal = [root objectForKey:@"Goal"];
     now = [root objectForKey:@"Now"];
     initgoal = [root objectForKey:@"InitGoal"];
@@ -51,6 +51,8 @@
     [goal setObject:name forKey:@"Name"];       //とりあえずgoalに値を上書き
     [goal setObject:value forKey:@"Value"];
     [goal setObject:period forKey:@"Period"];
+    [root setDictionary:goal];
+    NSLog(@"goal:%@",goal);
     [root setObject:goal forKey:@"Goal"];
     NSLog(@"goalをいれたroot:%@",root);
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
