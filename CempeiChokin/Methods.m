@@ -21,14 +21,17 @@
 }
 
 //Data.plistの初期設定
-- (void)initData:(id)sender{
+- (BOOL)initData{
     [self makeDataPath:nil];
+    NSLog(@"%@",path);
     if( [[NSFileManager defaultManager] fileExistsAtPath:path] == NO ){                     //Data.plistがなかったら
         root = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
         [[NSFileManager defaultManager] createFileAtPath:path contents:nil attributes:nil]; //作成する
+        root = [[NSMutableDictionary alloc] init];
     }else{                      //あったら
-        [self loadData:nil];    //読み込み
+        [self loadData:nil];
     }
+    return 0;
 }
 
 //Data.plistからひっぱってくる
@@ -65,15 +68,13 @@
 
 //予算のあれこれを一気に保存する
 - (void)saveStart:(NSString *)start End:(NSString *)end Budget:(NSString *)budget{
-    now = [[NSMutableDictionary alloc] init];
-    [now setObject:start forKey:@"Start"];       //とりあえずnowに値を上書き
-    [now setObject:end forKey:@"End"];
     [now setObject:budget forKey:@"Budget"];
+    [now setObject:end forKey:@"End"];
+    [root setObject:now forKey:@"Now"];
     NSLog(@"now:%@",now);
     [root setObject:now forKey:@"Now"];
     //root = [NSMutableDictionary dictionaryWithObject:now forKey:@"Now"];
     NSLog(@"nowをいれたroot:%@",root);
-    [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
 }
 
 #pragma mark - Formatter系

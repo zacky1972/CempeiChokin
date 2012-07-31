@@ -8,7 +8,9 @@
 
 #import "MainViewController.h"
 
-@interface MainViewController ()
+@interface MainViewController (){
+    Methods *_method;
+}
 
 @end
 
@@ -26,6 +28,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _method = [Methods alloc];
 	// Do any additional setup after loading the view.
 }
 
