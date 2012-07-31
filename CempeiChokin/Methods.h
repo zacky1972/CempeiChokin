@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface Methods : NSObject{
-    // ???: こういうのってここであってるんだろうか？
     //値をいじる感じ用
     NSString *path;
     NSMutableDictionary *root;

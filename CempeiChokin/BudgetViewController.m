@@ -218,8 +218,8 @@
 #pragma DoneButton
 
 - (IBAction)DoneButton_down:(id)sender {
-    
-    [_method saveStart:startDateTextField.text End:endDateTextField.text Budget:budgetTextField.text];
+    [_method saveStart:startDateTextField.text End:endDateTextField.text Budget:budgetTextField.text];// 保存する
+    // FIXME:ここにオプションの時はメイン画面に戻る的なことがほしい
 }
 
 @end

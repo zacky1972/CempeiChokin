@@ -34,8 +34,7 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     // 初期設定画面の表示
-    
-    if([_method searchGoal] == 0){ // TODO: 条件かこう
+    if([_method searchGoal] == 0){//初期設定がまだだったら，設定画面に遷移します
     [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Init"] animated:YES];
     }
 }
@@ -44,6 +43,8 @@
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
+    
+    // TODO:ここに円グラフの描画やら，値のセットが必要．その前にログを表示できるようにせなあかんですな
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
