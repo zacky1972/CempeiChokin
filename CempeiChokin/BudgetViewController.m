@@ -33,9 +33,9 @@
     BOOL atodeKesu = [_method initData];
     atodeKesu = NO;
     // TODO: あとで消そう
-    if([_method loadStart:nil]!=nil)startDateTextField.text = [_method loadName:nil];
-    if([_method loadEnd:nil]!=nil)endDateTextField.text = [_method loadValue:nil];
-    if([_method loadBudget:nil]!=nil)budgetTextField.text = [_method loadPeriod:nil];
+    if([_method loadStart:nil]!=nil)startDateTextField.text = [_method loadStart:nil];
+    if([_method loadEnd:nil]!=nil)endDateTextField.text = [_method loadEnd:nil];
+    if([_method loadBudget:nil]!=nil)budgetTextField.text = [_method loadBudget:nil];
     
     tempStartDate = [NSDate date];
     startDateTextField.text = [_method formatterDate:tempStartDate];

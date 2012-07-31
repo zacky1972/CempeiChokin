@@ -23,9 +23,7 @@
 //Data.plistの初期設定
 - (BOOL)initData{
     [self makeDataPath:nil];
-    NSLog(@"%@",path);
     if( [[NSFileManager defaultManager] fileExistsAtPath:path] == NO ){                     //Data.plistがなかったら
-        NSLog(@"make Data.plist!!");
         [[NSFileManager defaultManager] createFileAtPath:path contents:nil attributes:nil]; //作成する
         root = [[NSMutableDictionary alloc] init];
     }else{                      //あったら
@@ -36,13 +34,10 @@
 
 //Data.plistからひっぱってくる
 - (void)loadData:(id)sender{
-    NSLog(@"loadData!");
-    NSLog(@"root:%@",root);
     root = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
     goal = [root objectForKey:@"Goal"];
     now = [root objectForKey:@"Now"];
     initgoal = [root objectForKey:@"InitGoal"];
-    NSLog(@"root:%@",root);
 }
 
 // FIXME: 正直この3つはまとめたい
@@ -56,7 +51,6 @@
     [goal setObject:name forKey:@"Name"];       //とりあえずgoalに値を上書き
     [goal setObject:value forKey:@"Value"];
     [goal setObject:period forKey:@"Period"];
-    //root = [[NSMutableDictionary alloc] init];
     [root setObject:goal forKey:@"Goal"];
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
 }
