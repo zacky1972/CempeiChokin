@@ -65,7 +65,7 @@
 - (NSString *)loadFinish:(id)sender{return [now objectForKey:@"Finish"];}    //金額を読み込んで返す
 - (NSString *)loadBudget:(id)sender{return [now objectForKey:@"Budget"];}    //期限を読み込んで返す
 
-//目標のあれこれを一気に保存する
+//予算のあれこれを一気に保存する
 - (void)saveStart:(NSString *)start Finish:(NSString *)finish Budget:(NSString *)budget{
     [now setObject:start forKey:@"Start"];       //とりあえずnowに値を上書き
     [now setObject:finish forKey:@"Finish"];
