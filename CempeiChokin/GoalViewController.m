@@ -185,7 +185,9 @@
 
 // 決定ボタンが押されたときの
 - (IBAction)DoneButton_down:(id)sender {
-    //[_method saveName:NameTextField.text Value:ValueTextField.text Period:PeriodTextField.text]; // 保存する
+    // TODO: 決定ボタンで保存するようにしたい
+    //       入力途中でおちたら空になっちゃうので，それはどうしようか
+    [_method saveName:NameTextField.text Value:ValueTextField.text Period:PeriodTextField.text]; // 保存する
 }
 
 @end

@@ -15,23 +15,27 @@
 
 //Data.plistを読み込む
 - (void)loadData:(id)sender{
-    path = [[NSBundle mainBundle] pathForResource:@"Data" ofType:@"plist"];
+    NSString *home = NSHomeDirectory();
+    NSString *document = [home stringByAppendingPathComponent:@"Documents"];
+    path = [document stringByAppendingPathComponent:@"data.plist"];
     root = [[NSDictionary alloc] initWithContentsOfFile:path];
     goal = [root objectForKey:@"Goal"];
     initgoal = [root objectForKey:@"InitGoal"];
 }
 
-
+// TODO: なぜか読み込みができない
 // FIXME: 正直この3つはまとめたい
-- (NSString *)loadName:(id)sender{return [goal objectForKey:@"Name"];}//名前を読み込んで返す
-- (NSString *)loadValue:(id)sender{return [goal objectForKey:@"Value"];}//金額を読み込んで返す
-- (NSString *)loadPeriod:(id)sender{return [goal objectForKey:@"Period"];}//期限を読み込んで返す
+- (NSString *)loadName:(id)sender{NSLog(@"loadname"); return nil;/*[goal objectForKey:@"Name"];*/}      //名前を読み込んで返す
+- (NSString *)loadValue:(id)sender{NSLog(@"loadvalue");return nil;/*[goal objectForKey:@"Value"];*/}    //金額を読み込んで返す
+- (NSString *)loadPeriod:(id)sender{NSLog(@"loadperiod");return nil;/*[goal objectForKey:@"Period"];*/}  //期限を読み込んで返す
 
 //目標のあれこれを一気に保存する
 - (void)saveName:(NSString *)name Value:(NSString *)value Period:(NSString *)period{
-    [goal setObject:@"Name" forKey:name];
-    [goal setObject:@"Value" forKey:value];
-    [goal setObject:@"Period" forKey:period];
+    [goal setObject:name forKey:@"Name"];       //とりあえずgoalに値を上書き
+    [goal setObject:value forKey:@"Value"];
+    [goal setObject:period forKey:@"Period"];
+    
+    [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
 }
 
 // 10000 → 10,000 にするやつ
