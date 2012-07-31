@@ -36,14 +36,10 @@
 {
     [super viewDidLoad];
     _method = [Methods alloc];
-    
-    //設定がしてあったらデータをとってくる
-    BOOL atodeKesu = [_method initData];
-    atodeKesu = NO;
-    // TODO: あとで消そう
-    if([_method loadName:nil]!=nil)NameTextField.text = [_method loadName:nil];
-    if([_method loadValue:nil]!=nil)ValueTextField.text = [_method loadValue:nil];
-    if([_method loadPeriod:nil]!=nil)PeriodTextField.text = [_method loadPeriod:nil];
+    [_method initData];
+    if([_method loadName]!=nil)NameTextField.text = [_method loadName];
+    if([_method loadValue]!=nil)ValueTextField.text = [_method loadValue];
+    if([_method loadPeriod]!=nil)PeriodTextField.text = [_method loadPeriod];
 }
 
 - (void)viewDidUnload

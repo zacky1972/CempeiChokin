@@ -5,7 +5,6 @@
 //  Created by CEMPEI on 12/07/25.
 //  Copyright (c) 2012年 CEMPEI. All rights reserved.
 //
-
 #import "Methods.h"
 
 @interface Methods ()
@@ -13,56 +12,64 @@
 
 @implementation Methods
 
+// 初期設定が必要かどうかを確認する
 - (BOOL)searchGoal{
-    [self makeDataPath:nil];
-    if( [[NSFileManager defaultManager] fileExistsAtPath:path] == NO ){                     //Data.plistがなかったら
-        NSLog(@"ファイルなかった！");
+    [self makeDataPath];
+    if( [[NSFileManager defaultManager] fileExistsAtPath:path] == NO ){
+        // Data.plistがなかったら
+        DNSLog(@"ファイルなかった！");
         return 0;
-    }else{                      //あったら
-        NSLog(@"ファイるあった！");
-        [self loadData:nil];
-        if([goal objectForKey:@"Name"]==nil || [goal objectForKey:@"Value"] ==nil || [goal objectForKey:@"Period"] ==nil || [now objectForKey:@"Start"] ==nil || [now objectForKey:@"End"] ==nil || [now objectForKey:@"Budget"] ==nil ){
-            NSLog(@"ぬけがあった！");
+    }else{
+        // Data.plistがあったら
+        DNSLog(@"ファイルあった！");
+        [self loadData];
+        if([goal objectForKey:@"Name"]   == nil || [goal objectForKey:@"Value"] == nil ||
+           [goal objectForKey:@"Period"] == nil || [now objectForKey:@"Start"]  == nil ||
+           [now objectForKey:@"End"]     == nil || [now objectForKey:@"Budget"] == nil ){
+            DNSLog(@"ぬけがあった！");
             return 0;
         }
-        NSLog(@"せっっていおわってる！");
+        DNSLog(@"せっっていおわってる！");
         return 1;
     }
 }
 
-//Date.plistへのpathを作成
-- (void)makeDataPath:(id)sender{
+//  Date.plistへのpathを作成
+- (void)makeDataPath{
+    DNSLog(@"ファイルの場所の指示！");
     NSString *home = NSHomeDirectory();
     NSString *document = [home stringByAppendingPathComponent:@"Documents"];
     path = [document stringByAppendingPathComponent:@"Data.plist"];
 }
 
 //Data.plistの初期設定
-- (BOOL)initData{
-    [self makeDataPath:nil];
+- (void)initData{
+    DNSLog(@"データの初期化！");
+    [self makeDataPath];
     if( [[NSFileManager defaultManager] fileExistsAtPath:path] == NO ){                     //Data.plistがなかったら
         [[NSFileManager defaultManager] createFileAtPath:path contents:nil attributes:nil]; //作成する
         root = [[NSMutableDictionary alloc] init];
     }else{                      //あったら
-        [self loadData:nil];
+        [self loadData];
     }
-    return 0;
 }
 
 //Data.plistからひっぱってくる
-- (void)loadData:(id)sender{
+- (void)loadData{
+    DNSLog(@"データ読み込み！");
     root = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
     goal = [root objectForKey:@"Goal"];
     now = [root objectForKey:@"Now"];
 }
 
 // FIXME: 正直この3つはまとめたい
-- (NSString *)loadName:(id)sender{return [goal objectForKey:@"Name"];}      //名前を読み込んで返す
-- (NSString *)loadValue:(id)sender{return [goal objectForKey:@"Value"];}    //金額を読み込んで返す
-- (NSString *)loadPeriod:(id)sender{return [goal objectForKey:@"Period"];}  //期限を読み込んで返す
+- (NSString *)loadName{return [goal objectForKey:@"Name"];}      //名前を読み込んで返す
+- (NSString *)loadValue{return [goal objectForKey:@"Value"];}    //金額を読み込んで返す
+- (NSString *)loadPeriod{return [goal objectForKey:@"Period"];}  //期限を読み込んで返す
 
 //目標のあれこれを一気に保存する
 - (void)saveName:(NSString *)name Value:(NSString *)value Period:(NSString *)period{
+    DNSLog(@"プロパティリストに保存！");
     goal = [[NSMutableDictionary alloc] init];
     [goal setObject:name forKey:@"Name"];       //とりあえずgoalに値を上書き
     [goal setObject:value forKey:@"Value"];
@@ -72,12 +79,13 @@
 }
 
 // FIXME: 正直この3つはまとめたい
-- (NSString *)loadStart:(id)sender{return [now objectForKey:@"Start"];}      //名前を読み込んで返す
-- (NSString *)loadEnd:(id)sender{return [now objectForKey:@"End"];}          //金額を読み込んで返す
-- (NSString *)loadBudget:(id)sender{return [now objectForKey:@"Budget"];}    //期限を読み込んで返す
+- (NSString *)loadStart{return [now objectForKey:@"Start"];}      //名前を読み込んで返す
+- (NSString *)loadEnd{return [now objectForKey:@"End"];}          //金額を読み込んで返す
+- (NSString *)loadBudget{return [now objectForKey:@"Budget"];}    //期限を読み込んで返す
 
 //予算のあれこれを一気に保存する
 - (void)saveStart:(NSString *)start End:(NSString *)end Budget:(NSString *)budget{
+    DNSLog(@"プロパティリストに保存！");
     now = [[NSMutableDictionary alloc] init];
     [now setObject:start forKey:@"Start"];      //とりあえずnowに値を上書き
     [now setObject:budget forKey:@"Budget"];

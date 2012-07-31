@@ -29,13 +29,12 @@
     [super viewDidLoad];
     
     _method = [Methods alloc];
+    [_method initData];
     //設定がしてあったらデータをとってくる
-    BOOL atodeKesu = [_method initData];
-    atodeKesu = NO;
-    // TODO: あとで消そう
-    if([_method loadStart:nil]!=nil)startDateTextField.text = [_method loadStart:nil];
-    if([_method loadEnd:nil]!=nil)endDateTextField.text = [_method loadEnd:nil];
-    if([_method loadBudget:nil]!=nil)budgetTextField.text = [_method loadBudget:nil];
+    
+    if([_method loadStart]!=nil)startDateTextField.text = [_method loadStart];
+    if([_method loadEnd]!=nil)endDateTextField.text = [_method loadEnd];
+    if([_method loadBudget]!=nil)budgetTextField.text = [_method loadBudget];
     
     tempStartDate = [NSDate date];
     startDateTextField.text = [_method formatterDate:tempStartDate];
