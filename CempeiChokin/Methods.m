@@ -23,11 +23,12 @@
 //Data.plistの初期設定
 - (void)initData:(id)sender{
     [self makeDataPath:nil];
-    NSLog(@"%c",[[NSFileManager defaultManager] fileExistsAtPath:path]);
+    NSLog(@"%@",path);
     if( [[NSFileManager defaultManager] fileExistsAtPath:path] == NO ){                     //Data.plistがなかったら
         NSLog(@"make Data.plist!!");
         [[NSFileManager defaultManager] createFileAtPath:path contents:nil attributes:nil]; //作成する
     }else{                      //あったら
+        NSLog(@"Data load");
         [self loadData:nil];    //読み込み
     }
 }
@@ -58,7 +59,7 @@
 // FIXME: 正直この3つはまとめたい
 - (NSString *)loadStart:(id)sender{return [now objectForKey:@"Start"];}      //名前を読み込んで返す
 - (NSString *)loadFinish:(id)sender{return [now objectForKey:@"Finish"];}    //金額を読み込んで返す
-- (NSString *)loadBudget:(id)sender{return [now objectForKey:@"Budget"];}  //期限を読み込んで返す
+- (NSString *)loadBudget:(id)sender{return [now objectForKey:@"Budget"];}    //期限を読み込んで返す
 
 //目標のあれこれを一気に保存する
 - (void)saveStart:(NSString *)start Finish:(NSString *)finish Budget:(NSString *)budget{
