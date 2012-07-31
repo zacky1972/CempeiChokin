@@ -29,7 +29,7 @@
            Value:(NSString *)value
           Period:(NSString *)period;            //目標のあれこれを一気に保存する
 - (NSString *)loadStart:(id)sender;             //名前を読み込んで返す
-- (NSString *)loadEnd:(id)sender;            //金額を読み込んで返す
+- (NSString *)loadEnd:(id)sender;               //金額を読み込んで返す
 - (NSString *)loadBudget:(id)sender;            //期限を読み込んで返す
 - (void)saveStart:(NSString *)start
               End:(NSString *)end

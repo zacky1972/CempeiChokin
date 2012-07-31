@@ -30,6 +30,9 @@
     
     _method = [Methods alloc];
     //設定がしてあったらデータをとってくる
+    BOOL atodeKesu = [_method initData];
+    atodeKesu = NO;
+    // TODO: あとで消そう
     if([_method loadStart:nil]!=nil)startDateTextField.text = [_method loadName:nil];
     if([_method loadEnd:nil]!=nil)endDateTextField.text = [_method loadValue:nil];
     if([_method loadBudget:nil]!=nil)budgetTextField.text = [_method loadPeriod:nil];
