@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="raj-cK-qeg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E2617" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="raj-cK-qeg">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
@@ -173,12 +173,15 @@
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="デジカメ" textAlignment="right" minimumFontSize="17" id="knN-CT-Vrs">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="デジカメ" textAlignment="right" minimumFontSize="17" id="knN-CT-Vrs">
                                                     <rect key="frame" x="60" y="6" width="231" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="textColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                                    <connections>
+                                                        <action selector="NameTextField_end:" destination="5l7-9T-UdO" eventType="editingDidEnd" id="hjs-xE-HzV"/>
+                                                    </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="名前" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="OyU-aw-IJD">
                                                     <rect key="frame" x="10" y="11" width="34" height="21"/>
@@ -198,12 +201,15 @@
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="50,000円" textAlignment="right" minimumFontSize="17" id="rBP-p5-gFX">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="50,000円" textAlignment="right" minimumFontSize="17" id="rBP-p5-gFX">
                                                     <rect key="frame" x="60" y="6" width="231" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="textColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
+                                                    <connections>
+                                                        <action selector="ValueTextField_begin:" destination="5l7-9T-UdO" eventType="editingDidBegin" id="ofm-FG-KE6"/>
+                                                    </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="金額" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="ADx-34-Y6L">
                                                     <rect key="frame" x="10" y="11" width="34" height="21"/>
@@ -223,12 +229,15 @@
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="2012年9月13日" textAlignment="right" minimumFontSize="17" id="bsI-XL-hDh">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="2012年9月13日" textAlignment="right" minimumFontSize="17" id="bsI-XL-hDh">
                                                     <rect key="frame" x="60" y="6" width="231" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="textColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="PeriodTextField_begin:" destination="5l7-9T-UdO" eventType="editingDidBegin" id="knn-GQ-oal"/>
+                                                    </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="期間" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="c5m-Af-2TB">
                                                     <rect key="frame" x="10" y="11" width="34" height="21"/>
@@ -251,6 +260,11 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="欲しいものの設定" id="OxU-C4-WsF"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="NameTextField" destination="knN-CT-Vrs" id="d7f-pY-BJr"/>
+                        <outlet property="PeriodTextField" destination="bsI-XL-hDh" id="b7y-4n-Wmn"/>
+                        <outlet property="ValueTextField" destination="rBP-p5-gFX" id="yom-Kc-uOq"/>
+                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1339" y="2214"/>
@@ -289,12 +303,15 @@
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="2012年7月20日" textAlignment="right" minimumFontSize="17" id="N4S-LK-Iar">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="2012年7月20日" textAlignment="right" minimumFontSize="17" id="N4S-LK-Iar">
                                                     <rect key="frame" x="60" y="6" width="231" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="textColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="startDateTextField_begin:" destination="S9U-Jq-u8j" eventType="editingDidBegin" id="GTC-EN-gMr"/>
+                                                    </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="いつから" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="0g7-XE-wPm">
                                                     <rect key="frame" x="10" y="11" width="68" height="21"/>
@@ -314,12 +331,15 @@
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="2012年8月20日" textAlignment="right" minimumFontSize="17" id="pCt-dd-f8H">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="2012年8月20日" textAlignment="right" minimumFontSize="17" id="pCt-dd-f8H">
                                                     <rect key="frame" x="60" y="6" width="231" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="textColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="endDateTextField_begin:" destination="S9U-Jq-u8j" eventType="editingDidBegin" id="os5-h4-8s3"/>
+                                                    </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="いつまで" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="Fjz-Zh-q8z">
                                                     <rect key="frame" x="10" y="11" width="68" height="21"/>
@@ -343,12 +363,15 @@
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="120,000円" textAlignment="right" minimumFontSize="17" id="zX8-jA-oki">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="120,000円" textAlignment="right" minimumFontSize="17" id="zX8-jA-oki">
                                                     <rect key="frame" x="60" y="6" width="231" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="textColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="budgetTextField_begin:" destination="S9U-Jq-u8j" eventType="editingDidBegin" id="nAU-GG-Gcn"/>
+                                                    </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="予算" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="Yhh-Dw-6wy">
                                                     <rect key="frame" x="10" y="11" width="34" height="21"/>
@@ -371,6 +394,11 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="期間と予算の設定" id="ppE-Qt-iKY"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="budgetTextField" destination="zX8-jA-oki" id="qJE-Wq-uiF"/>
+                        <outlet property="endDateTextField" destination="pCt-dd-f8H" id="c3E-KA-xgR"/>
+                        <outlet property="startDateTextField" destination="N4S-LK-Iar" id="6oK-sz-9JW"/>
+                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1339" y="2806"/>
@@ -915,6 +943,7 @@
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
+                                        <action selector="DoneButton_down:" destination="iwI-JE-99H" eventType="touchUpInside" id="uby-nQ-eam"/>
                                         <segue destination="raj-cK-qeg" kind="modal" modalTransitionStyle="flipHorizontal" id="gv0-sb-DCH"/>
                                     </connections>
                                 </button>
@@ -931,12 +960,15 @@
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="2012年7月20日" textAlignment="right" minimumFontSize="17" id="aUf-dS-tHd">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="2012年7月20日" textAlignment="right" minimumFontSize="17" id="aUf-dS-tHd">
                                                     <rect key="frame" x="60" y="6" width="231" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="textColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="startDateTextField_begin:" destination="iwI-JE-99H" eventType="editingDidBegin" id="w6U-ds-Qxt"/>
+                                                    </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="いつから" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="eFI-F4-fLg">
                                                     <rect key="frame" x="10" y="11" width="68" height="21"/>
@@ -956,12 +988,15 @@
                                             <rect key="frame" x="10" y="0.0" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="2012年8月20日" textAlignment="right" minimumFontSize="17" id="gdw-fd-stC">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="2012年8月20日" textAlignment="right" minimumFontSize="17" id="gdw-fd-stC">
                                                     <rect key="frame" x="60" y="6" width="231" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="textColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="endDateTextField_begin:" destination="iwI-JE-99H" eventType="editingDidBegin" id="Ak2-dO-tVK"/>
+                                                    </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="いつまで" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="jqK-wI-2r6">
                                                     <rect key="frame" x="10" y="11" width="68" height="21"/>
@@ -985,12 +1020,15 @@
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="120,000円" textAlignment="right" minimumFontSize="17" id="NVS-LS-zqn">
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="120,000円" textAlignment="right" minimumFontSize="17" id="NVS-LS-zqn">
                                                     <rect key="frame" x="60" y="6" width="231" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="textColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="budgetTextField_begin:" destination="iwI-JE-99H" eventType="editingDidBegin" id="quK-vO-f6O"/>
+                                                    </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="予算" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="oSU-aC-EW7">
                                                     <rect key="frame" x="10" y="11" width="34" height="21"/>
@@ -1013,6 +1051,11 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="期間と予算の設定" id="gQK-On-VVW"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="budgetTextField" destination="NVS-LS-zqn" id="hgO-75-uTG"/>
+                        <outlet property="endDateTextField" destination="gdw-fd-stC" id="Tqb-vl-whx"/>
+                        <outlet property="startDateTextField" destination="aUf-dS-tHd" id="ydd-qs-yvQ"/>
+                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="867" y="1466"/>
@@ -1073,8 +1116,8 @@
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="10,000" textAlignment="right" minimumFontSize="17" id="cls-ho-OXQ">
-                                                    <rect key="frame" x="60" y="6" width="213" height="31"/>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="10,000円" textAlignment="right" minimumFontSize="17" id="cls-ho-OXQ">
+                                                    <rect key="frame" x="60" y="6" width="231" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="textColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1085,13 +1128,6 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </label>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="円" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="SRz-Za-OUM">
-                                                    <rect key="frame" x="255" y="11" width="34" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                             </subviews>
@@ -1176,7 +1212,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="uJm-A0-8rn"/>
+        <segue reference="gv0-sb-DCH"/>
         <segue reference="fhM-kk-tX0"/>
     </inferredMetricsTieBreakers>
 </document>
