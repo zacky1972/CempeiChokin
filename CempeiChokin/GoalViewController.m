@@ -38,7 +38,6 @@
     _method = [Methods alloc];
     
     //設定がしてあったらデータをとってくる
-    [_method initData:nil];
     if([_method loadName:nil]!=nil)NameTextField.text = [_method loadName:nil];
     if([_method loadValue:nil]!=nil)ValueTextField.text = [_method loadValue:nil];
     if([_method loadPeriod:nil]!=nil)PeriodTextField.text = [_method loadPeriod:nil];

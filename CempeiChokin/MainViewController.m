@@ -8,7 +8,9 @@
 
 #import "MainViewController.h"
 
-@interface MainViewController ()
+@interface MainViewController (){
+    Methods *_method;
+}
 
 @end
 
@@ -26,12 +28,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _method = [Methods alloc];
 	// Do any additional setup after loading the view.
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     // 初期設定画面の表示
-    if(1){ // TODO: 条件かこう
+    if([_method initData] == 0){ // TODO: 条件かこう
     [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Init"] animated:YES];
     }
 }

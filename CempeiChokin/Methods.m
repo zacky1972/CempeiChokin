@@ -21,13 +21,18 @@
 }
 
 //Data.plistの初期設定
-- (void)initData:(id)sender{
+- (BOOL)initData{
     [self makeDataPath:nil];
     if( [[NSFileManager defaultManager] fileExistsAtPath:path] == NO ){                     //Data.plistがなかったら
         [[NSFileManager defaultManager] createFileAtPath:path contents:nil attributes:nil]; //作成する
         root = [[NSMutableDictionary alloc] init];
     }else{                      //あったら
         [self loadData:nil];    //読み込み
+        if ([[root objectForKey:@"Goal"] count] == 3 && [[root objectForKey:@"Now"] count] == 5 ){
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }
 
