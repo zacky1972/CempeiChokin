@@ -25,6 +25,7 @@
     [self makeDataPath:nil];
     if( [[NSFileManager defaultManager] fileExistsAtPath:path] == NO ){                     //Data.plistがなかったら
         [[NSFileManager defaultManager] createFileAtPath:path contents:nil attributes:nil]; //作成する
+        root = [[NSMutableDictionary alloc] init];
     }else{                      //あったら
         [self loadData:nil];    //読み込み
     }
@@ -51,7 +52,7 @@
     [goal setObject:name forKey:@"Name"];       //とりあえずgoalに値を上書き
     [goal setObject:value forKey:@"Value"];
     [goal setObject:period forKey:@"Period"];
-    [root setObject:goal forKey:@"Goal"];
+    [root setDictionary:goal];
     NSLog(@"goalをいれたroot:%@",root);
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
 }
@@ -63,7 +64,6 @@
 
 //予算のあれこれを一気に保存する
 - (void)saveStart:(NSString *)start End:(NSString *)end Budget:(NSString *)budget{
-    now = [[NSMutableDictionary alloc] init];
     [now setObject:start forKey:@"Start"];       //とりあえずnowに値を上書き
     [now setObject:end forKey:@"End"];
     [now setObject:budget forKey:@"Budget"];
