@@ -39,7 +39,7 @@
     
     //　ホスティングビューを生成します。
     CPTGraphHostingView *hostingView = [[CPTGraphHostingView alloc]
-                                        initWithFrame:CGRectMake(0, 0, 225, 300)];
+                                        initWithFrame:CGRectMake(0, 0, 225, 250)];
     
     // グラフを生成します。
     CPTXYGraph *graph = [[CPTXYGraph alloc] initWithFrame:hostingView.bounds];
