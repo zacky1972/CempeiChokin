@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		015D072F15C8E1090005AA87 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 015D072E15C8E1090005AA87 /* QuartzCore.framework */; };
+		015D073115C8E11E0005AA87 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 015D073015C8E11E0005AA87 /* QuartzCore.framework */; };
+		015D078D15C8F1080005AA87 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 015D078C15C8F1080005AA87 /* libCorePlot-CocoaTouch.a */; };
 		E95EED9515C26A7300F2A89E /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EED9415C26A7300F2A89E /* MainViewController.m */; };
 		E95EED9B15C26C2600F2A89E /* OptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EED9A15C26C2600F2A89E /* OptionViewController.m */; };
 		E95EED9E15C26D8D00F2A89E /* BudgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EED9D15C26D8D00F2A89E /* BudgetViewController.m */; };
@@ -164,7 +166,8 @@
 				E98EA59415BFB8A10019AED5 /* UIKit.framework in Frameworks */,
 				E98EA59615BFB8A10019AED5 /* Foundation.framework in Frameworks */,
 				E98EA59815BFB8A10019AED5 /* CoreGraphics.framework in Frameworks */,
-				015D072C15C8E0700005AA87 /* libCorePlot-CocoaTouch.a in Frameworks */,
+				015D073115C8E11E0005AA87 /* QuartzCore.framework in Frameworks */,
+				015D078D15C8F1080005AA87 /* libCorePlot-CocoaTouch.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

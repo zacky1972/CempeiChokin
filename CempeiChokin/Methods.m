@@ -104,6 +104,7 @@
 }
 
 #pragma MainView系
+//保存系
 //金額を読み込んで返す
 - (NSString *)loadManeyValue:(NSUInteger *)cursor{
     tempManeyValue = [log objectAtIndex:*cursor];
@@ -131,6 +132,28 @@
                                     date, @"Date",
                                     kind, @"Kind", nil];
     [log addObject:tempManeyValue];
+}
+
+//初期設定系
+//データから値をセット
+- (void)setData{
+    DNSLog(@"データをセット！");
+}
+
+//ログ読み込み
+- (void)loadLog{
+    DNSLog(@"ログ読み込み！");
+}
+
+//スクロールビューの大きさを変更
+- (void)fitScrollView{
+    DNSLog(@"ビューをフィット！");
+}
+
+//グラフの生成
+- (void)makeGraph{
+    DNSLog(@"グラフ書き出し！");
+    //ここはグラフをイケメンにしてから
 }
 
 #pragma mark - Formatter系
