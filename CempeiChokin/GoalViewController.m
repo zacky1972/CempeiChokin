@@ -55,8 +55,6 @@
 
 #pragma mark - 名前の設定
 - (IBAction)NameTextField_end:(id)sender {
-    // TODO: いつかここに値を保存する処理を書こう
-    // ???: 一括で保存してみた！
     [ValueTextField becomeFirstResponder];  //ValueTextFieldに移動
 }
 
