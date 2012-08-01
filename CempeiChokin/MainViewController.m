@@ -31,6 +31,8 @@
 {
     [super viewDidLoad];
     _method = [Methods alloc];
+    [_method makeDataPath];
+    [_method loadData];
     
     [LogScroll setScrollEnabled:YES];
     [LogScroll setContentSize:CGSizeMake(320, 900)];

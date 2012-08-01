@@ -377,8 +377,8 @@
 		E9B4BC4C15C234B600E92B3D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				E95EED9415C26A7300F2A89E /* MainViewController.m */,
 				E95EED9315C26A7300F2A89E /* MainViewController.h */,
+				E95EED9415C26A7300F2A89E /* MainViewController.m */,
 				E95EEDA215C26EAB00F2A89E /* GoalViewController.h */,
 				E95EEDA315C26EAB00F2A89E /* GoalViewController.m */,
 				E95EED9C15C26D8D00F2A89E /* BudgetViewController.h */,
