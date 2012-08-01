@@ -37,7 +37,7 @@
     [_method setData];
     [_method loadLog];
     
-    
+    //スクロールビューをフィットさせる
     [LogScroll setScrollEnabled:YES];
     [LogScroll setContentSize:CGSizeMake(320,[[_method fitScrollView] floatValue])];
     [_method makeGraph];
