@@ -11,6 +11,8 @@
 
 @interface MainViewController : UIViewController{
     
+IBOutlet UIScrollView *LogScroll;
+    
 }
 
 @end

@@ -29,6 +29,9 @@
 {
     [super viewDidLoad];
     _method = [Methods alloc];
+    
+    [LogScroll setScrollEnabled:YES];
+    [LogScroll setContentSize:CGSizeMake(320, 900)];
 	// Do any additional setup after loading the view.
 }
 
