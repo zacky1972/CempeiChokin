@@ -149,7 +149,7 @@
 }
 
 //スクロールビューの大きさを変更
-- (NSNumber *)fitScrollView{
+- (float)fitScrollView{
     DNSLog(@"ビューをフィット！");
     [self makeDataPath];
     [self loadData];
@@ -163,9 +163,8 @@
         height = 10;
     }
     
-    height = 1;
     height = 779 + 45 * height;
-    return [[NSNumber alloc] initWithInt:height];
+    return [[[NSNumber alloc] initWithInt:height] floatValue];
 }
 
 //グラフの生成

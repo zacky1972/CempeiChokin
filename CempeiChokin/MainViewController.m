@@ -40,7 +40,7 @@
     
     //スクロールビューをフィットさせる
     [LogScroll setScrollEnabled:YES];
-    [LogScroll setContentSize:CGSizeMake(320,[[_method fitScrollView] floatValue])];
+    [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollView])];
     
     [LogScroll addSubview:[_method makeGraph:@40 Balance:@40 Norma:@10]];
 }
