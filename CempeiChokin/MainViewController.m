@@ -16,8 +16,6 @@
 
 @implementation MainViewController
 
-@synthesize pieChartData;
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -88,24 +86,7 @@
     [overlayGradient addColorStop :[[CPTColor blackColor] colorWithAlphaComponent:0.4] atPosition:1.0];
     pieChart.overlayFill = [CPTFill fillWithGradient:overlayGradient];
     
-    // 画面にホスティングビューを追加します。
-    [LogScroll addSubview:hostingView];
-	// Do any additional setup after loading the view.
-    
 }
-
--(CPTFill *)sliceFillForPieChart:(CPTPieChart *)pieChart recordIndex:(NSUInteger)index {
-    CPTColor *color = [[CPTColor alloc] init];
-    if(index == 0){
-        color = [CPTColor redColor];
-    }else if (index == 1){
-        color = [CPTColor whiteColor];
-    }else if (index == 2){
-        color = [CPTColor grayColor];
-    }
-	return [CPTFill fillWithColor:color];
-}
-
 
 - (void)viewDidAppear:(BOOL)animated{
     // 初期設定画面の表示
@@ -154,18 +135,6 @@
     logValue.text = @"100円だよ！";
     
     return cell;
-}
-
-// グラフに使用するデータの数を返すように実装します。
--(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plot
-{
-    return [self.pieChartData count];
-}
-
-// グラフに使用するデータの値を返すように実装します。
--(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index
-{
-    return [self.pieChartData objectAtIndex:index];
 }
 
 - (IBAction)expenseTextField_begin:(id)sender {

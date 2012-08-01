@@ -10,7 +10,7 @@
 #import "CorePlot-CocoaTouch.h"
 #import "Methods.h"
 
-@interface MainViewController : UIViewController <CPTPieChartDataSource,CPTPieChartDelegate>
+@interface MainViewController : UIViewController
 {
     IBOutlet UIScrollView *LogScroll;
     __weak IBOutlet UITextField *expenseTextField;
@@ -19,7 +19,5 @@
 }
 
 - (IBAction)expenseTextField_begin:(id)sender;
-
-@property (readwrite, nonatomic) NSMutableArray *pieChartData;
 
 @end

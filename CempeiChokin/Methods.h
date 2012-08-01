@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CorePlot-CocoaTouch.h"
 
-@interface Methods : NSObject{
+@interface Methods : NSObject <CPTPieChartDataSource,CPTPieChartDelegate>{
     //値をいじる感じ用
     NSString *path;
     NSMutableDictionary *root;
@@ -57,5 +58,7 @@
 
 // 日付の表示をする感じの
 - (NSString *)formatterDate:(NSDate *)date;
+
+@property (readwrite, nonatomic) NSMutableArray *pieChartData;
 
 @end
