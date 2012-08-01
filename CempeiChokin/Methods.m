@@ -106,32 +106,33 @@
 #pragma MainView系
 //保存系
 //金額を読み込んで返す
-- (NSString *)loadManeyValue:(NSUInteger *)cursor{
-    tempManeyValue = [log objectAtIndex:*cursor];
-    return [tempManeyValue objectForKey:@"ManeyValue"];
+- (NSString *)loadMoneyValue:(NSUInteger *)cursor{
+    tempMoneyValue = [log objectAtIndex:*cursor];
+    return [tempMoneyValue objectForKey:@"MoneyValue"];
 }
 
 //日付を読み込んで返す
 - (NSString *)loadDate:(NSUInteger *)cursor{
-    tempManeyValue = [log objectAtIndex:*cursor];
-    return [tempManeyValue objectForKey:@"Date"];
+    tempMoneyValue = [log objectAtIndex:*cursor];
+    return [tempMoneyValue objectForKey:@"Date"];
 }
 
 //種類を読み込んで返す
 - (NSString *)loadKind:(NSUInteger *)cursor{
-    tempManeyValue = [log objectAtIndex:*cursor];
-    return [tempManeyValue objectForKey:@"Kind"];
+    tempMoneyValue = [log objectAtIndex:*cursor];
+    return [tempMoneyValue objectForKey:@"Kind"];
 }
 
 //金額のあれこれを一気に保存する
-- (void)saveManeyValue:(NSString *)value Date:(NSString *)date Kind:(NSString *)kind{
+- (void)saveMoneyValue:(NSString *)value Date:(NSString *)date Kind:(NSString *)kind{
     DNSLog(@"金額のあれこれを保存！");
     log = [[NSMutableArray alloc] init];
-    tempManeyValue = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    value, @"ManeyValue",
+    tempMoneyValue = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    value, @"MoneyValue",
                                     date, @"Date",
                                     kind, @"Kind", nil];
-    [log addObject:tempManeyValue];
+    [log addObject:tempMoneyValue];
+    DNSLog(@"%@",log);
 }
 
 //初期設定系

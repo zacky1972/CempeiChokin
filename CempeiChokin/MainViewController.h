@@ -12,10 +12,13 @@
 
 @interface MainViewController : UIViewController <CPTPieChartDataSource,CPTPieChartDelegate>
 {
-    
     IBOutlet UIScrollView *LogScroll;
-
+    __weak IBOutlet UITextField *expenseTextField;
+    
+    
 }
+
+- (IBAction)expenseTextField_begin:(id)sender;
 
 @property (readwrite, nonatomic) NSMutableArray *pieChartData;
 
