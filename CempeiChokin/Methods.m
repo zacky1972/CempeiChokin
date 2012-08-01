@@ -149,8 +149,12 @@
 }
 
 //スクロールビューの大きさを変更
-- (void)fitScrollView{
+- (NSNumber *)fitScrollView{
     DNSLog(@"ビューをフィット！");
+    
+    NSNumber *height = @(779+45*2);
+    
+    return height;
 }
 
 //グラフの生成
