@@ -7,12 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CorePlot-CocoaTouch.h"
 #import "Methods.h"
 
-@interface MainViewController : UIViewController{
+@interface MainViewController : UIViewController <CPTPieChartDataSource,CPTPieChartDelegate>
+{
     
-IBOutlet UIScrollView *LogScroll;
-    
+    IBOutlet UIScrollView *LogScroll;
+
 }
+
+@property (readwrite, nonatomic) NSMutableArray *pieChartData;
 
 @end
