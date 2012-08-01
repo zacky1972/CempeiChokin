@@ -46,8 +46,6 @@
                   Date:(NSString *)date
                   Kind:(NSString *)kind;        //金額のあれこれを一気に保存する
 //メイン画面の初期設定とか
-
-
 - (void)setData;        //データから値をセット
 - (void)loadLog;        //ログ読み込み
 - (void)fitScrollView;  //スクロールビューの大きさを変更

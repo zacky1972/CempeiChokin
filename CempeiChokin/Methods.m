@@ -132,6 +132,7 @@
                                     date, @"Date",
                                     kind, @"Kind", nil];
     [log addObject:tempMoneyValue];
+    DNSLog(@"%@",log);
 }
 
 //初期設定系

@@ -13,12 +13,9 @@
 @interface MainViewController : UIViewController <CPTPieChartDataSource,CPTPieChartDelegate>
 {
     IBOutlet UIScrollView *LogScroll;
-    __weak IBOutlet UILabel *BudgetLabel;
-    __weak IBOutlet UILabel *ExpensesLabel;
-    __weak IBOutlet UILabel *BalanceLabel;
-    __weak IBOutlet UILabel *QuotaLabel;
-    __weak IBOutlet UISegmentedControl *KindSegment;
-    __weak IBOutlet UITextField *MoneyValueLabel;
+    __weak IBOutlet UITextField *expenseTextField;
+    
+    
 }
 
 - (IBAction)expenseTextField_begin:(id)sender;
