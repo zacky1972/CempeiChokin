@@ -29,6 +29,8 @@
 		E98EA5BC15BFB8A20019AED5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E98EA5BA15BFB8A20019AED5 /* InfoPlist.strings */; };
 		E98EA5BF15BFB8A20019AED5 /* CempeiChokinTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E98EA5BE15BFB8A20019AED5 /* CempeiChokinTests.m */; };
 		E98EA5CC15BFC9E80019AED5 /* graph.png in Resources */ = {isa = PBXBuildFile; fileRef = E98EA5CB15BFC9E80019AED5 /* graph.png */; };
+		E9AFEDEC15C9151C0021815A /* help.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E9AFEDEB15C9151C0021815A /* help.jpg */; };
+		E9AFEDF015C915BA0021815A /* FirstHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AFEDEF15C915BA0021815A /* FirstHelpViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -155,6 +157,9 @@
 		E98EA5BD15BFB8A20019AED5 /* CempeiChokinTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CempeiChokinTests.h; sourceTree = "<group>"; };
 		E98EA5BE15BFB8A20019AED5 /* CempeiChokinTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CempeiChokinTests.m; sourceTree = "<group>"; };
 		E98EA5CB15BFC9E80019AED5 /* graph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = graph.png; sourceTree = "<group>"; };
+		E9AFEDEB15C9151C0021815A /* help.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = help.jpg; sourceTree = "<group>"; };
+		E9AFEDEE15C915BA0021815A /* FirstHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstHelpViewController.h; sourceTree = "<group>"; };
+		E9AFEDEF15C915BA0021815A /* FirstHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstHelpViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -368,6 +373,7 @@
 		E98EA5CA15BFC9BE0019AED5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				E9AFEDEB15C9151C0021815A /* help.jpg */,
 				E98EA5CB15BFC9E80019AED5 /* graph.png */,
 			);
 			name = Images;
@@ -386,6 +392,8 @@
 				E95EEDA615C270B700F2A89E /* DepositViewController.m */,
 				E95EED9915C26C2600F2A89E /* OptionViewController.h */,
 				E95EED9A15C26C2600F2A89E /* OptionViewController.m */,
+				E9AFEDEE15C915BA0021815A /* FirstHelpViewController.h */,
+				E9AFEDEF15C915BA0021815A /* FirstHelpViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -473,6 +481,7 @@
 				E98EA59E15BFB8A10019AED5 /* InfoPlist.strings in Resources */,
 				E98EA5A715BFB8A10019AED5 /* MainStoryboard.storyboard in Resources */,
 				E98EA5CC15BFC9E80019AED5 /* graph.png in Resources */,
+				E9AFEDEC15C9151C0021815A /* help.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,6 +524,7 @@
 				E95EEDA415C26EAB00F2A89E /* GoalViewController.m in Sources */,
 				E95EEDA715C270B700F2A89E /* DepositViewController.m in Sources */,
 				E95EEDAA15C273B200F2A89E /* Methods.m in Sources */,
+				E9AFEDF015C915BA0021815A /* FirstHelpViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

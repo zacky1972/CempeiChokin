@@ -32,6 +32,12 @@
     [_method makeDataPath];
     [_method loadData];
     
+    //値の設定
+    BudgetLabel.text = [_method loadBudget];
+    ExpenseLabel.text = @"";
+    BalanceLabel.text = @"";
+    NormaLabel.text = @"";
+    
     [LogScroll setScrollEnabled:YES];
     [LogScroll setContentSize:CGSizeMake(320, 900)];
     
@@ -42,13 +48,17 @@
 - (void)viewDidAppear:(BOOL)animated{
     // 初期設定画面の表示
     if([_method searchGoal] == 0){//初期設定がまだだったら，設定画面に遷移します
-        [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Init"] animated:YES];
+        [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"First"] animated:YES];
     }
 }
 
 - (void)viewDidUnload
 {
     expenseTextField = nil;
+    BudgetLabel = nil;
+    ExpenseLabel = nil;
+    BalanceLabel = nil;
+    NormaLabel = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     
