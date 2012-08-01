@@ -21,6 +21,8 @@
     __weak IBOutlet UITextField *MoneyValueLabel;
 }
 
+- (IBAction)expenseTextField_begin:(id)sender;
+
 @property (readwrite, nonatomic) NSMutableArray *pieChartData;
 
 @end
