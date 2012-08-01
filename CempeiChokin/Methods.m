@@ -106,7 +106,7 @@
 #pragma MainView系
 //保存系
 //金額を読み込んで返す
-- (NSString *)loadManeyValue:(NSUInteger *)cursor{
+- (NSString *)loadMoneyValue:(NSUInteger *)cursor{
     tempManeyValue = [log objectAtIndex:*cursor];
     return [tempManeyValue objectForKey:@"ManeyValue"];
 }

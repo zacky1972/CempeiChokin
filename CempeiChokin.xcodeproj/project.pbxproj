@@ -618,7 +618,6 @@
 				INFOPLIST_FILE = "CempeiChokin/CempeiChokin-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../Downloads/CorePlot_1.0 2/Binaries/iOS\"",
 					"\"$(SRCROOT)/iOS\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
@@ -635,7 +634,6 @@
 				INFOPLIST_FILE = "CempeiChokin/CempeiChokin-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../Downloads/CorePlot_1.0 2/Binaries/iOS\"",
 					"\"$(SRCROOT)/iOS\"",
 				);
 				OTHER_LDFLAGS = "-ObjC";
