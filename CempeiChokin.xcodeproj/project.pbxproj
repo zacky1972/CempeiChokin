@@ -7,9 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		015D072F15C8E1090005AA87 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 015D072E15C8E1090005AA87 /* QuartzCore.framework */; };
-		015D073115C8E11E0005AA87 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 015D073015C8E11E0005AA87 /* QuartzCore.framework */; };
 		015D078D15C8F1080005AA87 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 015D078C15C8F1080005AA87 /* libCorePlot-CocoaTouch.a */; };
+		2A86784815C9518300720B2D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A86784715C9518300720B2D /* QuartzCore.framework */; };
 		E95EED9515C26A7300F2A89E /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EED9415C26A7300F2A89E /* MainViewController.m */; };
 		E95EED9B15C26C2600F2A89E /* OptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EED9A15C26C2600F2A89E /* OptionViewController.m */; };
 		E95EED9E15C26D8D00F2A89E /* BudgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EED9D15C26D8D00F2A89E /* BudgetViewController.m */; };
@@ -44,8 +43,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		015D072E15C8E1090005AA87 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		015D073015C8E11E0005AA87 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		015D073D15C8F1080005AA87 /* _CPTConstraintsFixed.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CPTConstraintsFixed.h; sourceTree = "<group>"; };
 		015D073E15C8F1080005AA87 /* _CPTConstraintsRelative.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CPTConstraintsRelative.h; sourceTree = "<group>"; };
 		015D073F15C8F1080005AA87 /* _CPTDarkGradientTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _CPTDarkGradientTheme.h; sourceTree = "<group>"; };
@@ -126,6 +123,7 @@
 		015D078A15C8F1080005AA87 /* NSDecimalNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDecimalNumberExtensions.h; sourceTree = "<group>"; };
 		015D078B15C8F1080005AA87 /* NSNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberExtensions.h; sourceTree = "<group>"; };
 		015D078C15C8F1080005AA87 /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libCorePlot-CocoaTouch.a"; sourceTree = "<group>"; };
+		2A86784715C9518300720B2D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		2AEA041115C804BF009C9208 /* debug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = debug.h; sourceTree = "<group>"; };
 		E95EED9315C26A7300F2A89E /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		E95EED9415C26A7300F2A89E /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
@@ -167,11 +165,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				015D072F15C8E1090005AA87 /* QuartzCore.framework in Frameworks */,
+				2A86784815C9518300720B2D /* QuartzCore.framework in Frameworks */,
 				E98EA59415BFB8A10019AED5 /* UIKit.framework in Frameworks */,
 				E98EA59615BFB8A10019AED5 /* Foundation.framework in Frameworks */,
 				E98EA59815BFB8A10019AED5 /* CoreGraphics.framework in Frameworks */,
-				015D073115C8E11E0005AA87 /* QuartzCore.framework in Frameworks */,
 				015D078D15C8F1080005AA87 /* libCorePlot-CocoaTouch.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -189,13 +186,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		015D073B15C8F1080005AA87 /* iOS */ = {
+		015D073B15C8F1080005AA87 /* Core-Plot */ = {
 			isa = PBXGroup;
 			children = (
 				015D073C15C8F1080005AA87 /* CorePlotHeaders */,
 				015D078C15C8F1080005AA87 /* libCorePlot-CocoaTouch.a */,
 			);
-			path = iOS;
+			name = "Core-Plot";
+			path = ../iOS;
 			sourceTree = "<group>";
 		};
 		015D073C15C8F1080005AA87 /* CorePlotHeaders */ = {
@@ -287,8 +285,6 @@
 		E98EA58415BFB8A10019AED5 = {
 			isa = PBXGroup;
 			children = (
-				015D073B15C8F1080005AA87 /* iOS */,
-				015D072E15C8E1090005AA87 /* QuartzCore.framework */,
 				E98EA59915BFB8A10019AED5 /* CempeiChokin */,
 				E98EA5B715BFB8A20019AED5 /* CempeiChokinTests */,
 				E98EA59215BFB8A10019AED5 /* Frameworks */,
@@ -308,7 +304,7 @@
 		E98EA59215BFB8A10019AED5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				015D073015C8E11E0005AA87 /* QuartzCore.framework */,
+				2A86784715C9518300720B2D /* QuartzCore.framework */,
 				E98EA59315BFB8A10019AED5 /* UIKit.framework */,
 				E98EA59515BFB8A10019AED5 /* Foundation.framework */,
 				E98EA59715BFB8A10019AED5 /* CoreGraphics.framework */,
@@ -320,14 +316,14 @@
 		E98EA59915BFB8A10019AED5 /* CempeiChokin */ = {
 			isa = PBXGroup;
 			children = (
+				015D073B15C8F1080005AA87 /* Core-Plot */,
 				E9B4BC4F15C235DC00E92B3D /* AddMethods */,
 				E9B4BC4C15C234B600E92B3D /* ViewControllers */,
 				E98EA5C915BFC97C0019AED5 /* Resources */,
+				E98EA5A515BFB8A10019AED5 /* MainStoryboard.storyboard */,
 				E98EA5A215BFB8A10019AED5 /* AppDelegate.h */,
 				E98EA5A315BFB8A10019AED5 /* AppDelegate.m */,
-				E98EA5A515BFB8A10019AED5 /* MainStoryboard.storyboard */,
 				E98EA59A15BFB8A10019AED5 /* Supporting Files */,
-				2AEA041115C804BF009C9208 /* debug.h */,
 			);
 			path = CempeiChokin;
 			sourceTree = "<group>";
@@ -339,6 +335,7 @@
 				E98EA59C15BFB8A10019AED5 /* InfoPlist.strings */,
 				E98EA59F15BFB8A10019AED5 /* main.m */,
 				E98EA5A115BFB8A10019AED5 /* CempeiChokin-Prefix.pch */,
+				2AEA041115C804BF009C9208 /* debug.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
