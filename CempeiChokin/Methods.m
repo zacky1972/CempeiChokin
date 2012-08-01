@@ -151,10 +151,21 @@
 //スクロールビューの大きさを変更
 - (NSNumber *)fitScrollView{
     DNSLog(@"ビューをフィット！");
+    [self makeDataPath];
+    [self loadData];
     
-    NSNumber *height = @(779+45*2);
+    NSInteger height;
     
-    return height;
+    //セルの個数をとってくる
+    DNSLog(@"log:%@",log);
+    height = [log count];
+    if ( height >= 10 ){ // logのセル数が10未満じゃなかったら
+        height = 10;
+    }
+    
+    height = 1;
+    height = 779 + 45 * height;
+    return [[NSNumber alloc] initWithInt:height];
 }
 
 //グラフの生成
