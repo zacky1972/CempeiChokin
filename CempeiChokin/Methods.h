@@ -49,7 +49,7 @@
 //メイン画面の初期設定とか
 - (void)setData;        //データから値をセット
 - (void)loadLog;        //ログ読み込み
-- (NSNumber *)fitScrollView;  //スクロールビューの大きさを変更
+- (float)fitScrollView;  //スクロールビューの大きさを変更
 - (CPTGraphHostingView *)makeGraph:(NSNumber *)expense Balance:(NSNumber *)balance Norma:(NSNumber *)norma;  //グラフの生成
 
 // 数字の表示をする感じの
