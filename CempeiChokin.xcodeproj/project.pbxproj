@@ -174,7 +174,6 @@
 		E98EA5C915BFC97C0019AED5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				E9B4BC4E15C234FA00E92B3D /* Datas */,
 				E98EA5CA15BFC9BE0019AED5 /* Images */,
 			);
 			name = Resources;
@@ -203,13 +202,6 @@
 				E95EED9A15C26C2600F2A89E /* OptionViewController.m */,
 			);
 			name = ViewControllers;
-			sourceTree = "<group>";
-		};
-		E9B4BC4E15C234FA00E92B3D /* Datas */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Datas;
 			sourceTree = "<group>";
 		};
 		E9B4BC4F15C235DC00E92B3D /* AddMethods */ = {
