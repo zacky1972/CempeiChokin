@@ -198,7 +198,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="BalanceLabel" destination="8UN-kZ-H61" id="5TQ-EY-5ZP"/>
+                        <outlet property="BudgetLabel" destination="Kb4-ic-H2e" id="YtV-52-EsQ"/>
+                        <outlet property="ExpensesLabel" destination="4X5-2C-0ap" id="Ycx-F4-p3i"/>
+                        <outlet property="KindSegment" destination="AHs-2z-ikp" id="AXr-H7-wku"/>
                         <outlet property="LogScroll" destination="eGP-ec-UM4" id="NjY-xc-0nw"/>
+                        <outlet property="MoneyValueLabel" destination="g9Q-Ja-iJ1" id="rNi-nt-5f8"/>
+                        <outlet property="QuotaLabel" destination="gnA-AP-iVj" id="6tR-Qn-9ww"/>
                     </connections>
                 </viewController>
             </objects>
@@ -1316,7 +1322,13 @@
         <class className="MainViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>
             <relationships>
+                <relationship kind="outlet" name="BalanceLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="BudgetLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="ExpensesLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="KindSegment" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="LogScroll" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="MoneyValueLabel" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="QuotaLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
         <class className="OptionViewController" superclassName="UITableViewController">

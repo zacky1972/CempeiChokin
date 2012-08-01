@@ -35,6 +35,12 @@
     [_method loadData];
     
     [_method setData];
+    
+    BudgetLabel.text = [_method loadBudget];
+    ExpensesLabel.text = @"0円";
+    BalanceLabel.text = @"0円";
+    QuotaLabel.text = @"0円";
+    
     [_method loadLog];
     [_method fitScrollView];
     [_method makeGraph];
@@ -91,6 +97,12 @@
 
 - (void)viewDidUnload
 {
+    BudgetLabel = nil;
+    ExpensesLabel = nil;
+    BalanceLabel = nil;
+    QuotaLabel = nil;
+    KindSegment = nil;
+    MoneyValueLabel = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     
