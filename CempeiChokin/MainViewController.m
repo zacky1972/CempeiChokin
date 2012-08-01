@@ -68,14 +68,35 @@
                          [NSNumber numberWithDouble:40.0],
                          [NSNumber numberWithDouble:30.0],
                          [NSNumber numberWithDouble:20.0],
-                         [NSNumber numberWithDouble:10.0],
                          nil];
+    
+    // イケメン度アップ
+    CPTGradient *overlayGradient = [[CPTGradient alloc] init];
+    overlayGradient.gradientType = CPTGradientTypeRadial;
+    overlayGradient =
+    [overlayGradient addColorStop :[[CPTColor blackColor] colorWithAlphaComponent:0.0] atPosition:0.9];
+    overlayGradient =
+    [overlayGradient addColorStop :[[CPTColor blackColor] colorWithAlphaComponent:0.4] atPosition:1.0];
+    pieChart.overlayFill = [CPTFill fillWithGradient:overlayGradient];
     
     // 画面にホスティングビューを追加します。
     [LogScroll addSubview:hostingView];
 	// Do any additional setup after loading the view.
     
 }
+
+-(CPTFill *)sliceFillForPieChart:(CPTPieChart *)pieChart recordIndex:(NSUInteger)index {
+    CPTColor *color = [[CPTColor alloc] init];
+    if(index == 0){
+        color = [CPTColor redColor];
+    }else if (index == 1){
+        color = [CPTColor whiteColor];
+    }else if (index == 2){
+        color = [CPTColor grayColor];
+    }
+	return [CPTFill fillWithColor:color];
+}
+
 
 - (void)viewDidAppear:(BOOL)animated{
     // 初期設定画面の表示
@@ -86,6 +107,7 @@
 
 - (void)viewDidUnload
 {
+    expenseTextField = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     
@@ -135,6 +157,50 @@
 -(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index
 {
     return [self.pieChartData objectAtIndex:index];
+}
+
+- (IBAction)expenseTextField_begin:(id)sender {
+    // Toolbarつくる
+    UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
+    numberToolbar.barStyle = UIBarStyleBlackTranslucent;
+    
+    // Toolbarのボタンたち
+    UIBarButtonItem *done =
+    [[UIBarButtonItem alloc] initWithTitle: @"次へ"
+                                     style: UIBarButtonItemStyleDone
+                                    target:self
+                                    action:@selector(doneNumberPad)];
+    UIBarButtonItem *cancel =
+    [[UIBarButtonItem alloc] initWithTitle: @"キャンセル"
+                                     style: UIBarButtonItemStyleBordered
+                                    target: self
+                                    action: @selector(cancelNumberPad)];
+    UIBarButtonItem *frexibleSpace =
+    [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace
+                                                  target: nil
+                                                  action: nil];
+    numberToolbar.items = @[cancel,frexibleSpace,done]; // ツールバーにのせる (キャンセル| [スペース] | 完了)
+    [numberToolbar sizeToFit];                          // なんかフィットさせる
+    expenseTextField.inputAccessoryView = numberToolbar;  // キーボードの上につけるときはこれ使うのかな？
+    // TODO: Numberpad表示させてる時に期日のところ押したらなんかバグるからいつかどうにかしよう
+}
+
+// Numberpadに追加したボタンの動作
+-(void)doneNumberPad{
+    // 値が入っている場合
+    if([expenseTextField.text length] >= 1) {
+        expenseTextField.text = [NSString stringWithFormat:@"%@円",[_method addComma:expenseTextField.text]]; // 表示変える
+        [_method saveMoneyValue:expenseTextField.text Date:[[NSDate date] description] Kind:@"出費"];
+        [expenseTextField resignFirstResponder];  // NumberPad消す
+        [expenseTextField becomeFirstResponder]; // PeriodTextFieldに移動
+    }
+    [expenseTextField resignFirstResponder]; // NumberPad消す
+}
+
+// Numberpadに追加したキャンセルボタンの動作
+-(void)cancelNumberPad{
+
+    [expenseTextField resignFirstResponder]; // NumberPad消す(=テキストフィールドを選択していない状態にする)
 }
 
 @end

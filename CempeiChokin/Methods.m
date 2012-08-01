@@ -123,7 +123,7 @@
 }
 
 //金額のあれこれを一気に保存する
-- (void)saveManeyValue:(NSString *)value Date:(NSString *)date Kind:(NSString *)kind{
+- (void)saveMoneyValue:(NSString *)value Date:(NSString *)date Kind:(NSString *)kind{
     DNSLog(@"金額のあれこれを保存！");
     log = [[NSMutableArray alloc] init];
     tempManeyValue = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -131,6 +131,7 @@
                                     date, @"Date",
                                     kind, @"Kind", nil];
     [log addObject:tempManeyValue];
+    DNSLog(@"%@",log);
 }
 
 #pragma mark - Formatter系
