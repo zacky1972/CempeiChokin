@@ -36,12 +36,10 @@
 {
     [super viewDidLoad];
     _method = [Methods alloc];
-    
-    //設定がしてあったらデータをとってくる
-    [_method initData:nil];
-    if([_method loadName:nil]!=nil)NameTextField.text = [_method loadName:nil];
-    if([_method loadValue:nil]!=nil)ValueTextField.text = [_method loadValue:nil];
-    if([_method loadPeriod:nil]!=nil)PeriodTextField.text = [_method loadPeriod:nil];
+    [_method initData];
+    if([_method loadName]!=nil)NameTextField.text = [_method loadName];
+    if([_method loadValue]!=nil)ValueTextField.text = [_method loadValue];
+    if([_method loadPeriod]!=nil)PeriodTextField.text = [_method loadPeriod];
 }
 
 - (void)viewDidUnload
@@ -57,8 +55,6 @@
 
 #pragma mark - 名前の設定
 - (IBAction)NameTextField_end:(id)sender {
-    // TODO: いつかここに値を保存する処理を書こう
-    // ???: 一括で保存してみた！
     [ValueTextField becomeFirstResponder];  //ValueTextFieldに移動
 }
 
@@ -185,13 +181,8 @@
 
 // 決定ボタンが押されたときの
 - (IBAction)DoneButton_down:(id)sender {
-    // TODO: 決定ボタンで保存するようにしたい
-    //       入力途中でおちたら空になっちゃうので，それはどうしようか
-    if(NameTextField.text != nil && ValueTextField.text != nil && PeriodTextField.text != nil){
-        
-    }else {
-        [_method saveName:NameTextField.text Value:ValueTextField.text Period:PeriodTextField.text]; // 保存する
-    }
+    [_method saveName:NameTextField.text Value:ValueTextField.text Period:PeriodTextField.text]; // 保存する
+    // FIXME:ここにオプションの時はメイン画面に戻る的なことがほしい
 }
 
 @end

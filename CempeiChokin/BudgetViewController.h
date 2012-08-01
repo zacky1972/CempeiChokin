@@ -17,6 +17,7 @@
 }
 - (IBAction)startDateTextField_begin:(id)sender;
 - (IBAction)endDateTextField_begin:(id)sender;
-- (IBAction)budgetTextField_end:(id)sender;
+- (IBAction)budgetTextField_begin:(id)sender;
+- (IBAction)DoneButton_down:(id)sender;
 
 @end

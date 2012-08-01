@@ -8,7 +8,9 @@
 
 #import "MainViewController.h"
 
-@interface MainViewController ()
+@interface MainViewController (){
+    Methods *_method;
+}
 
 @end
 
@@ -26,12 +28,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _method = [Methods alloc];
 	// Do any additional setup after loading the view.
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     // 初期設定画面の表示
-    if(1){ // TODO: 条件かこう
+    if([_method searchGoal] == 0){//初期設定がまだだったら，設定画面に遷移します
     [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Init"] animated:YES];
     }
 }
@@ -40,6 +43,8 @@
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
+    
+    // TODO:ここに円グラフの描画やら，値のセットが必要．その前にログを表示できるようにせなあかんですな
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

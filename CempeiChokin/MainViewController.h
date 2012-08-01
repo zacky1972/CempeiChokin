@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "Methods.h"
 
-@interface MainViewController : UIViewController
+@interface MainViewController : UIViewController{
+    
+}
 
 @end
