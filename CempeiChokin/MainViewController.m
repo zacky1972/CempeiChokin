@@ -57,4 +57,31 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark - UITableView関係
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // TODO: とりあえず一個
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    DNSLog(@"Cell for Row :%d",indexPath.row);
+    static NSString *CellIdentifier = @"Log";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UILabel *logDate      = (UILabel *)[cell viewWithTag:1];
+    UILabel *logKind      = (UILabel *)[cell viewWithTag:2];
+    UITextField *logValue = (UITextField *)[cell viewWithTag:3];
+    
+    logDate.text = @"いつだよ！";
+    logKind.text = @"出費だよ！";
+    logValue.text = @"100円だよ！";
+    
+    return cell;
+}
 @end
