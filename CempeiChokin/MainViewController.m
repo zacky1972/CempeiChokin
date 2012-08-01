@@ -34,6 +34,11 @@
     [_method makeDataPath];
     [_method loadData];
     
+    [_method setData];
+    [_method loadLog];
+    [_method fitScrollView];
+    [_method makeGraph];
+    
     [LogScroll setScrollEnabled:YES];
     [LogScroll setContentSize:CGSizeMake(320, 800)];
     
