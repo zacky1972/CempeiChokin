@@ -45,6 +45,11 @@
 - (void)saveMoneyValue:(NSString *)value
                   Date:(NSString *)date
                   Kind:(NSString *)kind;        //金額のあれこれを一気に保存する
+//メイン画面の初期設定とか
+- (void)setData;        //データから値をセット
+- (void)loadLog;        //ログ読み込み
+- (void)fitScrollView;  //スクロールビューの大きさを変更
+- (void)makeGraph;      //グラフの生成
 
 // 数字の表示をする感じの
 - (NSString *)addComma:(NSString *)number;      // 10000 → 10,000 にするやつ
