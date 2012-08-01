@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CorePlot-CocoaTouch.h"
 
-@interface Methods : NSObject{
+@interface Methods : NSObject <CPTPieChartDataSource,CPTPieChartDelegate>{
     //値をいじる感じ用
     NSString *path;
     NSMutableDictionary *root;
@@ -49,7 +50,7 @@
 - (void)setData;        //データから値をセット
 - (void)loadLog;        //ログ読み込み
 - (void)fitScrollView;  //スクロールビューの大きさを変更
-- (void)makeGraph;      //グラフの生成
+- (CPTGraphHostingView *)makeGraph:(NSNumber *)expense Balance:(NSNumber *)balance Norma:(NSNumber *)norma;  //グラフの生成
 
 // 数字の表示をする感じの
 - (NSString *)addComma:(NSString *)number;      // 10000 → 10,000 にするやつ
@@ -57,5 +58,7 @@
 
 // 日付の表示をする感じの
 - (NSString *)formatterDate:(NSDate *)date;
+
+@property (readwrite, nonatomic) NSMutableArray *pieChartData;
 
 @end
