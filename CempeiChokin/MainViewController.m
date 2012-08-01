@@ -35,7 +35,7 @@
     [_method loadData];
     
     [LogScroll setScrollEnabled:YES];
-    [LogScroll setContentSize:CGSizeMake(320, 900)];
+    [LogScroll setContentSize:CGSizeMake(320, 800)];
     
     //　ホスティングビューを生成します。
     CPTGraphHostingView *hostingView = [[CPTGraphHostingView alloc]
@@ -62,6 +62,9 @@
     
     // グラフに円グラフを追加します。
     [graph addPlot:pieChart];
+    
+    
+    
     
     // グラフに表示するデータを生成します。
     self.pieChartData = [NSMutableArray arrayWithObjects:
