@@ -313,7 +313,6 @@
                     </view>
                     <connections>
                         <outlet property="BalanceLabel" destination="8UN-kZ-H61" id="5rx-Sb-sSp"/>
-                        <outlet property="BlanceLabel" destination="8UN-kZ-H61" id="k8w-yC-Nhi"/>
                         <outlet property="BudgetLabel" destination="Kb4-ic-H2e" id="lqB-8S-2Yv"/>
                         <outlet property="ExpenseLabel" destination="4X5-2C-0ap" id="lMo-cF-2pZ"/>
                         <outlet property="LogScroll" destination="eGP-ec-UM4" id="NjY-xc-0nw"/>
