@@ -42,7 +42,7 @@
 - (void)viewDidAppear:(BOOL)animated{
     // 初期設定画面の表示
     if([_method searchGoal] == 0){//初期設定がまだだったら，設定画面に遷移します
-    [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Init"] animated:YES];
+        [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Init"] animated:YES];
     }
 }
 
@@ -61,7 +61,7 @@
 }
 
 #pragma mark - UITableView関係
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (NSInteger)numberOfSectionsInTableiew:(UITableView *)tableView
 {
     return 1;
 }

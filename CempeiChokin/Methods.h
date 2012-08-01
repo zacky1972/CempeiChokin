@@ -16,7 +16,7 @@
     NSMutableDictionary *goal;
     NSMutableDictionary *now;
     NSMutableArray *log;
-    NSDictionary *tempManeyValue;
+    NSDictionary *tempMoneyValue;
 }
 
 - (BOOL)searchGoal;                              //初期設定が必要かどうか

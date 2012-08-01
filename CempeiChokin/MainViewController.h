@@ -14,6 +14,8 @@
 {
     IBOutlet UIScrollView *LogScroll;
     __weak IBOutlet UITextField *expenseTextField;
+    
+    
 }
 
 - (IBAction)expenseTextField_begin:(id)sender;
