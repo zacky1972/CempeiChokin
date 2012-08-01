@@ -8,7 +8,9 @@
 
 #import "OptionViewController.h"
 
-@interface OptionViewController ()
+@interface OptionViewController (){
+    Methods *_method;
+}
 
 @end
 
@@ -36,6 +38,7 @@
 
 - (void)viewDidUnload
 {
+    deleteDataButton = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -46,4 +49,7 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (IBAction)deleteDataButton_down:(id)sender {
+    [_method deleteData];
+}
 @end

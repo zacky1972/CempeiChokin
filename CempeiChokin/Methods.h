@@ -22,6 +22,7 @@
 - (void)initData;                               //Data.plistを作成
 - (void)makeDataPath;                           //Date.plistへのpathを作成
 - (void)loadData;                               //Data.plistから引っ張ってくる
+- (void)deleteData;                             //Data.plistを消す
 - (NSString *)loadName;              //名前を読み込んで返す
 - (NSString *)loadValue;             //金額を読み込んで返す
 - (NSString *)loadPeriod;            //期限を読み込んで返す
