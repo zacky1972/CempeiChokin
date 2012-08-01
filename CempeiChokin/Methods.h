@@ -40,9 +40,9 @@
            Budget:(NSString *)budget;          //予算のあれこれを一気に保存する
 
 //メイン画面で値を保存するとか
-- (NSString *)loadMoneyValue:(NSUInteger *)cursor;        //金額を読み込んで返す
-- (NSString *)loadDate:(NSUInteger *)cursor;              //日付を読み込んで返す
-- (NSString *)loadKind:(NSUInteger *)cursor;              //種類を読み込んで返す
+- (NSString *)loadMoneyValue:(NSUInteger)cursor;        //金額を読み込んで返す
+- (NSString *)loadDate:(NSUInteger)cursor;              //日付を読み込んで返す
+- (NSString *)loadKind:(NSUInteger)cursor;              //種類を読み込んで返す
 - (void)saveMoneyValue:(NSString *)value
                   Date:(NSString *)date
                   Kind:(NSString *)kind;        //金額のあれこれを一気に保存する

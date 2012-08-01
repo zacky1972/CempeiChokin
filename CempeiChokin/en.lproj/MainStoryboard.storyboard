@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="raj-cK-qeg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E2617" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="raj-cK-qeg">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
@@ -170,108 +170,6 @@
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
                                             </tableViewCell>
-                                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="Log" id="0uz-jG-gcc">
-                                                <rect key="frame" x="0.0" y="66" width="320" height="44"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="left" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" id="dkx-aH-EBS">
-                                                            <rect key="frame" x="10" y="1" width="300" height="22"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                        </label>
-                                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="left" text="Kind" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="X3P-9G-Af4">
-                                                            <rect key="frame" x="10" y="25" width="84" height="18"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                        </label>
-                                                        <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Value" textAlignment="right" minimumFontSize="17" id="T5U-ch-AlN">
-                                                            <rect key="frame" x="79" y="6" width="231" height="31"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                                            <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
-                                                            <connections>
-                                                                <action selector="ValueTextField_begin:" destination="NwY-zI-POI" eventType="editingDidBegin" id="Yiq-fR-OXt"/>
-                                                            </connections>
-                                                        </textField>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </view>
-                                            </tableViewCell>
-                                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="Log" id="qPa-qZ-ysx">
-                                                <rect key="frame" x="0.0" y="110" width="320" height="44"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="left" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" id="2Fe-AZ-HgY">
-                                                            <rect key="frame" x="10" y="1" width="300" height="22"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                        </label>
-                                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="left" text="Kind" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="teU-Mj-lyQ">
-                                                            <rect key="frame" x="10" y="25" width="84" height="18"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                        </label>
-                                                        <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Value" textAlignment="right" minimumFontSize="17" id="V1M-TX-BUB">
-                                                            <rect key="frame" x="79" y="6" width="231" height="31"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                                            <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
-                                                            <connections>
-                                                                <action selector="ValueTextField_begin:" destination="NwY-zI-POI" eventType="editingDidBegin" id="DTX-AQ-O2l"/>
-                                                            </connections>
-                                                        </textField>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </view>
-                                            </tableViewCell>
-                                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="Log" id="fao-k4-Loq">
-                                                <rect key="frame" x="0.0" y="154" width="320" height="44"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="left" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" id="98U-7a-YDU">
-                                                            <rect key="frame" x="10" y="1" width="300" height="22"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                        </label>
-                                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="left" text="Kind" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="XSY-2Q-31H">
-                                                            <rect key="frame" x="10" y="25" width="84" height="18"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                        </label>
-                                                        <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Value" textAlignment="right" minimumFontSize="17" id="lST-7Z-RfV">
-                                                            <rect key="frame" x="79" y="6" width="231" height="31"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
-                                                            <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
-                                                            <connections>
-                                                                <action selector="ValueTextField_begin:" destination="NwY-zI-POI" eventType="editingDidBegin" id="3Ff-uM-dps"/>
-                                                            </connections>
-                                                        </textField>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </view>
-                                            </tableViewCell>
                                         </prototypes>
                                         <connections>
                                             <outlet property="dataSource" destination="raj-cK-qeg" id="Vbk-fL-pq9"/>
@@ -318,6 +216,7 @@
                         <outlet property="LogScroll" destination="eGP-ec-UM4" id="NjY-xc-0nw"/>
                         <outlet property="NormaLabel" destination="gnA-AP-iVj" id="12K-zh-hY9"/>
                         <outlet property="expenseTextField" destination="g9Q-Ja-iJ1" id="fIk-gt-SLb"/>
+                        <outlet property="logTableView" destination="hKr-Rw-zM3" id="duI-op-wVG"/>
                     </connections>
                 </viewController>
             </objects>
@@ -1486,6 +1385,7 @@
                 <relationship kind="outlet" name="LogScroll" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="NormaLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="expenseTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="logTableView" candidateClass="UITableView"/>
             </relationships>
         </class>
         <class className="OptionViewController" superclassName="UITableViewController">

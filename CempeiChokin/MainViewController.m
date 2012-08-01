@@ -28,6 +28,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    logTableView.delegate = self;
+    logTableView.dataSource = self;
+    
     _method = [Methods alloc];
     [_method makeDataPath];
     [_method loadData];
@@ -59,6 +62,7 @@
     ExpenseLabel = nil;
     BalanceLabel = nil;
     NormaLabel = nil;
+    logTableView = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     
@@ -90,11 +94,11 @@
     UILabel *logDate      = (UILabel *)[cell viewWithTag:1];
     UILabel *logKind      = (UILabel *)[cell viewWithTag:2];
     UITextField *logValue = (UITextField *)[cell viewWithTag:3];
-    
-    logDate.text = @"いつだよ！";
-    logKind.text = @"出費だよ！";
-    logValue.text = @"100円だよ！";
-    
+    if([_method loadMoneyValue:0] != NULL){
+    logDate.text = [_method loadMoneyValue:0];
+    logKind.text = [_method loadKind:0];
+    logValue.text = [_method loadDate:0];
+    }
     return cell;
 }
 
@@ -133,6 +137,7 @@
         [expenseTextField resignFirstResponder];  // NumberPad消す
         [expenseTextField becomeFirstResponder]; // PeriodTextFieldに移動
     }
+    [logTableView reloadData];
     [expenseTextField resignFirstResponder]; // NumberPad消す
 }
 

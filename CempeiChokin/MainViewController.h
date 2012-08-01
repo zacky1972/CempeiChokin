@@ -10,7 +10,7 @@
 #import "CorePlot-CocoaTouch.h"
 #import "Methods.h"
 
-@interface MainViewController : UIViewController
+@interface MainViewController : UIViewController <UITableViewDataSource,UITableViewDelegate>
 {
     IBOutlet UIScrollView *LogScroll;
     __weak IBOutlet UILabel *BudgetLabel;
@@ -19,6 +19,7 @@
     __weak IBOutlet UILabel *NormaLabel;
     __weak IBOutlet UITextField *expenseTextField;
     
+    __weak IBOutlet UITableView *logTableView;
     
 }
 

@@ -108,20 +108,20 @@
 #pragma MainView系
 //保存系
 //金額を読み込んで返す
-- (NSString *)loadMoneyValue:(NSUInteger *)cursor{
-    tempMoneyValue = [log objectAtIndex:*cursor];
+- (NSString *)loadMoneyValue:(NSUInteger)cursor{
+    tempMoneyValue = [log objectAtIndex:cursor];
     return [tempMoneyValue objectForKey:@"MoneyValue"];
 }
 
 //日付を読み込んで返す
-- (NSString *)loadDate:(NSUInteger *)cursor{
-    tempMoneyValue = [log objectAtIndex:*cursor];
+- (NSString *)loadDate:(NSUInteger)cursor{
+    tempMoneyValue = [log objectAtIndex:cursor];
     return [tempMoneyValue objectForKey:@"Date"];
 }
 
 //種類を読み込んで返す
-- (NSString *)loadKind:(NSUInteger *)cursor{
-    tempMoneyValue = [log objectAtIndex:*cursor];
+- (NSString *)loadKind:(NSUInteger)cursor{
+    tempMoneyValue = [log objectAtIndex:cursor];
     return [tempMoneyValue objectForKey:@"Kind"];
 }
 
@@ -202,7 +202,6 @@
     overlayGradient =
     [overlayGradient addColorStop :[[CPTColor blackColor] colorWithAlphaComponent:0.4] atPosition:1.0];
     pieChart.overlayFill = [CPTFill fillWithGradient:overlayGradient];
-    //ここはグラフをイケメンにしてから
     return hostingView;
 }
 
