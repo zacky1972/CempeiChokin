@@ -14,6 +14,8 @@
     NSMutableDictionary *root;
     NSMutableDictionary *goal;
     NSMutableDictionary *now;
+    NSMutableArray *log;
+    NSDictionary *tempManeyValue;
 }
 
 - (BOOL)searchGoal;                              //初期設定が必要かどうか
@@ -35,6 +37,14 @@
 - (void)saveStart:(NSString *)start
               End:(NSString *)end
            Budget:(NSString *)budget;          //予算のあれこれを一気に保存する
+
+//メイン画面で値を保存するとか
+- (NSString *)loadManeyValue:(NSUInteger *)cursor;        //金額を読み込んで返す
+- (NSString *)loadDate:(NSUInteger *)cursor;              //日付を読み込んで返す
+- (NSString *)loadKind:(NSUInteger *)cursor;              //種類を読み込んで返す
+- (void)saveManeyValue:(NSString *)value
+                  Date:(NSString *)date
+                  Kind:(NSString *)kind;        //金額のあれこれを一気に保存する
 
 // 数字の表示をする感じの
 - (NSString *)addComma:(NSString *)number;      // 10000 → 10,000 にするやつ

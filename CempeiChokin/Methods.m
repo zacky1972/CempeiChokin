@@ -60,6 +60,7 @@
     root = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
     goal = [root objectForKey:@"Goal"];
     now = [root objectForKey:@"Now"];
+    log = [root objectForKey:@"Log"];
 }
 
 //Data.plistを消す
@@ -100,6 +101,36 @@
     [now setObject:end forKey:@"End"];
     [root setObject:now forKey:@"Now"];
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
+}
+
+#pragma MainView系
+//金額を読み込んで返す
+- (NSString *)loadManeyValue:(NSUInteger *)cursor{
+    tempManeyValue = [log objectAtIndex:*cursor];
+    return [tempManeyValue objectForKey:@"ManeyValue"];
+}
+
+//日付を読み込んで返す
+- (NSString *)loadDate:(NSUInteger *)cursor{
+    tempManeyValue = [log objectAtIndex:*cursor];
+    return [tempManeyValue objectForKey:@"Date"];
+}
+
+//種類を読み込んで返す
+- (NSString *)loadKind:(NSUInteger *)cursor{
+    tempManeyValue = [log objectAtIndex:*cursor];
+    return [tempManeyValue objectForKey:@"Kind"];
+}
+
+//金額のあれこれを一気に保存する
+- (void)saveManeyValue:(NSString *)value Date:(NSString *)date Kind:(NSString *)kind{
+    DNSLog(@"金額のあれこれを保存！");
+    log = [[NSMutableArray alloc] init];
+    tempManeyValue = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    value, @"ManeyValue",
+                                    date, @"Date",
+                                    kind, @"Kind", nil];
+    [log addObject:tempManeyValue];
 }
 
 #pragma mark - Formatter系
