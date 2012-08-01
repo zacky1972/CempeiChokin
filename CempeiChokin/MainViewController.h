@@ -18,11 +18,11 @@
     __weak IBOutlet UILabel *BalanceLabel;
     __weak IBOutlet UILabel *NormaLabel;
     __weak IBOutlet UITextField *expenseTextField;
-    
+    __weak IBOutlet UISegmentedControl *KindSegment;
     __weak IBOutlet UITableView *logTableView;
-    
 }
 
 - (IBAction)expenseTextField_begin:(id)sender;
+- (IBAction)KindSegment_click:(id)sender;
 
 @end

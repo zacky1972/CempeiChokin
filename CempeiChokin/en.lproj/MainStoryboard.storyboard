@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E2617" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="raj-cK-qeg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="raj-cK-qeg">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
@@ -26,7 +26,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0円" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="4X5-2C-0ap">
-                                        <rect key="frame" x="220" y="251" width="80" height="21"/>
+                                        <rect key="frame" x="231" y="251" width="80" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -40,14 +40,14 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="120,000円" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Kb4-ic-H2e">
-                                        <rect key="frame" x="220" y="228" width="80" height="21"/>
+                                        <rect key="frame" x="231" y="228" width="80" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="110,000円" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="8UN-kZ-H61">
-                                        <rect key="frame" x="220" y="273" width="80" height="21"/>
+                                        <rect key="frame" x="231" y="273" width="80" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -68,23 +68,26 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="10,000円" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="gnA-AP-iVj">
-                                        <rect key="frame" x="220" y="294" width="80" height="21"/>
+                                        <rect key="frame" x="231" y="294" width="80" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="AHs-2z-ikp">
-                                        <rect key="frame" x="20" y="325" width="127" height="30"/>
+                                        <rect key="frame" x="9" y="325" width="142" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <segments>
                                             <segment title="出費"/>
                                             <segment title="収入"/>
                                             <segment title="調整"/>
                                         </segments>
+                                        <connections>
+                                            <action selector="KindSegment_click:" destination="raj-cK-qeg" eventType="valueChanged" id="MLe-lK-32i"/>
+                                        </connections>
                                     </segmentedControl>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="例）1,000円" textAlignment="right" minimumFontSize="17" id="g9Q-Ja-iJ1">
-                                        <rect key="frame" x="159" y="324" width="141" height="31"/>
+                                        <rect key="frame" x="159" y="324" width="152" height="31"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
@@ -93,7 +96,7 @@
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gR4-1v-94F">
-                                        <rect key="frame" x="114" y="280" width="36" height="35"/>
+                                        <rect key="frame" x="115" y="268" width="36" height="35"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="〆">
@@ -108,7 +111,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sue-ty-QXb">
-                                        <rect key="frame" x="16" y="279" width="41" height="37"/>
+                                        <rect key="frame" x="9" y="268" width="41" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="今">
@@ -120,7 +123,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WcQ-3a-DbH">
-                                        <rect key="frame" x="65" y="279" width="41" height="37"/>
+                                        <rect key="frame" x="60" y="268" width="41" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="先">
@@ -213,6 +216,7 @@
                         <outlet property="BalanceLabel" destination="8UN-kZ-H61" id="5rx-Sb-sSp"/>
                         <outlet property="BudgetLabel" destination="Kb4-ic-H2e" id="lqB-8S-2Yv"/>
                         <outlet property="ExpenseLabel" destination="4X5-2C-0ap" id="lMo-cF-2pZ"/>
+                        <outlet property="KindSegment" destination="AHs-2z-ikp" id="L3y-qG-y70"/>
                         <outlet property="LogScroll" destination="eGP-ec-UM4" id="NjY-xc-0nw"/>
                         <outlet property="NormaLabel" destination="gnA-AP-iVj" id="12K-zh-hY9"/>
                         <outlet property="expenseTextField" destination="g9Q-Ja-iJ1" id="fIk-gt-SLb"/>
@@ -1378,10 +1382,12 @@
         <class className="MainViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>
             <relationships>
+                <relationship kind="action" name="KindSegment_click:"/>
                 <relationship kind="action" name="expenseTextField_begin:"/>
                 <relationship kind="outlet" name="BalanceLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="BudgetLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="ExpenseLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="KindSegment" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="LogScroll" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="NormaLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="expenseTextField" candidateClass="UITextField"/>

@@ -110,6 +110,7 @@
 //金額を読み込んで返す
 - (NSString *)loadMoneyValue:(NSUInteger)cursor{
     tempMoneyValue = [log objectAtIndex:cursor];
+    DNSLog(@"MoneyValue:%@",[tempMoneyValue objectForKey:@"MoneyValue"]);
     return [tempMoneyValue objectForKey:@"MoneyValue"];
 }
 
@@ -134,7 +135,9 @@
                                     date, @"Date",
                                     kind, @"Kind", nil];
     [log addObject:tempMoneyValue];
-    DNSLog(@"%@",log);
+    [root setObject:log forKey:@"Log"];
+    [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
+    DNSLog(@"log:%@",log);
 }
 
 //初期設定系
@@ -147,6 +150,8 @@
 - (void)loadLog{
     DNSLog(@"ログ読み込み！");
 }
+
+
 
 //スクロールビューの大きさを変更
 - (float)fitScrollView{
@@ -162,7 +167,6 @@
     if ( height >= 10 ){ // logのセル数が10未満じゃなかったら
         height = 10;
     }
-    
     height = 779 + 45 * height;
     return [[[NSNumber alloc] initWithInt:height] floatValue];
 }

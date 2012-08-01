@@ -10,6 +10,7 @@
 
 @interface MainViewController (){
     Methods *_method;
+    NSString *tempKind;
 }
 
 @end
@@ -40,6 +41,7 @@
     ExpenseLabel.text = @"";
     BalanceLabel.text = @"";
     NormaLabel.text = @"";
+    tempKind = @"出費";
     
     //スクロールビューをフィットさせる
     [LogScroll setScrollEnabled:YES];
@@ -63,6 +65,7 @@
     BalanceLabel = nil;
     NormaLabel = nil;
     logTableView = nil;
+    KindSegment = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     
@@ -95,9 +98,10 @@
     UILabel *logKind      = (UILabel *)[cell viewWithTag:2];
     UITextField *logValue = (UITextField *)[cell viewWithTag:3];
     if([_method loadMoneyValue:0] != NULL){
-    logDate.text = [_method loadMoneyValue:0];
+    logValue.text = [_method loadMoneyValue:0];
     logKind.text = [_method loadKind:0];
-    logValue.text = [_method loadDate:0];
+    logDate.text = [_method loadDate:0];
+    [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollView])];
     }
     return cell;
 }
@@ -128,12 +132,26 @@
     // TODO: Numberpad表示させてる時に期日のところ押したらなんかバグるからいつかどうにかしよう
 }
 
+- (IBAction)KindSegment_click:(id)sender {
+    switch (KindSegment.selectedSegmentIndex) {
+        case 0:
+            tempKind = @"出費";
+            break;
+        case 1:
+            tempKind = @"収入";
+            break;
+        case 2:
+            tempKind = @"調整";
+            break;
+    }
+}
+
 // Numberpadに追加したボタンの動作
 -(void)doneNumberPad{
     // 値が入っている場合
     if([expenseTextField.text length] >= 1) {
         expenseTextField.text = [NSString stringWithFormat:@"%@円",[_method addComma:expenseTextField.text]]; // 表示変える
-        [_method saveMoneyValue:expenseTextField.text Date:[[NSDate date] description] Kind:@"出費"];
+        [_method saveMoneyValue:expenseTextField.text Date:[_method formatterDate:[NSDate date]] Kind:tempKind];
         [expenseTextField resignFirstResponder];  // NumberPad消す
         [expenseTextField becomeFirstResponder]; // PeriodTextFieldに移動
     }
