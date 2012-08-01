@@ -36,11 +36,12 @@
     
     [_method setData];
     [_method loadLog];
-    [_method fitScrollView];
-    [_method makeGraph];
+    
     
     [LogScroll setScrollEnabled:YES];
-    [LogScroll setContentSize:CGSizeMake(320, 800)];
+    [LogScroll setContentSize:CGSizeMake(320,[[_method fitScrollView] floatValue])];
+    [_method makeGraph];
+    
     
     //　ホスティングビューを生成します。
     CPTGraphHostingView *hostingView = [[CPTGraphHostingView alloc]

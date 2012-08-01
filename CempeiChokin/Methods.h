@@ -16,6 +16,7 @@
     NSMutableDictionary *now;
     NSMutableArray *log;
     NSDictionary *tempManeyValue;
+    
 }
 
 - (BOOL)searchGoal;                              //初期設定が必要かどうか
@@ -48,7 +49,7 @@
 //メイン画面の初期設定とか
 - (void)setData;        //データから値をセット
 - (void)loadLog;        //ログ読み込み
-- (void)fitScrollView;  //スクロールビューの大きさを変更
+- (NSNumber *)fitScrollView;  //スクロールビューの縦の長さを返す
 - (void)makeGraph;      //グラフの生成
 
 // 数字の表示をする感じの
