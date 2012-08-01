@@ -62,6 +62,14 @@
     now = [root objectForKey:@"Now"];
 }
 
+//Data.plistを消す
+- (void)deleteData{
+    DNSLog(@"データ削除！");
+    [self makeDataPath];
+    [self loadData];
+    [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+}
+
 // FIXME: 正直この3つはまとめたい
 - (NSString *)loadName{return [goal objectForKey:@"Name"];}      //名前を読み込んで返す
 - (NSString *)loadValue{return [goal objectForKey:@"Value"];}    //金額を読み込んで返す

@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "Methods.h"
 
-@interface OptionViewController : UITableViewController
+@interface OptionViewController : UITableViewController{
+    
+    __weak IBOutlet UIButton *deleteDataButton;
+}
+- (IBAction)deleteDataButton_down:(id)sender;
 
 @end
