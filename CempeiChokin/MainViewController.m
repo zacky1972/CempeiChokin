@@ -38,54 +38,8 @@
     //スクロールビューをフィットさせる
     [LogScroll setScrollEnabled:YES];
     [LogScroll setContentSize:CGSizeMake(320,[[_method fitScrollView] floatValue])];
-    [_method makeGraph];
     
-    
-    //　ホスティングビューを生成します。
-    CPTGraphHostingView *hostingView = [[CPTGraphHostingView alloc]
-                                        initWithFrame:CGRectMake(0, 0, 225, 250)];
-    
-    // グラフを生成します。
-    CPTXYGraph *graph = [[CPTXYGraph alloc] initWithFrame:hostingView.bounds];
-    hostingView.hostedGraph = graph;
-    
-    // 今回は円グラフなので、グラフの軸は使用しません。
-    graph.axisSet = nil;
-    
-    // 円グラフのインスタンスを生成します。
-    CPTPieChart *pieChart = [[CPTPieChart alloc] init];
-    
-    // 円グラフの半径を設定します。
-    pieChart.pieRadius = 90.0;
-    
-    // データソースを設定します。
-    pieChart.dataSource = self;
-    
-    // デリゲートを設定します。
-    pieChart.delegate = self;
-    
-    // グラフに円グラフを追加します。
-    [graph addPlot:pieChart];
-    
-    
-    
-    
-    // グラフに表示するデータを生成します。
-    self.pieChartData = [NSMutableArray arrayWithObjects:
-                         [NSNumber numberWithDouble:40.0],
-                         [NSNumber numberWithDouble:30.0],
-                         [NSNumber numberWithDouble:20.0],
-                         nil];
-    
-    // イケメン度アップ
-    CPTGradient *overlayGradient = [[CPTGradient alloc] init];
-    overlayGradient.gradientType = CPTGradientTypeRadial;
-    overlayGradient =
-    [overlayGradient addColorStop :[[CPTColor blackColor] colorWithAlphaComponent:0.0] atPosition:0.9];
-    overlayGradient =
-    [overlayGradient addColorStop :[[CPTColor blackColor] colorWithAlphaComponent:0.4] atPosition:1.0];
-    pieChart.overlayFill = [CPTFill fillWithGradient:overlayGradient];
-    
+    [LogScroll addSubview:[_method makeGraph:@40 Balance:@40 Norma:@10]];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
