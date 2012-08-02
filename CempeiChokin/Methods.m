@@ -140,6 +140,13 @@
     DNSLog(@"log:%@",log);
 }
 
+//指定のログを削除する
+- (void)deleteLog:(NSUInteger)cursor{
+    [log removeObjectAtIndex:cursor];
+    [root setObject:log forKey:@"Log"];
+    [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
+}
+
 //初期設定系
 //データから値をセット
 - (void)setData{
@@ -147,8 +154,9 @@
 }
 
 //ログ読み込み
-- (void)loadLog{
-    DNSLog(@"ログ読み込み！");
+- (NSInteger)loadLog{
+    DNSLog(@"ログ読み込み！%d個です！",[log count]);
+    return [log count];
 }
 
 
@@ -163,7 +171,7 @@
     
     //セルの個数をとってくる
     DNSLog(@"log:%@",log);
-    height = [log count];
+    height = [self loadLog];
     if ( height >= 10 ){ // logのセル数が10未満じゃなかったら
         height = 10;
     }

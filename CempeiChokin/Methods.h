@@ -46,9 +46,11 @@
 - (void)saveMoneyValue:(NSString *)value
                   Date:(NSString *)date
                   Kind:(NSString *)kind;        //金額のあれこれを一気に保存する
+- (void)deleteLog:(NSUInteger)cursor;           //指定のログを削除する
+
 //メイン画面の初期設定とか
 - (void)setData;        //データから値をセット
-- (void)loadLog;        //ログ読み込み
+- (NSInteger)loadLog;        //ログ読み込み
 - (float)fitScrollView;  //スクロールビューの大きさを変更
 - (CPTGraphHostingView *)makeGraph:(NSNumber *)expense Balance:(NSNumber *)balance Norma:(NSNumber *)norma;  //グラフの生成
 

@@ -94,16 +94,29 @@
     DNSLog(@"Cell for Row :%d",indexPath.row);
     static NSString *CellIdentifier = @"Log";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    UILabel *logDate      = (UILabel *)[cell viewWithTag:1];
-    UILabel *logKind      = (UILabel *)[cell viewWithTag:2];
-    UITextField *logValue = (UITextField *)[cell viewWithTag:3];
-    if([_method loadMoneyValue:0] != NULL){
-    logValue.text = [_method loadMoneyValue:0];
-    logKind.text = [_method loadKind:0];
-    logDate.text = [_method loadDate:0];
-    [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollView])];
+    if( [_method loadLog] != 0 ){
+        UILabel *logDate      = (UILabel *)[cell viewWithTag:1];
+        UILabel *logKind      = (UILabel *)[cell viewWithTag:2];
+        UITextField *logValue = (UITextField *)[cell viewWithTag:3];
+        if([_method loadMoneyValue:0] != NULL){
+            logValue.text = [_method loadMoneyValue:0];
+            logKind.text = [_method loadKind:0];
+            logDate.text = [_method loadDate:0];
+            [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollView])];//スクロールビューをフィットさせる
+        }
     }
     return cell;
+}
+
+//なんかフリックで消したかった
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    DNSLog(@"%d",indexPath.row);
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        [_method deleteLog:indexPath.row];
+        DNSLog(@"イマココ");
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
 }
 
 - (IBAction)expenseTextField_begin:(id)sender {
