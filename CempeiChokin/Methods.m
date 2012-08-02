@@ -120,18 +120,18 @@
     [root setObject:now forKey:@"Now"];
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
 }
-// !!!: ここまで変えた！
-#pragma MainView系
+
+#pragma mark - MainView系
 //保存系
 //金額を読み込んで返す
-- (NSString *)loadMoneyValue:(NSUInteger)cursor{
+- (NSNumber *)loadMoneyValue:(NSUInteger)cursor{
     tempMoneyValue = [log objectAtIndex:cursor];
     DNSLog(@"MoneyValue:%@",[tempMoneyValue objectForKey:@"MoneyValue"]);
     return [tempMoneyValue objectForKey:@"MoneyValue"];
 }
 
 //日付を読み込んで返す
-- (NSString *)loadDate:(NSUInteger)cursor{
+- (NSDate *)loadDate:(NSUInteger)cursor{
     tempMoneyValue = [log objectAtIndex:cursor];
     return [tempMoneyValue objectForKey:@"Date"];
 }
@@ -143,7 +143,7 @@
 }
 
 //金額のあれこれを一気に保存する
-- (void)saveMoneyValue:(NSString *)value Date:(NSString *)date Kind:(NSString *)kind{
+- (void)saveMoneyValue:(NSNumber *)value Date:(NSDate *)date Kind:(NSString *)kind{
     
     DNSLog(@"金額のあれこれを保存！");
     log = [[NSMutableArray alloc] init];
@@ -172,9 +172,9 @@
 }
 
 //わけわからんくなってきた
-- (NSString *)loadExpence{return [root objectForKey:@"Expence"];}   //出費を返す
-- (NSString *)loadBalance{return [root objectForKey:@"Balance"];}   //残りを返す
-- (NSString *)loadNorma{return [root objectForKey:@"Norma"];}     //ノルマを返す
+- (NSNumber *)loadExpence{return [root objectForKey:@"Expence"];}   //出費を返す
+- (NSNumber *)loadBalance{return [root objectForKey:@"Balance"];}   //残りを返す
+- (NSNumber *)loadNorma{return [root objectForKey:@"Norma"];}     //ノルマを返す
 
 //計算やらやるよ
 - (void)calcVlue:(NSString *)value Kind:(NSInteger)kind{

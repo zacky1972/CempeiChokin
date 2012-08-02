@@ -17,6 +17,11 @@
     NSMutableDictionary *now;
     NSMutableArray *log;
     NSDictionary *tempMoneyValue;
+    /* 察して！
+     NSNumber *expense;
+     NSNumber *balance;
+     NSNumber *norma;
+     */
     NSString *expense;
     NSString *balance;
     NSString *norma;
@@ -43,19 +48,19 @@
            Budget:(NSNumber *)budget;          //予算のあれこれを一気に保存する
 
 //メイン画面で値を保存するとか
-- (NSString *)loadMoneyValue:(NSUInteger)cursor;        //金額を読み込んで返す
-- (NSString *)loadDate:(NSUInteger)cursor;              //日付を読み込んで返す
+- (NSNumber *)loadMoneyValue:(NSUInteger)cursor;        //金額を読み込んで返す
+- (NSDate *)loadDate:(NSUInteger)cursor;              //日付を読み込んで返す
 - (NSString *)loadKind:(NSUInteger)cursor;              //種類を読み込んで返す
-- (void)saveMoneyValue:(NSString *)value
-                  Date:(NSString *)date
+- (void)saveMoneyValue:(NSNumber *)value
+                  Date:(NSDate *)date
                   Kind:(NSString *)kind;        //金額のあれこれを一気に保存する
 - (void)deleteLog:(NSUInteger)cursor;           //指定のログを削除する
 
 //メイン画面の初期設定とか
 - (void)setData;        //データから値をセット
-- (NSString *)loadExpence;   //出費を返す
-- (NSString *)loadBalance;   //残りを返す
-- (NSString *)loadNorma;     //ノルマを返す
+- (NSNumber *)loadExpence;   //出費を返す
+- (NSNumber *)loadBalance;   //残りを返す
+- (NSNumber *)loadNorma;     //ノルマを返す
 - (void)calcVlue:(NSString *)value Kind:(NSInteger)kind ;
 
 - (NSInteger)loadLog;        //ログ読み込み

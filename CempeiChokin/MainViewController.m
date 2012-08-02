@@ -41,11 +41,10 @@
     [_method loadData];
     
     //値の設定
-    // BudgetLabel.text = [_method loadBudget];
-    BudgetLabel.text = @"1";
-    ExpenseLabel.text = [_method loadExpence];
-    BalanceLabel.text = [_method loadBalance];
-    NormaLabel.text = [_method loadNorma];
+    BudgetLabel.text = [_translateFormat stringFromNumber:[_method loadBudget] addComma:YES addYen:YES];
+    ExpenseLabel.text = [_translateFormat stringFromNumber:[_method loadExpence] addComma:YES addYen:YES];
+    BalanceLabel.text = [_translateFormat stringFromNumber:[_method loadBalance] addComma:YES addYen:YES];
+    NormaLabel.text = [_translateFormat stringFromNumber:[_method loadNorma] addComma:YES addYen:YES];
     tempKind = @"出費";
     
     //スクロールビューをフィットさせる
@@ -105,9 +104,9 @@
         UILabel *logKind      = (UILabel *)[cell viewWithTag:2];
         UITextField *logValue = (UITextField *)[cell viewWithTag:3];
         if([_method loadMoneyValue:0] != NULL){
-            logValue.text = [_method loadMoneyValue:0];
+            logValue.text = [_translateFormat stringFromNumber:[_method loadMoneyValue:0] addComma:YES addYen:YES];
             logKind.text = [_method loadKind:0];
-            logDate.text = [_method loadDate:0];
+            logDate.text = [_translateFormat formatterDate:[_method loadDate:0]];
             [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollView])];//スクロールビューをフィットさせる
         }
     }
@@ -169,9 +168,8 @@
 -(void)doneNumberPad{
     // 値が入っている場合
     if([expenseTextField.text length] >= 1) {
-        expenseTextField.text = [NSString stringWithFormat:@"%@円",
-                                 [_translateFormat addComma:expenseTextField.text]]; // 表示変える
-        [_method saveMoneyValue:expenseTextField.text Date:[_translateFormat formatterDate:[NSDate date]] Kind:tempKind];
+        NSNumber *tempExpense = [_translateFormat numberFromString:expenseTextField.text];
+        [_method saveMoneyValue:tempExpense Date:[NSDate date] Kind:tempKind];
         [expenseTextField resignFirstResponder];  // NumberPad消す
         [_method calcVlue:expenseTextField.text Kind:KindSegment.selectedSegmentIndex];
         expenseTextField.text = @"";//テキストフィールドの値を消す
