@@ -11,14 +11,15 @@
 @interface BudgetViewController (){
     Methods *_method;
     TranslateFormat *_translateFormat;
-
-    NSDate *tempStartDate;
-    NSDate *tempEndDate;
-    NSString *tempValue;
     
+    // 値を保存するための変数
+    NSDate   *startDate;
+    NSDate   *endDate;
+    NSNumber *budget;
+    
+    // パーツたち
     UIActionSheet *actionSheet;
     UIDatePicker *datePicker;
-    UIToolbar *datePickerToolbar;
 }
 
 @end
@@ -34,27 +35,32 @@
     [_method initData];
     //設定がしてあったらデータをとってくる
     
-    if([_method loadStart]!=nil)startDateTextField.text = [_method loadStart];
-    if([_method loadEnd]!=nil)endDateTextField.text = [_method loadEnd];
-    if([_method loadBudget]!=nil)budgetTextField.text = [_method loadBudget];
-    
-    tempStartDate = [NSDate date];
-    startDateTextField.text = [_translateFormat formatterDate:tempStartDate];
-    
+    if([_method loadStart]!=nil){
+        // FIXME: こうやって書きたい
+        // startDate = [_method loadStart];
+        // startDateTextField.text = [_translateFormat formatterDate:startDate];
+        startDateTextField.text = [_method loadStart];
+    }else{
+        startDate = [NSDate date];
+        startDateTextField.text = [_translateFormat formatterDate:startDate];
+    }
+    if([_method loadEnd] != nil){
+        // FIXME: こうやって書きたい
+        // endDate = [_method loadEnd];
+        // endDateTextField.text = [_translateFormat formatterDate:endDate];
+        endDateTextField.text = [_method loadEnd];
+    }
+    if([_method loadBudget] != nil){
+        // FIXME: こうやって書きたい
+        // budget = [_method loadBudget];
+        // budgetTextField.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];
+        if([_method loadBudget]!=nil)budgetTextField.text = [_method loadBudget];
+    }
+        
     // ツールバーとかデータピッカー
-    datePickerToolbar = [[UIToolbar alloc] initWithFrame: CGRectMake(0, 0, 320, 44)];
-    datePickerToolbar.barStyle = UIBarStyleBlackTranslucent;
     datePicker =[[UIDatePicker alloc] initWithFrame: CGRectMake(0, 44, 320, 216)];
     datePicker.datePickerMode = UIDatePickerModeDate;
-        
-    // 空のActionSheetをつくる
-    actionSheet =
-    [[UIActionSheet alloc] initWithTitle: nil
-                                delegate: nil
-                       cancelButtonTitle: nil
-                  destructiveButtonTitle: nil
-                       otherButtonTitles: nil];
-    actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+
 }
 
 - (void)viewDidUnload
@@ -67,161 +73,144 @@
 
 #pragma mark - StartDateTextField
 - (IBAction)startDateTextField_begin:(id)sender {
-    // Toolbarのボタンつくる
-    UIBarButtonItem *done =
-    [[UIBarButtonItem alloc] initWithTitle: @"次へ"
-                                     style: UIBarButtonItemStyleBordered
-                                    target: self
-                                    action: @selector(doneWithDatePicker)];
-    UIBarButtonItem *cancel =
-    [[UIBarButtonItem alloc] initWithTitle: @"キャンセル"
-                                     style: UIBarButtonItemStyleBordered
-                                    target: self
-                                    action: @selector(cancelWithDatePicker)];
-    UIBarButtonItem *frexibleSpace =
-    [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace
-                                                  target: nil
-                                                  action: nil];
-    datePickerToolbar.items = @[cancel,frexibleSpace,done]; // ツールバーにのせる (キャンセル| [スペース] | 完了)
-    [datePickerToolbar sizeToFit];
-    
     // DatePickerの設定
-    datePicker.date = tempStartDate;
+    datePicker.date = startDate;
     datePicker.minimumDate = [NSDate date]; // 設定できる範囲は今日から
-    datePicker.maximumDate = [NSDate dateWithTimeIntervalSinceNow:86400*365*10]; // 10年後まで
+    datePicker.maximumDate = [NSDate dateWithTimeIntervalSinceNow:86400*365]; // 1年後まで
 
     // ActionSheetを表示させる
-    [actionSheet addSubview: datePickerToolbar]; // Toolbarのっける
-    [actionSheet addSubview: datePicker];        // DatePickerのっける
+    [self makeActionSheetWithDataPicker:@"次へ"
+                                   Done:@selector(doneStartDateTextField)
+                                 Cancel:@selector(cancelStartDateTextField)];
     [actionSheet showInView: self.view];         // 画面上に表示させる
     [actionSheet setBounds: CGRectMake(0, 0, 320, 500)]; // 場所とサイズ決める(x,y.width,height)
 }
 
--(void)doneWithDatePicker{ // 値をテキストフィールドに入れる
-    tempStartDate = datePicker.date;
-    startDateTextField.text = [_translateFormat formatterDate:tempStartDate]; // 文字入力する
+-(void)doneStartDateTextField{ // 値をテキストフィールドに入れる
+    startDate = datePicker.date;
+    startDateTextField.text = [_translateFormat formatterDate:startDate]; // 文字入力する
     [startDateTextField resignFirstResponder]; // フォーカス外す
-    if([tempStartDate earlierDate:tempEndDate] == tempEndDate ){
-        tempEndDate = [NSDate dateWithTimeInterval:86400 sinceDate:tempStartDate];
-        endDateTextField.text = [_translateFormat formatterDate:tempEndDate];
+    if([startDate earlierDate:endDate] == endDate ){
+        endDate = [NSDate dateWithTimeInterval:86400 sinceDate:startDate];
+        endDateTextField.text = [_translateFormat formatterDate:endDate];
     }
+    [endDateTextField becomeFirstResponder]; // endDateTextFieldに移動
     [actionSheet dismissWithClickedButtonIndex:0 animated:YES]; // ActionSheet消す
 }
 
 // DatePickerがキャンセルした時の
--(void)cancelWithDatePicker{ // 特に何もしない
+-(void)cancelStartDateTextField{ // 特に何もしない
     [startDateTextField resignFirstResponder];
     [actionSheet dismissWithClickedButtonIndex:0 animated:YES];
 }
 
 #pragma mark - endDateTextField
 - (IBAction)endDateTextField_begin:(id)sender {
-    // Toolbarのボタンつくる
-    UIBarButtonItem *done =
-    [[UIBarButtonItem alloc] initWithTitle: @"次へ"
-                                     style: UIBarButtonItemStyleBordered
-                                    target: self
-                                    action: @selector(doneWithDatePicker2)];
-    UIBarButtonItem *cancel =
-    [[UIBarButtonItem alloc] initWithTitle: @"キャンセル"
-                                     style: UIBarButtonItemStyleBordered
-                                    target: self
-                                    action: @selector(cancelWithDatePicker2)];
-    UIBarButtonItem *frexibleSpace =
-    [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace
-                                                  target: nil
-                                                  action: nil];
-    // ボタンをToolbarにつける
-    datePickerToolbar.items = @[cancel,frexibleSpace,done]; // ツールバーにのせる (キャンセル| [スペース] | 完了)
-    [datePickerToolbar sizeToFit];
     
-    // DatePickerつくる
-    datePicker =[[UIDatePicker alloc] initWithFrame: CGRectMake(0, 44, 320, 216)];
-    datePicker.datePickerMode = UIDatePickerModeDate; // 年月日までモード
-    
-    datePicker.minimumDate = [NSDate dateWithTimeInterval:86400 sinceDate:tempStartDate]; // 設定できる範囲は今日から
-    datePicker.maximumDate = [NSDate dateWithTimeInterval:86400*365*10 sinceDate:tempStartDate]; // 10年後まで
+    datePicker.minimumDate = [NSDate dateWithTimeInterval:86400 sinceDate:startDate]; // 設定できる範囲は今日から
+    datePicker.maximumDate = [NSDate dateWithTimeInterval:86400*365*10 sinceDate:startDate]; // 10年後まで
 
-    [actionSheet addSubview: datePickerToolbar]; // Toolbarのっける
-    [actionSheet addSubview: datePicker];        // DatePickerのっける
+    [self makeActionSheetWithDataPicker:@"次へ"
+                                   Done:@selector(doneEndDateTextField)
+                                 Cancel:@selector(cancelEndDateTextField)];
     [actionSheet showInView: self.view];         // 画面上に表示させる
     [actionSheet setBounds: CGRectMake(0, 0, 320, 500)]; // 場所とサイズ決める(x,y.width,height)
 }
 
 
-- (void)doneWithDatePicker2{ // 値をテキストフィールドに入れる
-    tempEndDate = datePicker.date;
-    endDateTextField.text = [_translateFormat formatterDate:tempEndDate]; // 文字入力する
+- (void)doneEndDateTextField{ // 値をテキストフィールドに入れる
+    endDate = datePicker.date;
+    endDateTextField.text = [_translateFormat formatterDate:endDate]; // 文字入力する
     [endDateTextField resignFirstResponder]; // フォーカス外す
     [actionSheet dismissWithClickedButtonIndex:0 animated:YES]; // ActionSheet消す
     [budgetTextField becomeFirstResponder];  //budgetTextFieldに移動
 }
 
 // DatePickerがキャンセルした時の
-- (void)cancelWithDatePicker2{ // 特に何もしない
+- (void)cancelEndDateTextField{ // 特に何もしない
     [endDateTextField resignFirstResponder];
     [actionSheet dismissWithClickedButtonIndex:0 animated:YES];
 }
 
 #pragma mark - budgetTextField
-
 - (IBAction)budgetTextField_begin:(id)sender{
-    // 既に値が入力されていた場合，表示されている値を数値に戻す (例)10,000円→10000
-    if([budgetTextField.text hasSuffix:@"円"]){
-        tempValue = budgetTextField.text;
-        NSString *tempValue2 = [tempValue substringToIndex:[tempValue length]-1]; // 円を消す(=語尾から一文字消す)
-        budgetTextField.text = [NSString stringWithFormat:@"%@",[_translateFormat deleteComma:tempValue2]];  // ,消す
-    }
-    // Toolbarつくる
-    UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
-    numberToolbar.barStyle = UIBarStyleBlackTranslucent;
-    
-    // Toolbarのボタンたち
-    UIBarButtonItem *done =
-    [[UIBarButtonItem alloc] initWithTitle: @"次へ"
-                                     style: UIBarButtonItemStyleDone
-                                    target:self
-                                    action:@selector(doneNumberPad)];
-    UIBarButtonItem *cancel =
-    [[UIBarButtonItem alloc] initWithTitle: @"キャンセル"
-                                     style: UIBarButtonItemStyleBordered
-                                    target: self
-                                    action: @selector(cancelNumberPad)];
-    UIBarButtonItem *frexibleSpace =
-    [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace
-                                                  target: nil
-                                                  action: nil];
-    numberToolbar.items = @[cancel,frexibleSpace,done]; // ツールバーにのせる (キャンセル| [スペース] | 完了)
-    [numberToolbar sizeToFit];                          // なんかフィットさせる
-    budgetTextField.inputAccessoryView = numberToolbar;  // キーボードの上につけるときはこれ使うのかな？
+    budgetTextField.inputAccessoryView =
+    [self makeNumberPadToolbar:@"完了" Done:@selector(doneBudgetTextField) Cancel:@selector(cancelBudgetTextField)];
+    // 既に値が入力されていた場合，表示されている値を数値に戻す
+    if(budget != NULL)
+        budgetTextField.text = [_translateFormat stringFromNumber:budget addComma:NO addYen:NO];
 }
 
 // Numberpadに追加したボタンの動作
--(void)doneNumberPad{
+-(void)doneBudgetTextField{
     // 値が入っている場合
     if([budgetTextField.text length] >= 1) {
-        budgetTextField.text = [NSString stringWithFormat:@"%@円",[_translateFormat addComma:budgetTextField.text]]; // 表示変える
+        budget = [_translateFormat numberFromString:budgetTextField.text];
+        budgetTextField.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];
         [budgetTextField resignFirstResponder];  // NumberPad消す
     }
     [budgetTextField resignFirstResponder]; // NumberPad消す
 }
 
 // Numberpadに追加したキャンセルボタンの動作
--(void)cancelNumberPad{
+-(void)cancelBudgetTextField{
     // 既に値が入っていた場合
-    if(tempValue != @"")
-        budgetTextField.text = tempValue;   // 元に戻す
-    // そうでもなかった場合
+    if(budget != NULL)
+        budgetTextField.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];   // 元に戻す
     else
         budgetTextField.text = @"";         // 値を消す
     [budgetTextField resignFirstResponder]; // NumberPad消す(=テキストフィールドを選択していない状態にする)
 }
 
-#pragma DoneButton
-
+#pragma mark - ボタン
 - (IBAction)DoneButton_down:(id)sender {
+    // FIXME: こうやって書きたい
+    // [_method saveStart:startDate End:endDate Budget:budget];
     [_method saveStart:startDateTextField.text End:endDateTextField.text Budget:budgetTextField.text];// 保存する
-    // FIXME:ここにオプションの時はメイン画面に戻る的なことがほしい
+}
+
+#pragma mark - その他
+- (UIToolbar *)makeNumberPadToolbar:(NSString *)string Done:(SEL)done Cancel:(SEL)cancel{
+    // Toolbarつくる
+    UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
+    numberToolbar.barStyle = UIBarStyleBlackTranslucent;
+    
+    // Toolbarのボタンたち
+    UIBarButtonItem *doneButton =
+    [[UIBarButtonItem alloc] initWithTitle: string
+                                     style: UIBarButtonItemStyleDone
+                                    target: self
+                                    action: done];
+    UIBarButtonItem *cancelButton =
+    [[UIBarButtonItem alloc] initWithTitle: @"キャンセル"
+                                     style: UIBarButtonItemStyleBordered
+                                    target: self
+                                    action: cancel];
+    
+    UIBarButtonItem *frexibleSpace =
+    [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace
+                                                  target: nil
+                                                  action: nil];
+    numberToolbar.items = @[cancelButton,frexibleSpace,doneButton];
+    [numberToolbar sizeToFit];
+    return numberToolbar;
+}
+
+- (void)makeActionSheetWithDataPicker:(NSString *)string Done:(SEL)done Cancel:(SEL)cancel{
+    // 空のActionSheetをつくる
+    actionSheet =
+    [[UIActionSheet alloc] initWithTitle: nil
+                                delegate: nil
+                       cancelButtonTitle: nil
+                  destructiveButtonTitle: nil
+                       otherButtonTitles: nil];
+    actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+    
+    // Toolbar作る
+    UIToolbar *datePickerToolbar = [self makeNumberPadToolbar:string Done:done Cancel:cancel];
+        
+    [actionSheet addSubview: datePickerToolbar]; // Toolbarのっける
+    [actionSheet addSubview: datePicker];        // DatePickerのっける
 }
 
 @end

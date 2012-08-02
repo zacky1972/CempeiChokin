@@ -17,7 +17,6 @@
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];  // 形式変えるアレ
     [formatter setPositiveFormat:@"#,##0"];                           // 形式の指定;
     NSString *returnString = [formatter stringForObjectValue:value];
-    DNSLog(@"%@(%@)",returnString,number);
     return returnString;
 }
 
@@ -26,25 +25,28 @@
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     [formatter setPositiveFormat:@"#,##0"];
     NSNumber *returnNumber = [formatter numberFromString:string];
-    DNSLog(@"%@(%@)",returnNumber,string);
     return returnNumber;
 }
 
 // 文字列→数値の変換 (数字以外消す)
 - (NSNumber *)numberFromString:(NSString *)string{
+    DNSLog(@"Input:%@",string);
     string = [string stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@",円"]];
     NSNumber *returnNumber = [[NSNumberFormatter alloc] numberFromString:string];
+    DNSLog(@"Output:%@",returnNumber);
     return returnNumber;
 }
 
 // 数値→文字列の変換　(,と円をつけるかどうか選択可)
 - (NSString *)stringFromNumber:(NSNumber *)number addComma:(BOOL)comma addYen:(BOOL)yen{
+    DNSLog(@"Input:%@",number);
     NSString *returnString = [NSString stringWithFormat:@"%@",number];
     if(comma == YES)
         returnString = [self addComma:returnString];
     if(yen == YES){
         returnString = [returnString stringByAppendingString:@"円"];
     }
+    DNSLog(@"Output:%@",returnString);
     return returnString;
 }
 
