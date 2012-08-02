@@ -9,12 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "CorePlot-CocoaTouch.h"
 
-@interface addGraph : NSObject <CPTPieChartDataSource,CPTPieChartDelegate>
+@interface AddGraph : NSObject <CPTPieChartDataSource,CPTPieChartDelegate>
 
 @property (readwrite, nonatomic) NSMutableArray *pieChartData;
 
 // グラフの生成
 - (CPTGraphHostingView *)makeGraph:(NSNumber *)expense Balance:(NSNumber *)balance Norma:(NSNumber *)norma;
-
 
 @end

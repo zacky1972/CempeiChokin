@@ -84,6 +84,7 @@
     [goal setObject:value forKey:@"Value"];
     [goal setObject:period forKey:@"Period"];
     [root setObject:goal forKey:@"Goal"];
+    DNSLog(@"root:%@",root);
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
 }
 
@@ -149,8 +150,6 @@
     DNSLog(@"ログ読み込み！");
 }
 
-
-
 //スクロールビューの大きさを変更
 - (float)fitScrollView{
     DNSLog(@"ビューをフィット！");
@@ -167,29 +166,6 @@
     }
     height = 779 + 45 * height;
     return [[[NSNumber alloc] initWithInt:height] floatValue];
-}
-
-#pragma mark - Formatter系
-// 10000 → 10,000 にするやつ
-- (NSString *)addComma:(NSString *)number{
-    NSNumber *value = [NSNumber numberWithInt:[number intValue]];     // 文字を数値に変換
-    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];  // 形式変えるアレ
-    [formatter setPositiveFormat:@"#,##0"];                           // 形式の指定;
-    return [formatter stringForObjectValue:value];                    // ,つけたのを返す
-}
-
-// 10,000 → 10000 にするやつ
-- (NSNumber *)deleteComma:(NSString *)string{
-    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-    [formatter setPositiveFormat:@"#,##0"];
-    return [formatter numberFromString:string];
-}
-
-#pragma mark - DateFormatter系
-- (NSString *)formatterDate:(NSDate *)date{
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat =@"yyyy年M月d日"; // 表示を変える
-    return [formatter stringFromDate:date];
 }
 
 @end

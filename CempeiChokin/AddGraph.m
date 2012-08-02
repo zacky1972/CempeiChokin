@@ -6,9 +6,9 @@
 //  Copyright (c) 2012年 CEMPEI. All rights reserved.
 //
 
-#import "addGraph.h"
+#import "AddGraph.h"
 
-@implementation addGraph
+@implementation AddGraph
 
 @synthesize pieChartData;
 

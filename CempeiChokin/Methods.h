@@ -50,12 +50,5 @@
 - (void)loadLog;        //ログ読み込み
 - (float)fitScrollView;  //スクロールビューの大きさを変更
 
-// 数字の表示をする感じの
-- (NSString *)addComma:(NSString *)number;      // 10000 → 10,000 にするやつ
-- (NSString *)deleteComma:(NSString *)string;   // 10,000 → 10000 にするやつ
-
-// 日付の表示をする感じの
-- (NSString *)formatterDate:(NSDate *)date;
-
 
 @end
