@@ -161,7 +161,7 @@
                                     value, @"MoneyValue",
                                     date, @"Date",
                                     kind, @"Kind", nil];
-    [log addObject:tempMoneyValue];
+    [log insertObject:tempMoneyValue atIndex:0];
     [root setObject:log forKey:@"Log"];
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
     DNSLog(@"log:%@",log);

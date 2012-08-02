@@ -122,37 +122,19 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     DNSLog(@"%d",indexPath.row);
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        
         [_method deleteLog:indexPath.row];
-        //[instanceArray removeObjectAtIndex:indexPath.row];
-        //[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+		[tableView deleteRowsAtIndexPaths: [NSArray arrayWithObject:indexPath]
+                         withRowAnimation: UITableViewRowAnimationFade];
+        // TODO: 消したのに応じて予算とか計算し直さんとあかんな
     }
 }
 
+#pragma mark - 出費・収入・残高調整 関係
 - (IBAction)expenseTextField_begin:(id)sender {
-    // Toolbarつくる
-    UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
-    numberToolbar.barStyle = UIBarStyleBlackTranslucent;
-    
-    // Toolbarのボタンたち
-    UIBarButtonItem *done =
-    [[UIBarButtonItem alloc] initWithTitle: @"完了"
-                                     style: UIBarButtonItemStyleDone
-                                    target:self
-                                    action:@selector(doneNumberPad)];
-    UIBarButtonItem *cancel =
-    [[UIBarButtonItem alloc] initWithTitle: @"キャンセル"
-                                     style: UIBarButtonItemStyleBordered
-                                    target: self
-                                    action: @selector(cancelNumberPad)];
-    UIBarButtonItem *frexibleSpace =
-    [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace
-                                                  target: nil
-                                                  action: nil];
-    numberToolbar.items = @[cancel,frexibleSpace,done]; // ツールバーにのせる (キャンセル| [スペース] | 完了)
-    [numberToolbar sizeToFit];                          // なんかフィットさせる
-    expenseTextField.inputAccessoryView = numberToolbar;  // キーボードの上につけるときはこれ使うのかな？
-    // TODO: Numberpad表示させてる時に期日のところ押したらなんかバグるからいつかどうにかしよう
+    expenseTextField.inputAccessoryView =
+    [self makeNumberPadToolbar:@"完了"
+                          Done:@selector(doneExpenseTextField)
+                        Cancel:@selector(cancelExpenseTextField)];
 }
 
 - (IBAction)KindSegment_click:(id)sender {
@@ -170,7 +152,7 @@
 }
 
 // Numberpadに追加したボタンの動作
--(void)doneNumberPad{
+-(void)doneExpenseTextField{
     // 値が入っている場合
     if([expenseTextField.text length] >= 1) {
         NSNumber *tempExpense = [_translateFormat numberFromString:expenseTextField.text];
@@ -196,8 +178,36 @@
 }
 
 // Numberpadに追加したキャンセルボタンの動作
--(void)cancelNumberPad{
+-(void)cancelExpenseTextField{
+    expenseTextField.text = @""; //テキストフィールドの値を消す
     [expenseTextField resignFirstResponder]; // NumberPad消す(=テキストフィールドを選択していない状態にする)
+}
+
+#pragma mark - その他
+- (UIToolbar *)makeNumberPadToolbar:(NSString *)string Done:(SEL)done Cancel:(SEL)cancel{
+    // Toolbarつくる
+    UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
+    numberToolbar.barStyle = UIBarStyleBlackTranslucent;
+
+    // Toolbarのボタンたち
+    UIBarButtonItem *doneButton =
+    [[UIBarButtonItem alloc] initWithTitle: string
+                                     style: UIBarButtonItemStyleDone
+                                    target: self
+                                    action: done];
+    UIBarButtonItem *cancelButton =
+    [[UIBarButtonItem alloc] initWithTitle: @"キャンセル"
+                                     style: UIBarButtonItemStyleBordered
+                                    target: self
+                                    action: cancel];
+
+    UIBarButtonItem *frexibleSpace =
+    [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace
+                                                  target: nil
+                                                  action: nil];
+    numberToolbar.items = @[cancelButton,frexibleSpace,doneButton];
+    [numberToolbar sizeToFit];
+    return numberToolbar;
 }
 
 @end
