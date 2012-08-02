@@ -36,25 +36,19 @@
     //設定がしてあったらデータをとってくる
     
     if([_method loadStart]!=nil){
-        // FIXME: こうやって書きたい
-        // startDate = [_method loadStart];
-        // startDateTextField.text = [_translateFormat formatterDate:startDate];
-        startDateTextField.text = [_method loadStart];
+        startDate = [_method loadStart];
+        startDateTextField.text = [_translateFormat formatterDate:startDate];
     }else{
         startDate = [NSDate date];
         startDateTextField.text = [_translateFormat formatterDate:startDate];
     }
     if([_method loadEnd] != nil){
-        // FIXME: こうやって書きたい
-        // endDate = [_method loadEnd];
-        // endDateTextField.text = [_translateFormat formatterDate:endDate];
-        endDateTextField.text = [_method loadEnd];
+        endDate = [_method loadEnd];
+        endDateTextField.text = [_translateFormat formatterDate:endDate];
     }
     if([_method loadBudget] != nil){
-        // FIXME: こうやって書きたい
-        // budget = [_method loadBudget];
-        // budgetTextField.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];
-        if([_method loadBudget]!=nil)budgetTextField.text = [_method loadBudget];
+        budget = [_method loadBudget];
+        budgetTextField.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];
     }
         
     // ツールバーとかデータピッカー
@@ -164,9 +158,7 @@
 
 #pragma mark - ボタン
 - (IBAction)DoneButton_down:(id)sender {
-    // FIXME: こうやって書きたい
-    // [_method saveStart:startDate End:endDate Budget:budget];
-    [_method saveStart:startDateTextField.text End:endDateTextField.text Budget:budgetTextField.text];// 保存する
+    [_method saveStart:startDate End:endDate Budget:budget];
 }
 
 #pragma mark - その他

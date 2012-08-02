@@ -30,17 +30,17 @@
 - (void)loadData;                               //Data.plistから引っ張ってくる
 - (void)deleteData;                             //Data.plistを消す
 - (NSString *)loadName;              //名前を読み込んで返す
-- (NSString *)loadValue;             //金額を読み込んで返す
-- (NSString *)loadPeriod;            //期限を読み込んで返す
+- (NSNumber *)loadValue;             //金額を読み込んで返す
+- (NSDate *)loadPeriod;            //期限を読み込んで返す
 - (void)saveName:(NSString *)name
-           Value:(NSString *)value
-          Period:(NSString *)period;            //目標のあれこれを一気に保存する
-- (NSString *)loadStart;             //名前を読み込んで返す
-- (NSString *)loadEnd;               //金額を読み込んで返す
-- (NSString *)loadBudget;            //期限を読み込んで返す
-- (void)saveStart:(NSString *)start
-              End:(NSString *)end
-           Budget:(NSString *)budget;          //予算のあれこれを一気に保存する
+           Value:(NSNumber *)value
+          Period:(NSDate *)period;            //目標のあれこれを一気に保存する
+- (NSDate *)loadStart;             //名前を読み込んで返す
+- (NSDate *)loadEnd;               //金額を読み込んで返す
+- (NSNumber *)loadBudget;            //期限を読み込んで返す
+- (void)saveStart:(NSDate *)start
+              End:(NSDate *)end
+           Budget:(NSNumber *)budget;          //予算のあれこれを一気に保存する
 
 //メイン画面で値を保存するとか
 - (NSString *)loadMoneyValue:(NSUInteger)cursor;        //金額を読み込んで返す

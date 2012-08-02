@@ -90,11 +90,11 @@
 
 // FIXME: 正直この3つはまとめたい
 - (NSString *)loadName{return [goal objectForKey:@"Name"];}      //名前を読み込んで返す
-- (NSString *)loadValue{return [goal objectForKey:@"Value"];}    //金額を読み込んで返す
-- (NSString *)loadPeriod{return [goal objectForKey:@"Period"];}  //期限を読み込んで返す
+- (NSNumber *)loadValue{return [goal objectForKey:@"Value"];}    //金額を読み込んで返す
+- (NSDate *)loadPeriod{return [goal objectForKey:@"Period"];}  //期限を読み込んで返す
 
 //目標のあれこれを一気に保存する
-- (void)saveName:(NSString *)name Value:(NSString *)value Period:(NSString *)period{
+- (void)saveName:(NSString *)name Value:(NSNumber *)value Period:(NSDate *)period{
     DNSLog(@"プロパティリストに保存！");
     goal = [[NSMutableDictionary alloc] init];
     [goal setObject:name forKey:@"Name"];       //とりあえずgoalに値を上書き
@@ -106,12 +106,12 @@
 }
 
 // FIXME: 正直この3つはまとめたい
-- (NSString *)loadStart{return [now objectForKey:@"Start"];}      //名前を読み込んで返す
-- (NSString *)loadEnd{return [now objectForKey:@"End"];}          //金額を読み込んで返す
-- (NSString *)loadBudget{return [now objectForKey:@"Budget"];}    //期限を読み込んで返す
+- (NSDate *)loadStart{return [now objectForKey:@"Start"];}      //名前を読み込んで返す
+- (NSDate *)loadEnd{return [now objectForKey:@"End"];}          //金額を読み込んで返す
+- (NSNumber *)loadBudget{return [now objectForKey:@"Budget"];}    //期限を読み込んで返す
 
 //予算のあれこれを一気に保存する
-- (void)saveStart:(NSString *)start End:(NSString *)end Budget:(NSString *)budget{
+- (void)saveStart:(NSDate *)start End:(NSDate *)end Budget:(NSNumber *)budget{
     DNSLog(@"プロパティリストに保存！");
     now = [[NSMutableDictionary alloc] init];
     [now setObject:start forKey:@"Start"];      //とりあえずnowに値を上書き
@@ -120,7 +120,7 @@
     [root setObject:now forKey:@"Now"];
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
 }
-
+// !!!: ここまで変えた！
 #pragma MainView系
 //保存系
 //金額を読み込んで返す

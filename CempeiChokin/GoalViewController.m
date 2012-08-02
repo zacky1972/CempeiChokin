@@ -35,9 +35,18 @@
     _method = [Methods alloc];
     
     [_method initData];
-    if([_method loadName]!=nil)NameTextField.text = [_method loadName];
-    if([_method loadValue]!=nil)ValueTextField.text = [_method loadValue];
-    if([_method loadPeriod]!=nil)PeriodTextField.text = [_method loadPeriod];
+    if([_method loadName]!=nil){
+        name = [_method loadName];
+        NameTextField.text = name;
+    }
+    if([_method loadValue]!=nil){
+        value = [_method loadValue];
+        ValueTextField.text = [_translateFormat stringFromNumber:value addComma:YES addYen:YES];
+    }
+    if([_method loadPeriod]!=nil){
+        period = [_method loadPeriod];
+        PeriodTextField.text = [_translateFormat formatterDate:period];
+    }
 }
 
 - (void)viewDidUnload
@@ -117,9 +126,7 @@
 #pragma mark - ボタン
 // 決定ボタンが押されたときの
 - (IBAction)DoneButton_down:(id)sender {
-    // FIXME: NameをNSString ValueをNSNumber PeriodをNSDateで扱いたい
-    [_method saveName:NameTextField.text Value:ValueTextField.text Period:PeriodTextField.text]; // 保存する
-    // [_method saveName:name Value:value Period:period]; ←これで許されるようにしたい
+     [_method saveName:name Value:value Period:period];
 }
 
 #pragma mark - その他

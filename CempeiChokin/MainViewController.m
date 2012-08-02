@@ -41,7 +41,8 @@
     [_method loadData];
     
     //値の設定
-    BudgetLabel.text = [_method loadBudget];
+    // BudgetLabel.text = [_method loadBudget];
+    BudgetLabel.text = @"1";
     ExpenseLabel.text = [_method loadExpence];
     BalanceLabel.text = [_method loadBalance];
     NormaLabel.text = [_method loadNorma];
