@@ -7,9 +7,12 @@
 //
 
 #import "MainViewController.h"
+#import "addGraph.h"
 
 @interface MainViewController (){
     Methods *_method;
+    addGraph *_graph;
+    
     NSString *tempKind;
 }
 
@@ -47,7 +50,8 @@
     [LogScroll setScrollEnabled:YES];
     [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollView])];
     
-    [LogScroll addSubview:[_method makeGraph:@40 Balance:@40 Norma:@10]];
+    _graph = [addGraph alloc];
+    [LogScroll addSubview:[_graph makeGraph:@40 Balance:@40 Norma:@10]];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -97,12 +101,12 @@
     UILabel *logDate      = (UILabel *)[cell viewWithTag:1];
     UILabel *logKind      = (UILabel *)[cell viewWithTag:2];
     UITextField *logValue = (UITextField *)[cell viewWithTag:3];
-    if([_method loadMoneyValue:0] != NULL){
-    logValue.text = [_method loadMoneyValue:0];
-    logKind.text = [_method loadKind:0];
-    logDate.text = [_method loadDate:0];
+    
+    logValue.text = @"a";
+    logKind.text = @"i";
+    logDate.text = @"u";
     [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollView])];
-    }
+    
     return cell;
 }
 

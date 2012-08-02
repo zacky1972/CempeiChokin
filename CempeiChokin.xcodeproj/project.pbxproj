@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		015D078D15C8F1080005AA87 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 015D078C15C8F1080005AA87 /* libCorePlot-CocoaTouch.a */; };
 		2A86784815C9518300720B2D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A86784715C9518300720B2D /* QuartzCore.framework */; };
+		2A86784B15CA2A3F00720B2D /* addGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A86784A15CA2A3F00720B2D /* addGraph.m */; };
 		E95EED9515C26A7300F2A89E /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EED9415C26A7300F2A89E /* MainViewController.m */; };
 		E95EED9B15C26C2600F2A89E /* OptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EED9A15C26C2600F2A89E /* OptionViewController.m */; };
 		E95EED9E15C26D8D00F2A89E /* BudgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EED9D15C26D8D00F2A89E /* BudgetViewController.m */; };
@@ -124,6 +125,8 @@
 		015D078B15C8F1080005AA87 /* NSNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberExtensions.h; sourceTree = "<group>"; };
 		015D078C15C8F1080005AA87 /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libCorePlot-CocoaTouch.a"; sourceTree = "<group>"; };
 		2A86784715C9518300720B2D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		2A86784915CA2A3F00720B2D /* addGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addGraph.h; sourceTree = "<group>"; };
+		2A86784A15CA2A3F00720B2D /* addGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = addGraph.m; sourceTree = "<group>"; };
 		2AEA041115C804BF009C9208 /* debug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = debug.h; sourceTree = "<group>"; };
 		E95EED9315C26A7300F2A89E /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		E95EED9415C26A7300F2A89E /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
@@ -400,6 +403,8 @@
 			children = (
 				E95EEDA815C273B200F2A89E /* Methods.h */,
 				E95EEDA915C273B200F2A89E /* Methods.m */,
+				2A86784915CA2A3F00720B2D /* addGraph.h */,
+				2A86784A15CA2A3F00720B2D /* addGraph.m */,
 			);
 			name = AddMethods;
 			sourceTree = "<group>";
@@ -522,6 +527,7 @@
 				E95EEDA715C270B700F2A89E /* DepositViewController.m in Sources */,
 				E95EEDAA15C273B200F2A89E /* Methods.m in Sources */,
 				E9AFEDF015C915BA0021815A /* FirstHelpViewController.m in Sources */,
+				2A86784B15CA2A3F00720B2D /* addGraph.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
