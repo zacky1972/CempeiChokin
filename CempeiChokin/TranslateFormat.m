@@ -30,6 +30,24 @@
     return returnNumber;
 }
 
+// 文字列→数値の変換 (数字以外消す)
+- (NSNumber *)numberFromString:(NSString *)string{
+    string = [string stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@",円"]];
+    NSNumber *returnNumber = [[NSNumberFormatter alloc] numberFromString:string];
+    return returnNumber;
+}
+
+// 数値→文字列の変換　(,と円をつけるかどうか選択可)
+- (NSString *)stringFromNumber:(NSNumber *)number addComma:(BOOL)comma addYen:(BOOL)yen{
+    NSString *returnString = [NSString stringWithFormat:@"%@",number];
+    if(comma == YES)
+        returnString = [self addComma:returnString];
+    if(yen == YES){
+        returnString = [returnString stringByAppendingString:@"円"];
+    }
+    return returnString;
+}
+
 #pragma mark - DateFormatter系
 - (NSString *)formatterDate:(NSDate *)date{
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
