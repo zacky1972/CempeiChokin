@@ -25,6 +25,9 @@
     _method = [Methods alloc];
     _translateFormat = [TranslateFormat alloc];
     
+    [_method makeDataPath];
+    [_method loadData];
+    
     [self makeNumberPadToolbar:depositTextField Return:@"完了"
                           Done:@selector(doneDepositTextField)
                         Cancel:@selector(cancelDepostiTextField)];
@@ -67,6 +70,7 @@
 #pragma mark - ボタンたち
 - (IBAction)doneButton:(id)sender {
     // TODO: ここに保存する処理書いてね
+    [_method saveDeposit:depositValue];
 }
 
 - (IBAction)laterButton:(id)sender {

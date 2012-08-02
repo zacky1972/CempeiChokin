@@ -12,6 +12,7 @@
     NSNumber *expense;
     NSNumber *balance;
     NSNumber *norma;
+    NSNumber *deposit;
 }
 @end
 
@@ -77,8 +78,15 @@
                 DNSLog(@"%@",root);
                 bud = [self loadBudget];
                 expense = @0;  //出費
-                norma = @0;    //ノルマ
-                //norma = @( ([self loadValue]/* - [self load貯蓄]*/) / ([self loadPeriod] - [self loadStart]) ) * ([self loadEnd]-[self loadStart]);
+                NSTimeInterval since;
+                NSInteger tempday1,tempday2;
+                since = [[self loadStart] timeIntervalSinceDate:[self loadPeriod]];
+                tempday1 = (int)(since / (60 * 60 * 24));
+                since = [[self loadStart] timeIntervalSinceDate:[self loadEnd]];
+                tempday2 = (int)(since / (60 * 60 * 24));
+                
+                //norma = @0;    //ノルマ
+                norma = @( ( ( [[self loadValue] intValue] - [[self loadDeposit] intValue] ) / tempday1 ) * tempday2 );
                 balance = @( [[self loadBudget] intValue] - [[self loadNorma] intValue] );
                 [root setObject:expense forKey:@"Expense"];
                 [root setObject:balance forKey:@"Balance"];
@@ -236,6 +244,24 @@
     DNSLog(@"ログ読み込み！%d個です！",[log count]);
     return [log count];
 }
+
+#pragma mark - 貯金(Deposit)関係
+//貯金額を保存
+- (void)saveDeposit:(NSNumber *)value{
+    //???: 配列depolog使って記録とったがいいんかな…
+    DNSLog(@"貯金保存！");
+    
+    
+    
+    deposit = [self loadDeposit];
+    deposit = @( [deposit intValue] + [value intValue] );
+    [root setObject:deposit forKey:@"Deposit"];
+    [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
+    DNSLog(@"log:%@",root);
+}
+
+//貯金額を呼び出し
+- (NSNumber *)loadDeposit{return [root objectForKey:@"Deposit"];}
 
 #pragma mark - その他
 //スクロールビューの大きさを変更
