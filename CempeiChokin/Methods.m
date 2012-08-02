@@ -41,8 +41,11 @@
 - (void)loadData{
     DNSLog(@"データ読み込み！");
     root = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
+    goal = [[NSMutableDictionary alloc] init];
     goal = [root objectForKey:@"Goal"];
+    now = [[NSMutableDictionary alloc] init];
     now = [root objectForKey:@"Now"];
+    log = [[NSMutableArray alloc] init];
     log = [root objectForKey:@"Log"];
 }
 
@@ -154,7 +157,9 @@
 - (void)saveMoneyValue:(NSNumber *)value Date:(NSDate *)date Kind:(NSString *)kind{
     DNSLog(@"金額のあれこれを保存！");
     // FIXME: Logの中身を新たに作って上書きしてるから値が一個にしかならんで！
-    log = [[NSMutableArray alloc] init];
+    if(log == nil){
+        log = [[NSMutableArray alloc] init];
+    }
     tempMoneyValue = [NSDictionary dictionaryWithObjectsAndKeys:
                                     value, @"MoneyValue",
                                     date, @"Date",
