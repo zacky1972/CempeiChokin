@@ -16,6 +16,7 @@
     NSMutableDictionary *goal;
     NSMutableDictionary *now;
     NSMutableArray *log;
+    NSMutableDictionary *depolog;
     NSDictionary *tempMoneyValue;
 }
 
@@ -58,5 +59,7 @@
 - (NSInteger)loadLog;        //ログ読み込み
 - (float)fitScrollView;  //スクロールビューの大きさを変更
 
-
+//〆後とか
+- (void)saveDeposit:(NSNumber *)value;    //貯金額を保存
+- (NSNumber *)loadDeposit;                //貯金額を呼び出し
 @end
