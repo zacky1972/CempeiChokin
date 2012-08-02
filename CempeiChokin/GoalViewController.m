@@ -12,6 +12,8 @@
 @interface GoalViewController (){
     @private
     Methods *_method;
+    TranslateFormat *_translateFormat;
+    
     NSString *tempValue; // 金額の保持に使う
     NSDate *tempDate;
     
@@ -35,6 +37,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _translateFormat = [TranslateFormat alloc];
+    
     _method = [Methods alloc];
     [_method initData];
     if([_method loadName]!=nil)NameTextField.text = [_method loadName];
@@ -65,7 +69,7 @@
     if([ValueTextField.text hasSuffix:@"円"]){
         tempValue = ValueTextField.text;
         NSString *tempValue2 = [tempValue substringToIndex:[tempValue length]-1]; // 円を消す(=語尾から一文字消す)
-        ValueTextField.text = [NSString stringWithFormat:@"%@",[_method deleteComma:tempValue2]];  // ,消す
+        ValueTextField.text = [NSString stringWithFormat:@"%@",[_translateFormat deleteComma:tempValue2]];  // ,消す
     }
     // Toolbarつくる
     UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
@@ -96,7 +100,7 @@
 -(void)doneNumberPad{
     // 値が入っている場合
     if([ValueTextField.text length] >= 1) {
-        ValueTextField.text = [NSString stringWithFormat:@"%@円",[_method addComma:ValueTextField.text]]; // 表示変える
+        ValueTextField.text = [NSString stringWithFormat:@"%@円",[_translateFormat addComma:ValueTextField.text]]; // 表示変える
         [ValueTextField resignFirstResponder];  // NumberPad消す
         [PeriodTextField becomeFirstResponder]; // PeriodTextFieldに移動
     }
@@ -165,10 +169,8 @@
 
 // DatePickerが完了したときの
 -(void)doneWithDatePicker{ // 値をテキストフィールドに入れる
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat =@"yyyy年M月d日"; // 表示を変える
     tempDate = datePicker.date; // 保持しておく
-    PeriodTextField.text = [formatter stringFromDate:tempDate]; // 文字入力する
+    PeriodTextField.text = [_translateFormat formatterDate:tempDate]; // 文字入力する
     [PeriodTextField resignFirstResponder]; // フォーカス外す
     [actionSheet dismissWithClickedButtonIndex:0 animated:YES]; // ActionSheet消す
 }

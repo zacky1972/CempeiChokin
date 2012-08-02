@@ -10,6 +10,9 @@
 
 @interface MainViewController (){
     Methods *_method;
+    AddGraph *_graph;
+    TranslateFormat *_translateFormat;
+    
     NSString *tempKind;
 }
 
@@ -47,7 +50,8 @@
     [LogScroll setScrollEnabled:YES];
     [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollView])];
     
-    [LogScroll addSubview:[_method makeGraph:@40 Balance:@40 Norma:@10]];
+    _graph = [AddGraph alloc];
+    [LogScroll addSubview:[_graph makeGraph:@40 Balance:@40 Norma:@10]];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -163,8 +167,8 @@
 -(void)doneNumberPad{
     // 値が入っている場合
     if([expenseTextField.text length] >= 1) {
-        expenseTextField.text = [NSString stringWithFormat:@"%@円",[_method addComma:expenseTextField.text]]; // 表示変える
-        [_method saveMoneyValue:expenseTextField.text Date:[_method formatterDate:[NSDate date]] Kind:tempKind];
+        expenseTextField.text = [NSString stringWithFormat:@"%@円",[_translateFormat addComma:expenseTextField.text]]; // 表示変える
+        [_method saveMoneyValue:expenseTextField.text Date:[_translateFormat formatterDate:[NSDate date]] Kind:tempKind];
         [expenseTextField resignFirstResponder];  // NumberPad消す
         [expenseTextField becomeFirstResponder]; // PeriodTextFieldに移動
     }

@@ -6,4 +6,8 @@
 
 *.xcuserstate
 
-*/xcschememanagement.plist
+*.xcsettings
+
+*.xcbkptlist
+
+*xcschememanagement.plist

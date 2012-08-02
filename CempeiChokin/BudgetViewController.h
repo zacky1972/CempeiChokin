@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Methods.h"
+#import "TranslateFormat.h"
 
 @interface BudgetViewController : UITableViewController{
     __weak IBOutlet UITextField *startDateTextField;
