@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E2617" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="raj-cK-qeg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="raj-cK-qeg">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
@@ -209,6 +209,7 @@
                         <outlet property="ExpenseLabel" destination="4X5-2C-0ap" id="lMo-cF-2pZ"/>
                         <outlet property="KindSegment" destination="AHs-2z-ikp" id="L3y-qG-y70"/>
                         <outlet property="LogScroll" destination="eGP-ec-UM4" id="NjY-xc-0nw"/>
+                        <outlet property="MainNavigationBar" destination="XW8-Tb-4XM" id="ymn-iY-4cE"/>
                         <outlet property="NormaLabel" destination="gnA-AP-iVj" id="12K-zh-hY9"/>
                         <outlet property="expenseTextField" destination="g9Q-Ja-iJ1" id="fIk-gt-SLb"/>
                         <outlet property="logTableView" destination="hKr-Rw-zM3" id="duI-op-wVG"/>

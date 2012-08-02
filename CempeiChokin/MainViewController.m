@@ -61,7 +61,10 @@
     expense = [_method loadExpense];
     balance = [_method loadBalance];
     norma = [_method loadNorma];
-    
+    NSString *temp;
+    temp = [[_translateFormat formatterDate:[_method loadStart]] stringByAppendingString:@"~"];
+    temp = [temp stringByAppendingString:[_translateFormat formatterDate:[_method loadEnd]]];
+    MainNavigationBar.topItem.title = temp;
     BudgetLabel.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];
     ExpenseLabel.text = [_translateFormat stringFromNumber:expense addComma:YES addYen:YES];
     BalanceLabel.text = [_translateFormat stringFromNumber:balance addComma:YES addYen:YES];
@@ -82,6 +85,7 @@
     NormaLabel = nil;
     logTableView = nil;
     KindSegment = nil;
+    MainNavigationBar = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     
