@@ -110,9 +110,9 @@
         UILabel *logKind      = (UILabel *)[cell viewWithTag:2];
         UITextField *logValue = (UITextField *)[cell viewWithTag:3];
         if([_method loadMoneyValue:0] != NULL){
-            logValue.text = [_translateFormat stringFromNumber:[_method loadMoneyValue:0] addComma:YES addYen:YES];
-            logKind.text = [_method loadKind:0];
-            logDate.text = [_translateFormat formatterDate:[_method loadDate:0]];
+            logValue.text = [_translateFormat stringFromNumber:[_method loadMoneyValue:indexPath.row] addComma:YES addYen:YES];
+            logKind.text = [_method loadKind:indexPath.row];
+            logDate.text = [_translateFormat formatterDate:[_method loadDate:indexPath.row]];
         }
     }
     return cell;
