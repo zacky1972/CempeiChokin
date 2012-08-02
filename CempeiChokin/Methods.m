@@ -170,6 +170,8 @@
                                     date, @"Date",
                                     kind, @"Kind", nil];
     [log insertObject:tempMoneyValue atIndex:0];
+    if([log count] > 20)
+        [log removeObjectAtIndex:20];
     [root setObject:log forKey:@"Log"];
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
     DNSLog(@"log:%@",log);
