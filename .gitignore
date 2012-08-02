@@ -6,10 +6,8 @@
 
 *.xcuserstate
 
-*/xcschememanagement.plist
-
 *.xcsettings
 
 *.xcbkptlist
 
-CempeiChokin.xcodeproj/xcuserdata/ecnailerelia.xcuserdatad/xcschemes/xcschememanagement.plist
+*xcschememanagement.plist
