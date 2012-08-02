@@ -95,7 +95,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // TODO: とりあえず一個
+    // return [_method loadLog];
     return 1;
 }
 
