@@ -34,8 +34,9 @@
     [super viewDidLoad];
     logTableView.delegate = self;
     logTableView.dataSource = self;
-    
     _method = [Methods alloc];
+    _translateFormat = [TranslateFormat alloc];
+    
     [_method makeDataPath];
     [_method loadData];
     
@@ -130,7 +131,7 @@
     
     // Toolbarのボタンたち
     UIBarButtonItem *done =
-    [[UIBarButtonItem alloc] initWithTitle: @"次へ"
+    [[UIBarButtonItem alloc] initWithTitle: @"完了"
                                      style: UIBarButtonItemStyleDone
                                     target:self
                                     action:@selector(doneNumberPad)];
@@ -167,10 +168,10 @@
 -(void)doneNumberPad{
     // 値が入っている場合
     if([expenseTextField.text length] >= 1) {
-        expenseTextField.text = [NSString stringWithFormat:@"%@円",[_translateFormat addComma:expenseTextField.text]]; // 表示変える
+        expenseTextField.text = [NSString stringWithFormat:@"%@円",
+                                 [_translateFormat addComma:expenseTextField.text]]; // 表示変える
         [_method saveMoneyValue:expenseTextField.text Date:[_translateFormat formatterDate:[NSDate date]] Kind:tempKind];
         [expenseTextField resignFirstResponder];  // NumberPad消す
-        [expenseTextField becomeFirstResponder]; // PeriodTextFieldに移動
     }
     [logTableView reloadData];
     [expenseTextField resignFirstResponder]; // NumberPad消す
@@ -178,7 +179,6 @@
 
 // Numberpadに追加したキャンセルボタンの動作
 -(void)cancelNumberPad{
-
     [expenseTextField resignFirstResponder]; // NumberPad消す(=テキストフィールドを選択していない状態にする)
 }
 

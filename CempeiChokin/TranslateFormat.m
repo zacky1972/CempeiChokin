@@ -16,15 +16,18 @@
     NSNumber *value = [NSNumber numberWithInt:[number intValue]];     // 文字を数値に変換
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];  // 形式変えるアレ
     [formatter setPositiveFormat:@"#,##0"];                           // 形式の指定;
-    return [formatter stringForObjectValue:value];                    // ,つけたのを返す
+    NSString *returnString = [formatter stringForObjectValue:value];
+    DNSLog(@"%@(%@)",returnString,number);
+    return returnString;
 }
 
 // 10,000 → 10000 にするやつ
 - (NSNumber *)deleteComma:(NSString *)string{
-    
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
     [formatter setPositiveFormat:@"#,##0"];
-    return [formatter numberFromString:string];
+    NSNumber *returnNumber = [formatter numberFromString:string];
+    DNSLog(@"%@(%@)",returnNumber,string);
+    return returnNumber;
 }
 
 #pragma mark - DateFormatter系
