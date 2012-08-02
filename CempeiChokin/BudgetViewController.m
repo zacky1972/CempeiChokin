@@ -102,7 +102,7 @@
 - (IBAction)endDateTextField_begin:(id)sender {
     
     datePicker.minimumDate = [NSDate dateWithTimeInterval:86400 sinceDate:startDate]; // 設定できる範囲は今日から
-    datePicker.maximumDate = [NSDate dateWithTimeInterval:86400*365*10 sinceDate:startDate]; // 10年後まで
+    datePicker.maximumDate = [_method loadPeriod]; // 10年後まで
 
     [self makeActionSheetWithDataPicker:@"次へ"
                                    Done:@selector(doneEndDateTextField)
