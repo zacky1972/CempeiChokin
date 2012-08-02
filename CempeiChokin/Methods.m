@@ -7,7 +7,11 @@
 //
 #import "Methods.h"
 
-@interface Methods ()
+@interface Methods (){
+     NSNumber *expense;
+     NSNumber *balance;
+     NSNumber *norma;
+}
 @end
 
 @implementation Methods
@@ -32,11 +36,11 @@
             //ここで値をセット
             if([root objectForKey:@"Norma"] == nil){//初めだったら
                 DNSLog(@"新規の目標なので初期設定！");
-                expense = @"0円";  //出費
-                norma = @"0円";    //ノルマ
-                //norma = ( ([self loadValue] - [self load貯蓄]) / ([self loadPeriod] - [self loadStart]) ) * ([self loadEnd]-[self loadStart]);
-                balance = @"0円";
-                //balance = [self loadBudget] - norma;// 出費ひくノルマ;  //残り
+                DNSLog(@"%@",root);
+                expense = @0;  //出費
+                norma = @0;    //ノルマ
+                //norma = @( ([self loadValue]/* - [self load貯蓄]*/) / ([self loadPeriod] - [self loadStart]) ) * ([self loadEnd]-[self loadStart]);
+                balance = @( [[self loadBudget] intValue] - [[self loadNorma] intValue] );
                 [root setObject:expense forKey:@"Expense"];
                 [root setObject:balance forKey:@"Balance"];
                 [root setObject:norma forKey:@"Norma"];
@@ -177,31 +181,31 @@
 - (NSNumber *)loadNorma{return [root objectForKey:@"Norma"];}     //ノルマを返す
 
 //計算やらやるよ
-- (void)calcVlue:(NSString *)value Kind:(NSInteger)kind{
+- (void)calcVlue:(NSNumber *)value Kind:(NSInteger)kind{
+    DNSLog(@"計算するよ");
     switch (kind) {
         case 0://出費
             DNSLog(@"出費の処理！");
-            break;
-        case 1://収入
-            DNSLog(@"収入の処理！");
-            break;
-        case 2://調整
-            DNSLog(@"調整の処理！");
+            DNSLog(@"budget:%@",[self loadBudget]);
+            expense = @([expense intValue] + [value intValue]);
+            balance = @([[self loadBalance] intValue] - [value intValue]);
             break;
             
-        default://初期設定これはここにはいらない
-            DNSLog(@"新規の目標なので初期設定！");
-            expense = @"-0円";  //出費
-            norma = @"0円";    //ノルマ
-            //norma = ( ([self loadValue] - [self load貯蓄]) / ([self loadPeriod] - [self loadStart]) ) * ([self loadEnd]-[self loadStart]);
-            balance = @"0円";
-            //balance = [self loadBudget] - norma;// 出費ひくノルマ;  //残り
-            [root setObject:expense forKey:@"Expense"];
-            [root setObject:balance forKey:@"Balance"];
-            [root setObject:norma forKey:@"Norma"];
-            [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
+        case 1://収入
+            DNSLog(@"収入の処理！");
+            
             break;
+        case 2://調整 
+            DNSLog(@"調整の処理！");
+            
+            break;
+
     }
+    
+    [root setObject:expense forKey:@"Expense"];
+    [root setObject:balance forKey:@"Balance"];
+    [root setObject:norma forKey:@"Norma"];
+    [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
 }
 
 //ログ読み込み

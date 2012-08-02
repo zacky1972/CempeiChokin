@@ -17,14 +17,6 @@
     NSMutableDictionary *now;
     NSMutableArray *log;
     NSDictionary *tempMoneyValue;
-    /* 察して！
-     NSNumber *expense;
-     NSNumber *balance;
-     NSNumber *norma;
-     */
-    NSString *expense;
-    NSString *balance;
-    NSString *norma;
 }
 
 - (BOOL)searchGoal;                              //初期設定が必要かどうか
@@ -61,7 +53,7 @@
 - (NSNumber *)loadExpense;   //出費を返す
 - (NSNumber *)loadBalance;   //残りを返す
 - (NSNumber *)loadNorma;     //ノルマを返す
-- (void)calcVlue:(NSString *)value Kind:(NSInteger)kind ;
+- (void)calcVlue:(NSNumber *)value Kind:(NSInteger)kind ;
 
 - (NSInteger)loadLog;        //ログ読み込み
 - (float)fitScrollView;  //スクロールビューの大きさを変更

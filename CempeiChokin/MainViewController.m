@@ -41,6 +41,7 @@
     [_method loadData];
     
     //値の設定
+    
     BudgetLabel.text = [_translateFormat stringFromNumber:[_method loadBudget] addComma:YES addYen:YES];
     ExpenseLabel.text = [_translateFormat stringFromNumber:[_method loadExpense] addComma:YES addYen:YES];
     BalanceLabel.text = [_translateFormat stringFromNumber:[_method loadBalance] addComma:YES addYen:YES];
@@ -60,6 +61,10 @@
     if([_method searchGoal] == 0){//初期設定がまだだったら，設定画面に遷移します
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"First"] animated:YES];
     }
+    BudgetLabel.text = [_translateFormat stringFromNumber:[_method loadBudget] addComma:YES addYen:YES];
+    ExpenseLabel.text = [_translateFormat stringFromNumber:[_method loadExpense] addComma:YES addYen:YES];
+    BalanceLabel.text = [_translateFormat stringFromNumber:[_method loadBalance] addComma:YES addYen:YES];
+    NormaLabel.text = [_translateFormat stringFromNumber:[_method loadNorma] addComma:YES addYen:YES];
 }
 
 - (void)viewDidUnload
@@ -171,8 +176,11 @@
         NSNumber *tempExpense = [_translateFormat numberFromString:expenseTextField.text];
         [_method saveMoneyValue:tempExpense Date:[NSDate date] Kind:tempKind];
         [expenseTextField resignFirstResponder];  // NumberPad消す
-        [_method calcVlue:expenseTextField.text Kind:KindSegment.selectedSegmentIndex];
+        [_method calcVlue:tempExpense Kind:KindSegment.selectedSegmentIndex];
         expenseTextField.text = @"";//テキストフィールドの値を消す
+        BudgetLabel.text = [_translateFormat stringFromNumber:[_method loadBudget] addComma:1 addYen:1];
+        ExpenseLabel.text = [_translateFormat stringFromNumber:[_method loadExpense] addComma:1 addYen:1];
+        BalanceLabel.text = [_translateFormat stringFromNumber:[_method loadBalance] addComma:1 addYen:1];
     }
     [logTableView reloadData];
     [expenseTextField resignFirstResponder]; // NumberPad消す
