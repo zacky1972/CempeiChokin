@@ -8,42 +8,96 @@
 
 #import "DepositViewController.h"
 
-@interface DepositViewController ()
+@interface DepositViewController (){
+    Methods *_method;
+    TranslateFormat *_translateFormat;
+    
+    NSNumber *depositValue; // 貯金額
+}
 
 @end
 
 @implementation DepositViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    _method = [Methods alloc];
+    _translateFormat = [TranslateFormat alloc];
+    
+    [self makeNumberPadToolbar:depositTextField Return:@"完了"
+                          Done:@selector(doneDepositTextField)
+                        Cancel:@selector(cancelDepostiTextField)];
 }
 
 - (void)viewDidUnload
 {
+    depositTextField = nil;
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+#pragma mark - depositTextField関係
+- (IBAction)depositTextField_begin:(id)sender {
+    // 既に値が入力されていた場合，表示されている値を数値に戻す
+    if(depositValue != NULL)
+        depositTextField.text = [NSString stringWithFormat:@"%@",depositValue];
+}
+
+-(void)doneDepositTextField{
+    // 値が入っている場合
+    if([depositTextField.text length] >= 1) {
+        depositValue = @([depositTextField.text intValue]);
+        depositTextField.text = [_translateFormat stringFromNumber:depositValue addComma:YES addYen:YES]; // 表示変える
+        [depositTextField resignFirstResponder];  // NumberPad消す
+    }
+    [depositTextField resignFirstResponder]; // NumberPad消す
+}
+
+-(void)cancelDepositTextField{
+    // 既に値が入っていた場合
+    if(depositValue != NULL)
+        depositTextField.text = [_translateFormat stringFromNumber:depositValue addComma:YES addYen:YES]; // 元に戻す
+    // そうでもなかった場合
+    else
+        depositTextField.text = @"";         // 値を消す
+    [depositTextField resignFirstResponder]; // NumberPad消す(=テキストフィールドを選択していない状態にする)
+}
+
+#pragma mark - ボタンたち
+- (IBAction)doneButton:(id)sender {
+    // TODO: ここに保存する処理書いてね
+}
+
+- (IBAction)laterButton:(id)sender {
+    // ???: ここはどうすんの？
+}
+
+#pragma mark - その他
+- (void)makeNumberPadToolbar:(UITextField *)textField Return:(NSString *)string Done:(SEL)done Cancel:(SEL)cancel{
+    // Toolbarつくる
+    UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
+    numberToolbar.barStyle = UIBarStyleBlackTranslucent;
+    
+    // Toolbarのボタンたち
+    UIBarButtonItem *doneButton =
+    [[UIBarButtonItem alloc] initWithTitle: string
+                                     style: UIBarButtonItemStyleDone
+                                    target: self
+                                    action: done];
+    UIBarButtonItem *cancelButton =
+    [[UIBarButtonItem alloc] initWithTitle: @"キャンセル"
+                                     style: UIBarButtonItemStyleBordered
+                                    target: self
+                                    action: cancel];
+    
+    UIBarButtonItem *frexibleSpace =
+    [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace
+                                                  target: nil
+                                                  action: nil];
+    numberToolbar.items = @[cancelButton,frexibleSpace,doneButton]; // ツールバーにのせる (キャンセル| [スペース] | 完了)
+    [numberToolbar sizeToFit];                          // なんかフィットさせる
+    textField.inputAccessoryView = numberToolbar;
 }
 
 @end
