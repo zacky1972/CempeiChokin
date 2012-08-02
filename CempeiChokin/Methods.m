@@ -78,8 +78,15 @@
                 DNSLog(@"%@",root);
                 bud = [self loadBudget];
                 expense = @0;  //出費
-                norma = @0;    //ノルマ
-                //norma = @( ([self loadValue]/* - [self load貯蓄]*/) / ([self loadPeriod] - [self loadStart]) ) * ([self loadEnd]-[self loadStart]);
+                NSTimeInterval since;
+                NSInteger tempday1,tempday2;
+                since = [[self loadStart] timeIntervalSinceDate:[self loadPeriod]];
+                tempday1 = (int)(since / (60 * 60 * 24));
+                since = [[self loadStart] timeIntervalSinceDate:[self loadEnd]];
+                tempday2 = (int)(since / (60 * 60 * 24));
+                
+                //norma = @0;    //ノルマ
+                norma = @( ( ( [[self loadValue] intValue] - [[self loadDeposit] intValue] ) / tempday1 ) * tempday2 );
                 balance = @( [[self loadBudget] intValue] - [[self loadNorma] intValue] );
                 [root setObject:expense forKey:@"Expense"];
                 [root setObject:balance forKey:@"Balance"];
