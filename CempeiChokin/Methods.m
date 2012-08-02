@@ -204,7 +204,6 @@
             balance = @([bud intValue] - [expense intValue]);
             break;
         case 1://収入
-            //TODO: 値が変
             DNSLog(@"収入の処理！");
             bud = @([bud intValue] + [value intValue]);
             balance = @([bud intValue] - [expense intValue]);
@@ -212,7 +211,7 @@
             [root setObject:now forKey:@"Now"];
             break;
         case 2://調整
-            //TODO: 値未確認
+            //TODO: 値が変
             DNSLog(@"調整の処理！");
             if ([balance intValue] > [value intValue]) {
                 expense = @([expense intValue] - [balance intValue] - [value intValue]);
