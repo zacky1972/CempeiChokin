@@ -41,11 +41,8 @@
 - (void)loadData{
     DNSLog(@"データ読み込み！");
     root = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
-    goal = [[NSMutableDictionary alloc] init];
     goal = [root objectForKey:@"Goal"];
-    now = [[NSMutableDictionary alloc] init];
     now = [root objectForKey:@"Now"];
-    log = [[NSMutableArray alloc] init];
     log = [root objectForKey:@"Log"];
 }
 
