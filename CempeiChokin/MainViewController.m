@@ -69,7 +69,9 @@
     tempKind = @"出費";
 
     _graph = [AddGraph alloc];
-    graph = [_graph makeGraph:expense Balance:balance Norma:norma];
+    // FIXME: こいつどうにかしよう
+    NSNumber *balance2 = @([balance intValue] - [norma intValue]);
+    graph = [_graph makeGraph:expense Balance:balance2 Norma:norma];
     [LogScroll addSubview:graph];
 }
 
