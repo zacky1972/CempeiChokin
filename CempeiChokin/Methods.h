@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TranslateFormat.h"
 
 @interface Methods : NSObject {
     //値をいじる感じ用
@@ -16,6 +17,9 @@
     NSMutableDictionary *now;
     NSMutableArray *log;
     NSDictionary *tempMoneyValue;
+    NSString *expense;
+    NSString *balance;
+    NSString *norma;
 }
 
 - (BOOL)searchGoal;                              //初期設定が必要かどうか
@@ -49,6 +53,11 @@
 
 //メイン画面の初期設定とか
 - (void)setData;        //データから値をセット
+- (NSString *)loadExpence;   //出費を返す
+- (NSString *)loadBalance;   //残りを返す
+- (NSString *)loadNorma;     //ノルマを返す
+- (void)calcVlue:(NSString *)value Kind:(NSInteger)kind ;
+
 - (NSInteger)loadLog;        //ログ読み込み
 - (float)fitScrollView;  //スクロールビューの大きさを変更
 

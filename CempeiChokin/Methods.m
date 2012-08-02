@@ -20,10 +20,6 @@
     }else{
         
         NSFileManager *fileManager = [NSFileManager defaultManager];
-        /*NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentsDirectory = [paths objectAtIndex:0];
-        NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:@"dictionary.plist"];
-         */
         NSDictionary *fileAttributes = [fileManager attributesOfItemAtPath:path error:nil];
         unsigned long long fileSize = [fileAttributes fileSize];
         DNSLog(@"filesize:%llu",fileSize);
@@ -33,6 +29,20 @@
             if([goal objectForKey:@"Name"]   == nil || [goal objectForKey:@"Value"] == nil ||
                [goal objectForKey:@"Period"] == nil || [now objectForKey:@"Start"]  == nil ||
                [now objectForKey:@"End"]     == nil || [now objectForKey:@"Budget"] == nil ){return 0;}
+            //ここで値をセット
+            if([root objectForKey:@"Norma"] == nil){//初めだったら
+                DNSLog(@"新規の目標なので初期設定！");
+                expense = @"0円";  //出費
+                norma = @"0円";    //ノルマ
+                //norma = ( ([self loadValue] - [self load貯蓄]) / ([self loadPeriod] - [self loadStart]) ) * ([self loadEnd]-[self loadStart]);
+                balance = @"0円";
+                //balance = [self loadBudget] - norma;// 出費ひくノルマ;  //残り
+                [root setObject:expense forKey:@"Expense"];
+                [root setObject:balance forKey:@"Balance"];
+                [root setObject:norma forKey:@"Norma"];
+                [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
+            }
+            DNSLog(@"root:%@",root);
             return 1;
         }else{//0バイトだったら
             [self deleteData];
@@ -134,6 +144,7 @@
 
 //金額のあれこれを一気に保存する
 - (void)saveMoneyValue:(NSString *)value Date:(NSString *)date Kind:(NSString *)kind{
+    
     DNSLog(@"金額のあれこれを保存！");
     log = [[NSMutableArray alloc] init];
     tempMoneyValue = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -158,6 +169,39 @@
 //データから値をセット
 - (void)setData{
     DNSLog(@"データをセット！");
+}
+
+//わけわからんくなってきた
+- (NSString *)loadExpence{return [root objectForKey:@"Expence"];}   //出費を返す
+- (NSString *)loadBalance{return [root objectForKey:@"Balance"];}   //残りを返す
+- (NSString *)loadNorma{return [root objectForKey:@"Norma"];}     //ノルマを返す
+
+//計算やらやるよ
+- (void)calcVlue:(NSString *)value Kind:(NSInteger)kind{
+    switch (kind) {
+        case 0://出費
+            DNSLog(@"出費の処理！");
+            break;
+        case 1://収入
+            DNSLog(@"収入の処理！");
+            break;
+        case 2://調整
+            DNSLog(@"調整の処理！");
+            break;
+            
+        default://初期設定これはここにはいらない
+            DNSLog(@"新規の目標なので初期設定！");
+            expense = @"-0円";  //出費
+            norma = @"0円";    //ノルマ
+            //norma = ( ([self loadValue] - [self load貯蓄]) / ([self loadPeriod] - [self loadStart]) ) * ([self loadEnd]-[self loadStart]);
+            balance = @"0円";
+            //balance = [self loadBudget] - norma;// 出費ひくノルマ;  //残り
+            [root setObject:expense forKey:@"Expense"];
+            [root setObject:balance forKey:@"Balance"];
+            [root setObject:norma forKey:@"Norma"];
+            [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
+            break;
+    }
 }
 
 //ログ読み込み

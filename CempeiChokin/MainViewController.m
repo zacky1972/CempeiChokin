@@ -42,9 +42,9 @@
     
     //値の設定
     BudgetLabel.text = [_method loadBudget];
-    ExpenseLabel.text = @"";
-    BalanceLabel.text = @"";
-    NormaLabel.text = @"";
+    ExpenseLabel.text = [_method loadExpence];
+    BalanceLabel.text = [_method loadBalance];
+    NormaLabel.text = [_method loadNorma];
     tempKind = @"出費";
     
     //スクロールビューをフィットさせる
@@ -172,6 +172,8 @@
                                  [_translateFormat addComma:expenseTextField.text]]; // 表示変える
         [_method saveMoneyValue:expenseTextField.text Date:[_translateFormat formatterDate:[NSDate date]] Kind:tempKind];
         [expenseTextField resignFirstResponder];  // NumberPad消す
+        [_method calcVlue:expenseTextField.text Kind:KindSegment.selectedSegmentIndex];
+        expenseTextField.text = @"";//テキストフィールドの値を消す
     }
     [logTableView reloadData];
     [expenseTextField resignFirstResponder]; // NumberPad消す
