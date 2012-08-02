@@ -118,8 +118,8 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         
         [_method deleteLog:indexPath.row];
-        DNSLog(@"イマココ");
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        //[instanceArray removeObjectAtIndex:indexPath.row];
+        //[tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
 

@@ -144,6 +144,7 @@
     [log removeObjectAtIndex:cursor];
     [root setObject:log forKey:@"Log"];
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
+    DNSLog(@"%@",root)
 }
 
 //初期設定系
