@@ -41,7 +41,7 @@
     [_method loadData];
     
     //値の設定
-    
+
     BudgetLabel.text = [_translateFormat stringFromNumber:[_method loadBudget] addComma:YES addYen:YES];
     ExpenseLabel.text = [_translateFormat stringFromNumber:[_method loadExpense] addComma:YES addYen:YES];
     BalanceLabel.text = [_translateFormat stringFromNumber:[_method loadBalance] addComma:YES addYen:YES];
@@ -95,10 +95,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // return [_method loadLog];
-    return 1;
+    return [_method loadLog];
 }
 
+// セルの内容を返させる
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DNSLog(@"Cell for Row :%d",indexPath.row);
@@ -112,7 +112,6 @@
             logValue.text = [_translateFormat stringFromNumber:[_method loadMoneyValue:0] addComma:YES addYen:YES];
             logKind.text = [_method loadKind:0];
             logDate.text = [_translateFormat formatterDate:[_method loadDate:0]];
-            [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollView])];//スクロールビューをフィットさせる
         }
     }
     return cell;
@@ -175,14 +174,16 @@
     if([expenseTextField.text length] >= 1) {
         NSNumber *tempExpense = [_translateFormat numberFromString:expenseTextField.text];
         [_method saveMoneyValue:tempExpense Date:[NSDate date] Kind:tempKind];
-        [expenseTextField resignFirstResponder];  // NumberPad消す
         [_method calcVlue:tempExpense Kind:KindSegment.selectedSegmentIndex];
-        expenseTextField.text = @"";//テキストフィールドの値を消す
+        expenseTextField.text = @""; //テキストフィールドの値を消す
+
         BudgetLabel.text = [_translateFormat stringFromNumber:[_method loadBudget] addComma:1 addYen:1];
         ExpenseLabel.text = [_translateFormat stringFromNumber:[_method loadExpense] addComma:1 addYen:1];
         BalanceLabel.text = [_translateFormat stringFromNumber:[_method loadBalance] addComma:1 addYen:1];
+        
+        [logTableView reloadData];               // TableViewをリロード
+        [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollView])]; //スクロールビューをフィットさせる
     }
-    [logTableView reloadData];
     [expenseTextField resignFirstResponder]; // NumberPad消す
 }
 

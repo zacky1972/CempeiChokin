@@ -17,6 +17,43 @@
 
 @implementation Methods
 
+// Date.plistへのpathを作成
+- (void)makeDataPath{
+    DNSLog(@"ファイルの場所の指示！");
+    NSString *home = NSHomeDirectory();
+    NSString *document = [home stringByAppendingPathComponent:@"Documents"];
+    path = [document stringByAppendingPathComponent:@"Data.plist"];
+}
+
+// Data.plistの存在確認的な
+- (void)initData{
+    DNSLog(@"データの初期化！");
+    [self makeDataPath];
+    if( [[NSFileManager defaultManager] fileExistsAtPath:path] == NO ){                     //Data.plistがなかったら
+        [[NSFileManager defaultManager] createFileAtPath:path contents:nil attributes:nil]; //作成する
+        root = [[NSMutableDictionary alloc] init];
+    }else{                      //あったら
+        [self loadData];
+    }
+}
+
+//Data.plistからひっぱってくる
+- (void)loadData{
+    DNSLog(@"データ読み込み！");
+    root = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
+    goal = [root objectForKey:@"Goal"];
+    now = [root objectForKey:@"Now"];
+    log = [root objectForKey:@"Log"];
+}
+
+//Data.plistを消す
+- (void)deleteData{
+    DNSLog(@"データ削除！");
+    [self makeDataPath];
+    [self loadData];
+    [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+}
+
 // 初期設定が必要かどうかを確認する
 - (BOOL)searchGoal{
     [self makeDataPath];
@@ -57,43 +94,7 @@
     return 0;
 }
 
-//  Date.plistへのpathを作成
-- (void)makeDataPath{
-    DNSLog(@"ファイルの場所の指示！");
-    NSString *home = NSHomeDirectory();
-    NSString *document = [home stringByAppendingPathComponent:@"Documents"];
-    path = [document stringByAppendingPathComponent:@"Data.plist"];
-}
-
-//Data.plistの初期設定
-- (void)initData{
-    DNSLog(@"データの初期化！");
-    [self makeDataPath];
-    if( [[NSFileManager defaultManager] fileExistsAtPath:path] == NO ){                     //Data.plistがなかったら
-        [[NSFileManager defaultManager] createFileAtPath:path contents:nil attributes:nil]; //作成する
-        root = [[NSMutableDictionary alloc] init];
-    }else{                      //あったら
-        [self loadData];
-    }
-}
-
-//Data.plistからひっぱってくる
-- (void)loadData{
-    DNSLog(@"データ読み込み！");
-    root = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
-    goal = [root objectForKey:@"Goal"];
-    now = [root objectForKey:@"Now"];
-    log = [root objectForKey:@"Log"];
-}
-
-//Data.plistを消す
-- (void)deleteData{
-    DNSLog(@"データ削除！");
-    [self makeDataPath];
-    [self loadData];
-    [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
-}
-
+#pragma mark - 目標(Goal)関係
 // FIXME: 正直この3つはまとめたい
 - (NSString *)loadName{return [goal objectForKey:@"Name"];}      //名前を読み込んで返す
 - (NSNumber *)loadValue{return [goal objectForKey:@"Value"];}    //金額を読み込んで返す
@@ -111,6 +112,7 @@
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
 }
 
+#pragma mark - 今回のアレ(Now)関係
 // FIXME: 正直この3つはまとめたい
 - (NSDate *)loadStart{return [now objectForKey:@"Start"];}      //名前を読み込んで返す
 - (NSDate *)loadEnd{return [now objectForKey:@"End"];}          //金額を読み込んで返す
@@ -127,7 +129,7 @@
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
 }
 
-#pragma mark - MainView系
+#pragma mark - 履歴(Log)関係
 //保存系
 //金額を読み込んで返す
 - (NSNumber *)loadMoneyValue:(NSUInteger)cursor{
@@ -150,8 +152,8 @@
 
 //金額のあれこれを一気に保存する
 - (void)saveMoneyValue:(NSNumber *)value Date:(NSDate *)date Kind:(NSString *)kind{
-    
     DNSLog(@"金額のあれこれを保存！");
+    // FIXME: Logの中身を新たに作って上書きしてるから値が一個にしかならんで！
     log = [[NSMutableArray alloc] init];
     tempMoneyValue = [NSDictionary dictionaryWithObjectsAndKeys:
                                     value, @"MoneyValue",
@@ -171,7 +173,7 @@
     DNSLog(@"%@",root)
 }
 
-//初期設定系
+#pragma mark - 初期設定関係
 //データから値をセット
 - (void)setData{
     DNSLog(@"データをセット！");
@@ -185,25 +187,27 @@
 //計算やらやるよ
 - (void)calcVlue:(NSNumber *)value Kind:(NSInteger)kind{
     DNSLog(@"計算するよ");
+    DNSLog(@"\nRoot:%@",root);
+    // FIXME: ここで読み込みかなんかしないと初回起動以外だと値が消えるっぽい
+    expense = [self loadExpense];
+    balance = [self loadBalance];
+    bud = [self loadBudget];
     switch (kind) {
         case 0://出費
             DNSLog(@"出費の処理！");
             expense = @([expense intValue] + [value intValue]);
             balance = @([bud intValue] - [expense intValue]);
             break;
-            
         case 1://収入
-            //TODO:値が変
+            //TODO: 値が変
             DNSLog(@"収入の処理！");
             bud = @([bud intValue] + [value intValue]);
             balance = @([bud intValue] - [expense intValue]);
-            break;
-            
             [now setObject:bud forKey:@"Budget"];
             [root setObject:now forKey:@"Now"];
-            
+            break;
         case 2://調整
-            //TODO:値未確認
+            //TODO: 値未確認
             DNSLog(@"調整の処理！");
             if ([balance intValue] > [value intValue]) {
                 expense = @([expense intValue] - [balance intValue] - [value intValue]);
@@ -218,10 +222,8 @@
             break;
 
     }
-    
     [root setObject:expense forKey:@"Expense"];
     [root setObject:balance forKey:@"Balance"];
-    [root setObject:norma forKey:@"Norma"];
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
     DNSLog(@"%@",root);
 }
@@ -232,6 +234,7 @@
     return [log count];
 }
 
+#pragma mark - その他
 //スクロールビューの大きさを変更
 - (float)fitScrollView{
     DNSLog(@"ビューをフィット！");
