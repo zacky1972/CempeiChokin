@@ -96,7 +96,11 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_method loadLog];
+    NSInteger count = [_method loadLog];
+    if(count >= 10)
+        count = 10;
+    DNSLog(@"Number of Rows : %d",count);
+    return count;
 }
 
 // セルの内容を返させる
@@ -120,11 +124,13 @@
 
 //なんかフリックで消したかった
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
-    DNSLog(@"%d",indexPath.row);
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        DNSLog(@"Delete At %d Row",indexPath.row);
         [_method deleteLog:indexPath.row];
-		[tableView deleteRowsAtIndexPaths: [NSArray arrayWithObject:indexPath]
-                         withRowAnimation: UITableViewRowAnimationFade];
+        // アニメーションさせたら落ちる
+		// [tableView deleteRowsAtIndexPaths: [NSArray arrayWithObject:indexPath] withRowAnimation: UITableViewRowAnimationFade];
+        [tableView reloadData];
+        [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollView])];
         // TODO: 消したのに応じて予算とか計算し直さんとあかんな
     }
 }
