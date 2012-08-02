@@ -33,20 +33,18 @@
     DNSLog(@"Input:%@",string);
     string = [string stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@",円"]];
     NSNumber *returnNumber = [[NSNumberFormatter alloc] numberFromString:string];
-    DNSLog(@"Output:%@",returnNumber);
     return returnNumber;
 }
 
 // 数値→文字列の変換　(,と円をつけるかどうか選択可)
 - (NSString *)stringFromNumber:(NSNumber *)number addComma:(BOOL)comma addYen:(BOOL)yen{
-    DNSLog(@"Input:%@",number);
+    DNSLog(@"Input:%@ (Comma:%@,Yen:%@)",number,comma?@"YES":@"NO",yen?@"YES":@"NO");
     NSString *returnString = [NSString stringWithFormat:@"%@",number];
     if(comma == YES)
         returnString = [self addComma:returnString];
     if(yen == YES){
         returnString = [returnString stringByAppendingString:@"円"];
     }
-    DNSLog(@"Output:%@",returnString);
     return returnString;
 }
 

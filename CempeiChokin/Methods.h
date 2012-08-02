@@ -58,7 +58,7 @@
 
 //メイン画面の初期設定とか
 - (void)setData;        //データから値をセット
-- (NSNumber *)loadExpence;   //出費を返す
+- (NSNumber *)loadExpense;   //出費を返す
 - (NSNumber *)loadBalance;   //残りを返す
 - (NSNumber *)loadNorma;     //ノルマを返す
 - (void)calcVlue:(NSString *)value Kind:(NSInteger)kind ;

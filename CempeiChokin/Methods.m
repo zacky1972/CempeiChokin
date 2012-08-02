@@ -172,7 +172,7 @@
 }
 
 //わけわからんくなってきた
-- (NSNumber *)loadExpence{return [root objectForKey:@"Expence"];}   //出費を返す
+- (NSNumber *)loadExpense{return [root objectForKey:@"Expense"];}   //出費を返す
 - (NSNumber *)loadBalance{return [root objectForKey:@"Balance"];}   //残りを返す
 - (NSNumber *)loadNorma{return [root objectForKey:@"Norma"];}     //ノルマを返す
 

@@ -42,7 +42,7 @@
     
     //値の設定
     BudgetLabel.text = [_translateFormat stringFromNumber:[_method loadBudget] addComma:YES addYen:YES];
-    ExpenseLabel.text = [_translateFormat stringFromNumber:[_method loadExpence] addComma:YES addYen:YES];
+    ExpenseLabel.text = [_translateFormat stringFromNumber:[_method loadExpense] addComma:YES addYen:YES];
     BalanceLabel.text = [_translateFormat stringFromNumber:[_method loadBalance] addComma:YES addYen:YES];
     NormaLabel.text = [_translateFormat stringFromNumber:[_method loadNorma] addComma:YES addYen:YES];
     tempKind = @"出費";
