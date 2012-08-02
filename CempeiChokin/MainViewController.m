@@ -12,7 +12,13 @@
     Methods *_method;
     AddGraph *_graph;
     TranslateFormat *_translateFormat;
-    
+
+    UIView *graph;
+
+    NSNumber *budget;
+    NSNumber *expense;
+    NSNumber *balance;
+    NSNumber *norma;
     NSString *tempKind;
 }
 
@@ -40,20 +46,10 @@
     [_method makeDataPath];
     [_method loadData];
     
-    //値の設定
-
-    BudgetLabel.text = [_translateFormat stringFromNumber:[_method loadBudget] addComma:YES addYen:YES];
-    ExpenseLabel.text = [_translateFormat stringFromNumber:[_method loadExpense] addComma:YES addYen:YES];
-    BalanceLabel.text = [_translateFormat stringFromNumber:[_method loadBalance] addComma:YES addYen:YES];
-    NormaLabel.text = [_translateFormat stringFromNumber:[_method loadNorma] addComma:YES addYen:YES];
-    tempKind = @"出費";
-    
     //スクロールビューをフィットさせる
     [LogScroll setScrollEnabled:YES];
     [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollView])];
     
-    _graph = [AddGraph alloc];
-    [LogScroll addSubview:[_graph makeGraph:@40 Balance:@40 Norma:@10]];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -61,10 +57,20 @@
     if([_method searchGoal] == 0){//初期設定がまだだったら，設定画面に遷移します
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"First"] animated:YES];
     }
-    BudgetLabel.text = [_translateFormat stringFromNumber:[_method loadBudget] addComma:YES addYen:YES];
-    ExpenseLabel.text = [_translateFormat stringFromNumber:[_method loadExpense] addComma:YES addYen:YES];
-    BalanceLabel.text = [_translateFormat stringFromNumber:[_method loadBalance] addComma:YES addYen:YES];
-    NormaLabel.text = [_translateFormat stringFromNumber:[_method loadNorma] addComma:YES addYen:YES];
+    budget = [_method loadBudget];
+    expense = [_method loadExpense];
+    balance = [_method loadBalance];
+    norma = [_method loadNorma];
+    
+    BudgetLabel.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];
+    ExpenseLabel.text = [_translateFormat stringFromNumber:expense addComma:YES addYen:YES];
+    BalanceLabel.text = [_translateFormat stringFromNumber:balance addComma:YES addYen:YES];
+    NormaLabel.text = [_translateFormat stringFromNumber:norma addComma:YES addYen:YES];
+    tempKind = @"出費";
+
+    _graph = [AddGraph alloc];
+    graph = [_graph makeGraph:expense Balance:balance Norma:norma];
+    [LogScroll addSubview:graph];
 }
 
 - (void)viewDidUnload
@@ -80,11 +86,6 @@
     // Release any retained subviews of the main view.
     
     // TODO:ここに円グラフの描画やら，値のセットが必要．その前にログを表示できるようにせなあかんですな
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - UITableView関係
@@ -176,12 +177,19 @@
         [_method saveMoneyValue:tempExpense Date:[NSDate date] Kind:tempKind];
         [_method calcVlue:tempExpense Kind:KindSegment.selectedSegmentIndex];
         expenseTextField.text = @""; //テキストフィールドの値を消す
-
-        BudgetLabel.text = [_translateFormat stringFromNumber:[_method loadBudget] addComma:1 addYen:1];
-        ExpenseLabel.text = [_translateFormat stringFromNumber:[_method loadExpense] addComma:1 addYen:1];
-        BalanceLabel.text = [_translateFormat stringFromNumber:[_method loadBalance] addComma:1 addYen:1];
         
+        budget = [_method loadBudget];
+        expense = [_method loadExpense];
+        balance = [_method loadBalance];
+
+        BudgetLabel.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];
+        ExpenseLabel.text = [_translateFormat stringFromNumber:expense addComma:YES addYen:YES];
+        BalanceLabel.text = [_translateFormat stringFromNumber:balance addComma:YES addYen:YES];
+
         [logTableView reloadData];               // TableViewをリロード
+        graph = [_graph makeGraph:expense Balance:balance Norma:norma];
+        [graph removeFromSuperview];
+        [LogScroll addSubview:graph];
         [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollView])]; //スクロールビューをフィットさせる
     }
     [expenseTextField resignFirstResponder]; // NumberPad消す
