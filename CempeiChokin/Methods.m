@@ -8,9 +8,10 @@
 #import "Methods.h"
 
 @interface Methods (){
-     NSNumber *expense;
-     NSNumber *balance;
-     NSNumber *norma;
+    NSNumber *bud;
+    NSNumber *expense;
+    NSNumber *balance;
+    NSNumber *norma;
 }
 @end
 
@@ -37,6 +38,7 @@
             if([root objectForKey:@"Norma"] == nil){//初めだったら
                 DNSLog(@"新規の目標なので初期設定！");
                 DNSLog(@"%@",root);
+                bud = [self loadBudget];
                 expense = @0;  //出費
                 norma = @0;    //ノルマ
                 //norma = @( ([self loadValue]/* - [self load貯蓄]*/) / ([self loadPeriod] - [self loadStart]) ) * ([self loadEnd]-[self loadStart]);
@@ -186,17 +188,32 @@
     switch (kind) {
         case 0://出費
             DNSLog(@"出費の処理！");
-            DNSLog(@"budget:%@",[self loadBudget]);
             expense = @([expense intValue] + [value intValue]);
-            balance = @([[self loadBalance] intValue] - [value intValue]);
+            balance = @([bud intValue] - [expense intValue]);
             break;
             
         case 1://収入
+            //TODO:値が変
             DNSLog(@"収入の処理！");
-            
+            bud = @([bud intValue] + [value intValue]);
+            balance = @([bud intValue] - [expense intValue]);
             break;
-        case 2://調整 
+            
+            [now setObject:bud forKey:@"Budget"];
+            [root setObject:now forKey:@"Now"];
+            
+        case 2://調整
+            //TODO:値未確認
             DNSLog(@"調整の処理！");
+            if ([balance intValue] > [value intValue]) {
+                expense = @([expense intValue] - [balance intValue] - [value intValue]);
+                
+                balance = value;
+            }else{
+                expense = @([expense intValue] + [balance intValue] - [value intValue]);
+                
+                balance = value;
+            }
             
             break;
 
@@ -206,6 +223,7 @@
     [root setObject:balance forKey:@"Balance"];
     [root setObject:norma forKey:@"Norma"];
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
+    DNSLog(@"%@",root);
 }
 
 //ログ読み込み
