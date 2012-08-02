@@ -15,23 +15,30 @@
 // 初期設定が必要かどうかを確認する
 - (BOOL)searchGoal{
     [self makeDataPath];
-    if( [[NSFileManager defaultManager] fileExistsAtPath:path] == NO ){
+    if( [[NSFileManager defaultManager] fileExistsAtPath:path] == NO){
         // Data.plistがなかったら
-        DNSLog(@"ファイルなかった！");
-        return 0;
     }else{
-        // Data.plistがあったら
-        DNSLog(@"ファイルあった！");
-        [self loadData];
-        if([goal objectForKey:@"Name"]   == nil || [goal objectForKey:@"Value"] == nil ||
-           [goal objectForKey:@"Period"] == nil || [now objectForKey:@"Start"]  == nil ||
-           [now objectForKey:@"End"]     == nil || [now objectForKey:@"Budget"] == nil ){
-            DNSLog(@"ぬけがあった！");
-            return 0;
+        
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        /*NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:@"dictionary.plist"];
+         */
+        NSDictionary *fileAttributes = [fileManager attributesOfItemAtPath:path error:nil];
+        unsigned long long fileSize = [fileAttributes fileSize];
+        DNSLog(@"filesize:%llu",fileSize);
+        if (fileSize != 0) {//ファイルサイズが0バイトじゃなかったら
+            [self loadData];
+        
+            if([goal objectForKey:@"Name"]   == nil || [goal objectForKey:@"Value"] == nil ||
+               [goal objectForKey:@"Period"] == nil || [now objectForKey:@"Start"]  == nil ||
+               [now objectForKey:@"End"]     == nil || [now objectForKey:@"Budget"] == nil ){return 0;}
+            return 1;
+        }else{//0バイトだったら
+            [self deleteData];
         }
-        DNSLog(@"せっっていおわってる！");
-        return 1;
     }
+    return 0;
 }
 
 //  Date.plistへのpathを作成
