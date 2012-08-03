@@ -64,4 +64,5 @@
 - (NSNumber *)loadDeposit;                //貯金額を呼び出し
 //〆
 - (BOOL)searchNext;         //期限を超えているかどうか調べる
+
 @end

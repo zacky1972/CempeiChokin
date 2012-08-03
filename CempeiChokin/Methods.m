@@ -325,6 +325,9 @@
     [self loadData];
     if ( [date earlierDate:[self loadStart]] == date ) {
         DNSLog(@"期限きれた！");
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"期限が来ました！" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        //[[UIAlertView alloc] initWithTitle:@"期限が来ました！" message:nil delegate:self cancelButtonTitle:@"OK", otherButtonTitles:nil];
+        [alert show];
         return YES;
     }
     DNSLog(@"期限きれてない！");
