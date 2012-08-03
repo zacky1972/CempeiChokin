@@ -171,6 +171,9 @@
     [self makeNumberPadToolbar:@"完了"
                           Done:@selector(doneExpenseTextField)
                         Cancel:@selector(cancelExpenseTextField)];
+    CGPoint scrollPoint = CGPointMake(0.0,200.0);
+    
+    [LogScroll setContentOffset:scrollPoint animated:YES];
 }
 
 - (IBAction)KindSegment_click:(id)sender {
@@ -250,12 +253,9 @@
 
 
 
-//キーボードの表示非表示を判断
+//キーボードが非表示になったときを判断
 - (void)registerForKeyboardNotifications
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWasShown:)
-                                                 name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillBeHidden:)
                                                  name:UIKeyboardWillHideNotification object:nil];
