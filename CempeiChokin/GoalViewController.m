@@ -175,7 +175,7 @@
     if(period)
         datePicker.date = period; // 入力しなおした時の初期値は前に入れた奴にする
     
-    datePicker.minimumDate = [NSDate date]; // 設定できる範囲は今日から
+    datePicker.minimumDate = [NSDate dateWithTimeIntervalSinceNow:86400*7]; // 設定できる範囲は来週から
     datePicker.maximumDate = [NSDate dateWithTimeIntervalSinceNow:86400*365*10]; // 10年後まで
     
     [actionSheet addSubview: datePickerToolbar]; // Toolbarのっける
