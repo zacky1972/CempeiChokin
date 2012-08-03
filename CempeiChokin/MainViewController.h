@@ -15,7 +15,7 @@
 @interface MainViewController : UIViewController <UITableViewDataSource,UITableViewDelegate>
 {
     __weak IBOutlet UINavigationBar *MainNavigationBar;
-    IBOutlet UIScrollView *LogScroll;
+    __weak IBOutlet UIScrollView *LogScroll;
     __weak IBOutlet UILabel *BudgetLabel;
     __weak IBOutlet UILabel *ExpenseLabel;
     __weak IBOutlet UILabel *BalanceLabel;
