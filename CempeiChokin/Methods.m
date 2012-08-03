@@ -182,7 +182,7 @@
     DNSLog(@"%d番目のログを削除します！",cursor);
     DNSLog(@"%@",log);
     //読み込んで
-    [self calcDeleteVlue:[[log objectAtIndex:cursor] objectForKey:@"MoneyValue"] Kind:[[log objectAtIndex:cursor] objectForKey:@"Kind"]];//値一致させて
+    [self calcDeletevalue:[[log objectAtIndex:cursor] objectForKey:@"MoneyValue"] Kind:[[log objectAtIndex:cursor] objectForKey:@"Kind"]];//値一致させて
     [log removeObjectAtIndex:cursor];           //で，実際にログを消す
     [root setObject:log forKey:@"Log"];
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
@@ -196,7 +196,7 @@
 - (NSNumber *)loadNorma{return [root objectForKey:@"Norma"];}     //ノルマを返す
 
 //計算やらやるよ
-- (void)calcVlue:(NSNumber *)value Kind:(NSInteger)kind{
+- (void)calcvalue:(NSNumber *)value Kind:(NSInteger)kind{
     DNSLog(@"計算するよ");
     DNSLog(@"\nRoot:%@",root);
     // FIXME: ここで読み込みかなんかしないと初回起動以外だと値が消えるっぽい
@@ -237,7 +237,7 @@
 }
 
 //delete用，種類に応じた処理を行うよ
-- (void)calcDeleteVlue:(NSNumber *)value Kind:(NSString *)kind{
+- (void)calcDeletevalue:(NSNumber *)value Kind:(NSString *)kind{
     //TODO: ここにdelete用の処理
     DNSLog(@"delete用の計算するよ");
     DNSLog(@"\nRoot:%@",root);
