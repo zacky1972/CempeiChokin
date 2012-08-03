@@ -58,6 +58,9 @@
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"First"] animated:YES];
     }
     
+    //期限チェック
+    [_method searchNext];
+    
     //初期設定から戻ってきた時用
     budget = [_method loadBudget];   // 予算
     expense = [_method loadExpense]; // 出費

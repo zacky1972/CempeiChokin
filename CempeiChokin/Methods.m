@@ -12,7 +12,7 @@
     NSNumber *expense;
     NSNumber *balance;
     NSNumber *norma;
-    NSNumber *deposit;
+    NSMutableArray *deposit;
 }
 @end
 
@@ -165,7 +165,7 @@
     if(log == nil){
         log = [[NSMutableArray alloc] init];
     }
-    tempMoneyValue = [NSDictionary dictionaryWithObjectsAndKeys:
+    tempMoneyValue = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                     value, @"MoneyValue",
                                     date, @"Date",
                                     kind, @"Kind", nil];
@@ -218,15 +218,17 @@
             break;
         case 2://調整
             DNSLog(@"調整の処理！");
-            if ([balance intValue] > [value intValue]) {
-                DNSLog(@"誤差:%d", [expense intValue] - [value intValue]);
-                expense = @( [expense intValue] + ( [balance intValue] - [value intValue] ) );
-                balance = @([bud intValue] - [expense intValue]);
-            }else{
-                DNSLog(@"誤差:%d", [expense intValue] - [value intValue]);
-                expense = @( [expense intValue] - ( [value intValue] - [balance intValue] ) );
-                balance = @([bud intValue] - [expense intValue]);
-            }
+            //TODO:あとでする
+            /*
+            NSNumber *tempMargin;
+            tempMargin = @([bud intValue] - [value intValue]);     //誤差
+            DNSLog(@"tempMargin:%@",[[log objectAtIndex:0] objectForKey:@"MoneyValue"]);
+            
+            expense = @( [expense intValue] - [tempMargin intValue] );
+            balance = @([bud intValue] - [expense intValue]);
+            [[log objectAtIndex:0] setObject:tempMargin forKey:@"MoneyValue"];
+            [root setObject:log forKey:@"Log"];
+             */
             break;
 
     }
@@ -300,13 +302,12 @@
 #pragma mark - 貯金(Deposit)関係
 //貯金額を保存
 - (void)saveDeposit:(NSNumber *)value{
-    //???: 配列depolog使って記録とったがいいんかな…
     DNSLog(@"貯金保存！");
     
     
     
-    deposit = [self loadDeposit];
-    deposit = @( [deposit intValue] + [value intValue] );
+    //deposit = [self loadDeposit];
+    //deposit = @( [deposit intValue] + [value intValue] );
     [root setObject:deposit forKey:@"Deposit"];
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
     DNSLog(@"log:%@",root);
@@ -314,6 +315,22 @@
 
 //貯金額を呼び出し
 - (NSNumber *)loadDeposit{return [root objectForKey:@"Deposit"];}
+
+#pragma mark - 〆
+//期限を超えているかどうか調べる
+- (BOOL)searchNext{
+    DNSLog(@"期限チェック！");
+    NSDate *date = [NSDate date];
+    [self makeDataPath];
+    [self loadData];
+    if ( [date earlierDate:[self loadStart]] == date ) {
+        DNSLog(@"期限きれた！");
+        return YES;
+    }
+    DNSLog(@"期限きれてない！");
+    return NO;
+}
+
 
 #pragma mark - その他
 //スクロールビューの大きさを変更
