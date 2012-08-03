@@ -77,6 +77,7 @@
     _graph = [AddGraph alloc];
     // FIXME: こいつどうにかしよう
 
+    DNSLog(@"Expense:%@ ,Balance:%@ ,Norma:%@",expense,balance,norma);
     if(balance > norma){
         balance = @([balance intValue] - [norma intValue]);
     }else{
@@ -217,7 +218,6 @@
         BalanceLabel.text = [_translateFormat stringFromNumber:balance addComma:YES addYen:YES];
 
         [logTableView reloadData];               // TableViewをリロード
-
 
         if(balance > norma){
             balance = @([balance intValue] - [norma intValue]);
