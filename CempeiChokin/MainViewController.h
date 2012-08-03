@@ -27,5 +27,6 @@
 
 - (IBAction)expenseTextField_begin:(id)sender;
 - (IBAction)KindSegment_click:(id)sender;
+- (IBAction)valueTextField_begin:(id)sender;
 
 @end

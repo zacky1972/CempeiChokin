@@ -118,6 +118,7 @@
     [root setObject:goal forKey:@"Goal"];
     DNSLog(@"root:%@",root);
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
+
 }
 
 #pragma mark - 今回のアレ(Now)関係
