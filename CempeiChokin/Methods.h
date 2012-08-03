@@ -50,11 +50,11 @@
 - (void)deleteLog:(NSUInteger)cursor;           //指定のログを削除する
 
 //メイン画面の初期設定とか
-- (void)setData;        //データから値をセット
 - (NSNumber *)loadExpense;   //出費を返す
 - (NSNumber *)loadBalance;   //残りを返す
 - (NSNumber *)loadNorma;     //ノルマを返す
-- (void)calcVlue:(NSNumber *)value Kind:(NSInteger)kind ;
+- (void)calcvalue:(NSNumber *)value Kind:(NSInteger)kind;        //種類に応じた処理を行うよ
+- (void)calcDeletevalue:(NSNumber *)value Kind:(NSString *)kind;  //delete用，種類に応じた処理を行うよ
 
 - (NSInteger)loadLog;        //ログ読み込み
 - (float)fitScrollView;  //スクロールビューの大きさを変更

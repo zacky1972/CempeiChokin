@@ -36,8 +36,25 @@
 - (void)viewDidUnload
 {
     depositTextField = nil;
+    depositTableView = nil;
     [super viewDidUnload];
 
+}
+
+//タイトルを決定する
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    NSString *temp;
+    temp = [[_translateFormat formatterDate:[_method loadStart]] stringByAppendingString:@"~"];
+    temp = [temp stringByAppendingString:[_translateFormat formatterDate:[_method loadEnd]]];
+    return temp;
+}
+//フッターを決定する
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section{
+    NSString *temp;
+    temp = [_translateFormat stringFromNumber:[_method loadDeposit] addComma:1 addYen:1];
+    temp = [@"貯金総額は" stringByAppendingString:temp];
+    temp = [temp stringByAppendingString:@"です"];
+    return temp;
 }
 
 #pragma mark - depositTextField関係

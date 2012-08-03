@@ -11,6 +11,7 @@
 #import "TranslateFormat.h"
 
 @interface DepositViewController : UITableViewController{
+    IBOutlet UITableView *depositTableView;
     __weak IBOutlet UITextField *depositTextField;
 }
 
