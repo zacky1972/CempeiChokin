@@ -1122,7 +1122,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                                     <connections>
-                                                        <action selector="NameTextField_end:" destination="qPJ-4E-EOY" eventType="editingDidEnd" id="cPL-cr-hHl"/>
+                                                        <action selector="NameTextField_end:" destination="qPJ-4E-EOY" eventType="editingDidEndOnExit" id="Nc6-Jy-iaH"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="名前" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="izB-gQ-f3P">
@@ -1391,9 +1391,7 @@
                 <relationship kind="action" name="DoneButton_down:"/>
                 <relationship kind="action" name="NameTextField_end:"/>
                 <relationship kind="action" name="PeriodTextField_begin:"/>
-                <relationship kind="action" name="PeriodTextField_end:"/>
                 <relationship kind="action" name="ValueTextField_begin:"/>
-                <relationship kind="action" name="ValueTextField_end:"/>
                 <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="NameTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="PeriodTextField" candidateClass="UITextField"/>

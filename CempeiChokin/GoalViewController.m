@@ -67,8 +67,9 @@
 - (IBAction)NameTextField_end:(id)sender {
     name = NameTextField.text;
     [ValueTextField becomeFirstResponder];  //ValueTextFieldに移動
-    if(name != NULL && value != NULL && period != NULL)
+    if(name != NULL && value != NULL && period != NULL){
         DoneButton.enabled = YES;
+    }
     [NameTextField resignFirstResponder];
 }
 
@@ -88,10 +89,17 @@
 
     if(name != NULL && value != NULL && period != NULL){
         DoneButton.enabled = YES;
-        [ValueTextField resignFirstResponder];
-
-    
     }
+    
+    // 既に値が入っていた場合
+    if(value != NULL){
+        ValueTextField.text = [_translateFormat stringFromNumber:value addComma:YES addYen:YES];
+    }// 元に戻す
+    // そうでもなかった場合
+    else{
+        ValueTextField.text = @""; // 値を消す
+    }
+    [ValueTextField resignFirstResponder];
  
 }
 
@@ -129,8 +137,9 @@
      
 }
 - (IBAction)PeriodTextField_end:(id)sender {
-    if(name != NULL && value != NULL && period != NULL)
+    if(name != NULL && value != NULL && period != NULL){
         DoneButton.enabled = YES;
+    }
     [PeriodTextField resignFirstResponder];
 
 }
