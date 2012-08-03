@@ -316,6 +316,22 @@
 //貯金額を呼び出し
 - (NSNumber *)loadDeposit{return [root objectForKey:@"Deposit"];}
 
+#pragma mark - 〆
+//期限を超えているかどうか調べる
+- (BOOL)searchNext{
+    DNSLog(@"期限チェック！");
+    NSDate *date = [NSDate date];
+    [self makeDataPath];
+    [self loadData];
+    if ( [date earlierDate:[self loadStart]] == date ) {
+        DNSLog(@"期限きれた！");
+        return YES;
+    }
+    DNSLog(@"期限きれてない！");
+    return NO;
+}
+
+
 #pragma mark - その他
 //スクロールビューの大きさを変更
 - (float)fitScrollView{
