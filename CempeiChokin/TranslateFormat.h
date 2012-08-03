@@ -19,5 +19,7 @@
 
 // 日付の表示をする感じの
 - (NSString *)formatterDate:(NSDate *)date;     // NSDate → yyyy年M月dd日にする
+- (NSString *)formatterDateUltimate:(NSDate *)date addYear:(BOOL)year addMonth:(BOOL)month addDay:(BOOL)day
+                            addHour:(BOOL)hour addMinute:(BOOL)minute addSecond:(BOOL)second;
 
 @end

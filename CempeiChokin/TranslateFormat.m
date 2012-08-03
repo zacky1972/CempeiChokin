@@ -55,4 +55,34 @@
     return [formatter stringFromDate:date];
 }
 
+- (NSString *)formatterDateUltimate:(NSDate *)date addYear:(BOOL)year addMonth:(BOOL)month addDay:(BOOL)day
+                            addHour:(BOOL)hour addMinute:(BOOL)minute addSecond:(BOOL)second{
+    DNSLog(@"Year:%@,Month:%@",year?@"YES":@"NO",month?@"YES":@"NO");
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+
+    NSString *tempString = @"";
+    if (year == YES){
+        tempString = [tempString stringByAppendingFormat:@"yyyy年"];
+    }
+    if (month == YES){
+        tempString = [tempString stringByAppendingString:@"M月"];
+    }
+    if (day == YES){
+        tempString = [tempString stringByAppendingString:@"d日"];
+    }
+    if (hour == YES){
+        tempString = [tempString stringByAppendingString:@"H時"];
+    }
+    if (minute == YES){
+        tempString = [tempString stringByAppendingString:@"m分"];
+    }
+    if (second == YES){
+        tempString = [tempString stringByAppendingString:@"s秒"];
+    }
+    DNSLog(@"Format:%@",tempString);
+    
+    formatter.dateFormat = tempString; // 表示を変える
+    return [formatter stringFromDate:date];
+}
+
 @end

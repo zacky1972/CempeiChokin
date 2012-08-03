@@ -50,8 +50,6 @@
     [LogScroll setScrollEnabled:YES];
     [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollView])];
     
-    //表示非表示判断
-    [self registerForKeyboardNotifications];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -61,13 +59,14 @@
     }
     
     //初期設定から戻ってきた時用
-    budget = [_method loadBudget];
-    expense = [_method loadExpense];
-    balance = [_method loadBalance];
-    norma = [_method loadNorma];
+    budget = [_method loadBudget];   // 予算
+    expense = [_method loadExpense]; // 出費
+    balance = [_method loadBalance]; // 残り
+    norma = [_method loadNorma];     // ノルマ
+    
     NSString *temp;
-    temp = [[_translateFormat formatterDate:[_method loadStart]] stringByAppendingString:@"~"];
-    temp = [temp stringByAppendingString:[_translateFormat formatterDate:[_method loadEnd]]];
+    temp = [[_translateFormat formatterDateUltimate:[_method loadStart] addYear:NO addMonth:YES addDay:YES addHour:NO addMinute:NO addSecond:NO] stringByAppendingString:@"~"];
+    temp = [temp stringByAppendingString:[_translateFormat formatterDateUltimate:[_method loadEnd] addYear:NO addMonth:YES addDay:YES addHour:NO addMinute:NO addSecond:NO]];
     MainNavigationBar.topItem.title = temp;
     BudgetLabel.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];
     ExpenseLabel.text = [_translateFormat stringFromNumber:expense addComma:YES addYen:YES];
@@ -77,8 +76,14 @@
 
     _graph = [AddGraph alloc];
     // FIXME: こいつどうにかしよう
-    NSNumber *balance2 = @([balance intValue] - [norma intValue]);
-    graph = [_graph makeGraph:expense Balance:balance2 Norma:norma];
+
+    if(balance > norma){
+        balance = @([balance intValue] - [norma intValue]);
+    }else{
+        balance = @0;
+        norma = @([budget intValue] - [expense intValue]);
+    }
+    graph = [_graph makeGraph:expense Balance:balance Norma:norma];
     [LogScroll addSubview:graph];
 }
 
@@ -147,10 +152,14 @@
         BalanceLabel.text = [_translateFormat stringFromNumber:balance addComma:YES addYen:YES];
         NormaLabel.text = [_translateFormat stringFromNumber:norma addComma:YES addYen:YES];
         //グラフの更新
-        _graph = [AddGraph alloc];
-        // FIXME: こいつどうにかしよう
-        NSNumber *balance2 = @([balance intValue] - [norma intValue]);
-        graph = [_graph makeGraph:expense Balance:balance2 Norma:norma];
+        
+        if(balance > norma){
+            balance = @([balance intValue] - [norma intValue]);
+        }else{
+            balance = @0;
+            norma = @([budget intValue] - [expense intValue]);
+        }
+        graph = [_graph makeGraph:expense Balance:balance Norma:norma];
         [LogScroll addSubview:graph];
         
         // アニメーションさせたら落ちる
@@ -208,10 +217,22 @@
         BalanceLabel.text = [_translateFormat stringFromNumber:balance addComma:YES addYen:YES];
 
         [logTableView reloadData];               // TableViewをリロード
+
+
+        if(balance > norma){
+            balance = @([balance intValue] - [norma intValue]);
+        }else{
+            balance = @0;
+            norma = @([budget intValue] - [expense intValue]);
+        }
         graph = [_graph makeGraph:expense Balance:balance Norma:norma];
         [graph removeFromSuperview];
         [LogScroll addSubview:graph];
         [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollView])]; //スクロールビューをフィットさせる
+        CGPoint scrollPoint = CGPointMake(0.0,45.0);
+        [LogScroll setContentOffset:scrollPoint animated:YES];
+    }else{
+        [LogScroll setContentOffset:CGPointZero animated:YES];
     }
     [expenseTextField resignFirstResponder]; // NumberPad消す
 }
@@ -220,6 +241,9 @@
 -(void)cancelExpenseTextField{
     expenseTextField.text = @""; //テキストフィールドの値を消す
     [expenseTextField resignFirstResponder]; // NumberPad消す(=テキストフィールドを選択していない状態にする)
+    
+    [LogScroll setContentOffset:CGPointZero animated:YES];
+
 }
 
 #pragma mark - その他
@@ -247,32 +271,6 @@
     numberToolbar.items = @[cancelButton,frexibleSpace,doneButton];
     [numberToolbar sizeToFit];
     return numberToolbar;
-}
-
-
-
-
-
-//キーボードが非表示になったときを判断
-- (void)registerForKeyboardNotifications
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillBeHidden:)
-                                                 name:UIKeyboardWillHideNotification object:nil];
-}
-
-//キーボードを表示する時に画面を一緒にスクロール
-- (void)keyboardWasShown:(NSNotification*)aNotification
-{
-    CGPoint scrollPoint = CGPointMake(0.0,200.0);
-    
-    [LogScroll setContentOffset:scrollPoint animated:YES];
-}
-
-//キーボードを閉じる時に画面も戻す
-- (void)keyboardWillBeHidden:(NSNotification*)aNotification
-{
-    [LogScroll setContentOffset:CGPointZero animated:YES];
 }
 
 //完了を押したときの動作
