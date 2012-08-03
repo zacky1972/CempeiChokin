@@ -50,8 +50,6 @@
     [LogScroll setScrollEnabled:YES];
     [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollView])];
     
-    //表示非表示判断
-    [self registerForKeyboardNotifications];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -231,6 +229,10 @@
         [graph removeFromSuperview];
         [LogScroll addSubview:graph];
         [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollView])]; //スクロールビューをフィットさせる
+        CGPoint scrollPoint = CGPointMake(0.0,45.0);
+        [LogScroll setContentOffset:scrollPoint animated:YES];
+    }else{
+        [LogScroll setContentOffset:CGPointZero animated:YES];
     }
     [expenseTextField resignFirstResponder]; // NumberPad消す
 }
@@ -239,6 +241,9 @@
 -(void)cancelExpenseTextField{
     expenseTextField.text = @""; //テキストフィールドの値を消す
     [expenseTextField resignFirstResponder]; // NumberPad消す(=テキストフィールドを選択していない状態にする)
+    
+    [LogScroll setContentOffset:CGPointZero animated:YES];
+
 }
 
 #pragma mark - その他
@@ -266,34 +271,6 @@
     numberToolbar.items = @[cancelButton,frexibleSpace,doneButton];
     [numberToolbar sizeToFit];
     return numberToolbar;
-}
-
-
-
-
-
-//キーボードが非表示になったときを判断
-- (void)registerForKeyboardNotifications
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillBeHidden:)
-                                                 name:UIKeyboardWillHideNotification object:nil];
-}
-
-//キーボードを表示する時に画面を一緒にスクロール
-- (void)keyboardWasShown:(NSNotification*)aNotification
-{
-    CGPoint scrollPoint = CGPointMake(0.0,200.0);
-    [LogScroll setContentOffset:scrollPoint animated:YES];
-}
-
-//キーボードを閉じる時に画面も戻す
-- (void)keyboardWillBeHidden:(NSNotification*)aNotification
-{
-    CGPoint scrollPoint = CGPointMake(0.0,45.0);
-    [LogScroll setContentOffset:scrollPoint animated:YES];
-
-    //[LogScroll setContentOffset:CGPointZero animated:YES];
 }
 
 //完了を押したときの動作
