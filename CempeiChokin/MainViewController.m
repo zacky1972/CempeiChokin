@@ -65,9 +65,10 @@
     expense = [_method loadExpense];
     balance = [_method loadBalance];
     norma = [_method loadNorma];
+    
     NSString *temp;
-    temp = [[_translateFormat formatterDate:[_method loadStart]] stringByAppendingString:@"~"];
-    temp = [temp stringByAppendingString:[_translateFormat formatterDate:[_method loadEnd]]];
+    temp = [[_translateFormat formatterDateUltimate:[_method loadStart] addYear:NO addMonth:YES addDay:YES addHour:NO addMinute:NO addSecond:NO] stringByAppendingString:@"~"];
+    temp = [temp stringByAppendingString:[_translateFormat formatterDateUltimate:[_method loadEnd] addYear:NO addMonth:YES addDay:YES addHour:NO addMinute:NO addSecond:NO]];
     MainNavigationBar.topItem.title = temp;
     BudgetLabel.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];
     ExpenseLabel.text = [_translateFormat stringFromNumber:expense addComma:YES addYen:YES];

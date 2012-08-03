@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="raj-cK-qeg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E2617" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="raj-cK-qeg">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
@@ -1364,6 +1364,7 @@
                 <relationship kind="action" name="depositTextField_begin:"/>
                 <relationship kind="action" name="doneButton:"/>
                 <relationship kind="action" name="laterButton:"/>
+                <relationship kind="outlet" name="depositTableView" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="depositTextField" candidateClass="UITextField"/>
             </relationships>
         </class>
@@ -1398,6 +1399,7 @@
                 <relationship kind="outlet" name="ExpenseLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="KindSegment" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="LogScroll" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="MainNavigationBar" candidateClass="UINavigationBar"/>
                 <relationship kind="outlet" name="NormaLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="expenseTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="logTableView" candidateClass="UITableView"/>
