@@ -37,9 +37,9 @@
     
     // グラフに表示するデータを生成します。
     self.pieChartData = [NSMutableArray arrayWithObjects:
-                         [NSNumber numberWithDouble:[expense floatValue]],
-                         [NSNumber numberWithDouble:[balance floatValue]],
-                         [NSNumber numberWithDouble:[norma floatValue]],
+                         [NSNumber numberWithDouble:[expense intValue]],
+                         [NSNumber numberWithDouble:[balance intValue]],
+                         [NSNumber numberWithDouble:[norma intValue]],
                          nil];
     
     // イケメン度アップ
