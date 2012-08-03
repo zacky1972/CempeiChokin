@@ -158,6 +158,11 @@
     }
 }
 
+//選択解除
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 #pragma mark - 出費・収入・残高調整 関係
 - (IBAction)expenseTextField_begin:(id)sender {
     expenseTextField.inputAccessoryView =
@@ -186,7 +191,7 @@
     if([expenseTextField.text length] >= 1) {
         NSNumber *tempExpense = [_translateFormat numberFromString:expenseTextField.text];
         [_method saveMoneyValue:tempExpense Date:[NSDate date] Kind:tempKind];
-        [_method calcVlue:tempExpense Kind:KindSegment.selectedSegmentIndex];
+        [_method calcvalue:tempExpense Kind:KindSegment.selectedSegmentIndex];
         expenseTextField.text = @""; //テキストフィールドの値を消す
         
         budget = [_method loadBudget];

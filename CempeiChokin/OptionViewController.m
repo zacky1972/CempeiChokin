@@ -53,4 +53,5 @@
 - (IBAction)deleteDataButton_down:(id)sender {
     [_method deleteData];
 }
+
 @end

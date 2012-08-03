@@ -182,7 +182,7 @@
     DNSLog(@"%d番目のログを削除します！",cursor);
     DNSLog(@"%@",log);
     //読み込んで
-    [self calcDeleteVlue:[[log objectAtIndex:cursor] objectForKey:@"MoneyValue"] Kind:[[log objectAtIndex:cursor] objectForKey:@"Kind"]];//値一致させて
+    [self calcDeletevalue:[[log objectAtIndex:cursor] objectForKey:@"MoneyValue"] Kind:[[log objectAtIndex:cursor] objectForKey:@"Kind"]];//値一致させて
     [log removeObjectAtIndex:cursor];           //で，実際にログを消す
     [root setObject:log forKey:@"Log"];
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
@@ -196,7 +196,7 @@
 - (NSNumber *)loadNorma{return [root objectForKey:@"Norma"];}     //ノルマを返す
 
 //計算やらやるよ
-- (void)calcVlue:(NSNumber *)value Kind:(NSInteger)kind{
+- (void)calcvalue:(NSNumber *)value Kind:(NSInteger)kind{
     DNSLog(@"計算するよ");
     DNSLog(@"\nRoot:%@",root);
     // FIXME: ここで読み込みかなんかしないと初回起動以外だと値が消えるっぽい
@@ -217,18 +217,16 @@
             [root setObject:now forKey:@"Now"];
             break;
         case 2://調整
-            //TODO: 値が変
             DNSLog(@"調整の処理！");
             if ([balance intValue] > [value intValue]) {
-                expense = @([expense intValue] - [balance intValue] - [value intValue]);
-                
-                balance = value;
+                DNSLog(@"誤差:%d", [expense intValue] - [value intValue]);
+                expense = @( [expense intValue] + ( [balance intValue] - [value intValue] ) );
+                balance = @([bud intValue] - [expense intValue]);
             }else{
-                expense = @([expense intValue] + [balance intValue] - [value intValue]);
-                
-                balance = value;
+                DNSLog(@"誤差:%d", [expense intValue] - [value intValue]);
+                expense = @( [expense intValue] - ( [value intValue] - [balance intValue] ) );
+                balance = @([bud intValue] - [expense intValue]);
             }
-            
             break;
 
     }
@@ -239,7 +237,7 @@
 }
 
 //delete用，種類に応じた処理を行うよ
-- (void)calcDeleteVlue:(NSNumber *)value Kind:(NSString *)kind{
+- (void)calcDeletevalue:(NSNumber *)value Kind:(NSString *)kind{
     //TODO: ここにdelete用の処理
     DNSLog(@"delete用の計算するよ");
     DNSLog(@"\nRoot:%@",root);
@@ -270,8 +268,18 @@
             [root setObject:now forKey:@"Now"];
             break;
         case 2://調整
-            //TODO: 値が変
             DNSLog(@"調整のdelete処理！");
+            //TODO: いくら誤差があったかがわからないので計算できない
+            /*
+            if ([balance intValue] > [value intValue]) {
+                expense = @( [expense intValue] - 誤差 );
+                balance = @([bud intValue] - [expense intValue]);
+            }else{
+                DNSLog(@"誤差:%d", [expense intValue] - [value intValue]);
+                expense = @( [expense intValue] + 誤差 );
+                balance = @([bud intValue] - [expense intValue]);
+            }
+             */
             break;
     }
     
