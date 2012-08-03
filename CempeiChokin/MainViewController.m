@@ -50,6 +50,8 @@
     [LogScroll setScrollEnabled:YES];
     [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollView])];
     
+    //表示非表示判断
+    [self registerForKeyboardNotifications];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -242,6 +244,40 @@
     numberToolbar.items = @[cancelButton,frexibleSpace,doneButton];
     [numberToolbar sizeToFit];
     return numberToolbar;
+}
+
+
+
+
+
+//キーボードの表示非表示を判断
+- (void)registerForKeyboardNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+}
+
+//キーボードを表示する時に画面を一緒にスクロール
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    CGPoint scrollPoint = CGPointMake(0.0,200.0);
+    
+    [LogScroll setContentOffset:scrollPoint animated:YES];
+}
+
+//キーボードを閉じる時に画面も戻す
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    [LogScroll setContentOffset:CGPointZero animated:YES];
+}
+
+//完了を押したときの動作
+- (IBAction)End_down:(id)sender {
+    [expenseTextField resignFirstResponder];
 }
 
 

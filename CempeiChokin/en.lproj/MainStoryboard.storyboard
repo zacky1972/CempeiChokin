@@ -92,6 +92,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                                         <connections>
+                                            <action selector="End_down:" destination="raj-cK-qeg" eventType="editingDidEndOnExit" id="ENY-Gm-X9y"/>
                                             <action selector="expenseTextField_begin:" destination="raj-cK-qeg" eventType="editingDidBegin" id="dY1-K7-RPf"/>
                                         </connections>
                                     </textField>
@@ -1390,6 +1391,7 @@
         <class className="MainViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>
             <relationships>
+                <relationship kind="action" name="End_down:"/>
                 <relationship kind="action" name="KindSegment_click:"/>
                 <relationship kind="action" name="expenseTextField_begin:"/>
                 <relationship kind="outlet" name="BalanceLabel" candidateClass="UILabel"/>
