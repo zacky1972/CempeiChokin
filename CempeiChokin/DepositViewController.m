@@ -56,10 +56,6 @@
     temp = [temp stringByAppendingString:@"です"];
     return temp;
 }
-//選択解除
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
 
 #pragma mark - depositTextField関係
 - (IBAction)depositTextField_begin:(id)sender {
