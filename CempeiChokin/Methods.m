@@ -33,6 +33,7 @@
     if( [[NSFileManager defaultManager] fileExistsAtPath:path] == NO ){                     //Data.plistがなかったら
         [[NSFileManager defaultManager] createFileAtPath:path contents:nil attributes:nil]; //作成する
         root = [[NSMutableDictionary alloc] init];
+        [root setObject:@0 forKey:@"NextAlert"];
     }else{                      //あったら
         [self loadData];
     }
@@ -323,15 +324,32 @@
     NSDate *date = [NSDate date];
     [self makeDataPath];
     [self loadData];
-    if ( [date earlierDate:[self loadStart]] == date ) {
+    DNSLog(@"はやいほう！：%@",[date earlierDate:[self loadEnd]]);
+    
+    DNSLog(@"date:%@",[self loadEnd]);
+    if ( [date earlierDate:[self loadEnd]] != date ) {
         DNSLog(@"期限きれた！");
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"期限が来ました！" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        //[[UIAlertView alloc] initWithTitle:@"期限が来ました！" message:nil delegate:self cancelButtonTitle:@"OK", otherButtonTitles:nil];
-        [alert show];
-        return YES;
+        if ([self loadNextAlert] == YES) {
+            //TODO: 今は毎回ポップアップします
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"期限が来ました！" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+            [root setObject:@1 forKey:@"NextAlert"];
+            [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
+            return YES;
+        }
     }
     DNSLog(@"期限きれてない！");
     return NO;
+}
+
+//アラートするかどうか返す
+- (Boolean)loadNextAlert{
+    [self makeDataPath];
+    [self loadData];
+    if ([root objectForKey:@"NextAlert"] == @1) {
+        return NO;
+    }
+    return YES;
 }
 
 

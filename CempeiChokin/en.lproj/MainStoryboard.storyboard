@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E2617" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="raj-cK-qeg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="raj-cK-qeg">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
@@ -112,10 +112,10 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sue-ty-QXb">
-                                        <rect key="frame" x="9" y="268" width="41" height="37"/>
+                                        <rect key="frame" x="5" y="228" width="100" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="今">
+                                        <state key="normal" title="先月の貯金">
                                             <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -124,10 +124,10 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WcQ-3a-DbH">
-                                        <rect key="frame" x="60" y="268" width="41" height="37"/>
+                                        <rect key="frame" x="5" y="265" width="130" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="先">
+                                        <state key="normal" title="次の期間の設定">
                                             <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -793,7 +793,7 @@
             </objects>
             <point key="canvasLocation" x="-8" y="618"/>
         </scene>
-        <!--Budget View Controller - 期間と予算の設定-->
+        <!--Budget View Controller - 次の期間と予算の設定-->
         <scene sceneID="1Hs-VP-Mfn">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ttg-ZL-Zv6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -939,7 +939,7 @@
                             <outlet property="delegate" destination="iwI-JE-99H" id="rzh-cj-L2W"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="期間と予算の設定" id="gQK-On-VVW"/>
+                    <navigationItem key="navigationItem" title="次の期間と予算の設定" id="gQK-On-VVW"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="budgetTextField" destination="NVS-LS-zqn" id="hgO-75-uTG"/>
@@ -950,21 +950,21 @@
             </objects>
             <point key="canvasLocation" x="867" y="1466"/>
         </scene>
-        <!--Deposit View Controller - 前回の貯金-->
+        <!--Deposit View Controller - 貯金しよう-->
         <scene sceneID="k6Q-d3-zw7">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1S4-uX-CpO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="ppr-eV-5bM" customClass="DepositViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="" id="ppr-eV-5bM" customClass="DepositViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" bounces="NO" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="N65-Gj-lmK">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="XwI-nt-2fE">
-                            <rect key="frame" x="0.0" y="102" width="320" height="317"/>
+                            <rect key="frame" x="0.0" y="123" width="320" height="290"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="XNa-bc-pSQ">
-                                    <rect key="frame" x="20" y="201" width="130" height="80"/>
+                                    <rect key="frame" x="20" y="180" width="130" height="80"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                     <state key="normal" title="後で">
@@ -980,7 +980,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LTo-l2-TNj">
-                                    <rect key="frame" x="170" y="201" width="130" height="80"/>
+                                    <rect key="frame" x="170" y="180" width="130" height="80"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                     <state key="normal" title="完了">
@@ -999,7 +999,7 @@
                             <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         </view>
                         <sections>
-                            <tableViewSection headerTitle="いつからいつまでの期間" id="okm-hF-KeM">
+                            <tableViewSection headerTitle="いつからいつまでの期間" footerTitle="貯金額は円です" id="okm-hF-KeM">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="cnd-qE-KDB">
                                         <rect key="frame" x="0.0" y="46" width="320" height="46"/>
@@ -1037,7 +1037,7 @@
                             <outlet property="delegate" destination="ppr-eV-5bM" id="kAf-Wr-ViF"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="前回の貯金" id="6hw-wE-5Wd"/>
+                    <navigationItem key="navigationItem" title="貯金しよう" id="6hw-wE-5Wd"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="depositTableView" destination="N65-Gj-lmK" id="z92-7j-qEU"/>
@@ -1045,13 +1045,13 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="422" y="1466"/>
+            <point key="canvasLocation" x="455" y="1466"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gqF-4N-9BE">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5lK-M6-zPi" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController id="1EJ-OK-hO4" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Deposit" id="1EJ-OK-hO4" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="OXR-GL-9Wd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1345,6 +1345,73 @@
     <resources>
         <image name="help.jpg" width="640" height="960"/>
     </resources>
+    <classes>
+        <class className="BudgetViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BudgetViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="DoneButton_down:"/>
+                <relationship kind="action" name="budgetTextField_begin:"/>
+                <relationship kind="action" name="endDateTextField_begin:"/>
+                <relationship kind="action" name="startDateTextField_begin:"/>
+                <relationship kind="outlet" name="budgetTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="endDateTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="startDateTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="DepositViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DepositViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="depositTextField_begin:"/>
+                <relationship kind="action" name="doneButton:"/>
+                <relationship kind="action" name="laterButton:"/>
+                <relationship kind="outlet" name="depositTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="depositTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="FirstHelpViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FirstHelpViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="DoneButton_down:"/>
+                <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="GoalViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="DoneButton_down:"/>
+                <relationship kind="action" name="NameTextField_end:"/>
+                <relationship kind="action" name="PeriodTextField_begin:"/>
+                <relationship kind="action" name="ValueTextField_begin:"/>
+                <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="NameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="PeriodTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="ValueTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="MainViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="KindSegment_click:"/>
+                <relationship kind="action" name="expenseTextField_begin:"/>
+                <relationship kind="outlet" name="BalanceLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="BudgetLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="ExpenseLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="KindSegment" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="LogScroll" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="MainNavigationBar" candidateClass="UINavigationBar"/>
+                <relationship kind="outlet" name="NormaLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="expenseTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="logTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="OptionViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/OptionViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="deleteDataButton_down:"/>
+                <relationship kind="outlet" name="deleteDataButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
