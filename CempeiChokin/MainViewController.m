@@ -61,10 +61,10 @@
     }
     
     //初期設定から戻ってきた時用
-    budget = [_method loadBudget];
-    expense = [_method loadExpense];
-    balance = [_method loadBalance];
-    norma = [_method loadNorma];
+    budget = [_method loadBudget];   // 予算
+    expense = [_method loadExpense]; // 出費
+    balance = [_method loadBalance]; // 残り
+    norma = [_method loadNorma];     // ノルマ
     
     NSString *temp;
     temp = [[_translateFormat formatterDateUltimate:[_method loadStart] addYear:NO addMonth:YES addDay:YES addHour:NO addMinute:NO addSecond:NO] stringByAppendingString:@"~"];
@@ -78,8 +78,14 @@
 
     _graph = [AddGraph alloc];
     // FIXME: こいつどうにかしよう
-    NSNumber *balance2 = @([balance intValue] - [norma intValue]);
-    graph = [_graph makeGraph:expense Balance:balance2 Norma:norma];
+
+    if(balance > norma){
+        balance = @([balance intValue] - [norma intValue]);
+    }else{
+        balance = @0;
+        norma = @([budget intValue] - [expense intValue]);
+    }
+    graph = [_graph makeGraph:expense Balance:balance Norma:norma];
     [LogScroll addSubview:graph];
 }
 
@@ -148,10 +154,14 @@
         BalanceLabel.text = [_translateFormat stringFromNumber:balance addComma:YES addYen:YES];
         NormaLabel.text = [_translateFormat stringFromNumber:norma addComma:YES addYen:YES];
         //グラフの更新
-        _graph = [AddGraph alloc];
-        // FIXME: こいつどうにかしよう
-        NSNumber *balance2 = @([balance intValue] - [norma intValue]);
-        graph = [_graph makeGraph:expense Balance:balance2 Norma:norma];
+        
+        if(balance > norma){
+            balance = @([balance intValue] - [norma intValue]);
+        }else{
+            balance = @0;
+            norma = @([budget intValue] - [expense intValue]);
+        }
+        graph = [_graph makeGraph:expense Balance:balance Norma:norma];
         [LogScroll addSubview:graph];
         
         // アニメーションさせたら落ちる
@@ -209,6 +219,14 @@
         BalanceLabel.text = [_translateFormat stringFromNumber:balance addComma:YES addYen:YES];
 
         [logTableView reloadData];               // TableViewをリロード
+
+
+        if(balance > norma){
+            balance = @([balance intValue] - [norma intValue]);
+        }else{
+            balance = @0;
+            norma = @([budget intValue] - [expense intValue]);
+        }
         graph = [_graph makeGraph:expense Balance:balance Norma:norma];
         [graph removeFromSuperview];
         [LogScroll addSubview:graph];
