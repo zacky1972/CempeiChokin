@@ -179,18 +179,17 @@
 
 //指定のログを削除する
 - (void)deleteLog:(NSUInteger)cursor{
-    [log removeObjectAtIndex:cursor];
+    DNSLog(@"%d番目のログを削除します！",cursor);
+    DNSLog(@"%@",log);
+    //読み込んで
+    [self calcDeleteVlue:[[log objectAtIndex:cursor] objectForKey:@"MoneyValue"] Kind:[[log objectAtIndex:cursor] objectForKey:@"Kind"]];//値一致させて
+    [log removeObjectAtIndex:cursor];           //で，実際にログを消す
     [root setObject:log forKey:@"Log"];
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
     DNSLog(@"%@",root)
 }
 
 #pragma mark - 初期設定関係
-//データから値をセット
-- (void)setData{
-    DNSLog(@"データをセット！");
-}
-
 //わけわからんくなってきた
 - (NSNumber *)loadExpense{return [root objectForKey:@"Expense"];}   //出費を返す
 - (NSNumber *)loadBalance{return [root objectForKey:@"Balance"];}   //残りを返す
@@ -238,6 +237,51 @@
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
     DNSLog(@"%@",root);
 }
+
+//delete用，種類に応じた処理を行うよ
+- (void)calcDeleteVlue:(NSNumber *)value Kind:(NSString *)kind{
+    //TODO: ここにdelete用の処理
+    DNSLog(@"delete用の計算するよ");
+    DNSLog(@"\nRoot:%@",root);
+    // FIXME: ここで読み込みかなんかしないと初回起動以外だと値が消えるっぽい
+    expense = [self loadExpense];
+    balance = [self loadBalance];
+    bud = [self loadBudget];
+    
+    NSInteger tempKind;
+    if([kind isEqualToString:@"出費"])
+        tempKind = 0;
+    if([kind isEqualToString:@"収入"])
+        tempKind = 1;
+    if([kind isEqualToString:@"調整"])
+        tempKind = 2;
+    
+    switch (tempKind) {
+        case 0://出費
+            DNSLog(@"出費のdelete処理！");
+            expense = @([expense intValue] - [value intValue]);
+            balance = @([bud intValue] - [expense intValue]);
+            break;
+        case 1://収入
+            DNSLog(@"収入のdelete処理！");
+            bud = @([bud intValue] - [value intValue]);
+            balance = @([bud intValue] - [expense intValue]);
+            [now setObject:bud forKey:@"Budget"];
+            [root setObject:now forKey:@"Now"];
+            break;
+        case 2://調整
+            //TODO: 値が変
+            DNSLog(@"調整のdelete処理！");
+            break;
+    }
+    
+    [root setObject:expense forKey:@"Expense"];
+    [root setObject:balance forKey:@"Balance"];
+    [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
+    DNSLog(@"delete完了チェック:%@",root);
+
+}
+
 
 //ログ読み込み
 - (NSInteger)loadLog{

@@ -57,6 +57,8 @@
     if([_method searchGoal] == 0){//初期設定がまだだったら，設定画面に遷移します
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"First"] animated:YES];
     }
+    
+    //初期設定から戻ってきた時用
     budget = [_method loadBudget];
     expense = [_method loadExpense];
     balance = [_method loadBalance];
@@ -90,8 +92,6 @@
     MainNavigationBar = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
-    
-    // TODO:ここに円グラフの描画やら，値のセットが必要．その前にログを表示できるようにせなあかんですな
 }
 
 #pragma mark - UITableView関係
@@ -132,12 +132,29 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         DNSLog(@"Delete At %d Row",indexPath.row);
+        // TODO: 消したのに応じて予算とか計算し直さんとあかんな
+        
         [_method deleteLog:indexPath.row];
+        //ラベルの更新
+        budget = [_method loadBudget];
+        expense = [_method loadExpense];
+        balance = [_method loadBalance];
+        norma = [_method loadNorma];
+        BudgetLabel.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];
+        ExpenseLabel.text = [_translateFormat stringFromNumber:expense addComma:YES addYen:YES];
+        BalanceLabel.text = [_translateFormat stringFromNumber:balance addComma:YES addYen:YES];
+        NormaLabel.text = [_translateFormat stringFromNumber:norma addComma:YES addYen:YES];
+        //グラフの更新
+        _graph = [AddGraph alloc];
+        // FIXME: こいつどうにかしよう
+        NSNumber *balance2 = @([balance intValue] - [norma intValue]);
+        graph = [_graph makeGraph:expense Balance:balance2 Norma:norma];
+        [LogScroll addSubview:graph];
+        
         // アニメーションさせたら落ちる
 		// [tableView deleteRowsAtIndexPaths: [NSArray arrayWithObject:indexPath] withRowAnimation: UITableViewRowAnimationFade];
         [tableView reloadData];
         [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollView])];
-        // TODO: 消したのに応じて予算とか計算し直さんとあかんな
     }
 }
 
