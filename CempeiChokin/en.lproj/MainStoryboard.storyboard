@@ -1039,6 +1039,7 @@
                     <navigationItem key="navigationItem" title="前回の貯金" id="6hw-wE-5Wd"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="depositTableView" destination="N65-Gj-lmK" id="z92-7j-qEU"/>
                         <outlet property="depositTextField" destination="cls-ho-OXQ" id="GR4-K8-GSM"/>
                     </connections>
                 </tableViewController>
@@ -1349,7 +1350,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="uJm-A0-8rn"/>
+        <segue reference="gv0-sb-DCH"/>
         <segue reference="fhM-kk-tX0"/>
     </inferredMetricsTieBreakers>
 </document>

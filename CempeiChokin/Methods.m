@@ -217,18 +217,16 @@
             [root setObject:now forKey:@"Now"];
             break;
         case 2://調整
-            //TODO: 値が変
             DNSLog(@"調整の処理！");
             if ([balance intValue] > [value intValue]) {
-                expense = @([expense intValue] - [balance intValue] - [value intValue]);
-                
-                balance = value;
+                DNSLog(@"誤差:%d", [expense intValue] - [value intValue]);
+                expense = @( [expense intValue] + ( [balance intValue] - [value intValue] ) );
+                balance = @([bud intValue] - [expense intValue]);
             }else{
-                expense = @([expense intValue] + [balance intValue] - [value intValue]);
-                
-                balance = value;
+                DNSLog(@"誤差:%d", [expense intValue] - [value intValue]);
+                expense = @( [expense intValue] - ( [value intValue] - [balance intValue] ) );
+                balance = @([bud intValue] - [expense intValue]);
             }
-            
             break;
 
     }
@@ -270,8 +268,18 @@
             [root setObject:now forKey:@"Now"];
             break;
         case 2://調整
-            //TODO: 値が変
             DNSLog(@"調整のdelete処理！");
+            //TODO: いくら誤差があったかがわからないので計算できない
+            /*
+            if ([balance intValue] > [value intValue]) {
+                expense = @( [expense intValue] - 誤差 );
+                balance = @([bud intValue] - [expense intValue]);
+            }else{
+                DNSLog(@"誤差:%d", [expense intValue] - [value intValue]);
+                expense = @( [expense intValue] + 誤差 );
+                balance = @([bud intValue] - [expense intValue]);
+            }
+             */
             break;
     }
     
