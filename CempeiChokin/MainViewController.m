@@ -265,14 +265,16 @@
 - (void)keyboardWasShown:(NSNotification*)aNotification
 {
     CGPoint scrollPoint = CGPointMake(0.0,200.0);
-    
     [LogScroll setContentOffset:scrollPoint animated:YES];
 }
 
 //キーボードを閉じる時に画面も戻す
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification
 {
-    [LogScroll setContentOffset:CGPointZero animated:YES];
+    CGPoint scrollPoint = CGPointMake(0.0,45.0);
+    [LogScroll setContentOffset:scrollPoint animated:YES];
+
+    //[LogScroll setContentOffset:CGPointZero animated:YES];
 }
 
 //完了を押したときの動作
