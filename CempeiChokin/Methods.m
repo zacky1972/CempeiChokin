@@ -334,6 +334,14 @@
 
 //貯金額を呼び出し
 - (NSNumber *)loadDeposit{
+    DNSLog(@"貯金総額計算するよ！");
+    /*NSInteger sumDeposit;
+    depolog = [root objectForKey:@"Deposit"];
+    for (NSInteger i = 0; i < [depolog count]; i++) {
+        sumDeposit = sumDeposit + [[depolog objectAtIndex:i] intValue];
+    }
+    return [NSNumber numberWithInt:sumDeposit];
+     */
     return [root objectForKey:@"Deposit"];
 }
 
