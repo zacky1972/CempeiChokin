@@ -6,6 +6,7 @@
 //  Copyright (c) 2012年 CEMPEI. All rights reserved.
 //
 #import "Methods.h"
+#import "TranslateFormat.h"
 
 @interface Methods (){
     NSNumber *bud;
@@ -139,73 +140,6 @@
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
 }
 
-#pragma mark - 履歴(Log)関係
-//保存系
-//金額を読み込んで返す
-- (NSNumber *)loadMoneyValue:(NSUInteger)cursor{
-    tempMoneyValue = [log objectAtIndex:cursor];
-    DNSLog(@"MoneyValue:%@",[tempMoneyValue objectForKey:@"MoneyValue"]);
-    return [tempMoneyValue objectForKey:@"MoneyValue"];
-}
-
-//日付を読み込んで返す
-- (NSDate *)loadDate:(NSUInteger)cursor{
-    tempMoneyValue = [log objectAtIndex:cursor];
-    return [tempMoneyValue objectForKey:@"Date"];
-}
-
-//種類を読み込んで返す
-- (NSString *)loadKind:(NSUInteger)cursor{
-    tempMoneyValue = [log objectAtIndex:cursor];
-    return [tempMoneyValue objectForKey:@"Kind"];
-}
-
-- (NSMutableArray *)loadLogArray{
-    if(log == nil){
-        log = [[NSMutableArray alloc] init];
-    }
-    return log;
-}
-
-//金額のあれこれを一気に保存する
-- (void)saveLogArrayForPropertyList:(NSMutableArray *)array{
-    DNSLog(@"ログをプロパティリストに保存");
-    [self makeDataPath];
-    [self loadData];
-    [root setObject:array forKey:@"Log"];
-    DNSLog(@"%@",root);
-    [root writeToFile:path atomically:YES]; //それでrootをdata.plistに書き込み
-}
-
-- (void)saveMoneyValue:(NSNumber *)value Date:(NSDate *)date Kind:(NSString *)kind{
-    DNSLog(@"金額のあれこれを保存！");
-    if(log == nil){
-        log = [[NSMutableArray alloc] init];
-    }
-    tempMoneyValue = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                    value, @"MoneyValue",
-                                    date, @"Date",
-                                    kind, @"Kind", nil];
-    [log insertObject:tempMoneyValue atIndex:0];
-    if([log count] > 20)
-        [log removeObjectAtIndex:20];
-    [root setObject:log forKey:@"Log"];
-    [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
-    DNSLog(@"log:%@",log);
-}
-
-//指定のログを削除する
-- (void)deleteLog:(NSUInteger)cursor{
-    DNSLog(@"%d番目のログを削除します！",cursor);
-    DNSLog(@"%@",log);
-    //読み込んで
-    [self calcDeletevalue:[[log objectAtIndex:cursor] objectForKey:@"MoneyValue"] Kind:[[log objectAtIndex:cursor] objectForKey:@"Kind"]];//値一致させて
-    [log removeObjectAtIndex:cursor];           //で，実際にログを消す
-    [root setObject:log forKey:@"Log"];
-    [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
-    DNSLog(@"%@",root)
-}
-
 #pragma mark - 初期設定関係
 //わけわからんくなってきた
 - (NSNumber *)loadExpense{return [root objectForKey:@"Expense"];}   //出費を返す
@@ -261,6 +195,8 @@
     DNSLog(@"delete用の計算するよ");
     DNSLog(@"\nRoot:%@",root);
     // FIXME: ここで読み込みかなんかしないと初回起動以外だと値が消えるっぽい
+
+    [self initData];
     expense = [self loadExpense];
     balance = [self loadBalance];
     bud = [self loadBudget];
@@ -308,15 +244,6 @@
     DNSLog(@"delete完了チェック:%@",root);
 
 }
-
-
-
-//ログ読み込み
-- (NSInteger)loadLog{
-    DNSLog(@"ログ読み込み！%d個です！",[log count]);
-    return [log count];
-}
-
 
 #pragma mark - 貯金(Deposit)関係
 //貯金額を保存
@@ -372,6 +299,7 @@
 
 
 #pragma mark - その他
+/*
 //スクロールビューの大きさを変更
 - (float)fitScrollView{
     DNSLog(@"ビューをフィット！");
@@ -388,7 +316,7 @@
     }
     height = 779 + 45 * height;
     return [[[NSNumber alloc] initWithInt:height] floatValue];
-}
+}*/
 
 //スクロールビューの大きさを変更 改
 - (float)fitScrollViewWithCount:(NSUInteger)count{
