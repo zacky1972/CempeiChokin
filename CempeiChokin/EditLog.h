@@ -20,6 +20,8 @@
                                      Value:(NSNumber *)value Date:(NSDate *)date Kind:(NSString *)kind;
 // 配列のデータを削除
 - (NSMutableArray *)deleteLogArray:(NSMutableArray *)array atIndex:(NSUInteger)index;
+// 消していた配列を復活させる
+- (NSMutableArray *)reviveToLogArray:(NSMutableArray *)array;
 
 #pragma mark - 読み込む系
 // 金額を読み込む
@@ -29,6 +31,7 @@
 // 種類を読み込む
 - (NSString *)loadKindFromArray:(NSMutableArray *)array atIndex:(NSUInteger)index;
 
+- (BOOL)checkVault;
 #pragma mark - その他
 // 中身の数が決められた数を超えてる時に削除する
 - (NSMutableArray *)removeObjectsInArray:(NSMutableArray *)array count:(NSUInteger)count;

@@ -54,6 +54,7 @@
 // ログの読み込み
 - (NSMutableArray *)loadLogFromFile{
     NSMutableDictionary *root = [self loadData];
+    
     NSMutableArray *log = [root objectForKey:@"Log"];
     if(log == NULL){ // 読み込みに失敗した場合
         log = [[NSMutableArray alloc] init];
@@ -94,6 +95,15 @@
     return array; // 削除後の配列を返す
 }
 
+// 削除したあとにお墓から生き返らせる奴
+- (NSMutableArray *)reviveToLogArray:(NSMutableArray *)array{
+    if([self checkVault] == YES){
+        NSDictionary *zombieLog = [self reviveFromVault];
+        [array addObject:zombieLog];
+    }
+    return array;
+}
+
 #pragma mark - 読み込む系
 // 金額を読み込んで返す
 - (NSNumber *)loadMoneyValueFromArray:(NSMutableArray *)array atIndex:(NSUInteger)index{
@@ -116,13 +126,67 @@
     return tempString;
 }
 
+#pragma mark - お墓
+// ログのお墓の読み込み
+- (NSMutableArray *)loadVaultFromFile{
+    NSMutableDictionary *root = [self loadData];
+    
+    NSMutableArray *vault = [root objectForKey:@"Vault"];
+    if(vault == NULL){ // 読み込みに失敗した場合
+        vault = [[NSMutableArray alloc] init];
+    }
+    DNSLog(@"\nVault:%@",vault);
+    return vault;
+}
+
+// ログのお墓の保存
+- (void)saveVaultToFile:(NSMutableArray *)array{
+    NSMutableDictionary *root = [self loadData];
+
+    [root setObject:array forKey:@"Vault"];
+    [self saveData:root];
+    DNSLog(@"\nRoot:%@",root);
+}
+
+// お墓行き
+- (void)moveToVault:(NSDictionary *)dictionary{
+    NSMutableArray *vault = [self loadVaultFromFile];
+    [vault insertObject:dictionary atIndex:0]; // 墓に入れる
+
+    [self saveVaultToFile:vault]; // プロパティリストに保存
+}
+
+// 生き返り
+- (NSDictionary *)reviveFromVault{
+    NSMutableArray *vault = [self loadVaultFromFile];
+
+    NSDictionary *zombie = [vault objectAtIndex:0];
+    [vault removeObjectAtIndex:0];
+    [self saveVaultToFile:vault]; // プロパティリストに保存
+
+    return zombie;
+}
+
+- (BOOL)checkVault{
+    NSMutableArray *vault = [self loadVaultFromFile];
+    if([vault count] >= 1){
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
 #pragma mark - その他
 // 何個以上だったら消すみたいなやつ
 - (NSMutableArray *)removeObjectsInArray:(NSMutableArray *)array count:(NSUInteger)count{
     DNSLog(@"配列から消しまーす！");
     NSUInteger startNumber = count - 1;
-    NSUInteger deleteCount = [array count] - startNumber;
-    [array removeObjectsInRange:NSMakeRange(startNumber,deleteCount)];
+    NSUInteger endNumber = [array count];
+
+    for(int i = startNumber;i < endNumber;i++){
+        [self moveToVault:[array objectAtIndex:startNumber]];
+        [array removeObjectAtIndex:startNumber];
+    }
     return array;
 }
 

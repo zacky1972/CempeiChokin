@@ -228,12 +228,15 @@
     return cell;
 }
 
-//なんかフリックで消したかった
+// フリックで消すやつ
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         DNSLog(@"Delete At %d Row",indexPath.row);
         [_method calcDeletevalue:[_editLog loadMoneyValueFromArray:_log atIndex:indexPath.row]
                             Kind:[_editLog loadKindFromArray:_log atIndex:indexPath.row]];
+
+        _log = [_editLog reviveToLogArray:_log]; // お墓から生き返らせる
+        [tableView reloadData]; // 生き返ったのを反映させる
         [_editLog deleteLogArray:_log atIndex:indexPath.row];
         
         //ラベルの更新
@@ -248,9 +251,10 @@
         
         //グラフの更新
         [self makeGraph];
-        
+
         // アニメーション
 		[tableView deleteRowsAtIndexPaths: [NSArray arrayWithObject:indexPath] withRowAnimation: UITableViewRowAnimationFade];
+
         //FIXME: なんかキモい
         [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollViewWithCount:[_log count]])];
     }
