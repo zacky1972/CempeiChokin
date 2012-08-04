@@ -86,9 +86,24 @@
 
 #pragma mark - ボタンたち
 - (IBAction)doneButton:(id)sender {
-    // TODO: 要検討
     DNSLog(@"完了きたで！");
     [_method saveDeposit:depositValue Date:[NSDate date] ];
+    if([_method searchFinish] == YES){//終了！
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ノルマ達成しました！" message:@"おめでとうございます！" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        UIAlertView *nextalert = [[UIAlertView alloc] initWithTitle:@"次を決めましょう！" message:nil delegate:nil cancelButtonTitle:@"次のものへ" otherButtonTitles:@"今はいいや",nil];
+        [nextalert show];
+        //とりあえず抹消して次にいけるようにしたよ
+        
+    }else if ([_method searchLastNorma] == YES){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ノルマ達成できませんでした" message:@"もやし食えよ" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        UIAlertView *nextalert = [[UIAlertView alloc] initWithTitle:@"どうする？" message:nil delegate:nil cancelButtonTitle:@"期限を延ばす" otherButtonTitles:@"あきらめる",nil];
+        [nextalert show];
+        
+    }else{
+        //まだ終わらないよ！
+    }
 }
 
 - (IBAction)laterButton:(id)sender {
