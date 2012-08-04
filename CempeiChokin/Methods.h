@@ -16,7 +16,7 @@
     NSMutableDictionary *goal;
     NSMutableDictionary *now;
     NSMutableArray *log;
-    NSMutableDictionary *depolog;
+    NSMutableArray *depolog;
     NSMutableDictionary *tempMoneyValue;
 }
 
@@ -51,10 +51,11 @@
 // - (float)fitScrollView;  //スクロールビューの大きさを変更
 - (float)fitScrollViewWithCount:(NSUInteger)count;
 //貯金(Deposit)関係
-- (void)saveDeposit:(NSNumber *)value;    //貯金額を保存
+- (void)saveDeposit:(NSNumber *)value Date:(NSDate *)date;    //貯金額を保存
 - (NSNumber *)loadDeposit;                //貯金額を呼び出し
+//- (NSNumber *)searchDeposit;
 //〆
-- (BOOL)searchNext;             //期限を超えているかどうか調べる
-- (Boolean)loadNextAlert;    //アラートするかどうか返す
+//- (BOOL)searchNext;             //期限を超えているかどうか調べる
+//- (Boolean)loadNextAlert;    //アラートするかどうか返す
 
 @end

@@ -87,7 +87,8 @@
 #pragma mark - ボタンたち
 - (IBAction)doneButton:(id)sender {
     // TODO: 要検討
-    [_method saveDeposit:depositValue];
+    DNSLog(@"完了きたで！");
+    [_method saveDeposit:depositValue Date:[NSDate date] ];
 }
 
 - (IBAction)laterButton:(id)sender {

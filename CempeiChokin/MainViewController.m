@@ -15,7 +15,7 @@
     EditLog *_editLog;
 
     UIView *graph;
-
+    
     NSNumber *budget;
     NSNumber *expense;
     NSNumber *balance;
@@ -66,9 +66,10 @@
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"First"] animated:YES];
     }else{
         //期限チェック
+        /*
         if([_method searchNext] == YES){//期限をこえてたとき
             [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Deposit"] animated:NO];
-        }
+        }*/
     }
     //初期設定から戻ってきた時用
     budget = [_method loadBudget];   // 予算
@@ -85,7 +86,7 @@
     BalanceLabel.text = [_translateFormat stringFromNumber:balance addComma:YES addYen:YES];
     NormaLabel.text = [_translateFormat stringFromNumber:norma addComma:YES addYen:YES];
     tempKind = @"出費";
-
+    
     [self makeGraph];
 }
 
@@ -270,7 +271,7 @@
     // Toolbarつくる
     UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
     numberToolbar.barStyle = UIBarStyleBlackTranslucent;
-
+    
     // Toolbarのボタンたち
     UIBarButtonItem *doneButton =
     [[UIBarButtonItem alloc] initWithTitle: string
@@ -282,7 +283,7 @@
                                      style: UIBarButtonItemStyleBordered
                                     target: self
                                     action: cancel];
-
+    
     UIBarButtonItem *frexibleSpace =
     [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace
                                                   target: nil
