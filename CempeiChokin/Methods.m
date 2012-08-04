@@ -88,7 +88,7 @@
                 norma = @( ( ( [[self loadValue] intValue] - [[self loadDeposit] intValue] ) / tempday1 ) * tempday2 );
                 balance = @( [[self loadBudget] intValue] - [[self loadNorma] intValue] );
                 depolog = [[NSMutableArray alloc] init];
-                [self saveDeposit:@0 Date:[self loadStart]];
+                [self saveDeposit:@0 Date:[self loadEnd]];
                 
                 [root setObject:expense forKey:@"Expense"];
                 [root setObject:balance forKey:@"Balance"];
@@ -256,12 +256,16 @@
 #pragma mark - 貯金(Deposit)関係
 //貯金額を保存
 - (void)saveDeposit:(NSNumber *)value Date:(NSDate *)date{
-    //???: 配列depolog使って記録とったがいいんかな…
     DNSLog(@"貯金保存！");
     NSArray *tempDepolog = [[NSArray alloc] initWithObjects:value, date,  nil];
     if ([root objectForKey:@"Deposit"] != nil) {
         DNSLog(@"%@",[root objectForKey:@"Deposit"]);
         depolog = [root objectForKey:@"Deposit"];
+        if ([[[depolog objectAtIndex:0] objectAtIndex:1] isEqualToDate:date] ==YES ){
+            DNSLog(@"詐欺貯金はいかんよ！");
+            [depolog removeObjectAtIndex:0];
+            DNSLog(@"depolog:%@",depolog);
+        }
     }
     [depolog insertObject:tempDepolog atIndex:0];
     [root setObject:depolog forKey:@"Deposit"];

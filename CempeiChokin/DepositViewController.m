@@ -87,7 +87,7 @@
 #pragma mark - ボタンたち
 - (IBAction)doneButton:(id)sender {
     DNSLog(@"完了きたで！");
-    [_method saveDeposit:depositValue Date:[NSDate date] ];
+    [_method saveDeposit:depositValue Date:[_method loadEnd] ];
     if([_method searchFinish] == YES){//終了！
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ノルマ達成しました！" message:@"おめでとうございます！" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
