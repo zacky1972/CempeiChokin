@@ -285,7 +285,6 @@
 //期限を超えているかどうか調べる
  - (BOOL)searchNext{
      DNSLog(@"期限チェック！");
-     TranslateFormat *_translateFormat = [TranslateFormat alloc];
      NSDate *date = [NSDate date];
      [self makeDataPath];
      [self loadData];
