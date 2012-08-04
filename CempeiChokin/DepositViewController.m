@@ -87,7 +87,7 @@
 #pragma mark - ボタンたち
 - (IBAction)doneButton:(id)sender {
     // TODO: 要検討
-    [_method saveDeposit:depositValue];
+    [_method saveDeposit:depositValue Date:[NSDate date] ];
 }
 
 - (IBAction)laterButton:(id)sender {
