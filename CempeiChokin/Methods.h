@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SaveAndLoadOfMainView.h"
 #import "TranslateFormat.h"
 
 @interface Methods : NSObject {
@@ -58,10 +59,14 @@
 
 - (NSInteger)loadLog;        //ログ読み込み
 - (float)fitScrollView;  //スクロールビューの大きさを変更
-
+- (float)fitScrollViewWithCount:(NSUInteger)count;
 //貯金(Deposit)関係
 - (void)saveDeposit:(NSNumber *)value;    //貯金額を保存
 - (NSNumber *)loadDeposit;                //貯金額を呼び出し
 //〆
 - (BOOL)searchNext;         //期限を超えているかどうか調べる
+
+// 秘密
+- (NSMutableArray *)loadLogArray;
+- (void)saveLogArrayForPropertyList:(NSMutableArray *)array;
 @end

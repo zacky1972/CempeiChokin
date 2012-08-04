@@ -92,8 +92,8 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                                         <connections>
-                                            <action selector="End_down:" destination="raj-cK-qeg" eventType="editingDidEndOnExit" id="ENY-Gm-X9y"/>
                                             <action selector="expenseTextField_begin:" destination="raj-cK-qeg" eventType="editingDidBegin" id="dY1-K7-RPf"/>
+                                            <action selector="expenseTextField_end:" destination="raj-cK-qeg" eventType="editingDidEnd" id="hj8-Nw-6NX"/>
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gR4-1v-94F">
@@ -1351,7 +1351,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="9qt-Aw-2XO"/>
+        <segue reference="WA1-tD-icu"/>
         <segue reference="fhM-kk-tX0"/>
     </inferredMetricsTieBreakers>
 </document>

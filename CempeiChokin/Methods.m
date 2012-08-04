@@ -158,10 +158,25 @@
     return [tempMoneyValue objectForKey:@"Kind"];
 }
 
+- (NSMutableArray *)loadLogArray{
+    if(log == nil){
+        log = [[NSMutableArray alloc] init];
+    }
+    return log;
+}
+
 //金額のあれこれを一気に保存する
+- (void)saveLogArrayForPropertyList:(NSMutableArray *)array{
+    NSLog(@"ログをプロパティリストに保存");
+    [self makeDataPath];
+    [self loadData];
+    [root setObject:array forKey:@"Log"];
+    NSLog(@"%@",root);
+    [root writeToFile:path atomically:YES]; //それでrootをdata.plistに書き込み
+}
+
 - (void)saveMoneyValue:(NSNumber *)value Date:(NSDate *)date Kind:(NSString *)kind{
     DNSLog(@"金額のあれこれを保存！");
-    // FIXME: Logの中身を新たに作って上書きしてるから値が一個にしかならんで！
     if(log == nil){
         log = [[NSMutableArray alloc] init];
     }
@@ -351,5 +366,12 @@
     return [[[NSNumber alloc] initWithInt:height] floatValue];
 }
 
+//スクロールビューの大きさを変更 改
+- (float)fitScrollViewWithCount:(NSUInteger)count{
+    DNSLog(@"ビューをフィット！");
+    float height;
+    height = 779 + 45 * count;
+    return height;
+}
 
 @end
