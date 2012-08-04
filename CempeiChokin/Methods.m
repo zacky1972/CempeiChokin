@@ -75,7 +75,7 @@
         DNSLog(@"filesize:%llu",fileSize);
         if (fileSize != 0) {//ファイルサイズが0バイトじゃなかったら
             [self loadData];
-        
+            
             if([goal objectForKey:@"Name"]   == nil || [goal objectForKey:@"Value"] == nil ||
                [goal objectForKey:@"Period"] == nil || [now objectForKey:@"Start"]  == nil ||
                [now objectForKey:@"End"]     == nil || [now objectForKey:@"Budget"] == nil ){return 0;}
@@ -173,9 +173,9 @@
         log = [[NSMutableArray alloc] init];
     }
     tempMoneyValue = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                    value, @"MoneyValue",
-                                    date, @"Date",
-                                    kind, @"Kind", nil];
+                      value, @"MoneyValue",
+                      date, @"Date",
+                      kind, @"Kind", nil];
     [log insertObject:tempMoneyValue atIndex:0];
     if([log count] > 20)
         [log removeObjectAtIndex:20];
@@ -227,17 +227,17 @@
             DNSLog(@"調整の処理！");
             //TODO:あとでする
             /*
-            NSNumber *tempMargin;
-            tempMargin = @([bud intValue] - [value intValue]);     //誤差
-            DNSLog(@"tempMargin:%@",[[log objectAtIndex:0] objectForKey:@"MoneyValue"]);
-            
-            expense = @( [expense intValue] - [tempMargin intValue] );
-            balance = @([bud intValue] - [expense intValue]);
-            [[log objectAtIndex:0] setObject:tempMargin forKey:@"MoneyValue"];
-            [root setObject:log forKey:@"Log"];
+             NSNumber *tempMargin;
+             tempMargin = @([bud intValue] - [value intValue]);     //誤差
+             DNSLog(@"tempMargin:%@",[[log objectAtIndex:0] objectForKey:@"MoneyValue"]);
+             
+             expense = @( [expense intValue] - [tempMargin intValue] );
+             balance = @([bud intValue] - [expense intValue]);
+             [[log objectAtIndex:0] setObject:tempMargin forKey:@"MoneyValue"];
+             [root setObject:log forKey:@"Log"];
              */
             break;
-
+            
     }
     [root setObject:expense forKey:@"Expense"];
     [root setObject:balance forKey:@"Balance"];
@@ -280,14 +280,14 @@
             DNSLog(@"調整のdelete処理！");
             //TODO: いくら誤差があったかがわからないので計算できない
             /*
-            if ([balance intValue] > [value intValue]) {
-                expense = @( [expense intValue] - 誤差 );
-                balance = @([bud intValue] - [expense intValue]);
-            }else{
-                DNSLog(@"誤差:%d", [expense intValue] - [value intValue]);
-                expense = @( [expense intValue] + 誤差 );
-                balance = @([bud intValue] - [expense intValue]);
-            }
+             if ([balance intValue] > [value intValue]) {
+             expense = @( [expense intValue] - 誤差 );
+             balance = @([bud intValue] - [expense intValue]);
+             }else{
+             DNSLog(@"誤差:%d", [expense intValue] - [value intValue]);
+             expense = @( [expense intValue] + 誤差 );
+             balance = @([bud intValue] - [expense intValue]);
+             }
              */
             break;
     }
@@ -296,7 +296,7 @@
     [root setObject:balance forKey:@"Balance"];
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
     DNSLog(@"delete完了チェック:%@",root);
-
+    
 }
 
 
@@ -319,15 +319,15 @@
     //[deposit insertObject:value atIndex:0];
     DNSLog(@"searchDeposit:%@",deposit);
     /*
-    if ([[self searchDeposit] intValue] == 0) {
-        [deposit insertObject:0 atIndex:[value intValue]];
-    }else{
-        [deposit removeObject:0];
-        [deposit insertObject:0 atIndex:[value intValue]];
-        [root setObject:@1 forKey:@"Deposit"];
-    }
-    [root setObject:deposit forKey:@"Deposit"];
-    [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み*/
+     if ([[self searchDeposit] intValue] == 0) {
+     [deposit insertObject:0 atIndex:[value intValue]];
+     }else{
+     [deposit removeObject:0];
+     [deposit insertObject:0 atIndex:[value intValue]];
+     [root setObject:@1 forKey:@"Deposit"];
+     }
+     [root setObject:deposit forKey:@"Deposit"];
+     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み*/
     DNSLog(@"root:%@",root);
 }
 

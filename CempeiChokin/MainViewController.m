@@ -12,9 +12,9 @@
     Methods *_method;
     AddGraph *_graph;
     TranslateFormat *_translateFormat;
-
+    
     UIView *graph;
-
+    
     NSNumber *budget;
     NSNumber *expense;
     NSNumber *balance;
@@ -78,7 +78,7 @@
     BalanceLabel.text = [_translateFormat stringFromNumber:balance addComma:YES addYen:YES];
     NormaLabel.text = [_translateFormat stringFromNumber:norma addComma:YES addYen:YES];
     tempKind = @"出費";
-
+    
     [self makeGraph];
 }
 
@@ -214,15 +214,15 @@
         budget = [_method loadBudget];
         expense = [_method loadExpense];
         balance = [_method loadBalance];
-
+        
         BudgetLabel.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];
         ExpenseLabel.text = [_translateFormat stringFromNumber:expense addComma:YES addYen:YES];
         BalanceLabel.text = [_translateFormat stringFromNumber:balance addComma:YES addYen:YES];
-
+        
         [logTableView reloadData];               // TableViewをリロード
-
+        
         [self makeGraph];
-
+        
         [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollView])]; //スクロールビューをフィットさせる
         CGPoint scrollPoint = CGPointMake(0.0,45.0);
         [LogScroll setContentOffset:scrollPoint animated:YES];
@@ -238,7 +238,7 @@
     [expenseTextField resignFirstResponder]; // NumberPad消す(=テキストフィールドを選択していない状態にする)
     
     [LogScroll setContentOffset:CGPointZero animated:YES];
-
+    
 }
 
 #pragma mark - その他
@@ -246,7 +246,7 @@
     // Toolbarつくる
     UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
     numberToolbar.barStyle = UIBarStyleBlackTranslucent;
-
+    
     // Toolbarのボタンたち
     UIBarButtonItem *doneButton =
     [[UIBarButtonItem alloc] initWithTitle: string
@@ -258,7 +258,7 @@
                                      style: UIBarButtonItemStyleBordered
                                     target: self
                                     action: cancel];
-
+    
     UIBarButtonItem *frexibleSpace =
     [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace
                                                   target: nil
