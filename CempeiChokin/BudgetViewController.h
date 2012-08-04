@@ -15,12 +15,13 @@
     __weak IBOutlet UITextField *endDateTextField;
     __weak IBOutlet UITextField *budgetTextField;
     __weak IBOutlet UIButton *DoneButton;
-    
+    __weak IBOutlet UIButton *laterButton;
     
 }
 - (IBAction)startDateTextField_begin:(id)sender;
 - (IBAction)endDateTextField_begin:(id)sender;
 - (IBAction)budgetTextField_begin:(id)sender;
 - (IBAction)DoneButton_down:(id)sender;
+- (IBAction)laterButton_down:(id)sender;
 
 @end
