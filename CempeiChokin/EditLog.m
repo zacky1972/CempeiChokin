@@ -49,6 +49,7 @@
     if(root == NULL){ // 読み込みに失敗した場合
         root = [[NSMutableDictionary alloc] init];
     }
+    NSLog(@"\nRoot:%@",root);
     return root;
 }
 
@@ -70,8 +71,9 @@
 // ログの保存
 - (void)saveLogToFile:(NSMutableArray *)array{
     NSMutableDictionary *root = [self loadData];
+
     [root setObject:array forKey:@"Log"];
-    DNSLog(@"\nLog::%@",array);
+    DNSLog(@"\nLog:%@",array);
     [self saveData:root];
 }
 

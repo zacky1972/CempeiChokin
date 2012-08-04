@@ -53,6 +53,10 @@
     
     _editLog = [EditLog alloc];
     _log = [_editLog loadLogFromFile];
+    if(_log == NULL){
+        _log = [[NSMutableArray alloc] init];
+    }
+
 
     //スクロールビューをフィットさせる
     [LogScroll setScrollEnabled:YES];
@@ -106,17 +110,15 @@
 
 #pragma mark - なんかよくする処理たち
 - (void)makeGraph{
-    if(graph != NULL)
-        [graph removeFromSuperview];
-    
     if([balance compare:norma] == NSOrderedDescending){
         balance = @([balance intValue] - [norma intValue]);
     }else{
         balance = @0;
         norma = @([budget intValue] - [expense intValue]);
     }
+    if(graph != NULL)
+        [graph removeFromSuperview];
     graph = [_graph makeGraph:expense Balance:balance Norma:norma];
-    
     [LogScroll addSubview:graph];
 }
 
