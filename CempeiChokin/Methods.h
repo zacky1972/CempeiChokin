@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SaveAndLoadOfMainView.h"
+#import "EditLog.h"
 #import "TranslateFormat.h"
 
 @interface Methods : NSObject {

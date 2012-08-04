@@ -11,7 +11,7 @@
 		2A86784815C9518300720B2D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A86784715C9518300720B2D /* QuartzCore.framework */; };
 		2A86784B15CA2A3F00720B2D /* AddGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A86784A15CA2A3F00720B2D /* AddGraph.m */; };
 		2A86784E15CA318B00720B2D /* TranslateFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A86784D15CA318B00720B2D /* TranslateFormat.m */; };
-		2A92149015CCBD8700B5B993 /* SaveAndLoadOfMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A92148F15CCBD8700B5B993 /* SaveAndLoadOfMainView.m */; };
+		2A92149015CCBD8700B5B993 /* EditLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A92148F15CCBD8700B5B993 /* EditLog.m */; };
 		2ACB176D15CA932D00DDA60E /* License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2ACB176C15CA932D00DDA60E /* License.txt */; };
 		E95EED9515C26A7300F2A89E /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EED9415C26A7300F2A89E /* MainViewController.m */; };
 		E95EED9B15C26C2600F2A89E /* OptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EED9A15C26C2600F2A89E /* OptionViewController.m */; };
@@ -132,8 +132,8 @@
 		2A86784A15CA2A3F00720B2D /* AddGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddGraph.m; sourceTree = "<group>"; };
 		2A86784C15CA318B00720B2D /* TranslateFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TranslateFormat.h; sourceTree = "<group>"; };
 		2A86784D15CA318B00720B2D /* TranslateFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TranslateFormat.m; sourceTree = "<group>"; };
-		2A92148E15CCBD8700B5B993 /* SaveAndLoadOfMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveAndLoadOfMainView.h; sourceTree = "<group>"; };
-		2A92148F15CCBD8700B5B993 /* SaveAndLoadOfMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SaveAndLoadOfMainView.m; sourceTree = "<group>"; };
+		2A92148E15CCBD8700B5B993 /* EditLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditLog.h; sourceTree = "<group>"; };
+		2A92148F15CCBD8700B5B993 /* EditLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditLog.m; sourceTree = "<group>"; };
 		2ACB176C15CA932D00DDA60E /* License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = License.txt; sourceTree = "<group>"; };
 		2AEA041115C804BF009C9208 /* debug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = debug.h; sourceTree = "<group>"; };
 		E95EED9315C26A7300F2A89E /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -297,8 +297,8 @@
 		2A92149215CCBD9500B5B993 /* SaveAndLoad */ = {
 			isa = PBXGroup;
 			children = (
-				2A92148E15CCBD8700B5B993 /* SaveAndLoadOfMainView.h */,
-				2A92148F15CCBD8700B5B993 /* SaveAndLoadOfMainView.m */,
+				2A92148E15CCBD8700B5B993 /* EditLog.h */,
+				2A92148F15CCBD8700B5B993 /* EditLog.m */,
 			);
 			name = SaveAndLoad;
 			sourceTree = "<group>";
@@ -551,7 +551,7 @@
 				E9AFEDF015C915BA0021815A /* FirstHelpViewController.m in Sources */,
 				2A86784B15CA2A3F00720B2D /* AddGraph.m in Sources */,
 				2A86784E15CA318B00720B2D /* TranslateFormat.m in Sources */,
-				2A92149015CCBD8700B5B993 /* SaveAndLoadOfMainView.m in Sources */,
+				2A92149015CCBD8700B5B993 /* EditLog.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -167,11 +167,11 @@
 
 //金額のあれこれを一気に保存する
 - (void)saveLogArrayForPropertyList:(NSMutableArray *)array{
-    NSLog(@"ログをプロパティリストに保存");
+    DNSLog(@"ログをプロパティリストに保存");
     [self makeDataPath];
     [self loadData];
     [root setObject:array forKey:@"Log"];
-    NSLog(@"%@",root);
+    DNSLog(@"%@",root);
     [root writeToFile:path atomically:YES]; //それでrootをdata.plistに書き込み
 }
 

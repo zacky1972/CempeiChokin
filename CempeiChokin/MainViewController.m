@@ -12,7 +12,7 @@
     Methods *_method;
     AddGraph *_graph;
     TranslateFormat *_translateFormat;
-    SaveAndLoadOfMainView *_saveAndLoadOfMainView;
+    EditLog *_editLog;
 
     UIView *graph;
 
@@ -50,7 +50,7 @@
 
     [_method makeDataPath];
     [_method loadData];
-    _saveAndLoadOfMainView = [SaveAndLoadOfMainView alloc];
+    _editLog = [EditLog alloc];
     _log = [_method loadLogArray];
 
     //スクロールビューをフィットさせる
@@ -157,11 +157,11 @@
     if([expenseTextField.text length] >= 1) {
         // セルの個数が10個以上のとき9個に減らす
         if([_log count] >= 10){
-            [_saveAndLoadOfMainView removeObjectsInArray:_log count:10];
+            [_editLog removeObjectsInArray:_log count:10];
             [logTableView reloadData];
         }
         NSNumber *tempExpense = [_translateFormat numberFromString:expenseTextField.text];
-        _log = [_saveAndLoadOfMainView saveMoneyValueForArray:_log Value:tempExpense Date:[NSDate date] Kind:tempKind];
+        _log = [_editLog saveMoneyValueForArray:_log Value:tempExpense Date:[NSDate date] Kind:tempKind];
         
         [_method calcvalue:tempExpense Kind:KindSegment.selectedSegmentIndex];
         expenseTextField.text = @""; //テキストフィールドの値を消す
@@ -224,9 +224,9 @@
         UILabel *logKind      = (UILabel *)[cell viewWithTag:2];
         UITextField *logValue = (UITextField *)[cell viewWithTag:3];
         if(_log != nil){
-            logValue.text = [_translateFormat stringFromNumber:[_saveAndLoadOfMainView loadMoneyValueFromArray:_log atIndex:indexPath.row] addComma:YES addYen:YES];
-            logKind.text = [_saveAndLoadOfMainView loadKindFromArray:_log atIndex:indexPath.row];
-            logDate.text = [_translateFormat formatterDate:[_saveAndLoadOfMainView loadDateFromArray:_log atIndex:indexPath.row]];
+            logValue.text = [_translateFormat stringFromNumber:[_editLog loadMoneyValueFromArray:_log atIndex:indexPath.row] addComma:YES addYen:YES];
+            logKind.text = [_editLog loadKindFromArray:_log atIndex:indexPath.row];
+            logDate.text = [_translateFormat formatterDate:[_editLog loadDateFromArray:_log atIndex:indexPath.row]];
         }
     }
     return cell;
@@ -237,7 +237,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         DNSLog(@"Delete At %d Row",indexPath.row);
         // TODO: 消したのに応じて予算とか計算し直さんとあかんな
-        [_saveAndLoadOfMainView deleteLogArray:_log atIndex:indexPath.row];
+        [_editLog deleteLogArray:_log atIndex:indexPath.row];
         
         //ラベルの更新
         budget = [_method loadBudget];
