@@ -12,7 +12,8 @@
     Methods *_method;
     AddGraph *_graph;
     TranslateFormat *_translateFormat;
-    
+    EditLog *_editLog;
+
     UIView *graph;
     
     NSNumber *budget;
@@ -260,75 +261,6 @@
 //選択解除
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-
-#pragma mark - 出費・収入・残高調整 関係
-- (IBAction)expenseTextField_begin:(id)sender {
-    expenseTextField.inputAccessoryView =
-    [self makeNumberPadToolbar:@"完了"
-                          Done:@selector(doneExpenseTextField)
-                        Cancel:@selector(cancelExpenseTextField)];
-    
-    CGPoint scrollPoint = CGPointMake(0.0,200.0);
-    [LogScroll setContentOffset:scrollPoint animated:YES];
-}
-
-- (IBAction)KindSegment_click:(id)sender {
-    switch (KindSegment.selectedSegmentIndex) {
-        case 0:
-            tempKind = @"出費";
-            break;
-        case 1:
-            tempKind = @"収入";
-            break;
-        case 2:
-            tempKind = @"調整";
-            break;
-    }
-}
-
-//ログのテキストフィールドを編集しようとしたとき
-- (IBAction)valueTextField_begin:(id)sender {
-//TODOログを選択したときのスクロールとか実装したいな
-}
-
-// Numberpadに追加したボタンの動作
--(void)doneExpenseTextField{
-    // 値が入っている場合
-    if([expenseTextField.text length] >= 1) {
-        NSNumber *tempExpense = [_translateFormat numberFromString:expenseTextField.text];
-        [_method saveMoneyValue:tempExpense Date:[NSDate date] Kind:tempKind];
-        [_method calcvalue:tempExpense Kind:KindSegment.selectedSegmentIndex];
-        expenseTextField.text = @""; //テキストフィールドの値を消す
-        
-        budget = [_method loadBudget];
-        expense = [_method loadExpense];
-        balance = [_method loadBalance];
-        
-        BudgetLabel.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];
-        ExpenseLabel.text = [_translateFormat stringFromNumber:expense addComma:YES addYen:YES];
-        BalanceLabel.text = [_translateFormat stringFromNumber:balance addComma:YES addYen:YES];
-        
-        [logTableView reloadData];               // TableViewをリロード
-        
-        [self makeGraph];
-        
-        [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollView])]; //スクロールビューをフィットさせる
-        CGPoint scrollPoint = CGPointMake(0.0,45.0);
-        [LogScroll setContentOffset:scrollPoint animated:YES];
-    }else{
-        [LogScroll setContentOffset:CGPointZero animated:YES];
-    }
-    [expenseTextField resignFirstResponder]; // NumberPad消す
-}
-
-// Numberpadに追加したキャンセルボタンの動作
--(void)cancelExpenseTextField{
-    expenseTextField.text = @""; //テキストフィールドの値を消す
-    [expenseTextField resignFirstResponder]; // NumberPad消す(=テキストフィールドを選択していない状態にする)
-    
-    [LogScroll setContentOffset:CGPointZero animated:YES];
-    
 }
 
 #pragma mark - その他

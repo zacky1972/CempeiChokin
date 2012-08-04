@@ -184,10 +184,10 @@
     if(log == nil){
         log = [[NSMutableArray alloc] init];
     }
-    tempMoneyValue = [NSDictionary dictionaryWithObjectsAndKeys:
-                      value, @"MoneyValue",
-                      date, @"Date",
-                      kind, @"Kind", nil];
+    tempMoneyValue = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                    value, @"MoneyValue",
+                                    date, @"Date",
+                                    kind, @"Kind", nil];
     [log insertObject:tempMoneyValue atIndex:0];
     if([log count] > 20)
         [log removeObjectAtIndex:20];
@@ -334,9 +334,47 @@
 
 //貯金額を呼び出し
 - (NSNumber *)loadDeposit{
-    
     return [root objectForKey:@"Deposit"];
 }
+
+/*
+ #pragma mark - 〆
+ //期限を超えているかどうか調べる
+ - (BOOL)searchNext{
+ DNSLog(@"期限チェック！");
+ NSDate *date = [NSDate date];
+ [self makeDataPath];
+ [self loadData];
+ DNSLog(@"はやいほう！：%@",[date earlierDate:[self loadEnd]]);
+ 
+ DNSLog(@"date:%@",[self loadEnd]);
+ if ( [date earlierDate:[self loadEnd]] != date ) {
+ DNSLog(@"期限きれた！");
+ if ([self loadNextAlert] == YES) {
+ //TODO: 今は毎回ポップアップします
+ UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"期限が来ました！" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+ [alert show];
+ [root setObject:@1 forKey:@"NextAlert"];
+ [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
+ return YES;
+ }
+ }
+ DNSLog(@"期限きれてない！");
+ return NO;
+ }
+ 
+ 
+ //アラートするかどうか返す
+ - (Boolean)loadNextAlert{
+ [self makeDataPath];
+ [self loadData];
+ if ([root objectForKey:@"NextAlert"] == @1) {
+ return NO;
+ }
+ return YES;
+ }
+ */
+
 
 #pragma mark - その他
 //スクロールビューの大きさを変更
