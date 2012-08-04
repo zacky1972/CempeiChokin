@@ -31,6 +31,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+
+    
     _translateFormat = [TranslateFormat alloc];
     _method = [Methods alloc];
     
@@ -47,6 +50,10 @@
         period = [_method loadPeriod];
         PeriodTextField.text = [_translateFormat formatterDate:period];
     }
+    
+        DoneButton.enabled = NO;
+
+    
 }
 
 - (void)viewDidUnload
@@ -59,9 +66,14 @@
 }
 
 #pragma mark - 名前の設定
+
 - (IBAction)NameTextField_end:(id)sender {
     name = NameTextField.text;
     [ValueTextField becomeFirstResponder];  //ValueTextFieldに移動
+    if(name != NULL && value != NULL && period != NULL){
+        DoneButton.enabled = YES;
+    }
+    [NameTextField resignFirstResponder];
 }
 
 #pragma mark - 金額の設定
@@ -75,6 +87,23 @@
     // 既に値が入力されていた場合，表示されている値を数値に戻す (例)10,000円→10000
     if(value != NULL)
         ValueTextField.text = [_translateFormat stringFromNumber:value addComma:NO addYen:NO];
+}
+- (IBAction)ValueTextField_end:(id)sender {
+
+    if(name != NULL && value != NULL && period != NULL){
+        DoneButton.enabled = YES;
+    }
+    
+    // 既に値が入っていた場合
+    if(value != NULL){
+        ValueTextField.text = [_translateFormat stringFromNumber:value addComma:YES addYen:YES];
+    }// 元に戻す
+    // そうでもなかった場合
+    else{
+        ValueTextField.text = @""; // 値を消す
+    }
+    [ValueTextField resignFirstResponder];
+ 
 }
 
 // Numberpadに追加したボタンの動作
@@ -102,12 +131,22 @@
 
 #pragma mark - 期日の設定
 - (IBAction)PeriodTextField_begin:(id)sender {
+
     [self makeActionSheetWithDataPicker:@"完了"
                                    Done:@selector(doneWithDatePicker)
                                  Cancel:@selector(cancelWithDatePicker)];
     [actionSheet showInView: self.view];         // 画面上に表示させる
     [actionSheet setBounds: CGRectMake(0, 0, 320, 500)]; // 場所とサイズ決める(x,y.width,height)
+     
 }
+- (IBAction)PeriodTextField_end:(id)sender {
+    if(name != NULL && value != NULL && period != NULL){
+        DoneButton.enabled = YES;
+    }
+    [PeriodTextField resignFirstResponder];
+
+}
+
 
 // DatePickerが完了したときの
 -(void)doneWithDatePicker{
@@ -115,12 +154,13 @@
     PeriodTextField.text = [_translateFormat formatterDate:period]; // 文字入力する
     [PeriodTextField resignFirstResponder]; // フォーカス外す
     [actionSheet dismissWithClickedButtonIndex:0 animated:YES]; // ActionSheet消す
-}
+  }
 
 // DatePickerがキャンセルした時の
 -(void)cancelWithDatePicker{
     [PeriodTextField resignFirstResponder];
     [actionSheet dismissWithClickedButtonIndex:0 animated:YES];
+    
 }
 
 #pragma mark - ボタン

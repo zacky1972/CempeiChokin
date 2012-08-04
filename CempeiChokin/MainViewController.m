@@ -64,11 +64,12 @@
     // 初期設定画面の表示
     if([_method searchGoal] == 0){//初期設定がまだだったら，設定画面に遷移します
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"First"] animated:YES];
+    }else{
+        //期限チェック
+        if([_method searchNext] == YES){//期限をこえてたとき
+            [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Deposit"] animated:NO];
+        }
     }
-    
-    //期限チェック
-    [_method searchNext];
-    
     //初期設定から戻ってきた時用
     budget = [_method loadBudget];   // 予算
     expense = [_method loadExpense]; // 出費

@@ -86,12 +86,13 @@
 
 #pragma mark - ボタンたち
 - (IBAction)doneButton:(id)sender {
-    // TODO: ここに保存する処理書いてね
+    // TODO: 要検討
     [_method saveDeposit:depositValue];
 }
 
 - (IBAction)laterButton:(id)sender {
     // ???: ここはどうすんの？
+    
 }
 
 #pragma mark - その他

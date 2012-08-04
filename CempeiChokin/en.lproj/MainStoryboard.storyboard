@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E2617" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="raj-cK-qeg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="raj-cK-qeg">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
@@ -96,26 +96,11 @@
                                             <action selector="expenseTextField_end:" destination="raj-cK-qeg" eventType="editingDidEnd" id="hj8-Nw-6NX"/>
                                         </connections>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gR4-1v-94F">
-                                        <rect key="frame" x="115" y="268" width="36" height="35"/>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sue-ty-QXb">
+                                        <rect key="frame" x="15" y="233" width="130" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="〆">
-                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <segue destination="1EJ-OK-hO4" kind="modal" modalTransitionStyle="flipHorizontal" id="QYp-yu-xXA"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sue-ty-QXb">
-                                        <rect key="frame" x="9" y="268" width="41" height="37"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="今">
+                                        <state key="normal" title="先月の貯金">
                                             <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -123,11 +108,11 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WcQ-3a-DbH">
-                                        <rect key="frame" x="60" y="268" width="41" height="37"/>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WcQ-3a-DbH">
+                                        <rect key="frame" x="15" y="278" width="130" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                        <state key="normal" title="先">
+                                        <state key="normal" title="次の期間の設定">
                                             <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -167,7 +152,7 @@
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                             <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
                                                             <connections>
-                                                                <action selector="ValueTextField_begin:" destination="NwY-zI-POI" eventType="editingDidBegin" id="245-nx-AQX"/>
+                                                                <action selector="valueTextField_begin:" destination="raj-cK-qeg" eventType="editingDidBegin" id="FtE-ZR-2Sx"/>
                                                             </connections>
                                                         </textField>
                                                     </subviews>
@@ -514,7 +499,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                                     <connections>
-                                                        <action selector="NameTextField_end:" destination="NwY-zI-POI" eventType="editingDidEndOnExit" id="FJi-Ik-4PI"/>
+                                                        <action selector="NameTextField_end:" destination="NwY-zI-POI" eventType="editingDidEndOnExit" id="JBD-LT-Dzv"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="名前" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="tV5-U6-mcB">
@@ -543,6 +528,7 @@
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
                                                     <connections>
                                                         <action selector="ValueTextField_begin:" destination="NwY-zI-POI" eventType="editingDidBegin" id="5CL-ee-Pcv"/>
+                                                        <action selector="ValueTextField_end:" destination="NwY-zI-POI" eventType="editingDidEnd" id="dTU-yS-yP7"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="金額" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="0JB-EP-nyF">
@@ -571,6 +557,7 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
                                                         <action selector="PeriodTextField_begin:" destination="NwY-zI-POI" eventType="editingDidBegin" id="8JR-lG-sR5"/>
+                                                        <action selector="PeriodTextField_end:" destination="NwY-zI-POI" eventType="editingDidEnd" id="6E0-wz-4E4"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="いつまでに" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="I68-jf-m0t">
@@ -649,6 +636,7 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
                                                         <action selector="startDateTextField_begin:" destination="XRW-za-pcs" eventType="editingDidBegin" id="mgy-LY-LFO"/>
+                                                        <action selector="startDateTextField_end:" destination="XRW-za-pcs" eventType="editingDidEnd" id="6EY-ca-WtJ"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="いつから" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="Guo-KD-1TO">
@@ -677,6 +665,7 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
                                                         <action selector="endDateTextField_begin:" destination="XRW-za-pcs" eventType="editingDidBegin" id="uqZ-Mb-AGR"/>
+                                                        <action selector="endDateTextField_end:" destination="XRW-za-pcs" eventType="editingDidEnd" id="Mlz-TR-Ws4"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="いつまで" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="4Hn-wu-Mkc">
@@ -709,6 +698,7 @@
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
                                                         <action selector="budgetTextField_begin:" destination="XRW-za-pcs" eventType="editingDidBegin" id="yah-M3-c9p"/>
+                                                        <action selector="budgetTextField_end:" destination="XRW-za-pcs" eventType="editingDidEnd" id="6GR-5H-7Pi"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="予算" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="cHo-Eg-ytT">
@@ -733,6 +723,7 @@
                     <navigationItem key="navigationItem" title="期間と予算の設定" id="Bpg-D8-4YA"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="DoneButton" destination="eRX-jm-bdK" id="b8O-YV-oQl"/>
                         <outlet property="budgetTextField" destination="ku5-o0-ucT" id="WGf-a0-zm0"/>
                         <outlet property="endDateTextField" destination="skJ-y8-DPG" id="Sa5-hI-bTA"/>
                         <outlet property="startDateTextField" destination="eWg-Gh-frN" id="kVw-B8-VM7"/>
@@ -793,7 +784,7 @@
             </objects>
             <point key="canvasLocation" x="-8" y="618"/>
         </scene>
-        <!--Budget View Controller - 期間と予算の設定-->
+        <!--Budget View Controller - 次の期間と予算の設定-->
         <scene sceneID="1Hs-VP-Mfn">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ttg-ZL-Zv6" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -939,7 +930,7 @@
                             <outlet property="delegate" destination="iwI-JE-99H" id="rzh-cj-L2W"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="期間と予算の設定" id="gQK-On-VVW"/>
+                    <navigationItem key="navigationItem" title="次の期間と予算の設定" id="gQK-On-VVW"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="budgetTextField" destination="NVS-LS-zqn" id="hgO-75-uTG"/>
@@ -950,21 +941,21 @@
             </objects>
             <point key="canvasLocation" x="867" y="1466"/>
         </scene>
-        <!--Deposit View Controller - 前回の貯金-->
+        <!--Deposit View Controller - 貯金しよう-->
         <scene sceneID="k6Q-d3-zw7">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1S4-uX-CpO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="ppr-eV-5bM" customClass="DepositViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="" id="ppr-eV-5bM" customClass="DepositViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" bounces="NO" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="N65-Gj-lmK">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="XwI-nt-2fE">
-                            <rect key="frame" x="0.0" y="102" width="320" height="317"/>
+                            <rect key="frame" x="0.0" y="123" width="320" height="290"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="XNa-bc-pSQ">
-                                    <rect key="frame" x="20" y="201" width="130" height="80"/>
+                                    <rect key="frame" x="20" y="180" width="130" height="80"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                     <state key="normal" title="後で">
@@ -980,7 +971,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LTo-l2-TNj">
-                                    <rect key="frame" x="170" y="201" width="130" height="80"/>
+                                    <rect key="frame" x="170" y="180" width="130" height="80"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                     <state key="normal" title="完了">
@@ -999,7 +990,7 @@
                             <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         </view>
                         <sections>
-                            <tableViewSection headerTitle="いつからいつまでの期間" id="okm-hF-KeM">
+                            <tableViewSection headerTitle="いつからいつまでの期間" footerTitle="貯金額は円です" id="okm-hF-KeM">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="cnd-qE-KDB">
                                         <rect key="frame" x="0.0" y="46" width="320" height="46"/>
@@ -1037,7 +1028,7 @@
                             <outlet property="delegate" destination="ppr-eV-5bM" id="kAf-Wr-ViF"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="前回の貯金" id="6hw-wE-5Wd"/>
+                    <navigationItem key="navigationItem" title="貯金しよう" id="6hw-wE-5Wd"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="depositTableView" destination="N65-Gj-lmK" id="z92-7j-qEU"/>
@@ -1045,13 +1036,13 @@
                     </connections>
                 </tableViewController>
             </objects>
-            <point key="canvasLocation" x="422" y="1466"/>
+            <point key="canvasLocation" x="455" y="1466"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gqF-4N-9BE">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5lK-M6-zPi" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationController id="1EJ-OK-hO4" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Deposit" id="1EJ-OK-hO4" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="OXR-GL-9Wd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1081,6 +1072,9 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="BKM-dy-3rB">
                                     <rect key="frame" x="20" y="111" width="280" height="80"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <accessibility key="accessibilityConfiguration">
+                                        <bool key="isElement" value="NO"/>
+                                    </accessibility>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                     <state key="normal" title="完了">
                                         <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -1114,7 +1108,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                                     <connections>
-                                                        <action selector="NameTextField_end:" destination="qPJ-4E-EOY" eventType="editingDidEndOnExit" id="BTz-NQ-92K"/>
+                                                        <action selector="NameTextField_end:" destination="qPJ-4E-EOY" eventType="editingDidEndOnExit" id="Nc6-Jy-iaH"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="名前" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="izB-gQ-f3P">
@@ -1143,6 +1137,7 @@
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
                                                     <connections>
                                                         <action selector="ValueTextField_begin:" destination="qPJ-4E-EOY" eventType="editingDidBegin" id="f8a-Hu-QOF"/>
+                                                        <action selector="ValueTextField_end:" destination="qPJ-4E-EOY" eventType="editingDidEnd" id="OXN-lN-GAJ"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="金額" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="DrW-8U-hBO">
@@ -1170,7 +1165,8 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
-                                                        <action selector="PeriodTextField_begin:" destination="qPJ-4E-EOY" eventType="editingDidBegin" id="rSK-pz-GQW"/>
+                                                        <action selector="PeriodTextField_begin:" destination="qPJ-4E-EOY" eventType="editingDidBegin" id="KCm-sP-t50"/>
+                                                        <action selector="PeriodTextField_end:" destination="qPJ-4E-EOY" eventType="editingDidEnd" id="Xwf-pV-IyH"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="期間" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="00l-yp-GZt">
@@ -1249,6 +1245,7 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
                                                         <action selector="startDateTextField_begin:" destination="h1v-dM-xxy" eventType="editingDidBegin" id="SG3-ed-Ze7"/>
+                                                        <action selector="startDateTextField_end:" destination="h1v-dM-xxy" eventType="editingDidEndOnExit" id="eei-8c-cwS"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="いつから" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="inS-zr-OsB">
@@ -1277,6 +1274,7 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
                                                         <action selector="endDateTextField_begin:" destination="h1v-dM-xxy" eventType="editingDidBegin" id="VL5-Jl-RyP"/>
+                                                        <action selector="endDateTextField_end:" destination="h1v-dM-xxy" eventType="editingDidEndOnExit" id="nTI-VK-ZFq"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="いつまで" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="h1b-E4-RdR">
@@ -1309,6 +1307,7 @@
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
                                                         <action selector="budgetTextField_begin:" destination="h1v-dM-xxy" eventType="editingDidBegin" id="Gyw-ov-Q0r"/>
+                                                        <action selector="budgetTextField_end:" destination="h1v-dM-xxy" eventType="editingDidEnd" id="J7N-WF-ihf"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="予算" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="xQc-4q-Xvh">
@@ -1333,6 +1332,7 @@
                     <navigationItem key="navigationItem" title="期間と予算の設定" id="sZI-rZ-a0f"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="DoneButton" destination="KrO-zQ-4up" id="CuK-u2-uW7"/>
                         <outlet property="budgetTextField" destination="q2Y-Z7-WbL" id="q3f-DC-7jL"/>
                         <outlet property="endDateTextField" destination="J36-cU-hEW" id="RvH-1f-iqn"/>
                         <outlet property="startDateTextField" destination="Ga8-bv-gOi" id="6ve-9p-FI0"/>
@@ -1345,6 +1345,80 @@
     <resources>
         <image name="help.jpg" width="640" height="960"/>
     </resources>
+    <classes>
+        <class className="BudgetViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BudgetViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="DoneButton_down:"/>
+                <relationship kind="action" name="budgetTextField_begin:"/>
+                <relationship kind="action" name="budgetTextField_end:"/>
+                <relationship kind="action" name="endDateTextField_begin:"/>
+                <relationship kind="action" name="endDateTextField_end:"/>
+                <relationship kind="action" name="startDateTextField_begin:"/>
+                <relationship kind="action" name="startDateTextField_end:"/>
+                <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="budgetTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="endDateTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="startDateTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="DepositViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DepositViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="depositTextField_begin:"/>
+                <relationship kind="action" name="doneButton:"/>
+                <relationship kind="action" name="laterButton:"/>
+                <relationship kind="outlet" name="depositTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="depositTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="FirstHelpViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FirstHelpViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="DoneButton_down:"/>
+                <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="GoalViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="DoneButton_down:"/>
+                <relationship kind="action" name="NameTextField_end:"/>
+                <relationship kind="action" name="PeriodTextField_begin:"/>
+                <relationship kind="action" name="PeriodTextField_end:"/>
+                <relationship kind="action" name="ValueTextField_begin:"/>
+                <relationship kind="action" name="ValueTextField_end:"/>
+                <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="NameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="PeriodTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="ValueTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="MainViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="KindSegment_click:"/>
+                <relationship kind="action" name="expenseTextField_begin:"/>
+                <relationship kind="action" name="valueTextField_begin:"/>
+                <relationship kind="outlet" name="BalanceLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="BudgetLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="ExpenseLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="KindSegment" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="LogScroll" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="MainNavigationBar" candidateClass="UINavigationBar"/>
+                <relationship kind="outlet" name="NormaLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="expenseTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="logTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="OptionViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/OptionViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="deleteDataButton_down:"/>
+                <relationship kind="outlet" name="deleteDataButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
