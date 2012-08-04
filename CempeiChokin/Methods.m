@@ -90,8 +90,6 @@
                 depolog = [[NSMutableArray alloc] init];
                 [self saveDeposit:@0 Date:[self loadStart]];
                 
-                //[depolog insertObject:@0 atIndex:0];
-                
                 [root setObject:expense forKey:@"Expense"];
                 [root setObject:balance forKey:@"Balance"];
                 [root setObject:norma forKey:@"Norma"];
@@ -308,15 +306,22 @@
 - (void)saveDeposit:(NSNumber *)value Date:(NSDate *)date{
     //???: 配列depolog使って記録とったがいいんかな…
     DNSLog(@"貯金保存！");
-    NSArray *tempDepolog = [[NSArray alloc] initWithObjects:value, date, nil];
+    NSArray *tempDepolog = [[NSArray alloc] initWithObjects:value, date,  nil];
+    if ([root objectForKey:@"Deposit"] != nil) {
+        DNSLog(@"%@",[root objectForKey:@"Deposit"]);
+        depolog = [root objectForKey:@"Deposit"];
+    }
     [depolog insertObject:tempDepolog atIndex:0];
-    [root setObject:tempDepolog forKey:@"Deposit"];
+    [root setObject:depolog forKey:@"Deposit"];
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
-    DNSLog(@"Depolog:%@",tempDepolog);
+    DNSLog(@"Depolog:%@",root);
 }
 
 //貯金額を呼び出し
-- (NSNumber *)loadDeposit{return [root objectForKey:@"Deposit"];}
+- (NSNumber *)loadDeposit{
+    
+    return [root objectForKey:@"Deposit"];
+}
 
 #pragma mark - その他
 //スクロールビューの大きさを変更
