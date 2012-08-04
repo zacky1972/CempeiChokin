@@ -84,8 +84,6 @@
                 tempday1 = (int)(since / (60 * 60 * 24));
                 since = [[self loadStart] timeIntervalSinceDate:[self loadEnd]];
                 tempday2 = (int)(since / (60 * 60 * 24));
-                
-                //norma = @0;    //ノルマ
                 norma = @( ( ( [[self loadValue] intValue] - [[self loadDeposit] intValue] ) / tempday1 ) * tempday2 );
                 balance = @( [[self loadBudget] intValue] - [[self loadNorma] intValue] );
                 depolog = [[NSMutableArray alloc] init];
@@ -95,6 +93,7 @@
                 [root setObject:balance forKey:@"Balance"];
                 [root setObject:norma forKey:@"Norma"];
                 [root setObject:depolog forKey:@"Deposit"];
+                [root setObject:@0 forKey:@"NextAlert"];
                 [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
             }
             DNSLog(@"root:%@",root);
@@ -280,43 +279,52 @@
     return [NSNumber numberWithInt:sumDeposit];
 }
 
-/*
+
  #pragma mark - 〆
- //期限を超えているかどうか調べる
+//TODO:
+//期限を超えているかどうか調べる
  - (BOOL)searchNext{
- DNSLog(@"期限チェック！");
- NSDate *date = [NSDate date];
- [self makeDataPath];
- [self loadData];
- DNSLog(@"はやいほう！：%@",[date earlierDate:[self loadEnd]]);
+     DNSLog(@"期限チェック！");
+     NSDate *date = [NSDate date];
+     [self makeDataPath];
+     [self loadData];
+     DNSLog(@"今日:%@",date);
+     DNSLog(@"期限日:%@",[self loadEnd]);
+     DNSLog(@"はやいほう！：%@",[date earlierDate:[self loadEnd]]);
  
- DNSLog(@"date:%@",[self loadEnd]);
- if ( [date earlierDate:[self loadEnd]] != date ) {
- DNSLog(@"期限きれた！");
- if ([self loadNextAlert] == YES) {
- //TODO: 今は毎回ポップアップします
- UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"期限が来ました！" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
- [alert show];
- [root setObject:@1 forKey:@"NextAlert"];
- [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
- return YES;
- }
- }
- DNSLog(@"期限きれてない！");
- return NO;
+     DNSLog(@"date:%@",[self loadEnd]);
+     if ( [date earlierDate:[self loadEnd]] != date && [date isEqualToDate:[self loadEnd]] == NO) {
+         DNSLog(@"期限きれた！");
+         if ([self loadNextAlert] == YES) {
+             DNSLog(@"催促するわ！");
+             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"期限が来ました！" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+             [alert show];
+             [root setObject:@1 forKey:@"NextAlert"];   //もう警告がでないようにする
+             [root writeToFile:path atomically:YES];    //それでrootをdata.plistに書き込み
+             return YES;
+         }else{
+             DNSLog(@"もう催促したわ！");
+             return NO;
+         }
+     }else{
+         DNSLog(@"期限きれてない！");
+         [root setObject:@0 forKey:@"NextAlert"];   //もう警告がでないようにする
+         [root writeToFile:path atomically:YES];    //それでrootをdata.plistに書き込み
+         return NO;
+     }
  }
  
  
  //アラートするかどうか返す
  - (Boolean)loadNextAlert{
- [self makeDataPath];
- [self loadData];
- if ([root objectForKey:@"NextAlert"] == @1) {
- return NO;
+     [self makeDataPath];
+     [self loadData];
+     if ([root objectForKey:@"NextAlert"] == @1) {
+         return NO;
+     }
+     return YES;
  }
- return YES;
- }
- */
+ 
 
 
 #pragma mark - その他

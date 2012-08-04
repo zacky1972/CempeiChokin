@@ -66,6 +66,7 @@
     endDateTextField = nil;
     budgetTextField = nil;
     DoneButton = nil;
+    laterButton = nil;
     [super viewDidUnload];
 }
 
@@ -196,6 +197,10 @@
 #pragma mark - ボタン
 - (IBAction)DoneButton_down:(id)sender {
     [_method saveStart:startDate End:endDate Budget:budget];
+}
+
+- (IBAction)laterButton_down:(id)sender {
+    
 }
 
 #pragma mark - その他
