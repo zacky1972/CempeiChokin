@@ -50,8 +50,9 @@
 
     [_method makeDataPath];
     [_method loadData];
+    
     _editLog = [EditLog alloc];
-    _log = [_method loadLogArray];
+    _log = [_editLog loadLogFromFile];
 
     //スクロールビューをフィットさせる
     [LogScroll setScrollEnabled:YES];
@@ -157,7 +158,7 @@
     if([expenseTextField.text length] >= 1) {
         // セルの個数が10個以上のとき9個に減らす
         if([_log count] >= 10){
-            [_editLog removeObjectsInArray:_log count:10];
+            _log = [_editLog removeObjectsInArray:_log count:10];
             [logTableView reloadData];
         }
         NSNumber *tempExpense = [_translateFormat numberFromString:expenseTextField.text];
@@ -175,7 +176,9 @@
         BalanceLabel.text = [_translateFormat stringFromNumber:balance addComma:YES addYen:YES];
 
         [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollViewWithCount:[_log count]])]; //スクロールビューをフィットさせる
-            
+
+        // FIXME: なんかガクッと移動して美しくない
+        [LogScroll setContentOffset:CGPointMake(0.0, 45.0) animated:YES];
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
         [logTableView insertRowsAtIndexPaths: [NSArray arrayWithObject:indexPath]
                             withRowAnimation: UITableViewRowAnimationRight];
@@ -184,7 +187,6 @@
         [LogScroll setContentOffset:CGPointZero animated:YES];
     }
     [expenseTextField resignFirstResponder]; // NumberPad消す
-    [NSTimer timerWithTimeInterval:2 target:self selector:@selector(scrollToTop) userInfo:nil repeats:NO];
 }
 
 // Numberpadに追加したキャンセルボタンの動作
@@ -192,11 +194,6 @@
     expenseTextField.text = @""; //テキストフィールドの値を消す
     [expenseTextField resignFirstResponder]; // NumberPad消す(=テキストフィールドを選択していない状態にする)
 
-    [LogScroll setContentOffset:CGPointZero animated:YES];
-}
-
-// TODO: ここどうにかする
-- (void)scrollToTop{
     [LogScroll setContentOffset:CGPointZero animated:YES];
 }
 

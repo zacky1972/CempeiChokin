@@ -32,6 +32,8 @@
 
 // ファイルへデータの保存
 - (void)saveData:(NSMutableDictionary *)root{
+    [self initData];
+    
     DNSLog(@"ログのデータ保存！");
     NSString *path = [self makeDataPathOfLog];
     [root writeToFile:path atomically:YES];
@@ -39,9 +41,14 @@
 
 // ファイルからデータの読み込み
 - (NSMutableDictionary *)loadData{
+    [self initData];
+    
     DNSLog(@"ログのデータ読み込み！");
     NSString *path = [self makeDataPathOfLog];
     NSMutableDictionary *root = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
+    if(root == NULL){ // 読み込みに失敗した場合
+        root = [[NSMutableDictionary alloc] init];
+    }
     return root;
 }
 
@@ -49,7 +56,14 @@
 // ログの読み込み
 - (NSMutableArray *)loadLogFromFile{
     NSMutableDictionary *root = [self loadData];
-    NSMutableArray *log = [root objectForKey:@"Log"];
+
+    NSMutableArray *log;
+    if(root == NULL){
+        log = [[NSMutableArray alloc] init];
+    }else{
+        log = [root objectForKey:@"Log"];
+    }
+
     return log;
 }
 
@@ -57,6 +71,7 @@
 - (void)saveLogToFile:(NSMutableArray *)array{
     NSMutableDictionary *root = [self loadData];
     [root setObject:array forKey:@"Log"];
+    DNSLog(@"\nLog::%@",array);
     [self saveData:root];
 }
 
@@ -114,6 +129,7 @@
 #pragma mark - その他
 // 何個以上だったら消すみたいなやつ
 - (NSMutableArray *)removeObjectsInArray:(NSMutableArray *)array count:(NSUInteger)count{
+    DNSLog(@"配列から消しまーす！");
     NSUInteger startNumber = count - 1;
     NSUInteger deleteCount = [array count] - startNumber;
     [array removeObjectsInRange:NSMakeRange(startNumber,deleteCount)];

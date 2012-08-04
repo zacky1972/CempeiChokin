@@ -294,13 +294,13 @@
 			path = CorePlotHeaders;
 			sourceTree = "<group>";
 		};
-		2A92149215CCBD9500B5B993 /* SaveAndLoad */ = {
+		2A92149215CCBD9500B5B993 /* Edit */ = {
 			isa = PBXGroup;
 			children = (
 				2A92148E15CCBD8700B5B993 /* EditLog.h */,
 				2A92148F15CCBD8700B5B993 /* EditLog.m */,
 			);
-			name = SaveAndLoad;
+			name = Edit;
 			sourceTree = "<group>";
 		};
 		E98EA58415BFB8A10019AED5 = {
@@ -419,7 +419,7 @@
 		E9B4BC4F15C235DC00E92B3D /* AddMethods */ = {
 			isa = PBXGroup;
 			children = (
-				2A92149215CCBD9500B5B993 /* SaveAndLoad */,
+				2A92149215CCBD9500B5B993 /* Edit */,
 				E95EEDA815C273B200F2A89E /* Methods.h */,
 				E95EEDA915C273B200F2A89E /* Methods.m */,
 				2A86784915CA2A3F00720B2D /* AddGraph.h */,
