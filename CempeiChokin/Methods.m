@@ -13,6 +13,7 @@
     NSNumber *balance;
     NSNumber *norma;
     NSMutableArray *deposit;
+    NSNumber *tempdeposit;
 }
 @end
 
@@ -33,7 +34,12 @@
     if( [[NSFileManager defaultManager] fileExistsAtPath:path] == NO ){                     //Data.plistがなかったら
         [[NSFileManager defaultManager] createFileAtPath:path contents:nil attributes:nil]; //作成する
         root = [[NSMutableDictionary alloc] init];
+        deposit = [[NSMutableArray alloc] init];
+        [deposit setValue:@0 forKey:0];
         [root setObject:@0 forKey:@"NextAlert"];
+        [root setObject:@0 forKey:@"DepositFlag"];
+        [root setObject:deposit forKey:@"Deposit"];
+        [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
     }else{                      //あったら
         [self loadData];
     }
@@ -86,7 +92,6 @@
                 since = [[self loadStart] timeIntervalSinceDate:[self loadEnd]];
                 tempday2 = (int)(since / (60 * 60 * 24));
                 
-                //norma = @0;    //ノルマ
                 norma = @( ( ( [[self loadValue] intValue] - [[self loadDeposit] intValue] ) / tempday1 ) * tempday2 );
                 balance = @( [[self loadBudget] intValue] - [[self loadNorma] intValue] );
                 [root setObject:expense forKey:@"Expense"];
@@ -97,6 +102,7 @@
             DNSLog(@"root:%@",root);
             return 1;
         }else{//0バイトだったら
+            DNSLog(@"0バイトだったよ！");
             [self deleteData];
         }
     }
@@ -303,19 +309,31 @@
 #pragma mark - 貯金(Deposit)関係
 //貯金額を保存
 - (void)saveDeposit:(NSNumber *)value{
-    DNSLog(@"貯金保存！");
-    
-    
-    
-    //deposit = [self loadDeposit];
-    //deposit = @( [deposit intValue] + [value intValue] );
+    DNSLog(@"貯金%@円保存！",value);
+    [self makeDataPath];
+    [self loadData];
+    deposit = [[NSMutableArray alloc]init];
+    if([root objectForKey:@"Deposit"] == nil){//初回だったら
+        [deposit addObject:value];
+    }
+    //[deposit insertObject:value atIndex:0];
+    DNSLog(@"searchDeposit:%@",deposit);
+    /*
+    if ([[self searchDeposit] intValue] == 0) {
+        [deposit insertObject:0 atIndex:[value intValue]];
+    }else{
+        [deposit removeObject:0];
+        [deposit insertObject:0 atIndex:[value intValue]];
+        [root setObject:@1 forKey:@"Deposit"];
+    }
     [root setObject:deposit forKey:@"Deposit"];
-    [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
-    DNSLog(@"log:%@",root);
+    [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み*/
+    DNSLog(@"root:%@",root);
 }
 
 //貯金額を呼び出し
 - (NSNumber *)loadDeposit{return [root objectForKey:@"Deposit"];}
+- (NSNumber *)searchDeposit{return [root objectForKey:@"DepositFlag"];}
 
 #pragma mark - 〆
 //期限を超えているかどうか調べる
