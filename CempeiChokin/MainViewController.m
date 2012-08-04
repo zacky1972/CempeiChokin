@@ -79,6 +79,7 @@
     norma = [_method loadNorma];     // ノルマ
     
     NSString *temp;
+    DNSLog(@"ナビゲーション：%@から%@",[_method loadStart],[_method loadEnd]);
     temp = [[_translateFormat formatterDateUltimate:[_method loadStart] addYear:NO addMonth:YES addDay:YES addHour:NO addMinute:NO addSecond:NO] stringByAppendingString:@"~"];
     temp = [temp stringByAppendingString:[_translateFormat formatterDateUltimate:[_method loadEnd] addYear:NO addMonth:YES addDay:YES addHour:NO addMinute:NO addSecond:NO]];
     MainNavigationBar.topItem.title = temp;

@@ -83,11 +83,16 @@
     DNSLog(@"Format:%@",tempString);
     
     formatter.dateFormat = tempString; // 表示を変える
-    return [formatter stringFromDate:date];
+    return [formatter stringFromDate:[self nineHoursEarly:date]];
 }
 
 - (NSDate *)nineHoursLater:(NSDate *)date{
     date = [NSDate dateWithTimeInterval:60*60*9 sinceDate:date];
+    return date;
+}
+
+- (NSDate *)nineHoursEarly:(NSDate *)date{
+    date = [NSDate dateWithTimeInterval:-(60*60*9) sinceDate:date];
     return date;
 }
 

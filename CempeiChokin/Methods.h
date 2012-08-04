@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "EditLog.h"
+#import "TranslateFormat.h"
 
 @interface Methods : NSObject {
     //値をいじる感じ用

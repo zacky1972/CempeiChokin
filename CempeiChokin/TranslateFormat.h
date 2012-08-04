@@ -24,4 +24,5 @@
 
 // 許されない
 - (NSDate *)nineHoursLater:(NSDate *)date;
+- (NSDate *)nineHoursEarly:(NSDate *)date;
 @end

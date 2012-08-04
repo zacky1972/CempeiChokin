@@ -9,6 +9,7 @@
 #import "TranslateFormat.h"
 
 @interface Methods (){
+    TranslateFormat *_translateFormat;
     NSNumber *bud;
     NSNumber *expense;
     NSNumber *balance;
@@ -114,10 +115,11 @@
 //目標のあれこれを一気に保存する
 - (void)saveName:(NSString *)name Value:(NSNumber *)value Period:(NSDate *)period{
     DNSLog(@"プロパティリストに保存！");
+    _translateFormat = [TranslateFormat alloc];
     goal = [[NSMutableDictionary alloc] init];
     [goal setObject:name forKey:@"Name"];       //とりあえずgoalに値を上書き
     [goal setObject:value forKey:@"Value"];
-    [goal setObject:period forKey:@"Period"];
+    [goal setObject:[_translateFormat nineHoursLater:period] forKey:@"Period"];
     [root setObject:goal forKey:@"Goal"];
     DNSLog(@"root:%@",root);
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
@@ -133,10 +135,11 @@
 //予算のあれこれを一気に保存する
 - (void)saveStart:(NSDate *)start End:(NSDate *)end Budget:(NSNumber *)budget{
     DNSLog(@"プロパティリストに保存！");
+    _translateFormat = [TranslateFormat alloc];
     now = [[NSMutableDictionary alloc] init];
-    [now setObject:start forKey:@"Start"];      //とりあえずnowに値を上書き
+    [now setObject:[_translateFormat nineHoursLater:start] forKey:@"Start"];      //とりあえずnowに値を上書き
     [now setObject:budget forKey:@"Budget"];
-    [now setObject:end forKey:@"End"];
+    [now setObject:[_translateFormat nineHoursLater:end] forKey:@"End"];
     [root setObject:now forKey:@"Now"];
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
 }
@@ -285,7 +288,8 @@
 //期限を超えているかどうか調べる
  - (BOOL)searchNext{
      DNSLog(@"期限チェック！");
-     NSDate *date = [NSDate date];
+     _translateFormat = [TranslateFormat alloc];
+     NSDate *date = [_translateFormat nineHoursLater:[NSDate date]];
      [self makeDataPath];
      [self loadData];
      DNSLog(@"今日:%@",date);
@@ -293,25 +297,32 @@
      DNSLog(@"はやいほう！：%@",[date earlierDate:[self loadEnd]]);
  
      DNSLog(@"date:%@",[self loadEnd]);
-     if ( [date earlierDate:[self loadEnd]] != date && [date isEqualToDate:[self loadEnd]] == NO) {
-         DNSLog(@"期限きれた！");
-         if ([self loadNextAlert] == YES) {
-             DNSLog(@"催促するわ！");
-             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"期限が来ました！" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-             [alert show];
-             [root setObject:@1 forKey:@"NextAlert"];   //もう警告がでないようにする
-             [root writeToFile:path atomically:YES];    //それでrootをdata.plistに書き込み
-             return YES;
-         }else{
-             DNSLog(@"もう催促したわ！");
-             return NO;
+     
+     if ([date isEqualToDate:[self loadEnd]] == NO) {//今日が期限日じゃなくて
+         DNSLog(@"同じ日やないわ！");
+         if([date earlierDate:[self loadEnd]] != date){//期限日より後
+             DNSLog(@"期限きれた！");
+             
+             if ([self loadNextAlert] == YES) {
+                 DNSLog(@"催促するわ！");
+                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"期限が来ました！" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                 [alert show];
+                 [root setObject:@1 forKey:@"NextAlert"];   //もう警告がでないようにする
+                 [root writeToFile:path atomically:YES];    //それでrootをdata.plistに書き込み
+                 return YES;
+             }else{
+                 DNSLog(@"もう催促したわ！");
+                 return NO;
+             }
+             
+         }else{//まだ期限内
+             //DNSLog(@"期限内やわ！");
          }
-     }else{
-         DNSLog(@"期限きれてない！");
-         [root setObject:@0 forKey:@"NextAlert"];   //もう警告がでないようにする
-         [root writeToFile:path atomically:YES];    //それでrootをdata.plistに書き込み
-         return NO;
      }
+     DNSLog(@"期限きれてない！");
+     [root setObject:@0 forKey:@"NextAlert"];   //もう警告がでないようにする
+     [root writeToFile:path atomically:YES];    //それでrootをdata.plistに書き込み
+     return NO;
  }
  
  
