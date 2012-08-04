@@ -58,4 +58,8 @@
 - (BOOL)searchNext;             //期限を超えているかどうか調べる
 - (Boolean)loadNextAlert;    //アラートするかどうか返す
 
+//一番最後
+- (BOOL)searchFinish;       //貯金が溜まったかどうか調べる
+- (BOOL)searchLastNorma;    //最後の期間かどうか調べる
+
 @end
