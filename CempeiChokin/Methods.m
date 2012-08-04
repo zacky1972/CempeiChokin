@@ -125,6 +125,7 @@
     [root setObject:goal forKey:@"Goal"];
     DNSLog(@"root:%@",root);
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
+
 }
 
 #pragma mark - 今回のアレ(Now)関係
@@ -300,11 +301,13 @@
 }
 
 
+
 //ログ読み込み
 - (NSInteger)loadLog{
     DNSLog(@"ログ読み込み！%d個です！",[log count]);
     return [log count];
 }
+
 
 #pragma mark - 貯金(Deposit)関係
 //貯金額を保存

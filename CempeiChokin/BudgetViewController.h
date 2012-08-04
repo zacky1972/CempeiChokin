@@ -14,6 +14,8 @@
     __weak IBOutlet UITextField *startDateTextField;
     __weak IBOutlet UITextField *endDateTextField;
     __weak IBOutlet UITextField *budgetTextField;
+    __weak IBOutlet UIButton *DoneButton;
+    
     
 }
 - (IBAction)startDateTextField_begin:(id)sender;

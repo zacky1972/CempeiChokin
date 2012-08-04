@@ -183,8 +183,8 @@
     [self makeNumberPadToolbar:@"完了"
                           Done:@selector(doneExpenseTextField)
                         Cancel:@selector(cancelExpenseTextField)];
-    CGPoint scrollPoint = CGPointMake(0.0,200.0);
     
+    CGPoint scrollPoint = CGPointMake(0.0,200.0);
     [LogScroll setContentOffset:scrollPoint animated:YES];
 }
 
@@ -200,6 +200,11 @@
             tempKind = @"調整";
             break;
     }
+}
+
+//ログのテキストフィールドを編集しようとしたとき
+- (IBAction)valueTextField_begin:(id)sender {
+//TODOログを選択したときのスクロールとか実装したいな
 }
 
 // Numberpadに追加したボタンの動作

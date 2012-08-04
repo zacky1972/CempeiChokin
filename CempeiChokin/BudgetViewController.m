@@ -20,6 +20,7 @@
     // パーツたち
     UIActionSheet *actionSheet;
     UIDatePicker *datePicker;
+    
 }
 
 @end
@@ -50,11 +51,15 @@
         budget = [_method loadBudget];
         budgetTextField.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];
     }
+        if(startDate != NULL && endDate != NULL && budget != NULL){
+        DoneButton.enabled = NO;
+    }
+        DoneButton.enabled = NO;
+    
         
     // ツールバーとかデータピッカー
     datePicker =[[UIDatePicker alloc] initWithFrame: CGRectMake(0, 44, 320, 216)];
     datePicker.datePickerMode = UIDatePickerModeDate;
-
 }
 
 - (void)viewDidUnload
@@ -62,6 +67,7 @@
     startDateTextField = nil;
     endDateTextField = nil;
     budgetTextField = nil;
+    DoneButton = nil;
     [super viewDidUnload];
 }
 
@@ -80,6 +86,14 @@
     [actionSheet setBounds: CGRectMake(0, 0, 320, 500)]; // 場所とサイズ決める(x,y.width,height)
 }
 
+- (IBAction)startDateTextField_end:(id)sender {
+    if(startDate != NULL && endDate != NULL && budget != NULL){
+        DoneButton.enabled = YES;
+    }
+    [startDateTextField resignFirstResponder];
+}
+
+
 -(void)doneStartDateTextField{ // 値をテキストフィールドに入れる
     startDate = datePicker.date;
     startDateTextField.text = [_translateFormat formatterDate:startDate]; // 文字入力する
@@ -88,8 +102,9 @@
         endDate = [NSDate dateWithTimeInterval:86400 sinceDate:startDate];
         endDateTextField.text = [_translateFormat formatterDate:endDate];
     }
-    [endDateTextField becomeFirstResponder]; // endDateTextFieldに移動
     [actionSheet dismissWithClickedButtonIndex:0 animated:YES]; // ActionSheet消す
+    [endDateTextField becomeFirstResponder]; // endDateTextFieldに移動
+
 }
 
 // DatePickerがキャンセルした時の
@@ -109,6 +124,13 @@
                                  Cancel:@selector(cancelEndDateTextField)];
     [actionSheet showInView: self.view];         // 画面上に表示させる
     [actionSheet setBounds: CGRectMake(0, 0, 320, 500)]; // 場所とサイズ決める(x,y.width,height)
+}
+
+- (IBAction)endDateTextField_end:(id)sender {
+    if(startDate != NULL && endDate != NULL && budget != NULL){
+        DoneButton.enabled = YES;
+    }
+    [endDateTextField resignFirstResponder];
 }
 
 
@@ -134,6 +156,23 @@
     if(budget != NULL)
         budgetTextField.text = [_translateFormat stringFromNumber:budget addComma:NO addYen:NO];
 }
+
+- (IBAction)budgetTextField_end:(id)sender{
+    if(startDate != NULL && endDate != NULL && budget != NULL){
+        DoneButton.enabled = YES;
+    }
+    
+    if(budget != NULL){
+        budgetTextField.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];   // 元に戻す
+    }
+    else{
+        budgetTextField.text = @"";         // 値を消す
+    }
+    [budgetTextField resignFirstResponder]; // NumberPad消す(=テキストフィールドを選択していない状態にする)
+
+}
+
+
 
 // Numberpadに追加したボタンの動作
 -(void)doneBudgetTextField{

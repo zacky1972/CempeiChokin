@@ -152,7 +152,7 @@
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                             <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
                                                             <connections>
-                                                                <action selector="ValueTextField_begin:" destination="NwY-zI-POI" eventType="editingDidBegin" id="245-nx-AQX"/>
+                                                                <action selector="valueTextField_begin:" destination="raj-cK-qeg" eventType="editingDidBegin" id="FtE-ZR-2Sx"/>
                                                             </connections>
                                                         </textField>
                                                     </subviews>
@@ -499,7 +499,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                                     <connections>
-                                                        <action selector="NameTextField_end:" destination="NwY-zI-POI" eventType="editingDidEndOnExit" id="FJi-Ik-4PI"/>
+                                                        <action selector="NameTextField_end:" destination="NwY-zI-POI" eventType="editingDidEndOnExit" id="JBD-LT-Dzv"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="名前" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="tV5-U6-mcB">
@@ -528,6 +528,7 @@
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
                                                     <connections>
                                                         <action selector="ValueTextField_begin:" destination="NwY-zI-POI" eventType="editingDidBegin" id="5CL-ee-Pcv"/>
+                                                        <action selector="ValueTextField_end:" destination="NwY-zI-POI" eventType="editingDidEnd" id="dTU-yS-yP7"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="金額" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="0JB-EP-nyF">
@@ -556,6 +557,7 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
                                                         <action selector="PeriodTextField_begin:" destination="NwY-zI-POI" eventType="editingDidBegin" id="8JR-lG-sR5"/>
+                                                        <action selector="PeriodTextField_end:" destination="NwY-zI-POI" eventType="editingDidEnd" id="6E0-wz-4E4"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="いつまでに" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="I68-jf-m0t">
@@ -634,6 +636,7 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
                                                         <action selector="startDateTextField_begin:" destination="XRW-za-pcs" eventType="editingDidBegin" id="mgy-LY-LFO"/>
+                                                        <action selector="startDateTextField_end:" destination="XRW-za-pcs" eventType="editingDidEnd" id="6EY-ca-WtJ"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="いつから" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="Guo-KD-1TO">
@@ -662,6 +665,7 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
                                                         <action selector="endDateTextField_begin:" destination="XRW-za-pcs" eventType="editingDidBegin" id="uqZ-Mb-AGR"/>
+                                                        <action selector="endDateTextField_end:" destination="XRW-za-pcs" eventType="editingDidEnd" id="Mlz-TR-Ws4"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="いつまで" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="4Hn-wu-Mkc">
@@ -694,6 +698,7 @@
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
                                                         <action selector="budgetTextField_begin:" destination="XRW-za-pcs" eventType="editingDidBegin" id="yah-M3-c9p"/>
+                                                        <action selector="budgetTextField_end:" destination="XRW-za-pcs" eventType="editingDidEnd" id="6GR-5H-7Pi"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="予算" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="cHo-Eg-ytT">
@@ -718,6 +723,7 @@
                     <navigationItem key="navigationItem" title="期間と予算の設定" id="Bpg-D8-4YA"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="DoneButton" destination="eRX-jm-bdK" id="b8O-YV-oQl"/>
                         <outlet property="budgetTextField" destination="ku5-o0-ucT" id="WGf-a0-zm0"/>
                         <outlet property="endDateTextField" destination="skJ-y8-DPG" id="Sa5-hI-bTA"/>
                         <outlet property="startDateTextField" destination="eWg-Gh-frN" id="kVw-B8-VM7"/>
@@ -1066,6 +1072,9 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="BKM-dy-3rB">
                                     <rect key="frame" x="20" y="111" width="280" height="80"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <accessibility key="accessibilityConfiguration">
+                                        <bool key="isElement" value="NO"/>
+                                    </accessibility>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                     <state key="normal" title="完了">
                                         <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -1099,7 +1108,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                                     <connections>
-                                                        <action selector="NameTextField_end:" destination="qPJ-4E-EOY" eventType="editingDidEndOnExit" id="BTz-NQ-92K"/>
+                                                        <action selector="NameTextField_end:" destination="qPJ-4E-EOY" eventType="editingDidEndOnExit" id="Nc6-Jy-iaH"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="名前" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="izB-gQ-f3P">
@@ -1128,6 +1137,7 @@
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
                                                     <connections>
                                                         <action selector="ValueTextField_begin:" destination="qPJ-4E-EOY" eventType="editingDidBegin" id="f8a-Hu-QOF"/>
+                                                        <action selector="ValueTextField_end:" destination="qPJ-4E-EOY" eventType="editingDidEnd" id="OXN-lN-GAJ"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="金額" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="DrW-8U-hBO">
@@ -1155,7 +1165,8 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
-                                                        <action selector="PeriodTextField_begin:" destination="qPJ-4E-EOY" eventType="editingDidBegin" id="rSK-pz-GQW"/>
+                                                        <action selector="PeriodTextField_begin:" destination="qPJ-4E-EOY" eventType="editingDidBegin" id="KCm-sP-t50"/>
+                                                        <action selector="PeriodTextField_end:" destination="qPJ-4E-EOY" eventType="editingDidEnd" id="Xwf-pV-IyH"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="期間" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="00l-yp-GZt">
@@ -1234,6 +1245,7 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
                                                         <action selector="startDateTextField_begin:" destination="h1v-dM-xxy" eventType="editingDidBegin" id="SG3-ed-Ze7"/>
+                                                        <action selector="startDateTextField_end:" destination="h1v-dM-xxy" eventType="editingDidEndOnExit" id="eei-8c-cwS"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="いつから" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="inS-zr-OsB">
@@ -1262,6 +1274,7 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
                                                         <action selector="endDateTextField_begin:" destination="h1v-dM-xxy" eventType="editingDidBegin" id="VL5-Jl-RyP"/>
+                                                        <action selector="endDateTextField_end:" destination="h1v-dM-xxy" eventType="editingDidEndOnExit" id="nTI-VK-ZFq"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="いつまで" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="h1b-E4-RdR">
@@ -1294,6 +1307,7 @@
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
                                                         <action selector="budgetTextField_begin:" destination="h1v-dM-xxy" eventType="editingDidBegin" id="Gyw-ov-Q0r"/>
+                                                        <action selector="budgetTextField_end:" destination="h1v-dM-xxy" eventType="editingDidEnd" id="J7N-WF-ihf"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="予算" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="xQc-4q-Xvh">
@@ -1318,6 +1332,7 @@
                     <navigationItem key="navigationItem" title="期間と予算の設定" id="sZI-rZ-a0f"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="DoneButton" destination="KrO-zQ-4up" id="CuK-u2-uW7"/>
                         <outlet property="budgetTextField" destination="q2Y-Z7-WbL" id="q3f-DC-7jL"/>
                         <outlet property="endDateTextField" destination="J36-cU-hEW" id="RvH-1f-iqn"/>
                         <outlet property="startDateTextField" destination="Ga8-bv-gOi" id="6ve-9p-FI0"/>
@@ -1336,8 +1351,12 @@
             <relationships>
                 <relationship kind="action" name="DoneButton_down:"/>
                 <relationship kind="action" name="budgetTextField_begin:"/>
+                <relationship kind="action" name="budgetTextField_end:"/>
                 <relationship kind="action" name="endDateTextField_begin:"/>
+                <relationship kind="action" name="endDateTextField_end:"/>
                 <relationship kind="action" name="startDateTextField_begin:"/>
+                <relationship kind="action" name="startDateTextField_end:"/>
+                <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="budgetTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="endDateTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="startDateTextField" candidateClass="UITextField"/>
@@ -1366,7 +1385,9 @@
                 <relationship kind="action" name="DoneButton_down:"/>
                 <relationship kind="action" name="NameTextField_end:"/>
                 <relationship kind="action" name="PeriodTextField_begin:"/>
+                <relationship kind="action" name="PeriodTextField_end:"/>
                 <relationship kind="action" name="ValueTextField_begin:"/>
+                <relationship kind="action" name="ValueTextField_end:"/>
                 <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="NameTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="PeriodTextField" candidateClass="UITextField"/>
@@ -1378,6 +1399,7 @@
             <relationships>
                 <relationship kind="action" name="KindSegment_click:"/>
                 <relationship kind="action" name="expenseTextField_begin:"/>
+                <relationship kind="action" name="valueTextField_begin:"/>
                 <relationship kind="outlet" name="BalanceLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="BudgetLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="ExpenseLabel" candidateClass="UILabel"/>
@@ -1403,7 +1425,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="9qt-Aw-2XO"/>
+        <segue reference="uJm-A0-8rn"/>
         <segue reference="fhM-kk-tX0"/>
     </inferredMetricsTieBreakers>
 </document>
