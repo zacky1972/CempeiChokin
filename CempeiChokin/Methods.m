@@ -297,7 +297,7 @@
      DNSLog(@"はやいほう！：%@",[date earlierDate:[self loadEnd]]);
  
      DNSLog(@"date:%@",[self loadEnd]);
-     
+     //TODO:年月日だけで比較しないと恐ろしいことになる
      if ([date isEqualToDate:[self loadEnd]] == NO) {//今日が期限日じゃなくて
          DNSLog(@"同じ日やないわ！");
          if([date earlierDate:[self loadEnd]] != date){//期限日より後

@@ -86,6 +86,8 @@
     return [formatter stringFromDate:[self nineHoursEarly:date]];
 }
 
+#pragma mark - 許されない系
+
 - (NSDate *)nineHoursLater:(NSDate *)date{
     date = [NSDate dateWithTimeInterval:60*60*9 sinceDate:date];
     return date;
