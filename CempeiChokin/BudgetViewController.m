@@ -51,7 +51,9 @@
         budget = [_method loadBudget];
         budgetTextField.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];
     }
-    
+        if(startDate != NULL && endDate != NULL && budget != NULL){
+        DoneButton.enabled = NO;
+    }
         DoneButton.enabled = NO;
     
         
