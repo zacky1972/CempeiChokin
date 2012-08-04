@@ -42,6 +42,7 @@
     logTableView.dataSource = self;
     _method = [Methods alloc];
     _translateFormat = [TranslateFormat alloc];
+    _graph = [AddGraph alloc];
     
     [_method makeDataPath];
     [_method loadData];
@@ -56,8 +57,12 @@
     // 初期設定画面の表示
     if([_method searchGoal] == 0){//初期設定がまだだったら，設定画面に遷移します
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"First"] animated:YES];
+    }else{
+        //期限チェック
+        if([_method searchNext] == YES){//期限をこえてたとき
+            [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Deposit"] animated:NO];
+        }
     }
-    
     //初期設定から戻ってきた時用
     budget = [_method loadBudget];   // 予算
     expense = [_method loadExpense]; // 出費
@@ -74,17 +79,7 @@
     NormaLabel.text = [_translateFormat stringFromNumber:norma addComma:YES addYen:YES];
     tempKind = @"出費";
 
-    _graph = [AddGraph alloc];
-    // FIXME: こいつどうにかしよう
-
-    if(balance > norma){
-        balance = @([balance intValue] - [norma intValue]);
-    }else{
-        balance = @0;
-        norma = @([budget intValue] - [expense intValue]);
-    }
-    graph = [_graph makeGraph:expense Balance:balance Norma:norma];
-    [LogScroll addSubview:graph];
+    [self makeGraph];
 }
 
 - (void)viewDidUnload
@@ -99,6 +94,21 @@
     MainNavigationBar = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
+}
+#pragma mark - なんかよくする処理たち
+- (void)makeGraph{
+    if(graph != NULL)
+        [graph removeFromSuperview];
+    
+    if([balance compare:norma] == NSOrderedDescending){
+        balance = @([balance intValue] - [norma intValue]);
+    }else{
+        balance = @0;
+        norma = @([budget intValue] - [expense intValue]);
+    }
+    graph = [_graph makeGraph:expense Balance:balance Norma:norma];
+    
+    [LogScroll addSubview:graph];
 }
 
 #pragma mark - UITableView関係
@@ -153,14 +163,7 @@
         NormaLabel.text = [_translateFormat stringFromNumber:norma addComma:YES addYen:YES];
         //グラフの更新
         
-        if(balance > norma){
-            balance = @([balance intValue] - [norma intValue]);
-        }else{
-            balance = @0;
-            norma = @([budget intValue] - [expense intValue]);
-        }
-        graph = [_graph makeGraph:expense Balance:balance Norma:norma];
-        [LogScroll addSubview:graph];
+        [self makeGraph];
         
         // アニメーションさせたら落ちる
 		// [tableView deleteRowsAtIndexPaths: [NSArray arrayWithObject:indexPath] withRowAnimation: UITableViewRowAnimationFade];
@@ -223,16 +226,8 @@
 
         [logTableView reloadData];               // TableViewをリロード
 
+        [self makeGraph];
 
-        if(balance > norma){
-            balance = @([balance intValue] - [norma intValue]);
-        }else{
-            balance = @0;
-            norma = @([budget intValue] - [expense intValue]);
-        }
-        graph = [_graph makeGraph:expense Balance:balance Norma:norma];
-        [graph removeFromSuperview];
-        [LogScroll addSubview:graph];
         [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollView])]; //スクロールビューをフィットさせる
         CGPoint scrollPoint = CGPointMake(0.0,45.0);
         [LogScroll setContentOffset:scrollPoint animated:YES];
