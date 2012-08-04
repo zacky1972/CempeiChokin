@@ -52,6 +52,7 @@
 
 - (IBAction)deleteDataButton_down:(id)sender {
     [_method deleteData];
+    [[EditLog alloc] deleteLogData];
 }
 
 @end

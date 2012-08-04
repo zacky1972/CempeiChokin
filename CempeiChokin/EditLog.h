@@ -32,5 +32,6 @@
 #pragma mark - その他
 // 中身の数が決められた数を超えてる時に削除する
 - (NSMutableArray *)removeObjectsInArray:(NSMutableArray *)array count:(NSUInteger)count;
+- (void)deleteLogData;
 
 @end

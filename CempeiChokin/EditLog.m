@@ -15,7 +15,7 @@
 // ファイル名を返す
 - (NSString *)makeDataPathOfLog{
     NSString *home = NSHomeDirectory();
-    NSString *document = [home stringByAppendingPathComponent:@"Documents"];
+    NSString *document = [home stringByAppendingPathComponent:@"Documents"]; // フォルダ名
     NSString *path = [document stringByAppendingPathComponent:@"Log.plist"]; // ファイル名
     DNSLog(@"ログのファイル: %@",path);
     return path;
@@ -124,6 +124,12 @@
     NSUInteger deleteCount = [array count] - startNumber;
     [array removeObjectsInRange:NSMakeRange(startNumber,deleteCount)];
     return array;
+}
+
+- (void)deleteLogData{
+    DNSLog(@"データ削除！");
+    NSString *path = [self makeDataPathOfLog];
+    [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
 }
 
 @end

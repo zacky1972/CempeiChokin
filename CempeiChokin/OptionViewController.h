@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Methods.h"
+#import "EditLog.h"
 
 @interface OptionViewController : UITableViewController{
     
