@@ -51,6 +51,7 @@
 #pragma mark - DateFormatter系
 - (NSString *)formatterDate:(NSDate *)date{
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setLocale:[NSLocale currentLocale]];
     formatter.dateFormat =@"yyyy年M月d日"; // 表示を変える
     return [formatter stringFromDate:date];
 }
