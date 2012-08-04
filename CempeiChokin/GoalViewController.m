@@ -31,8 +31,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    DoneButton.enabled = NO;
+
+
     
     _translateFormat = [TranslateFormat alloc];
     _method = [Methods alloc];
@@ -50,6 +50,9 @@
         period = [_method loadPeriod];
         PeriodTextField.text = [_translateFormat formatterDate:period];
     }
+    
+        DoneButton.enabled = NO;
+
     
 }
 

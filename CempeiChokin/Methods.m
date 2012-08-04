@@ -292,11 +292,13 @@
 }
 
 
+
 //ログ読み込み
 - (NSInteger)loadLog{
     DNSLog(@"ログ読み込み！%d個です！",[log count]);
     return [log count];
 }
+
 
 #pragma mark - 貯金(Deposit)関係
 //貯金額を保存
