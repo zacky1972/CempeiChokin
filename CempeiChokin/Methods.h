@@ -64,7 +64,8 @@
 - (void)saveDeposit:(NSNumber *)value;    //貯金額を保存
 - (NSNumber *)loadDeposit;                //貯金額を呼び出し
 //〆
-- (BOOL)searchNext;         //期限を超えているかどうか調べる
+- (BOOL)searchNext;             //期限を超えているかどうか調べる
+- (Boolean)loadNextAlert;    //アラートするかどうか返す
 
 // 秘密
 - (NSMutableArray *)loadLogArray;

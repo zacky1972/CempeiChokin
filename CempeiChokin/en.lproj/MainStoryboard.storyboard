@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="raj-cK-qeg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E2617" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="raj-cK-qeg">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
@@ -151,9 +151,6 @@
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                             <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
-                                                            <connections>
-                                                                <action selector="valueTextField_begin:" destination="raj-cK-qeg" eventType="editingDidBegin" id="FtE-ZR-2Sx"/>
-                                                            </connections>
                                                         </textField>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1351,11 +1348,8 @@
             <relationships>
                 <relationship kind="action" name="DoneButton_down:"/>
                 <relationship kind="action" name="budgetTextField_begin:"/>
-                <relationship kind="action" name="budgetTextField_end:"/>
                 <relationship kind="action" name="endDateTextField_begin:"/>
-                <relationship kind="action" name="endDateTextField_end:"/>
                 <relationship kind="action" name="startDateTextField_begin:"/>
-                <relationship kind="action" name="startDateTextField_end:"/>
                 <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="budgetTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="endDateTextField" candidateClass="UITextField"/>
@@ -1385,9 +1379,7 @@
                 <relationship kind="action" name="DoneButton_down:"/>
                 <relationship kind="action" name="NameTextField_end:"/>
                 <relationship kind="action" name="PeriodTextField_begin:"/>
-                <relationship kind="action" name="PeriodTextField_end:"/>
                 <relationship kind="action" name="ValueTextField_begin:"/>
-                <relationship kind="action" name="ValueTextField_end:"/>
                 <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="NameTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="PeriodTextField" candidateClass="UITextField"/>
@@ -1399,7 +1391,7 @@
             <relationships>
                 <relationship kind="action" name="KindSegment_click:"/>
                 <relationship kind="action" name="expenseTextField_begin:"/>
-                <relationship kind="action" name="valueTextField_begin:"/>
+                <relationship kind="action" name="expenseTextField_end:"/>
                 <relationship kind="outlet" name="BalanceLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="BudgetLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="ExpenseLabel" candidateClass="UILabel"/>
@@ -1425,7 +1417,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="WA1-tD-icu"/>
+        <segue reference="uJm-A0-8rn"/>
         <segue reference="fhM-kk-tX0"/>
     </inferredMetricsTieBreakers>
 </document>
