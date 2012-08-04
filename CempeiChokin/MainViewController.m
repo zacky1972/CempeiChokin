@@ -53,10 +53,6 @@
     
     _editLog = [EditLog alloc];
     _log = [_editLog loadLogFromFile];
-    if(_log == NULL){
-        _log = [[NSMutableArray alloc] init];
-    }
-
 
     //スクロールビューをフィットさせる
     [LogScroll setScrollEnabled:YES];
@@ -237,7 +233,8 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         DNSLog(@"Delete At %d Row",indexPath.row);
-        // TODO: 消したのに応じて予算とか計算し直さんとあかんな
+        [_method calcDeletevalue:[_editLog loadMoneyValueFromArray:_log atIndex:indexPath.row]
+                            Kind:[_editLog loadKindFromArray:_log atIndex:indexPath.row]];
         [_editLog deleteLogArray:_log atIndex:indexPath.row];
         
         //ラベルの更新

@@ -14,26 +14,25 @@
 
 // ファイル名を返す
 - (NSString *)makeDataPathOfLog{
-    DNSLog(@"ログのファイルの場所の指示！");
     NSString *home = NSHomeDirectory();
     NSString *document = [home stringByAppendingPathComponent:@"Documents"];
     NSString *path = [document stringByAppendingPathComponent:@"Log.plist"]; // ファイル名
+    DNSLog(@"ログのファイル: %@",path);
     return path;
 }
 
 // ファイルの初期化
 - (void)initData{
-    DNSLog(@"ログのデータの初期化！");
-    NSString *path = [self makeDataPathOfLog];
+    NSString *path = [self makeDataPathOfLog]; // ファイルの場所指定
     if( [[NSFileManager defaultManager] fileExistsAtPath:path] == NO ){ // ファイルがなかったら
+        DNSLog(@"ログのデータの初期化！");
         [[NSFileManager defaultManager] createFileAtPath:path contents:nil attributes:nil]; //作成する
     }
 }
 
 // ファイルへデータの保存
 - (void)saveData:(NSMutableDictionary *)root{
-    [self initData];
-    
+    [self initData]; // ファイルの確認
     DNSLog(@"ログのデータ保存！");
     NSString *path = [self makeDataPathOfLog];
     [root writeToFile:path atomically:YES];
@@ -42,14 +41,12 @@
 // ファイルからデータの読み込み
 - (NSMutableDictionary *)loadData{
     [self initData];
-    
     DNSLog(@"ログのデータ読み込み！");
     NSString *path = [self makeDataPathOfLog];
     NSMutableDictionary *root = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
     if(root == NULL){ // 読み込みに失敗した場合
         root = [[NSMutableDictionary alloc] init];
     }
-    NSLog(@"\nRoot:%@",root);
     return root;
 }
 
@@ -57,14 +54,10 @@
 // ログの読み込み
 - (NSMutableArray *)loadLogFromFile{
     NSMutableDictionary *root = [self loadData];
-
-    NSMutableArray *log;
-    if(root == NULL){
+    NSMutableArray *log = [root objectForKey:@"Log"];
+    if(log == NULL){ // 読み込みに失敗した場合
         log = [[NSMutableArray alloc] init];
-    }else{
-        log = [root objectForKey:@"Log"];
     }
-
     return log;
 }
 
@@ -73,11 +66,10 @@
     NSMutableDictionary *root = [self loadData];
 
     [root setObject:array forKey:@"Log"];
-    DNSLog(@"\nLog:%@",array);
     [self saveData:root];
 }
 
-// 配列に値を保存する
+// 配列に値を追加する
 - (NSMutableArray *)saveMoneyValueForArray:(NSMutableArray *)array Value:(NSNumber *)value Date:(NSDate *)date Kind:(NSString *)kind{
     DNSLog(@"金額のあれこれを保存！");
     
@@ -89,14 +81,13 @@
     [array insertObject:tempDictionary atIndex:0];       // 配列に入れる
     
     [self saveLogToFile:array]; // プロパティリストに保存
-    return array;
+    return array; // 追加後の値を返す
 }
 
 // 削除するやつ
 - (NSMutableArray *)deleteLogArray:(NSMutableArray *)array atIndex:(NSUInteger)index{
     DNSLog(@"%d番目のログを削除します！",index);
     
-    [[Methods alloc] calcDeletevalue:[[array objectAtIndex:index] objectForKey:@"MoneyValue"] Kind:[[array objectAtIndex:index] objectForKey:@"Kind"]];
     [array removeObjectAtIndex:index]; //で，実際にログを消す
 
     [self saveLogToFile:array]; // プロパティリストに保存
@@ -108,7 +99,6 @@
 - (NSNumber *)loadMoneyValueFromArray:(NSMutableArray *)array atIndex:(NSUInteger)index{
     NSDictionary *tempDictionary = [array objectAtIndex:index];
     NSNumber *tempNumber = [tempDictionary objectForKey:@"MoneyValue"];
-    DNSLog(@"MoneyValue:%@",tempNumber);
     return tempNumber;
 }
 
@@ -116,7 +106,6 @@
 - (NSDate *)loadDateFromArray:(NSMutableArray *)array atIndex:(NSUInteger)index{
     NSDictionary *tempDictionary = [array objectAtIndex:index];
     NSDate *tempDate = [tempDictionary objectForKey:@"Date"];
-    DNSLog(@"Date:%@",[[TranslateFormat alloc] formatterDate:tempDate]);
     return tempDate;
 }
 
@@ -124,7 +113,6 @@
 - (NSString *)loadKindFromArray:(NSMutableArray *)array atIndex:(NSUInteger)index{
     NSDictionary *tempDictionary = [array objectAtIndex:index];
     NSString *tempString = [tempDictionary objectForKey:@"Kind"];
-    DNSLog(@"%@",tempString)
     return tempString;
 }
 

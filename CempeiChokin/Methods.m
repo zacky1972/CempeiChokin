@@ -196,7 +196,6 @@
     DNSLog(@"\nRoot:%@",root);
     // FIXME: ここで読み込みかなんかしないと初回起動以外だと値が消えるっぽい
 
-    [self initData];
     expense = [self loadExpense];
     balance = [self loadBalance];
     bud = [self loadBudget];
