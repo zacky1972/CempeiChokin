@@ -86,4 +86,9 @@
     return [formatter stringFromDate:date];
 }
 
+- (NSDate *)nineHoursLater:(NSDate *)date{
+    date = [NSDate dateWithTimeInterval:60*60*9 sinceDate:date];
+    return date;
+}
+
 @end

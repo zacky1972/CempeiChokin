@@ -31,9 +31,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSTimeZone *timeZone = [[NSTimeZone alloc] initWithName:@"Asia/Tokyo"];
+    [NSTimeZone setDefaultTimeZone:timeZone];
 
 
-    
     _translateFormat = [TranslateFormat alloc];
     _method = [Methods alloc];
     

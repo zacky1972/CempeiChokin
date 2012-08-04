@@ -41,8 +41,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSTimeZone *timeZone = [[NSTimeZone alloc] initWithName:@"Asia/Tokyo"];
-    [NSTimeZone setDefaultTimeZone:timeZone];
+    
     logTableView.delegate = self;
     logTableView.dataSource = self;
     
