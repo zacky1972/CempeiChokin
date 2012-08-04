@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="raj-cK-qeg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E2617" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="raj-cK-qeg">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
@@ -92,8 +92,8 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                                         <connections>
-                                            <action selector="End_down:" destination="raj-cK-qeg" eventType="editingDidEndOnExit" id="ENY-Gm-X9y"/>
                                             <action selector="expenseTextField_begin:" destination="raj-cK-qeg" eventType="editingDidBegin" id="dY1-K7-RPf"/>
+                                            <action selector="expenseTextField_end:" destination="raj-cK-qeg" eventType="editingDidEnd" id="hj8-Nw-6NX"/>
                                         </connections>
                                     </textField>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="sue-ty-QXb">
@@ -151,9 +151,6 @@
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                             <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
-                                                            <connections>
-                                                                <action selector="valueTextField_begin:" destination="raj-cK-qeg" eventType="editingDidBegin" id="FtE-ZR-2Sx"/>
-                                                            </connections>
                                                         </textField>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1410,7 +1407,7 @@
                 <relationship kind="action" name="End_down:"/>
                 <relationship kind="action" name="KindSegment_click:"/>
                 <relationship kind="action" name="expenseTextField_begin:"/>
-                <relationship kind="action" name="valueTextField_begin:"/>
+                <relationship kind="action" name="expenseTextField_end:"/>
                 <relationship kind="outlet" name="BalanceLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="BudgetLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="ExpenseLabel" candidateClass="UILabel"/>
