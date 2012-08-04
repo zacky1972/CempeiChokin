@@ -59,9 +59,10 @@
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"First"] animated:YES];
     }else{
         //期限チェック
+        /*
         if([_method searchNext] == YES){//期限をこえてたとき
             [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Deposit"] animated:NO];
-        }
+        }*/
     }
     //初期設定から戻ってきた時用
     budget = [_method loadBudget];   // 予算
