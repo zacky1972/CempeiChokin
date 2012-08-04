@@ -287,7 +287,6 @@
      DNSLog(@"期限チェック！");
      TranslateFormat *_translateFormat = [TranslateFormat alloc];
      NSDate *date = [NSDate date];
-     date = [_translateFormat nineHoursLater:date];
      [self makeDataPath];
      [self loadData];
      DNSLog(@"今日:%@",date);
