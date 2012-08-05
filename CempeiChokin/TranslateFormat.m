@@ -87,7 +87,7 @@
 }
 
 #pragma mark - 許されない系
-- (NSDate *)timeTokaIranKattanYa:(NSDate *)date{
+- (NSDate *)dateOnly:(NSDate *)date{
     DNSLog(@"%@を",date);
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setTimeStyle:NSDateFormatterNoStyle];

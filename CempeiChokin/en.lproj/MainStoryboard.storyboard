@@ -186,7 +186,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="gRj-Ul-hmK"/>
                                     <barButtonItem title="オプション" id="YNE-nJ-a0Y">
                                         <connections>
-                                            <segue destination="KZm-Wb-QTc" kind="modal" modalTransitionStyle="flipHorizontal" id="ebS-0Y-Joa"/>
+                                            <segue destination="KZm-Wb-QTc" kind="modal" identifier="showOptionView" modalTransitionStyle="flipHorizontal" id="ebS-0Y-Joa"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -318,7 +318,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
-                                            <segue destination="qPJ-4E-EOY" kind="push" id="UVg-Z6-uRE"/>
+                                            <segue destination="qPJ-4E-EOY" kind="push" identifier="showGoalView" id="UVg-Z6-uRE"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="NaH-zJ-HzF" style="IBUITableViewCellStyleDefault" id="XV7-il-2gl">
@@ -339,7 +339,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
-                                            <segue destination="h1v-dM-xxy" kind="push" id="tjn-u7-pGc"/>
+                                            <segue destination="h1v-dM-xxy" kind="push" identifier="showBudgetView" id="tjn-u7-pGc"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -364,7 +364,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
-                                            <segue destination="JdI-Z6-HOp" kind="push" id="q4t-4R-eG5"/>
+                                            <segue destination="JdI-Z6-HOp" kind="push" identifier="showHelp" id="q4t-4R-eG5"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Fj5-yq-POP" style="IBUITableViewCellStyleDefault" id="Mcm-H3-AWI">
@@ -385,7 +385,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
-                                            <segue destination="1DZ-f3-aZQ" kind="push" id="hNM-sq-svJ"/>
+                                            <segue destination="1DZ-f3-aZQ" kind="push" identifier="showC" id="hNM-sq-svJ"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -399,7 +399,7 @@
                     <navigationItem key="navigationItem" title="オプション" id="JBc-oC-jWj">
                         <barButtonItem key="leftBarButtonItem" title="Back" id="36W-2W-4Am">
                             <connections>
-                                <segue destination="raj-cK-qeg" kind="modal" modalTransitionStyle="flipHorizontal" id="k0a-gN-RJK"/>
+                                <segue destination="raj-cK-qeg" kind="modal" identifier="showMainView" modalTransitionStyle="flipHorizontal" id="k0a-gN-RJK"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -488,7 +488,7 @@
                                     </state>
                                     <connections>
                                         <action selector="DoneButton_down:" destination="NwY-zI-POI" eventType="touchUpInside" id="J8b-FI-R6T"/>
-                                        <segue destination="XRW-za-pcs" kind="push" id="s4t-uk-5xa"/>
+                                        <segue destination="XRW-za-pcs" kind="push" identifier="showBudgetView" id="s4t-uk-5xa"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -624,7 +624,7 @@
                                     </state>
                                     <connections>
                                         <action selector="DoneButton_down:" destination="XRW-za-pcs" eventType="touchUpInside" id="9k4-YH-E44"/>
-                                        <segue destination="raj-cK-qeg" kind="modal" modalTransitionStyle="flipHorizontal" id="uJm-A0-8rn"/>
+                                        <segue destination="raj-cK-qeg" kind="modal" identifier="showMainView" modalTransitionStyle="flipHorizontal" id="uJm-A0-8rn"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -822,7 +822,7 @@
                                     </state>
                                     <connections>
                                         <action selector="laterButton_down:" destination="iwI-JE-99H" eventType="touchUpInside" id="oW2-rE-7u2"/>
-                                        <segue destination="raj-cK-qeg" kind="modal" modalTransitionStyle="flipHorizontal" id="9qt-Aw-2XO"/>
+                                        <segue destination="raj-cK-qeg" kind="modal" identifier="showMainView_skip" modalTransitionStyle="flipHorizontal" id="9qt-Aw-2XO"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="FxQ-gR-809">
@@ -838,7 +838,7 @@
                                     </state>
                                     <connections>
                                         <action selector="DoneButton_down:" destination="iwI-JE-99H" eventType="touchUpInside" id="uby-nQ-eam"/>
-                                        <segue destination="raj-cK-qeg" kind="modal" modalTransitionStyle="flipHorizontal" id="gv0-sb-DCH"/>
+                                        <segue destination="raj-cK-qeg" kind="modal" identifier="showMainView_done" modalTransitionStyle="flipHorizontal" id="gv0-sb-DCH"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -981,7 +981,7 @@
                                     </state>
                                     <connections>
                                         <action selector="laterButton:" destination="ppr-eV-5bM" eventType="touchUpInside" id="rZO-7P-KcA"/>
-                                        <segue destination="iwI-JE-99H" kind="push" id="fhM-kk-tX0"/>
+                                        <segue destination="iwI-JE-99H" kind="push" identifier="showBudgetView_skip" id="fhM-kk-tX0"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LTo-l2-TNj">
@@ -997,7 +997,7 @@
                                     </state>
                                     <connections>
                                         <action selector="doneButton:" destination="ppr-eV-5bM" eventType="touchUpInside" id="5Zi-Bb-awY"/>
-                                        <segue destination="iwI-JE-99H" kind="push" id="Thm-lh-qM2"/>
+                                        <segue destination="iwI-JE-99H" kind="push" identifier="showBudgetView_done" id="Thm-lh-qM2"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -1090,7 +1090,7 @@
                                         <bool key="isElement" value="NO"/>
                                     </accessibility>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                    <state key="normal" title="完了">
+                                    <state key="normal" title="保存">
                                         <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
@@ -1099,7 +1099,7 @@
                                     </state>
                                     <connections>
                                         <action selector="DoneButton_down:" destination="qPJ-4E-EOY" eventType="touchUpInside" id="MeS-vK-XuR"/>
-                                        <segue destination="raj-cK-qeg" kind="modal" id="gyw-13-KT7"/>
+                                        <segue destination="raj-cK-qeg" kind="modal" identifier="showMainView" id="gyw-13-KT7"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -1226,7 +1226,7 @@
                                     <rect key="frame" x="20" y="65" width="280" height="80"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                    <state key="normal" title="完了">
+                                    <state key="normal" title="保存">
                                         <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
@@ -1235,7 +1235,7 @@
                                     </state>
                                     <connections>
                                         <action selector="DoneButton_down:" destination="h1v-dM-xxy" eventType="touchUpInside" id="PlZ-tC-AJD"/>
-                                        <segue destination="raj-cK-qeg" kind="modal" id="WA1-tD-icu"/>
+                                        <segue destination="raj-cK-qeg" kind="modal" identifier="showMainView" id="WA1-tD-icu"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -1359,86 +1359,13 @@
     <resources>
         <image name="help.jpg" width="640" height="960"/>
     </resources>
-    <classes>
-        <class className="BudgetViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BudgetViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="DoneButton_down:"/>
-                <relationship kind="action" name="budgetTextField_begin:"/>
-                <relationship kind="action" name="endDateTextField_begin:"/>
-                <relationship kind="action" name="laterButton_down:"/>
-                <relationship kind="action" name="startDateTextField_begin:"/>
-                <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="budgetTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="endDateTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="laterButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="startDateTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="DepositViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DepositViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="depositTextField_begin:"/>
-                <relationship kind="action" name="doneButton:"/>
-                <relationship kind="action" name="laterButton:"/>
-                <relationship kind="outlet" name="depositTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="depositTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="FirstHelpViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FirstHelpViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="DoneButton_down:"/>
-                <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="GoalViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="DoneButton_down:"/>
-                <relationship kind="action" name="NameTextField_end:"/>
-                <relationship kind="action" name="PeriodTextField_begin:"/>
-                <relationship kind="action" name="PeriodTextField_end:"/>
-                <relationship kind="action" name="ValueTextField_begin:"/>
-                <relationship kind="action" name="ValueTextField_end:"/>
-                <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="NameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="PeriodTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="ValueTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="MainViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="KindSegment_click:"/>
-                <relationship kind="action" name="expenseTextField_begin:"/>
-                <relationship kind="action" name="expenseTextField_end:"/>
-                <relationship kind="outlet" name="BalanceLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="BudgetLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="ExpenseLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="KindSegment" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="LogScroll" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="MainNavigationBar" candidateClass="UINavigationBar"/>
-                <relationship kind="outlet" name="NormaLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="expenseTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="logTableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="OptionViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/OptionViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="deleteDataButton_down:"/>
-                <relationship kind="outlet" name="deleteDataButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="gv0-sb-DCH"/>
+        <segue reference="gyw-13-KT7"/>
         <segue reference="fhM-kk-tX0"/>
     </inferredMetricsTieBreakers>
 </document>

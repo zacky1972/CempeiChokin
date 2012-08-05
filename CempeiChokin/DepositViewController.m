@@ -41,6 +41,16 @@
 
 }
 
+#pragma mark - Storyboardで画面遷移する前に呼ばれるあれ
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"showBudgetView_done"]) {
+        //FIXME:ここでデータを渡すといいんじゃないか
+    }
+    if ([segue.identifier isEqualToString:@"showBudgetView_skip"]) {
+        //FIXME:ここでデータを渡すといいんじゃないか
+    }
+}
+
 //タイトルを決定する
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     NSString *temp;

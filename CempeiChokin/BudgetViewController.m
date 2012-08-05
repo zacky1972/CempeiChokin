@@ -70,6 +70,20 @@
     [super viewDidUnload];
 }
 
+#pragma mark - Storyboardで画面遷移する前に呼ばれるあれ
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"showMainView"]) {
+        //FIXME:ここでデータを渡すといいんじゃないか
+    }
+    
+    if ([segue.identifier isEqualToString:@"showMainView_done"]) {
+        //FIXME:ここでデータを渡すといいんじゃないか
+    }
+    if ([segue.identifier isEqualToString:@"showMainView_skip"]) {
+        //FIXME:ここでデータを渡すといいんじゃないか
+    }
+}
+
 #pragma mark - StartDateTextField
 - (IBAction)startDateTextField_begin:(id)sender {
     // DatePickerの設定
