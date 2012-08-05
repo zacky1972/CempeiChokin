@@ -12,6 +12,7 @@
 @implementation EditLogTest{
     EditLog _editlog;
 }
+
 - (void)setUp{
     [super setUp];
     _editlog = [[EditLog alloc] init];
@@ -20,5 +21,7 @@
 - (void)tearDown{
     [super tearDown];
 }
+
+
 
 @end

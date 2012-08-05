@@ -30,7 +30,6 @@
 
 // 文字列→数値の変換 (数字以外消す)
 - (NSNumber *)numberFromString:(NSString *)string{
-    DNSLog(@"Input:%@",string);
     string = [string stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@",円"]];
     NSNumber *returnNumber = [[NSNumberFormatter alloc] numberFromString:string];
     return returnNumber;
@@ -38,7 +37,6 @@
 
 // 数値→文字列の変換　(,と円をつけるかどうか選択可)
 - (NSString *)stringFromNumber:(NSNumber *)number addComma:(BOOL)comma addYen:(BOOL)yen{
-    DNSLog(@"Input:%@ (Comma:%@,Yen:%@)",number,comma?@"YES":@"NO",yen?@"YES":@"NO");
     NSString *returnString = [NSString stringWithFormat:@"%@",number];
     if(comma == YES)
         returnString = [self addComma:returnString];
@@ -58,9 +56,7 @@
 
 - (NSString *)formatterDateUltimate:(NSDate *)date addYear:(BOOL)year addMonth:(BOOL)month addDay:(BOOL)day
                             addHour:(BOOL)hour addMinute:(BOOL)minute addSecond:(BOOL)second{
-    DNSLog(@"Year:%@,Month:%@",year?@"YES":@"NO",month?@"YES":@"NO");
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-
     NSString *tempString = @"";
     if (year == YES){
         tempString = [tempString stringByAppendingFormat:@"yyyy年"];
@@ -79,16 +75,13 @@
     }
     if (second == YES){
         tempString = [tempString stringByAppendingString:@"s秒"];
-    }
-    DNSLog(@"Format:%@",tempString);
-    
+    }    
     formatter.dateFormat = tempString; // 表示を変える
     return [formatter stringFromDate:[self nineHoursEarly:date]];
 }
 
 #pragma mark - 許されない系
 - (NSDate *)dateOnly:(NSDate *)date{
-    DNSLog(@"%@を",date);
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setTimeStyle:NSDateFormatterNoStyle];
     [formatter setDateStyle:NSDateFormatterMediumStyle];
@@ -115,7 +108,6 @@
     NSString *dateString1 = [formatter stringFromDate:date1];
     NSString *dateString2 = [formatter stringFromDate:date2];
     BOOL equal = [dateString1 isEqualToString:dateString2];
-    NSLog(@"equal:%@",equal?@"YES":@"NO");
     return equal;
 }
 @end
