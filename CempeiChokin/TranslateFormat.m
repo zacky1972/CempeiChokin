@@ -87,6 +87,16 @@
 }
 
 #pragma mark - 許されない系
+- (NSDate *)timeTokaIranKattanYa:(NSDate *)date{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setTimeStyle:NSDateFormatterNoStyle];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    NSString *tempString = [formatter stringFromDate:date];
+    date = [formatter dateFromString:tempString];
+    // 何故か時間を消すと15:00:00になるの
+    date = [NSDate dateWithTimeInterval:-60*60*15 sinceDate:date];
+    return date;
+}
 
 - (NSDate *)nineHoursLater:(NSDate *)date{
     date = [NSDate dateWithTimeInterval:60*60*9 sinceDate:date];
@@ -98,4 +108,13 @@
     return date;
 }
 
+- (BOOL)equalDate:(NSDate *)date1 Vs:(NSDate *)date2{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"yyyy-MM-dd";
+    NSString *dateString1 = [formatter stringFromDate:date1];
+    NSString *dateString2 = [formatter stringFromDate:date2];
+    BOOL equal = [dateString1 isEqualToString:dateString2];
+    NSLog(@"equal:%@",equal?@"YES":@"NO");
+    return equal;
+}
 @end
