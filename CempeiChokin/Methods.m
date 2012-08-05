@@ -88,7 +88,7 @@
                 norma = @( ( ( [[self loadValue] intValue] - [[self loadDeposit] intValue] ) / tempday1 ) * tempday2 );
                 balance = @( [[self loadBudget] intValue] - [[self loadNorma] intValue] );
                 depolog = [[NSMutableArray alloc] init];
-                [self saveDeposit:@0 Date:[self loadStart]];
+                [self saveDeposit:@0 Date:[self loadEnd]];
                 
                 [root setObject:expense forKey:@"Expense"];
                 [root setObject:balance forKey:@"Balance"];
@@ -119,7 +119,7 @@
     goal = [[NSMutableDictionary alloc] init];
     [goal setObject:name forKey:@"Name"];       //とりあえずgoalに値を上書き
     [goal setObject:value forKey:@"Value"];
-    [goal setObject:[_translateFormat nineHoursLater:period] forKey:@"Period"];
+    [goal setObject:[_translateFormat timeTokaIranKattanYa:[_translateFormat nineHoursLater:period]] forKey:@"Period"];
     [root setObject:goal forKey:@"Goal"];
     DNSLog(@"root:%@",root);
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
@@ -137,9 +137,9 @@
     DNSLog(@"プロパティリストに保存！");
     _translateFormat = [TranslateFormat alloc];
     now = [[NSMutableDictionary alloc] init];
-    [now setObject:[_translateFormat nineHoursLater:start] forKey:@"Start"];      //とりあえずnowに値を上書き
+    [now setObject:[_translateFormat timeTokaIranKattanYa:[_translateFormat nineHoursLater:start]] forKey:@"Start"];      //とりあえずnowに値を上書き
     [now setObject:budget forKey:@"Budget"];
-    [now setObject:[_translateFormat nineHoursLater:end] forKey:@"End"];
+    [now setObject:[_translateFormat timeTokaIranKattanYa:[_translateFormat nineHoursLater:end]] forKey:@"End"];
     [root setObject:now forKey:@"Now"];
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
 }
@@ -256,12 +256,16 @@
 #pragma mark - 貯金(Deposit)関係
 //貯金額を保存
 - (void)saveDeposit:(NSNumber *)value Date:(NSDate *)date{
-    //???: 配列depolog使って記録とったがいいんかな…
     DNSLog(@"貯金保存！");
     NSArray *tempDepolog = [[NSArray alloc] initWithObjects:value, date,  nil];
     if ([root objectForKey:@"Deposit"] != nil) {
         DNSLog(@"%@",[root objectForKey:@"Deposit"]);
         depolog = [root objectForKey:@"Deposit"];
+        if ([[[depolog objectAtIndex:0] objectAtIndex:1] isEqualToDate:date] ==YES ){
+            DNSLog(@"詐欺貯金はいかんよ！");
+            [depolog removeObjectAtIndex:0];
+            DNSLog(@"depolog:%@",depolog);
+        }
     }
     [depolog insertObject:tempDepolog atIndex:0];
     [root setObject:depolog forKey:@"Deposit"];
@@ -289,7 +293,7 @@
  - (BOOL)searchNext{
      DNSLog(@"期限チェック！");
      _translateFormat = [TranslateFormat alloc];
-     NSDate *date = [_translateFormat nineHoursLater:[NSDate date]];
+     NSDate *date = [_translateFormat timeTokaIranKattanYa:[_translateFormat nineHoursLater:[NSDate date]]];
      [self makeDataPath];
      [self loadData];
      DNSLog(@"今日:%@",date);
@@ -298,7 +302,7 @@
  
      DNSLog(@"date:%@",[self loadEnd]);
      //TODO:年月日だけで比較しないと恐ろしいことになる
-     if ([date isEqualToDate:[self loadEnd]] == NO) {//今日が期限日じゃなくて
+     if ([_translateFormat equalDate:date Vs:[self loadEnd]]) {//今日が期限日じゃなくて
          DNSLog(@"同じ日やないわ！");
          if([date earlierDate:[self loadEnd]] != date){//期限日より後
              DNSLog(@"期限きれた！");

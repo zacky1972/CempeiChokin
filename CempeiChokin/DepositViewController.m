@@ -87,18 +87,19 @@
 #pragma mark - ボタンたち
 - (IBAction)doneButton:(id)sender {
     DNSLog(@"完了きたで！");
-    [_method saveDeposit:depositValue Date:[NSDate date] ];
+
+    [_method saveDeposit:depositValue Date:[_method loadEnd] ];
     if([_method searchFinish] == YES){//終了！
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ノルマ達成しました！" message:@"おめでとうございます！" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"貯金がたまりました！" message:@"おめでとうございます！" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
         UIAlertView *nextalert = [[UIAlertView alloc] initWithTitle:@"次を決めましょう！" message:nil delegate:nil cancelButtonTitle:@"次のものへ" otherButtonTitles:@"今はいいや",nil];
         [nextalert show];
         //とりあえず抹消して次にいけるようにしたよ
         
     }else if ([_method searchLastNorma] == YES){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ノルマ達成できませんでした" message:@"もやし食えよ" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"最終期限が来てしまいました" message:@"もやし食えよ" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
-        UIAlertView *nextalert = [[UIAlertView alloc] initWithTitle:@"どうする？" message:nil delegate:nil cancelButtonTitle:@"期限を延ばす" otherButtonTitles:@"あきらめる",nil];
+        UIAlertView *nextalert = [[UIAlertView alloc] initWithTitle:@"どうする？" message:@"あと何円足りません" delegate:nil cancelButtonTitle:@"期限を延ばす" otherButtonTitles:@"あきらめる",nil];
         [nextalert show];
         
     }else{
