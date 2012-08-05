@@ -7,6 +7,7 @@
 //
 
 #import <SenTestingKit/SenTestingKit.h>
+#import "TranslateFormatTest.h"
 
 @interface CempeiChokinTests : SenTestCase
 

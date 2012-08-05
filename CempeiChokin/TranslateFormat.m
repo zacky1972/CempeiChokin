@@ -95,8 +95,7 @@
     NSString *tempString = [formatter stringFromDate:date];
     date = [formatter dateFromString:tempString];
     // 何故か時間を消すと15:00:00になるの
-    date = [NSDate dateWithTimeInterval:-60*60*15 sinceDate:date];
-    DNSLog(@"%@にしたよ！！！！",date);
+    date = [NSDate dateWithTimeInterval:60*60*9 sinceDate:date];
     return date;
 }
 
