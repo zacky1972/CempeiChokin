@@ -26,4 +26,5 @@
 - (NSDate *)timeTokaIranKattanYa:(NSDate *)date;
 - (NSDate *)nineHoursLater:(NSDate *)date;
 - (NSDate *)nineHoursEarly:(NSDate *)date;
+- (BOOL)equalDate:(NSDate *)date1 Vs:(NSDate *)date2;
 @end

@@ -108,4 +108,13 @@
     return date;
 }
 
+- (BOOL)equalDate:(NSDate *)date1 Vs:(NSDate *)date2{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"yyyy-MM-dd";
+    NSString *dateString1 = [formatter stringFromDate:date1];
+    NSString *dateString2 = [formatter stringFromDate:date2];
+    BOOL equal = [dateString1 isEqualToString:dateString2];
+    NSLog(@"equal:%@",equal?@"YES":@"NO");
+    return equal;
+}
 @end
