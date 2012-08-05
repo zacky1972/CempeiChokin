@@ -106,6 +106,13 @@
     // Release any retained subviews of the main view.
 }
 
+#pragma mark - Storyboardで画面遷移する前に呼ばれるあれ
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"showOptionView"]) {
+    //FIXME:ここでデータを渡すといいんじゃないか
+    }
+}
+
 #pragma mark - なんかよくする処理たち
 - (void)makeGraph{
     if([balance compare:norma] == NSOrderedDescending){

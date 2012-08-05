@@ -66,6 +66,16 @@
     [super viewDidUnload];
 }
 
+#pragma mark - Storyboardで画面遷移する前に呼ばれるあれ
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"showBudgetView"]) {
+        //FIXME:ここでデータを渡すといいんじゃないか
+    }
+    if ([segue.identifier isEqualToString:@"showMainView"]) {
+        //FIXME:ここでデータを渡すといいんじゃないか
+    }
+}
+
 #pragma mark - 名前の設定
 
 - (IBAction)NameTextField_end:(id)sender {
