@@ -200,7 +200,7 @@
                                 withRowAnimation: UITableViewRowAnimationRight];
             [self makeGraph];
         }else{ // 100万以上なら
-            // FIXME: 誰かまじめに書いて
+            // FIXME: 誰かまじめに書いて //ワロタ
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"100万以上の出費とか"
                                                             message:@"お前どんだけ金持ちやねん"
                                                            delegate:nil
