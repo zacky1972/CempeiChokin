@@ -13,6 +13,7 @@
 		2A86784E15CA318B00720B2D /* TranslateFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A86784D15CA318B00720B2D /* TranslateFormat.m */; };
 		2A92149015CCBD8700B5B993 /* EditLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A92148F15CCBD8700B5B993 /* EditLog.m */; };
 		2ACACC8B15CE2FE200A6FB31 /* TranslateFormatTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ACACC8A15CE2FE200A6FB31 /* TranslateFormatTest.m */; };
+		2ACACC9015CE4BC700A6FB31 /* EditLogTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ACACC8F15CE4BC700A6FB31 /* EditLogTest.m */; };
 		2ACB176D15CA932D00DDA60E /* License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2ACB176C15CA932D00DDA60E /* License.txt */; };
 		E95EED9515C26A7300F2A89E /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EED9415C26A7300F2A89E /* MainViewController.m */; };
 		E95EED9B15C26C2600F2A89E /* OptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EED9A15C26C2600F2A89E /* OptionViewController.m */; };
@@ -137,6 +138,8 @@
 		2A92148F15CCBD8700B5B993 /* EditLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditLog.m; sourceTree = "<group>"; };
 		2ACACC8915CE2FE200A6FB31 /* TranslateFormatTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TranslateFormatTest.h; sourceTree = "<group>"; };
 		2ACACC8A15CE2FE200A6FB31 /* TranslateFormatTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TranslateFormatTest.m; sourceTree = "<group>"; };
+		2ACACC8E15CE4BC700A6FB31 /* EditLogTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditLogTest.h; sourceTree = "<group>"; };
+		2ACACC8F15CE4BC700A6FB31 /* EditLogTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditLogTest.m; sourceTree = "<group>"; };
 		2ACB176C15CA932D00DDA60E /* License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = License.txt; sourceTree = "<group>"; };
 		2AEA041115C804BF009C9208 /* debug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = debug.h; sourceTree = "<group>"; };
 		E95EED9315C26A7300F2A89E /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -309,10 +312,20 @@
 		2ACACC8D15CE2FED00A6FB31 /* AddMethods */ = {
 			isa = PBXGroup;
 			children = (
+				2ACACC9115CE4BCD00A6FB31 /* Edit */,
 				2ACACC8915CE2FE200A6FB31 /* TranslateFormatTest.h */,
 				2ACACC8A15CE2FE200A6FB31 /* TranslateFormatTest.m */,
 			);
 			name = AddMethods;
+			sourceTree = "<group>";
+		};
+		2ACACC9115CE4BCD00A6FB31 /* Edit */ = {
+			isa = PBXGroup;
+			children = (
+				2ACACC8E15CE4BC700A6FB31 /* EditLogTest.h */,
+				2ACACC8F15CE4BC700A6FB31 /* EditLogTest.m */,
+			);
+			name = Edit;
 			sourceTree = "<group>";
 		};
 		E98EA58415BFB8A10019AED5 = {
@@ -574,6 +587,7 @@
 			files = (
 				E98EA5BF15BFB8A20019AED5 /* CempeiChokinTests.m in Sources */,
 				2ACACC8B15CE2FE200A6FB31 /* TranslateFormatTest.m in Sources */,
+				2ACACC9015CE4BC700A6FB31 /* EditLogTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -21,8 +21,6 @@
     NSNumber *balance;
     NSNumber *norma;
     NSString *tempKind;
-
-    NSMutableArray *_log;
 }
 
 @end
@@ -51,13 +49,13 @@
 
     [_method makeDataPath];
     [_method loadData];
-    
-    _editLog = [EditLog alloc];
-    _log = [_editLog loadLogFromFile];
+
+    _editLog = [[EditLog alloc] init];
+    DNSLog(@"\n_editLog.log:%@",_editLog.log);
 
     //スクロールビューをフィットさせる
     [LogScroll setScrollEnabled:YES];
-    [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollViewWithCount:[_log count]])];
+    [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollViewWithCount:[_editLog.log count]])];
     
 }
 
@@ -73,7 +71,7 @@
                                                             message:@"期限日やで！"
                                                            delegate:nil
                                                   cancelButtonTitle:nil
-                                                  otherButtonTitles:@"貯金しよう", nil]
+                                                  otherButtonTitles:@"貯金しよう", nil];
             [alert show];
             [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Deposit"] animated:NO];
         }
@@ -115,7 +113,9 @@
 #pragma mark - Storyboardで画面遷移する前に呼ばれるあれ
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"showOptionView"]) {
-    //FIXME:ここでデータを渡すといいんじゃないか
+        //FIXME:ここでデータを渡すといいんじゃないか
+    }else if([segue destinationViewController] == [self.storyboard instantiateViewControllerWithIdentifier:@"Deposit"]){
+        // TODO: 貯金画面行くときに渡すデータ
     }
 }
 
@@ -174,12 +174,12 @@
         NSNumber *tempExpense = [_translateFormat numberFromString:expenseTextField.text];
         if([tempExpense compare:@1000000] == NSOrderedAscending){ // 100万以下なら
             // セルの個数が10個以上のとき9個に減らす
-            if([_log count] >= 10){
-                _log = [_editLog removeObjectsInArray:_log count:10];
+            if([_editLog.log count] >= 10){
+                [_editLog removeObjectsCount:10];
                 [logTableView reloadData];
             }
             NSNumber *tempExpense = [_translateFormat numberFromString:expenseTextField.text];
-            _log = [_editLog saveMoneyValueForArray:_log Value:tempExpense Date:[NSDate date] Kind:tempKind];
+            [_editLog saveMoneyValue:tempExpense Date:[NSDate date] Kind:tempKind];
 
             [_method calcvalue:tempExpense Kind:KindSegment.selectedSegmentIndex];
             expenseTextField.text = @""; //テキストフィールドの値を消す
@@ -192,7 +192,7 @@
             ExpenseLabel.text = [_translateFormat stringFromNumber:expense addComma:YES addYen:YES];
             BalanceLabel.text = [_translateFormat stringFromNumber:balance addComma:YES addYen:YES];
 
-            [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollViewWithCount:[_log count]])]; //スクロールビューをフィットさせる
+            [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollViewWithCount:[_editLog.log count]])]; //スクロールビューをフィットさせる
 
             // FIXME: なんかガクッと移動して美しくない
             [LogScroll setContentOffset:CGPointMake(0.0, 45.0) animated:YES];
@@ -232,7 +232,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger count = _log.count;
+    NSInteger count = _editLog.log.count;
     DNSLog(@"ログの数:%3d",count);
     return count;
 }
@@ -243,14 +243,14 @@
     DNSLog(@"Cell for Row :%d",indexPath.row);
     static NSString *CellIdentifier = @"Log";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if( [_log count] != 0 ){
+    if( [_editLog.log count] != 0 ){
         UILabel *logDate      = (UILabel *)[cell viewWithTag:1];
         UILabel *logKind      = (UILabel *)[cell viewWithTag:2];
         UITextField *logValue = (UITextField *)[cell viewWithTag:3];
-        if(_log != nil){
-            logValue.text = [_translateFormat stringFromNumber:[_editLog loadMoneyValueFromArray:_log atIndex:indexPath.row] addComma:YES addYen:YES];
-            logKind.text = [_editLog loadKindFromArray:_log atIndex:indexPath.row];
-            logDate.text = [_translateFormat formatterDate:[_editLog loadDateFromArray:_log atIndex:indexPath.row]];
+        if(_editLog.log != nil){
+            logValue.text = [_translateFormat stringFromNumber:[_editLog loadMoneyValueAtIndex:indexPath.row] addComma:YES addYen:YES];
+            logKind.text = [_editLog loadKindAtIndex:indexPath.row];
+            logDate.text = [_translateFormat formatterDate:[_editLog loadDateAtIndex:indexPath.row]];
         }
     }
     return cell;
@@ -260,12 +260,12 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         DNSLog(@"Delete At %d Row",indexPath.row);
-        [_method calcDeletevalue:[_editLog loadMoneyValueFromArray:_log atIndex:indexPath.row]
-                            Kind:[_editLog loadKindFromArray:_log atIndex:indexPath.row]];
+        [_method calcDeletevalue:[_editLog loadMoneyValueAtIndex:indexPath.row]
+                            Kind:[_editLog loadKindAtIndex:indexPath.row]];
 
-        _log = [_editLog reviveToLogArray:_log]; // お墓から生き返らせる
+        [_editLog reviveToLog]; // お墓から生き返らせる
         [tableView reloadData]; // 生き返ったのを反映させる
-        [_editLog deleteLogArray:_log atIndex:indexPath.row];
+        [_editLog deleteLogAtIndex:indexPath.row];
         
         //ラベルの更新
         budget = [_method loadBudget];
@@ -284,7 +284,7 @@
 		[tableView deleteRowsAtIndexPaths: [NSArray arrayWithObject:indexPath] withRowAnimation: UITableViewRowAnimationFade];
 
         //FIXME: なんかキモい
-        [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollViewWithCount:[_log count]])];
+        [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollViewWithCount:[_editLog.log count]])];
     }
 }
 
