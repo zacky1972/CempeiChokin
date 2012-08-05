@@ -23,6 +23,7 @@
                             addHour:(BOOL)hour addMinute:(BOOL)minute addSecond:(BOOL)second;
 
 // 許されない
+- (NSDate *)timeTokaIranKattanYa:(NSDate *)date;
 - (NSDate *)nineHoursLater:(NSDate *)date;
 - (NSDate *)nineHoursEarly:(NSDate *)date;
 @end
