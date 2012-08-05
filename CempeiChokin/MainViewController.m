@@ -46,12 +46,11 @@
     _method = [Methods alloc];
     _translateFormat = [TranslateFormat alloc];
     _graph = [AddGraph alloc];
+    _editLog = [[EditLog alloc] init];
 
     [_method makeDataPath];
     [_method loadData];
 
-    _editLog = [[EditLog alloc] init];
-    DNSLog(@"\n_editLog.log:%@",_editLog.log);
 
     //スクロールビューをフィットさせる
     [LogScroll setScrollEnabled:YES];
