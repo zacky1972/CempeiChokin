@@ -158,33 +158,45 @@
 -(void)doneExpenseTextField{
     // 値が入っている場合
     if([expenseTextField.text length] >= 1) {
-        // セルの個数が10個以上のとき9個に減らす
-        if([_log count] >= 10){
-            _log = [_editLog removeObjectsInArray:_log count:10];
-            [logTableView reloadData];
-        }
         NSNumber *tempExpense = [_translateFormat numberFromString:expenseTextField.text];
-        _log = [_editLog saveMoneyValueForArray:_log Value:tempExpense Date:[NSDate date] Kind:tempKind];
-        
-        [_method calcvalue:tempExpense Kind:KindSegment.selectedSegmentIndex];
-        expenseTextField.text = @""; //テキストフィールドの値を消す
+        if([tempExpense compare:@1000000] == NSOrderedAscending){ // 100万以下なら
+            // セルの個数が10個以上のとき9個に減らす
+            if([_log count] >= 10){
+                _log = [_editLog removeObjectsInArray:_log count:10];
+                [logTableView reloadData];
+            }
+            NSNumber *tempExpense = [_translateFormat numberFromString:expenseTextField.text];
+            _log = [_editLog saveMoneyValueForArray:_log Value:tempExpense Date:[NSDate date] Kind:tempKind];
 
-        budget = [_method loadBudget];
-        expense = [_method loadExpense];
-        balance = [_method loadBalance];
+            [_method calcvalue:tempExpense Kind:KindSegment.selectedSegmentIndex];
+            expenseTextField.text = @""; //テキストフィールドの値を消す
 
-        BudgetLabel.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];
-        ExpenseLabel.text = [_translateFormat stringFromNumber:expense addComma:YES addYen:YES];
-        BalanceLabel.text = [_translateFormat stringFromNumber:balance addComma:YES addYen:YES];
+            budget = [_method loadBudget];
+            expense = [_method loadExpense];
+            balance = [_method loadBalance];
 
-        [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollViewWithCount:[_log count]])]; //スクロールビューをフィットさせる
+            BudgetLabel.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];
+            ExpenseLabel.text = [_translateFormat stringFromNumber:expense addComma:YES addYen:YES];
+            BalanceLabel.text = [_translateFormat stringFromNumber:balance addComma:YES addYen:YES];
 
-        // FIXME: なんかガクッと移動して美しくない
-        [LogScroll setContentOffset:CGPointMake(0.0, 45.0) animated:YES];
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-        [logTableView insertRowsAtIndexPaths: [NSArray arrayWithObject:indexPath]
-                            withRowAnimation: UITableViewRowAnimationRight];
-        [self makeGraph];
+            [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollViewWithCount:[_log count]])]; //スクロールビューをフィットさせる
+
+            // FIXME: なんかガクッと移動して美しくない
+            [LogScroll setContentOffset:CGPointMake(0.0, 45.0) animated:YES];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+            [logTableView insertRowsAtIndexPaths: [NSArray arrayWithObject:indexPath]
+                                withRowAnimation: UITableViewRowAnimationRight];
+            [self makeGraph];
+        }else{ // 100万以上なら
+            // FIXME: 誰かまじめに書いて
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"100万以上の出費とか"
+                                                            message:@"お前どんだけ金持ちやねん"
+                                                           delegate:nil
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:@"反省する", nil];
+            [alert show];
+            return;
+        }
     }else{
         [LogScroll setContentOffset:CGPointZero animated:YES];
     }
