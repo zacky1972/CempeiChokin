@@ -67,8 +67,14 @@
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"First"] animated:YES];
     }else{
         //期限チェック
-        
         if([_method searchNext] == YES){//期限をこえてたとき
+            // FIXME: 誰かまじめに書いて
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"今日は"
+                                                            message:@"期限日やで！"
+                                                           delegate:nil
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:@"貯金しよう", nil]
+            [alert show];
             [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Deposit"] animated:NO];
         }
     }
