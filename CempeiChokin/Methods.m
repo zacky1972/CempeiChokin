@@ -119,7 +119,7 @@
     goal = [[NSMutableDictionary alloc] init];
     [goal setObject:name forKey:@"Name"];       //とりあえずgoalに値を上書き
     [goal setObject:value forKey:@"Value"];
-    [goal setObject:[_translateFormat timeTokaIranKattanYa:[_translateFormat nineHoursLater:period]] forKey:@"Period"];
+    [goal setObject:[_translateFormat dateOnly:[_translateFormat nineHoursLater:period]] forKey:@"Period"];
     [root setObject:goal forKey:@"Goal"];
     DNSLog(@"root:%@",root);
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
@@ -137,9 +137,9 @@
     DNSLog(@"プロパティリストに保存！");
     _translateFormat = [TranslateFormat alloc];
     now = [[NSMutableDictionary alloc] init];
-    [now setObject:[_translateFormat timeTokaIranKattanYa:[_translateFormat nineHoursLater:start]] forKey:@"Start"];      //とりあえずnowに値を上書き
+    [now setObject:[_translateFormat dateOnly:[_translateFormat nineHoursLater:start]] forKey:@"Start"];      //とりあえずnowに値を上書き
     [now setObject:budget forKey:@"Budget"];
-    [now setObject:[_translateFormat timeTokaIranKattanYa:[_translateFormat nineHoursLater:end]] forKey:@"End"];
+    [now setObject:[_translateFormat dateOnly:[_translateFormat nineHoursLater:end]] forKey:@"End"];
     [root setObject:now forKey:@"Now"];
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
 }
@@ -293,7 +293,7 @@
  - (BOOL)searchNext{
      DNSLog(@"期限チェック！");
      _translateFormat = [TranslateFormat alloc];
-     NSDate *date = [_translateFormat timeTokaIranKattanYa:[_translateFormat nineHoursLater:[NSDate date]]];
+     NSDate *date = [_translateFormat dateOnly:[_translateFormat nineHoursLater:[NSDate date]]];
      [self makeDataPath];
      [self loadData];
      DNSLog(@"今日:%@",date);
