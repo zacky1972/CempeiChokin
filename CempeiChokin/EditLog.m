@@ -81,7 +81,7 @@
     DNSLog(@"金額のあれこれを保存！");
     
     NSDictionary *tempDictionary;
-    if ([kind isEqualToString:@"調整"] == NO) {
+    if ([kind isEqualToString:@"残高調整"] == NO) {
         tempDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                                         value, @"MoneyValue",
                                         date,  @"Date",
