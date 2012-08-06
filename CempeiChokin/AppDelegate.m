@@ -7,8 +7,11 @@
 //
 
 #import "AppDelegate.h"
+#import "EditLog.h"
 
-@implementation AppDelegate
+@implementation AppDelegate{
+
+}
 
 @synthesize window = _window;
 

@@ -6,6 +6,7 @@
 //  Copyright (c) 2012年 CEMPEI. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "MainViewController.h"
 
 @interface MainViewController (){
@@ -39,7 +40,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    APP_DELEGATE;
     logTableView.delegate = self;
     logTableView.dataSource = self;
     
@@ -47,10 +48,10 @@
     _translateFormat = [TranslateFormat alloc];
     _graph = [AddGraph alloc];
     _editLog = [[EditLog alloc] init];
-
+    
     [_method makeDataPath];
     [_method loadData];
-
+    
 
     //スクロールビューをフィットさせる
     [LogScroll setScrollEnabled:YES];
