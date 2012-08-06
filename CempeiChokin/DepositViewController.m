@@ -32,7 +32,8 @@
                           Done:@selector(doneDepositTextField)
                         Cancel:@selector(cancelDepostiTextField)];
     
-    if(depositValue){
+    if(depositValue == NULL){
+        DoneButton.enabled = NO;
     }
 }
 
@@ -73,9 +74,16 @@
 
 #pragma mark - depositTextField関係
 - (IBAction)depositTextField_begin:(id)sender {
+    
     // 既に値が入力されていた場合，表示されている値を数値に戻す
     if(depositValue != NULL)
         depositTextField.text = [NSString stringWithFormat:@"%@",depositValue];
+}
+
+- (IBAction)depositTextField_end:(id)sender {
+    if(depositValue != NULL){
+        DoneButton.enabled = YES;
+    }
 }
 
 -(void)doneDepositTextField{
