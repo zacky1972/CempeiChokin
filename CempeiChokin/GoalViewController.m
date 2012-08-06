@@ -51,10 +51,16 @@
         PeriodTextField.text = [_translateFormat formatterDate:period];
     }
     
+    
+    //データが入力されているかどうか判断して、入力されていなければ完了を押せないようにする
+    if(name == NULL || value == NULL || period == NULL){
         DoneButton.enabled = NO;
+    }
 
     
 }
+
+
 
 - (void)viewDidUnload
 {
@@ -66,14 +72,17 @@
 }
 
 #pragma mark - 名前の設定
-
-- (IBAction)NameTextField_end:(id)sender {
+- (IBAction)NameTextField_next:(id)sender {
     name = NameTextField.text;
     [ValueTextField becomeFirstResponder];  //ValueTextFieldに移動
     if(name != NULL && value != NULL && period != NULL){
         DoneButton.enabled = YES;
     }
-    [NameTextField resignFirstResponder];
+    [NameTextField resignFirstResponder];}
+
+- (IBAction)NameTextField_end:(id)sender {
+    name = NameTextField.text;
+    
 }
 
 #pragma mark - 金額の設定
@@ -88,6 +97,7 @@
     if(value != NULL)
         ValueTextField.text = [_translateFormat stringFromNumber:value addComma:NO addYen:NO];
 }
+
 - (IBAction)ValueTextField_end:(id)sender {
 
     if(name != NULL && value != NULL && period != NULL){

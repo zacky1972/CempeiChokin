@@ -51,16 +51,18 @@
         budget = [_method loadBudget];
         budgetTextField.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];
     }
-        if(startDate != NULL && endDate != NULL && budget != NULL){
+    
+    //データが入力されているかどうか判断して、入力されていなければ完了を押せないようにする
+        if(startDate == NULL || endDate == NULL || budget == NULL){
         DoneButton.enabled = NO;
     }
-        DoneButton.enabled = NO;
     
         
     // ツールバーとかデータピッカー
     datePicker =[[UIDatePicker alloc] initWithFrame: CGRectMake(0, 44, 320, 216)];
     datePicker.datePickerMode = UIDatePickerModeDate;
 }
+
 
 - (void)viewDidUnload
 {
