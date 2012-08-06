@@ -31,9 +31,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSTimeZone *timeZone = [[NSTimeZone alloc] initWithName:@"Asia/Tokyo"];
+    [NSTimeZone setDefaultTimeZone:timeZone];
 
 
-    
     _translateFormat = [TranslateFormat alloc];
     _method = [Methods alloc];
     
@@ -69,6 +70,16 @@
     PeriodTextField = nil;
     DoneButton = nil;
     [super viewDidUnload];
+}
+
+#pragma mark - Storyboardで画面遷移する前に呼ばれるあれ
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"showBudgetView"]) {
+        //FIXME:ここでデータを渡すといいんじゃないか
+    }
+    if ([segue.identifier isEqualToString:@"showMainView"]) {
+        //FIXME:ここでデータを渡すといいんじゃないか
+    }
 }
 
 #pragma mark - 名前の設定

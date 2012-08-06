@@ -12,9 +12,10 @@
     Methods *_method;
     AddGraph *_graph;
     TranslateFormat *_translateFormat;
+    EditLog *_editLog;
 
     UIView *graph;
-
+    
     NSNumber *budget;
     NSNumber *expense;
     NSNumber *balance;
@@ -38,18 +39,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     logTableView.delegate = self;
     logTableView.dataSource = self;
+    
     _method = [Methods alloc];
     _translateFormat = [TranslateFormat alloc];
     _graph = [AddGraph alloc];
-    
+    _editLog = [[EditLog alloc] init];
+
     [_method makeDataPath];
     [_method loadData];
-    
+
+
     //スクロールビューをフィットさせる
     [LogScroll setScrollEnabled:YES];
-    [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollView])];
+    [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollViewWithCount:[_editLog.log count]])];
     
 }
 
@@ -60,25 +65,25 @@
     }else{
         //期限チェック
         if([_method searchNext] == YES){//期限をこえてたとき
+            // FIXME: 誰かまじめに書いて
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"今日は"
+                                                            message:@"期限日やで！"
+                                                           delegate:nil
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:@"貯金しよう", nil];
+            [alert show];
             [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Deposit"] animated:NO];
         }
     }
     //初期設定から戻ってきた時用
-    budget = [_method loadBudget];   // 予算
-    expense = [_method loadExpense]; // 出費
-    balance = [_method loadBalance]; // 残り
-    norma = [_method loadNorma];     // ノルマ
-    
+    [self labelReflesh];
     NSString *temp;
+    DNSLog(@"ナビゲーション：%@から%@",[_method loadStart],[_method loadEnd]);
     temp = [[_translateFormat formatterDateUltimate:[_method loadStart] addYear:NO addMonth:YES addDay:YES addHour:NO addMinute:NO addSecond:NO] stringByAppendingString:@"~"];
     temp = [temp stringByAppendingString:[_translateFormat formatterDateUltimate:[_method loadEnd] addYear:NO addMonth:YES addDay:YES addHour:NO addMinute:NO addSecond:NO]];
     MainNavigationBar.topItem.title = temp;
-    BudgetLabel.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];
-    ExpenseLabel.text = [_translateFormat stringFromNumber:expense addComma:YES addYen:YES];
-    BalanceLabel.text = [_translateFormat stringFromNumber:balance addComma:YES addYen:YES];
-    NormaLabel.text = [_translateFormat stringFromNumber:norma addComma:YES addYen:YES];
     tempKind = @"出費";
-
+    
     [self makeGraph];
 }
 
@@ -95,99 +100,17 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
-#pragma mark - なんかよくする処理たち
-- (void)makeGraph{
-    if(graph != NULL)
-        [graph removeFromSuperview];
-    
-    if([balance compare:norma] == NSOrderedDescending){
-        balance = @([balance intValue] - [norma intValue]);
-    }else{
-        balance = @0;
-        norma = @([budget intValue] - [expense intValue]);
+
+#pragma mark - Storyboardで画面遷移する前に呼ばれるあれ
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"showOptionView"]) {
+        //FIXME:ここでデータを渡すといいんじゃないか
+    }else if([segue destinationViewController] == [self.storyboard instantiateViewControllerWithIdentifier:@"Deposit"]){
+        // TODO: 貯金画面行くときに渡すデータ
     }
-    graph = [_graph makeGraph:expense Balance:balance Norma:norma];
-    
-    [LogScroll addSubview:graph];
-}
-
-#pragma mark - UITableView関係
-- (NSInteger)numberOfSectionsInTableiew:(UITableView *)tableView
-{
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    NSInteger count = [_method loadLog];
-    if(count >= 10)
-        count = 10;
-    DNSLog(@"Number of Rows : %d",count);
-    return count;
-}
-
-// セルの内容を返させる
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    DNSLog(@"Cell for Row :%d",indexPath.row);
-    static NSString *CellIdentifier = @"Log";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if( [_method loadLog] != 0 ){
-        UILabel *logDate      = (UILabel *)[cell viewWithTag:1];
-        UILabel *logKind      = (UILabel *)[cell viewWithTag:2];
-        UITextField *logValue = (UITextField *)[cell viewWithTag:3];
-        if([_method loadMoneyValue:0] != NULL){
-            logValue.text = [_translateFormat stringFromNumber:[_method loadMoneyValue:indexPath.row] addComma:YES addYen:YES];
-            logKind.text = [_method loadKind:indexPath.row];
-            logDate.text = [_translateFormat formatterDate:[_method loadDate:indexPath.row]];
-        }
-    }
-    return cell;
-}
-
-//なんかフリックで消したかった
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        DNSLog(@"Delete At %d Row",indexPath.row);
-        // TODO: 消したのに応じて予算とか計算し直さんとあかんな
-        
-        [_method deleteLog:indexPath.row];
-        //ラベルの更新
-        budget = [_method loadBudget];
-        expense = [_method loadExpense];
-        balance = [_method loadBalance];
-        norma = [_method loadNorma];
-        BudgetLabel.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];
-        ExpenseLabel.text = [_translateFormat stringFromNumber:expense addComma:YES addYen:YES];
-        BalanceLabel.text = [_translateFormat stringFromNumber:balance addComma:YES addYen:YES];
-        NormaLabel.text = [_translateFormat stringFromNumber:norma addComma:YES addYen:YES];
-        //グラフの更新
-        
-        [self makeGraph];
-        
-        // アニメーションさせたら落ちる
-		// [tableView deleteRowsAtIndexPaths: [NSArray arrayWithObject:indexPath] withRowAnimation: UITableViewRowAnimationFade];
-        [tableView reloadData];
-        [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollView])];
-    }
-}
-
-//選択解除
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - 出費・収入・残高調整 関係
-- (IBAction)expenseTextField_begin:(id)sender {
-    expenseTextField.inputAccessoryView =
-    [self makeNumberPadToolbar:@"完了"
-                          Done:@selector(doneExpenseTextField)
-                        Cancel:@selector(cancelExpenseTextField)];
-    
-    CGPoint scrollPoint = CGPointMake(0.0,200.0);
-    [LogScroll setContentOffset:scrollPoint animated:YES];
-}
-
 - (IBAction)KindSegment_click:(id)sender {
     switch (KindSegment.selectedSegmentIndex) {
         case 0:
@@ -202,9 +125,23 @@
     }
 }
 
-//ログのテキストフィールドを編集しようとしたとき
-- (IBAction)valueTextField_begin:(id)sender {
-//TODOログを選択したときのスクロールとか実装したいな
+- (IBAction)expenseTextField_begin:(id)sender {
+    expenseTextField.inputAccessoryView =
+    [self makeNumberPadToolbar:@"完了"
+                          Done:@selector(doneExpenseTextField)
+                        Cancel:@selector(cancelExpenseTextField)];
+    CGPoint scrollPoint = CGPointMake(0.0,200.0);
+
+    [LogScroll setContentOffset:scrollPoint animated:YES];
+}
+
+- (IBAction)expenseTextField_end:(id)sender {
+    /* あとでかく
+    expenseTextField.text = @"";             //テキストフィールドの値を消す
+    [expenseTextField resignFirstResponder]; // NumberPad消す(=テキストフィールドを選択していない状態にする)
+
+    [LogScroll setContentOffset:CGPointZero animated:YES];
+     */
 }
 
 // Numberpadに追加したボタンの動作
@@ -212,25 +149,38 @@
     // 値が入っている場合
     if([expenseTextField.text length] >= 1) {
         NSNumber *tempExpense = [_translateFormat numberFromString:expenseTextField.text];
-        [_method saveMoneyValue:tempExpense Date:[NSDate date] Kind:tempKind];
-        [_method calcvalue:tempExpense Kind:KindSegment.selectedSegmentIndex];
-        expenseTextField.text = @""; //テキストフィールドの値を消す
-        
-        budget = [_method loadBudget];
-        expense = [_method loadExpense];
-        balance = [_method loadBalance];
+        if([tempExpense compare:@1000000] == NSOrderedAscending){ // 100万以下なら
+            // セルの個数が10個以上のとき9個に減らす
+            if([_editLog.log count] >= 10){
+                [_editLog removeObjectsCount:10];
+                [logTableView reloadData];
+            }
+            NSNumber *tempExpense = [_translateFormat numberFromString:expenseTextField.text];
+            [_editLog saveMoneyValue:tempExpense Date:[NSDate date] Kind:tempKind];
 
-        BudgetLabel.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];
-        ExpenseLabel.text = [_translateFormat stringFromNumber:expense addComma:YES addYen:YES];
-        BalanceLabel.text = [_translateFormat stringFromNumber:balance addComma:YES addYen:YES];
+            [_method calcvalue:tempExpense Kind:KindSegment.selectedSegmentIndex];
+            expenseTextField.text = @""; //テキストフィールドの値を消す
 
-        [logTableView reloadData];               // TableViewをリロード
+            [self labelReflesh];
 
-        [self makeGraph];
+            [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollViewWithCount:[_editLog.log count]])]; //スクロールビューをフィットさせる
 
-        [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollView])]; //スクロールビューをフィットさせる
-        CGPoint scrollPoint = CGPointMake(0.0,45.0);
-        [LogScroll setContentOffset:scrollPoint animated:YES];
+            // FIXME: なんかガクッと移動して美しくない
+            [LogScroll setContentOffset:CGPointMake(0.0, 45.0) animated:YES];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+            [logTableView insertRowsAtIndexPaths: [NSArray arrayWithObject:indexPath]
+                                withRowAnimation: UITableViewRowAnimationRight];
+            [self makeGraph];
+        }else{ // 100万以上なら
+            // FIXME: 誰かまじめに書いて
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"100万以上の出費とか"
+                                                            message:@"お前どんだけ金持ちやねん"
+                                                           delegate:nil
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:@"反省する", nil];
+            [alert show];
+            return;
+        }
     }else{
         [LogScroll setContentOffset:CGPointZero animated:YES];
     }
@@ -241,9 +191,102 @@
 -(void)cancelExpenseTextField{
     expenseTextField.text = @""; //テキストフィールドの値を消す
     [expenseTextField resignFirstResponder]; // NumberPad消す(=テキストフィールドを選択していない状態にする)
-    
-    [LogScroll setContentOffset:CGPointZero animated:YES];
 
+    [LogScroll setContentOffset:CGPointZero animated:YES];
+}
+
+#pragma mark - なんかよくする処理たち
+- (void)makeGraph{
+    if([balance compare:norma] == NSOrderedDescending){
+        balance = @([balance intValue] - [norma intValue]);
+    }else{
+        balance = @0;
+        norma = @([budget intValue] - [expense intValue]);
+    }
+    if(graph != NULL)
+        [graph removeFromSuperview];
+    graph = [_graph makeGraph:expense Balance:balance Norma:norma];
+    [LogScroll addSubview:graph];
+}
+
+- (void)labelReflesh{
+    budget = [_method loadBudget];   // 予算
+    expense = [_method loadExpense]; // 出費
+    balance = [_method loadBalance]; // 残り
+    norma = [_method loadNorma];     // ノルマ
+
+    BudgetLabel.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];
+    ExpenseLabel.text = [_translateFormat stringFromNumber:expense addComma:YES addYen:YES];
+    BalanceLabel.text = [_translateFormat stringFromNumber:balance addComma:YES addYen:YES];
+    NormaLabel.text = [_translateFormat stringFromNumber:norma addComma:YES addYen:YES];
+}
+
+#pragma mark - UITableView関係
+// セクションの数
+- (NSInteger)numberOfSectionsInTableiew:(UITableView *)tableView
+{
+    return 1; // 1固定
+}
+
+// セルの数
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return _editLog.log.count;
+}
+
+// セルの内容を返させる
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Log";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if( [_editLog.log count] != 0 ){
+        UILabel *logDate      = (UILabel *)[cell viewWithTag:1];
+        UILabel *logKind      = (UILabel *)[cell viewWithTag:2];
+        UITextField *logValue = (UITextField *)[cell viewWithTag:3];
+        if(_editLog.log != nil){
+            logValue.text = [_translateFormat stringFromNumber:[_editLog loadMoneyValueAtIndex:indexPath.row] addComma:YES addYen:YES];
+            logKind.text = [_editLog loadKindAtIndex:indexPath.row];
+            logDate.text = [_translateFormat formatterDate:[_editLog loadDateAtIndex:indexPath.row]];
+        }
+    }
+    return cell;
+}
+
+// フリックで消すやつ
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        DNSLog(@"Delete At %d Row",indexPath.row);
+        [_method calcDeletevalue:[_editLog loadMoneyValueAtIndex:indexPath.row]
+                            Kind:[_editLog loadKindAtIndex:indexPath.row]];
+
+        [_editLog reviveToLog]; // お墓から生き返らせる
+        [tableView reloadData]; // 生き返ったのを反映させる
+        [_editLog deleteLogAtIndex:indexPath.row];
+        
+        //ラベルの更新
+        budget = [_method loadBudget];
+        expense = [_method loadExpense];
+        balance = [_method loadBalance];
+        norma = [_method loadNorma];
+        BudgetLabel.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];
+        ExpenseLabel.text = [_translateFormat stringFromNumber:expense addComma:YES addYen:YES];
+        BalanceLabel.text = [_translateFormat stringFromNumber:balance addComma:YES addYen:YES];
+        NormaLabel.text = [_translateFormat stringFromNumber:norma addComma:YES addYen:YES];
+        
+        //グラフの更新
+        [self makeGraph];
+
+        // アニメーション
+		[tableView deleteRowsAtIndexPaths: [NSArray arrayWithObject:indexPath] withRowAnimation: UITableViewRowAnimationFade];
+
+        //FIXME: なんかキモい
+        [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollViewWithCount:[_editLog.log count]])];
+    }
+}
+
+//選択解除
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - その他
@@ -251,7 +294,7 @@
     // Toolbarつくる
     UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
     numberToolbar.barStyle = UIBarStyleBlackTranslucent;
-
+    
     // Toolbarのボタンたち
     UIBarButtonItem *doneButton =
     [[UIBarButtonItem alloc] initWithTitle: string
@@ -263,7 +306,7 @@
                                      style: UIBarButtonItemStyleBordered
                                     target: self
                                     action: cancel];
-
+    
     UIBarButtonItem *frexibleSpace =
     [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace
                                                   target: nil
@@ -272,11 +315,5 @@
     [numberToolbar sizeToFit];
     return numberToolbar;
 }
-
-//完了を押したときの動作
-- (IBAction)End_down:(id)sender {
-    [expenseTextField resignFirstResponder];
-}
-
 
 @end

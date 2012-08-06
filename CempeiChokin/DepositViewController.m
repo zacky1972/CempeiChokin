@@ -41,6 +41,16 @@
 
 }
 
+#pragma mark - Storyboardで画面遷移する前に呼ばれるあれ
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"showBudgetView_done"]) {
+        //FIXME:ここでデータを渡すといいんじゃないか
+    }
+    if ([segue.identifier isEqualToString:@"showBudgetView_skip"]) {
+        //FIXME:ここでデータを渡すといいんじゃないか
+    }
+}
+
 //タイトルを決定する
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     NSString *temp;
@@ -86,8 +96,25 @@
 
 #pragma mark - ボタンたち
 - (IBAction)doneButton:(id)sender {
-    // TODO: 要検討
-    [_method saveDeposit:depositValue];
+    DNSLog(@"完了きたで！");
+
+    [_method saveDeposit:depositValue Date:[_method loadEnd] ];
+    if([_method searchFinish] == YES){//終了！
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"貯金がたまりました！" message:@"おめでとうございます！" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        UIAlertView *nextalert = [[UIAlertView alloc] initWithTitle:@"次を決めましょう！" message:nil delegate:nil cancelButtonTitle:@"次のものへ" otherButtonTitles:@"今はいいや",nil];
+        [nextalert show];
+        //とりあえず抹消して次にいけるようにしたよ
+        
+    }else if ([_method searchLastNorma] == YES){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"最終期限が来てしまいました" message:@"もやし食えよ" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        UIAlertView *nextalert = [[UIAlertView alloc] initWithTitle:@"どうする？" message:@"あと何円足りません" delegate:nil cancelButtonTitle:@"期限を延ばす" otherButtonTitles:@"あきらめる",nil];
+        [nextalert show];
+        
+    }else{
+        //まだ終わらないよ！
+    }
 }
 
 - (IBAction)laterButton:(id)sender {

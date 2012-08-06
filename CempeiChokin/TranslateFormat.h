@@ -22,4 +22,9 @@
 - (NSString *)formatterDateUltimate:(NSDate *)date addYear:(BOOL)year addMonth:(BOOL)month addDay:(BOOL)day
                             addHour:(BOOL)hour addMinute:(BOOL)minute addSecond:(BOOL)second;
 
+// 許されない
+- (NSDate *)dateOnly:(NSDate *)date;
+- (NSDate *)nineHoursLater:(NSDate *)date;
+- (NSDate *)nineHoursEarly:(NSDate *)date;
+- (BOOL)equalDate:(NSDate *)date1 Vs:(NSDate *)date2;
 @end

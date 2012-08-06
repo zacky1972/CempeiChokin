@@ -52,6 +52,18 @@
 
 - (IBAction)deleteDataButton_down:(id)sender {
     [_method deleteData];
+    [[EditLog alloc] deleteLogData];
+}
+
+
+#pragma mark - Storyboardで画面遷移する前に呼ばれるあれ
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"showGoalView"]) {
+        //FIXME:ここでデータを渡すといいんじゃないか
+    }
+    if ([segue.identifier isEqualToString:@"showBudgetView"]) {
+        //FIXME:ここでデータを渡すといいんじゃないか
+    }
 }
 
 @end

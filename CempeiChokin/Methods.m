@@ -6,13 +6,14 @@
 //  Copyright (c) 2012年 CEMPEI. All rights reserved.
 //
 #import "Methods.h"
+#import "TranslateFormat.h"
 
 @interface Methods (){
+    TranslateFormat *_translateFormat;
     NSNumber *bud;
     NSNumber *expense;
     NSNumber *balance;
     NSNumber *norma;
-    NSMutableArray *deposit;
 }
 @end
 
@@ -33,7 +34,6 @@
     if( [[NSFileManager defaultManager] fileExistsAtPath:path] == NO ){                     //Data.plistがなかったら
         [[NSFileManager defaultManager] createFileAtPath:path contents:nil attributes:nil]; //作成する
         root = [[NSMutableDictionary alloc] init];
-        [root setObject:@0 forKey:@"NextAlert"];
     }else{                      //あったら
         [self loadData];
     }
@@ -69,7 +69,7 @@
         DNSLog(@"filesize:%llu",fileSize);
         if (fileSize != 0) {//ファイルサイズが0バイトじゃなかったら
             [self loadData];
-        
+            
             if([goal objectForKey:@"Name"]   == nil || [goal objectForKey:@"Value"] == nil ||
                [goal objectForKey:@"Period"] == nil || [now objectForKey:@"Start"]  == nil ||
                [now objectForKey:@"End"]     == nil || [now objectForKey:@"Budget"] == nil ){return 0;}
@@ -85,13 +85,16 @@
                 tempday1 = (int)(since / (60 * 60 * 24));
                 since = [[self loadStart] timeIntervalSinceDate:[self loadEnd]];
                 tempday2 = (int)(since / (60 * 60 * 24));
-                
-                //norma = @0;    //ノルマ
                 norma = @( ( ( [[self loadValue] intValue] - [[self loadDeposit] intValue] ) / tempday1 ) * tempday2 );
                 balance = @( [[self loadBudget] intValue] - [[self loadNorma] intValue] );
+                depolog = [[NSMutableArray alloc] init];
+                [self saveDeposit:@0 Date:[self loadEnd]];
+                
                 [root setObject:expense forKey:@"Expense"];
                 [root setObject:balance forKey:@"Balance"];
                 [root setObject:norma forKey:@"Norma"];
+                [root setObject:depolog forKey:@"Deposit"];
+                [root setObject:@0 forKey:@"NextAlert"];
                 [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
             }
             DNSLog(@"root:%@",root);
@@ -112,14 +115,15 @@
 //目標のあれこれを一気に保存する
 - (void)saveName:(NSString *)name Value:(NSNumber *)value Period:(NSDate *)period{
     DNSLog(@"プロパティリストに保存！");
+    _translateFormat = [TranslateFormat alloc];
     goal = [[NSMutableDictionary alloc] init];
     [goal setObject:name forKey:@"Name"];       //とりあえずgoalに値を上書き
     [goal setObject:value forKey:@"Value"];
-    [goal setObject:period forKey:@"Period"];
+    [goal setObject:[_translateFormat dateOnly:[_translateFormat nineHoursLater:period]] forKey:@"Period"];
     [root setObject:goal forKey:@"Goal"];
     DNSLog(@"root:%@",root);
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
-
+    
 }
 
 #pragma mark - 今回のアレ(Now)関係
@@ -131,64 +135,13 @@
 //予算のあれこれを一気に保存する
 - (void)saveStart:(NSDate *)start End:(NSDate *)end Budget:(NSNumber *)budget{
     DNSLog(@"プロパティリストに保存！");
+    _translateFormat = [TranslateFormat alloc];
     now = [[NSMutableDictionary alloc] init];
-    [now setObject:start forKey:@"Start"];      //とりあえずnowに値を上書き
+    [now setObject:[_translateFormat dateOnly:[_translateFormat nineHoursLater:start]] forKey:@"Start"];      //とりあえずnowに値を上書き
     [now setObject:budget forKey:@"Budget"];
-    [now setObject:end forKey:@"End"];
+    [now setObject:[_translateFormat dateOnly:[_translateFormat nineHoursLater:end]] forKey:@"End"];
     [root setObject:now forKey:@"Now"];
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
-}
-
-#pragma mark - 履歴(Log)関係
-//保存系
-//金額を読み込んで返す
-- (NSNumber *)loadMoneyValue:(NSUInteger)cursor{
-    tempMoneyValue = [log objectAtIndex:cursor];
-    DNSLog(@"MoneyValue:%@",[tempMoneyValue objectForKey:@"MoneyValue"]);
-    return [tempMoneyValue objectForKey:@"MoneyValue"];
-}
-
-//日付を読み込んで返す
-- (NSDate *)loadDate:(NSUInteger)cursor{
-    tempMoneyValue = [log objectAtIndex:cursor];
-    return [tempMoneyValue objectForKey:@"Date"];
-}
-
-//種類を読み込んで返す
-- (NSString *)loadKind:(NSUInteger)cursor{
-    tempMoneyValue = [log objectAtIndex:cursor];
-    return [tempMoneyValue objectForKey:@"Kind"];
-}
-
-//金額のあれこれを一気に保存する
-- (void)saveMoneyValue:(NSNumber *)value Date:(NSDate *)date Kind:(NSString *)kind{
-    DNSLog(@"金額のあれこれを保存！");
-    // FIXME: Logの中身を新たに作って上書きしてるから値が一個にしかならんで！
-    if(log == nil){
-        log = [[NSMutableArray alloc] init];
-    }
-    tempMoneyValue = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                    value, @"MoneyValue",
-                                    date, @"Date",
-                                    kind, @"Kind", nil];
-    [log insertObject:tempMoneyValue atIndex:0];
-    if([log count] > 20)
-        [log removeObjectAtIndex:20];
-    [root setObject:log forKey:@"Log"];
-    [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
-    DNSLog(@"log:%@",log);
-}
-
-//指定のログを削除する
-- (void)deleteLog:(NSUInteger)cursor{
-    DNSLog(@"%d番目のログを削除します！",cursor);
-    DNSLog(@"%@",log);
-    //読み込んで
-    [self calcDeletevalue:[[log objectAtIndex:cursor] objectForKey:@"MoneyValue"] Kind:[[log objectAtIndex:cursor] objectForKey:@"Kind"]];//値一致させて
-    [log removeObjectAtIndex:cursor];           //で，実際にログを消す
-    [root setObject:log forKey:@"Log"];
-    [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
-    DNSLog(@"%@",root)
 }
 
 #pragma mark - 初期設定関係
@@ -220,19 +173,17 @@
             break;
         case 2://調整
             DNSLog(@"調整の処理！");
-            //TODO:あとでする
-            /*
-            NSNumber *tempMargin;
-            tempMargin = @([bud intValue] - [value intValue]);     //誤差
-            DNSLog(@"tempMargin:%@",[[log objectAtIndex:0] objectForKey:@"MoneyValue"]);
-            
-            expense = @( [expense intValue] - [tempMargin intValue] );
-            balance = @([bud intValue] - [expense intValue]);
-            [[log objectAtIndex:0] setObject:tempMargin forKey:@"MoneyValue"];
-            [root setObject:log forKey:@"Log"];
-             */
+            if ([balance intValue] > [value intValue]) {
+                DNSLog(@"誤差:%d", [expense intValue] - [value intValue]);
+                expense = @( [expense intValue] + ( [balance intValue] - [value intValue] ) );
+                balance = @([bud intValue] - [expense intValue]);
+            }else{
+                DNSLog(@"誤差:%d", [expense intValue] - [value intValue]);
+                expense = @( [expense intValue] - ( [value intValue] - [balance intValue] ) );
+                balance = @([bud intValue] - [expense intValue]);
+            }
             break;
-
+            
     }
     [root setObject:expense forKey:@"Expense"];
     [root setObject:balance forKey:@"Balance"];
@@ -246,6 +197,7 @@
     DNSLog(@"delete用の計算するよ");
     DNSLog(@"\nRoot:%@",root);
     // FIXME: ここで読み込みかなんかしないと初回起動以外だと値が消えるっぽい
+
     expense = [self loadExpense];
     balance = [self loadBalance];
     bud = [self loadBudget];
@@ -275,14 +227,14 @@
             DNSLog(@"調整のdelete処理！");
             //TODO: いくら誤差があったかがわからないので計算できない
             /*
-            if ([balance intValue] > [value intValue]) {
-                expense = @( [expense intValue] - 誤差 );
-                balance = @([bud intValue] - [expense intValue]);
-            }else{
-                DNSLog(@"誤差:%d", [expense intValue] - [value intValue]);
-                expense = @( [expense intValue] + 誤差 );
-                balance = @([bud intValue] - [expense intValue]);
-            }
+             if ([balance intValue] > [value intValue]) {
+             expense = @( [expense intValue] - 誤差 );
+             balance = @([bud intValue] - [expense intValue]);
+             }else{
+             DNSLog(@"誤差:%d", [expense intValue] - [value intValue]);
+             expense = @( [expense intValue] + 誤差 );
+             balance = @([bud intValue] - [expense intValue]);
+             }
              */
             break;
     }
@@ -291,10 +243,8 @@
     [root setObject:balance forKey:@"Balance"];
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
     DNSLog(@"delete完了チェック:%@",root);
-
+    
 }
-
-
 
 //ログ読み込み
 - (NSInteger)loadLog{
@@ -305,58 +255,117 @@
 
 #pragma mark - 貯金(Deposit)関係
 //貯金額を保存
-- (void)saveDeposit:(NSNumber *)value{
+- (void)saveDeposit:(NSNumber *)value Date:(NSDate *)date{
     DNSLog(@"貯金保存！");
-    
-    
-    
-    //deposit = [self loadDeposit];
-    //deposit = @( [deposit intValue] + [value intValue] );
-    [root setObject:deposit forKey:@"Deposit"];
+    NSArray *tempDepolog = [[NSArray alloc] initWithObjects:value, date,  nil];
+    if ([root objectForKey:@"Deposit"] != nil) {
+        DNSLog(@"%@",[root objectForKey:@"Deposit"]);
+        depolog = [root objectForKey:@"Deposit"];
+        if ([[[depolog objectAtIndex:0] objectAtIndex:1] isEqualToDate:date] ==YES ){
+            DNSLog(@"詐欺貯金はいかんよ！");
+            [depolog removeObjectAtIndex:0];
+            DNSLog(@"depolog:%@",depolog);
+        }
+    }
+    [depolog insertObject:tempDepolog atIndex:0];
+    [root setObject:depolog forKey:@"Deposit"];
     [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
-    DNSLog(@"log:%@",root);
+    DNSLog(@"Depolog:%@",root);
 }
 
 //貯金額を呼び出し
-- (NSNumber *)loadDeposit{return [root objectForKey:@"Deposit"];}
-
-#pragma mark - 〆
-//期限を超えているかどうか調べる
-- (BOOL)searchNext{
-    DNSLog(@"期限チェック！");
-    NSDate *date = [NSDate date];
-    [self makeDataPath];
-    [self loadData];
-    DNSLog(@"はやいほう！：%@",[date earlierDate:[self loadEnd]]);
+- (NSNumber *)loadDeposit{
+    DNSLog(@"貯金総額計算するよ！");
+    NSInteger sumDeposit = 0;
+    depolog = [root objectForKey:@"Deposit"];
+    DNSLog(@"%@",[[depolog objectAtIndex:0] objectAtIndex:0]);
     
-    DNSLog(@"date:%@",[self loadEnd]);
-    if ( [date earlierDate:[self loadEnd]] != date ) {
-        DNSLog(@"期限きれた！");
-        if ([self loadNextAlert] == YES) {
-            //TODO: 今は毎回ポップアップします
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"期限が来ました！" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alert show];
-            [root setObject:@1 forKey:@"NextAlert"];
-            [root writeToFile:path atomically:YES];     //それでrootをdata.plistに書き込み
-            return YES;
-        }
+    for (NSInteger i = 0; i < [depolog count]; i++) {
+        sumDeposit = sumDeposit + [[[depolog objectAtIndex:i] objectAtIndex:0] intValue];
     }
-    DNSLog(@"期限きれてない！");
-    return NO;
+    return [NSNumber numberWithInt:sumDeposit];
 }
 
-//アラートするかどうか返す
-- (Boolean)loadNextAlert{
-    [self makeDataPath];
-    [self loadData];
-    if ([root objectForKey:@"NextAlert"] == @1) {
+
+ #pragma mark - 〆
+//TODO:
+//期限を超えているかどうか調べる
+ - (BOOL)searchNext{
+     DNSLog(@"期限チェック！");
+     _translateFormat = [TranslateFormat alloc];
+     NSDate *date = [_translateFormat dateOnly:[_translateFormat nineHoursLater:[NSDate date]]];
+     [self makeDataPath];
+     [self loadData];
+     DNSLog(@"今日:%@",date);
+     DNSLog(@"期限日:%@",[self loadEnd]);
+     DNSLog(@"はやいほう！：%@",[date earlierDate:[self loadEnd]]);
+ 
+     DNSLog(@"date:%@",[self loadEnd]);
+     //TODO:年月日だけで比較しないと恐ろしいことになる
+     if ([_translateFormat equalDate:date Vs:[self loadEnd]]) {//今日が期限日じゃなくて
+         DNSLog(@"同じ日やないわ！");
+         if([date earlierDate:[self loadEnd]] != date){//期限日より後
+             DNSLog(@"期限きれた！");
+             
+             if ([self loadNextAlert] == YES) {
+                 DNSLog(@"催促するわ！");
+                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"期限が来ました！" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                 [alert show];
+                 [root setObject:@1 forKey:@"NextAlert"];   //もう警告がでないようにする
+                 [root writeToFile:path atomically:YES];    //それでrootをdata.plistに書き込み
+                 return YES;
+             }else{
+                 DNSLog(@"もう催促したわ！");
+                 return NO;
+             }
+             
+         }else{//まだ期限内
+             //DNSLog(@"期限内やわ！");
+         }
+     }
+     DNSLog(@"期限きれてない！");
+     [root setObject:@0 forKey:@"NextAlert"];   //もう警告がでないようにする
+     [root writeToFile:path atomically:YES];    //それでrootをdata.plistに書き込み
+     return NO;
+ }
+ 
+ 
+ //アラートするかどうか返す
+ - (Boolean)loadNextAlert{
+     [self makeDataPath];
+     [self loadData];
+     if ([root objectForKey:@"NextAlert"] == @1) {
+         return NO;
+     }
+     return YES;
+ }
+ 
+//貯金が溜まったかどうか調べる
+- (BOOL)searchFinish{
+    DNSLog(@"たまった？");
+    if ([self loadValue] ==  [self loadDeposit]) {
+        DNSLog(@"たまった！");
+        return YES;
+    }else{
+        DNSLog(@"たまってない…");
         return NO;
     }
-    return YES;
+
 }
 
+- (BOOL)searchLastNorma{
+    DNSLog(@"最後の期間？");
+    if ([[self loadEnd] isEqualToDate:[self loadPeriod]] == YES) {
+        DNSLog(@"最後！");
+        return YES;
+    }else{
+        DNSLog(@"まだまだ！");
+        return NO;
+    }
+}
 
 #pragma mark - その他
+/*
 //スクロールビューの大きさを変更
 - (float)fitScrollView{
     DNSLog(@"ビューをフィット！");
@@ -373,7 +382,14 @@
     }
     height = 779 + 45 * height;
     return [[[NSNumber alloc] initWithInt:height] floatValue];
-}
+}*/
 
+//スクロールビューの大きさを変更 改
+- (float)fitScrollViewWithCount:(NSUInteger)count{
+    DNSLog(@"ビューをフィット！");
+    float height;
+    height = 779 + 45 * count;
+    return height;
+}
 
 @end

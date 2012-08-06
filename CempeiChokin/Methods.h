@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "EditLog.h"
 #import "TranslateFormat.h"
 
 @interface Methods : NSObject {
@@ -16,7 +17,7 @@
     NSMutableDictionary *goal;
     NSMutableDictionary *now;
     NSMutableArray *log;
-    NSMutableDictionary *depolog;
+    NSMutableArray *depolog;
     NSMutableDictionary *tempMoneyValue;
 }
 
@@ -40,15 +41,6 @@
               End:(NSDate *)end
            Budget:(NSNumber *)budget;          //予算のあれこれを一気に保存する
 
-//メイン画面で値を保存するとか
-- (NSNumber *)loadMoneyValue:(NSUInteger)cursor;        //金額を読み込んで返す
-- (NSDate *)loadDate:(NSUInteger)cursor;              //日付を読み込んで返す
-- (NSString *)loadKind:(NSUInteger)cursor;              //種類を読み込んで返す
-- (void)saveMoneyValue:(NSNumber *)value
-                  Date:(NSDate *)date
-                  Kind:(NSString *)kind;        //金額のあれこれを一気に保存する
-- (void)deleteLog:(NSUInteger)cursor;           //指定のログを削除する
-
 //メイン画面の初期設定とか
 - (NSNumber *)loadExpense;   //出費を返す
 - (NSNumber *)loadBalance;   //残りを返す
@@ -56,14 +48,19 @@
 - (void)calcvalue:(NSNumber *)value Kind:(NSInteger)kind;        //種類に応じた処理を行うよ
 - (void)calcDeletevalue:(NSNumber *)value Kind:(NSString *)kind;  //delete用，種類に応じた処理を行うよ
 
-- (NSInteger)loadLog;        //ログ読み込み
-- (float)fitScrollView;  //スクロールビューの大きさを変更
-
+// TODO: ちょっとあとまわし
+// - (float)fitScrollView;  //スクロールビューの大きさを変更
+- (float)fitScrollViewWithCount:(NSUInteger)count;
 //貯金(Deposit)関係
-- (void)saveDeposit:(NSNumber *)value;    //貯金額を保存
+- (void)saveDeposit:(NSNumber *)value Date:(NSDate *)date;    //貯金額を保存
 - (NSNumber *)loadDeposit;                //貯金額を呼び出し
+//- (NSNumber *)searchDeposit;
 //〆
 - (BOOL)searchNext;             //期限を超えているかどうか調べる
 - (Boolean)loadNextAlert;    //アラートするかどうか返す
+
+//一番最後
+- (BOOL)searchFinish;       //貯金が溜まったかどうか調べる
+- (BOOL)searchLastNorma;    //最後の期間かどうか調べる
 
 @end
