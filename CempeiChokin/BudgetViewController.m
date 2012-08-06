@@ -144,6 +144,8 @@
 }
 
 - (IBAction)endDateTextField_end:(id)sender {
+    
+    //全ての欄が入力されていれば完了を押せるようにする
     if(startDate != NULL && endDate != NULL && budget != NULL){
         DoneButton.enabled = YES;
     }
@@ -175,6 +177,8 @@
 }
 
 - (IBAction)budgetTextField_end:(id)sender{
+    
+    //全ての欄が入力されていれば完了を押せるようにする
     if(startDate != NULL && endDate != NULL && budget != NULL){
         DoneButton.enabled = YES;
     }

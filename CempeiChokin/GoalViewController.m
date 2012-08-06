@@ -86,6 +86,8 @@
 - (IBAction)NameTextField_next:(id)sender {
     name = NameTextField.text;
     [ValueTextField becomeFirstResponder];  //ValueTextFieldに移動
+    
+    //全ての欄が入力されていれば完了を押せるようにする
     if(name != NULL && value != NULL && period != NULL){
         DoneButton.enabled = YES;
     }
@@ -99,6 +101,11 @@
 #pragma mark - 金額の設定
 // 金額の設定
 - (IBAction)ValueTextField_begin:(id)sender {
+    
+    //期限のテキストフィールドを編集できないようにする
+    PeriodTextField.enabled = NO;
+    
+    
     // NumberPadにToolbarつける
     ValueTextField.inputAccessoryView =
     [self makeNumberPadToolbar:@"次へ"
@@ -111,9 +118,13 @@
 
 - (IBAction)ValueTextField_end:(id)sender {
 
+    //全ての欄が入力されていれば完了を押せるようにする
     if(name != NULL && value != NULL && period != NULL){
         DoneButton.enabled = YES;
     }
+    
+    //期限のテキストフィールドを編集できるようにする
+    PeriodTextField.enabled = YES;
     
     // 既に値が入っていた場合
     if(value != NULL){
@@ -161,6 +172,8 @@
      
 }
 - (IBAction)PeriodTextField_end:(id)sender {
+    
+    //全ての欄が入力されていれば完了を押せるようにする
     if(name != NULL && value != NULL && period != NULL){
         DoneButton.enabled = YES;
     }
