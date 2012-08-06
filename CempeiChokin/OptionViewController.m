@@ -52,7 +52,8 @@
 
 - (IBAction)deleteDataButton_down:(id)sender {
     [_method deleteData];
-    [[EditLog alloc] deleteLogData];
+    // TODO: データ渡すようにしたら治す必要がありまーす
+    [[[EditLog alloc] init] deleteLogData];
 }
 
 
