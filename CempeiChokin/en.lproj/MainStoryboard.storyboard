@@ -981,7 +981,7 @@
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="laterButton:" destination="ppr-eV-5bM" eventType="touchUpInside" id="rZO-7P-KcA"/>
+                                        <action selector="laterButton_down:" destination="ppr-eV-5bM" eventType="touchUpInside" id="vld-2S-LhF"/>
                                         <segue destination="iwI-JE-99H" kind="push" identifier="showBudgetView_skip" id="fhM-kk-tX0"/>
                                     </connections>
                                 </button>
@@ -997,7 +997,8 @@
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="doneButton:" destination="ppr-eV-5bM" eventType="touchUpInside" id="5Zi-Bb-awY"/>
+                                        <action selector="DoneButton_down:" destination="ppr-eV-5bM" eventType="touchUpInside" id="jYO-Kc-Dh5"/>
+                                        <action selector="doneButton_down:" destination="ppr-eV-5bM" eventType="touchUpInside" id="I69-Ks-BMw"/>
                                         <segue destination="iwI-JE-99H" kind="push" identifier="showBudgetView_done" id="Thm-lh-qM2"/>
                                     </connections>
                                 </button>
@@ -1015,7 +1016,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="10,000円" textAlignment="right" minimumFontSize="17" id="cls-ho-OXQ">
-                                                    <rect key="frame" x="60" y="6" width="231" height="31"/>
+                                                    <rect key="frame" x="62" y="6" width="231" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="textColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -1046,8 +1047,10 @@
                     <navigationItem key="navigationItem" title="貯金しよう" id="6hw-wE-5Wd"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="DoneButton" destination="LTo-l2-TNj" id="OVI-4d-CbD"/>
                         <outlet property="depositTableView" destination="N65-Gj-lmK" id="z92-7j-qEU"/>
                         <outlet property="depositTextField" destination="cls-ho-OXQ" id="GR4-K8-GSM"/>
+                        <outlet property="dobeButton" destination="XwI-nt-2fE" id="SfO-VK-J2B"/>
                     </connections>
                 </tableViewController>
             </objects>
@@ -1124,6 +1127,7 @@
                                                     <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                                     <connections>
                                                         <action selector="NameTextField_end:" destination="qPJ-4E-EOY" eventType="editingDidEndOnExit" id="Nc6-Jy-iaH"/>
+                                                        <action selector="NameTextField_end:" destination="qPJ-4E-EOY" eventType="editingDidEnd" id="bNG-RC-IEO"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="名前" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="izB-gQ-f3P">
@@ -1360,83 +1364,6 @@
     <resources>
         <image name="help.jpg" width="640" height="960"/>
     </resources>
-    <classes>
-        <class className="BudgetViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/BudgetViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="DoneButton_down:"/>
-                <relationship kind="action" name="budgetTextField_begin:"/>
-                <relationship kind="action" name="budgetTextField_end:"/>
-                <relationship kind="action" name="endDateTextField_begin:"/>
-                <relationship kind="action" name="endDateTextField_end:"/>
-                <relationship kind="action" name="laterButton_down:"/>
-                <relationship kind="action" name="startDateTextField_begin:"/>
-                <relationship kind="action" name="startDateTextField_end:"/>
-                <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="budgetTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="endDateTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="laterButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="startDateTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="DepositViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/DepositViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="depositTextField_begin:"/>
-                <relationship kind="action" name="doneButton:"/>
-                <relationship kind="action" name="laterButton:"/>
-                <relationship kind="outlet" name="depositTableView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="depositTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="FirstHelpViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/FirstHelpViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="DoneButton_down:"/>
-                <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="GoalViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="DoneButton_down:"/>
-                <relationship kind="action" name="NameTextField_end:"/>
-                <relationship kind="action" name="NameTextField_next:"/>
-                <relationship kind="action" name="PeriodTextField_begin:"/>
-                <relationship kind="action" name="PeriodTextField_end:"/>
-                <relationship kind="action" name="ValueTextField_begin:"/>
-                <relationship kind="action" name="ValueTextField_end:"/>
-                <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="NameTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="PeriodTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="ValueTextField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="MainViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="KindSegment_click:"/>
-                <relationship kind="action" name="expenseTextField_begin:"/>
-                <relationship kind="action" name="expenseTextField_end:"/>
-                <relationship kind="outlet" name="BalanceLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="BudgetLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="ExpenseLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="KindSegment" candidateClass="UISegmentedControl"/>
-                <relationship kind="outlet" name="LogScroll" candidateClass="UIScrollView"/>
-                <relationship kind="outlet" name="MainNavigationBar" candidateClass="UINavigationBar"/>
-                <relationship kind="outlet" name="NormaLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="expenseTextField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="logTableView" candidateClass="UITableView"/>
-            </relationships>
-        </class>
-        <class className="OptionViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/OptionViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="deleteDataButton_down:"/>
-                <relationship kind="outlet" name="deleteDataButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

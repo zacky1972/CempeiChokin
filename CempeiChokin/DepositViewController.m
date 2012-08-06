@@ -31,12 +31,16 @@
     [self makeNumberPadToolbar:depositTextField Return:@"完了"
                           Done:@selector(doneDepositTextField)
                         Cancel:@selector(cancelDepostiTextField)];
+    
+    if(depositValue){
+    }
 }
 
 - (void)viewDidUnload
 {
     depositTextField = nil;
     depositTableView = nil;
+    DoneButton = nil;
     [super viewDidUnload];
 
 }
@@ -95,11 +99,11 @@
 }
 
 #pragma mark - ボタンたち
-- (IBAction)doneButton:(id)sender {
+- (IBAction)DoneButton_down:(id)sender {
     DNSLog(@"完了きたで！");
 
     [_method saveDeposit:depositValue Date:[_method loadEnd] ];
-    if([_method searchFinish] == YES){//終了！
+    if([_method searchFinish] == YES){ //終了！
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"貯金がたまりました！" message:@"おめでとうございます！" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
         UIAlertView *nextalert = [[UIAlertView alloc] initWithTitle:@"次を決めましょう！" message:nil delegate:nil cancelButtonTitle:@"次のものへ" otherButtonTitles:@"今はいいや",nil];
@@ -117,7 +121,7 @@
     }
 }
 
-- (IBAction)laterButton:(id)sender {
+- (IBAction)laterButton_down:(id)sender {
     // ???: ここはどうすんの？
     
 }
