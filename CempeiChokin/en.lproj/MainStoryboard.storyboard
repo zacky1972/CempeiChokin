@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E2617" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="raj-cK-qeg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="raj-cK-qeg">
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
@@ -570,7 +570,7 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
                                                         <action selector="PeriodTextField_begin:" destination="NwY-zI-POI" eventType="editingDidBegin" id="8JR-lG-sR5"/>
-                                                        <action selector="PeriodTextField_end:" destination="NwY-zI-POI" eventType="editingDidEndOnExit" id="rLn-8S-IPQ"/>
+                                                        <action selector="PeriodTextField_end:" destination="NwY-zI-POI" eventType="editingDidEnd" id="ln6-rw-NyQ"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="いつまでに" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="I68-jf-m0t">
@@ -1366,11 +1366,16 @@
             <relationships>
                 <relationship kind="action" name="DoneButton_down:"/>
                 <relationship kind="action" name="budgetTextField_begin:"/>
+                <relationship kind="action" name="budgetTextField_end:"/>
                 <relationship kind="action" name="endDateTextField_begin:"/>
+                <relationship kind="action" name="endDateTextField_end:"/>
+                <relationship kind="action" name="laterButton_down:"/>
                 <relationship kind="action" name="startDateTextField_begin:"/>
+                <relationship kind="action" name="startDateTextField_end:"/>
                 <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="budgetTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="endDateTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="laterButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="startDateTextField" candidateClass="UITextField"/>
             </relationships>
         </class>
@@ -1410,10 +1415,9 @@
         <class className="MainViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>
             <relationships>
-                <relationship kind="action" name="End_down:"/>
                 <relationship kind="action" name="KindSegment_click:"/>
                 <relationship kind="action" name="expenseTextField_begin:"/>
-                <relationship kind="action" name="valueTextField_begin:"/>
+                <relationship kind="action" name="expenseTextField_end:"/>
                 <relationship kind="outlet" name="BalanceLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="BudgetLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="ExpenseLabel" candidateClass="UILabel"/>
