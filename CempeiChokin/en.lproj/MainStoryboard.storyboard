@@ -511,7 +511,8 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                                     <connections>
-                                                        <action selector="NameTextField_end:" destination="NwY-zI-POI" eventType="editingDidEndOnExit" id="JBD-LT-Dzv"/>
+                                                        <action selector="NameTextField_end:" destination="NwY-zI-POI" eventType="editingDidEnd" id="myA-S6-EIk"/>
+                                                        <action selector="NameTextField_next:" destination="NwY-zI-POI" eventType="editingDidEndOnExit" id="Rdo-ER-NWG"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="名前" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="tV5-U6-mcB">
@@ -569,7 +570,7 @@
                                                     <textInputTraits key="textInputTraits"/>
                                                     <connections>
                                                         <action selector="PeriodTextField_begin:" destination="NwY-zI-POI" eventType="editingDidBegin" id="8JR-lG-sR5"/>
-                                                        <action selector="PeriodTextField_end:" destination="NwY-zI-POI" eventType="editingDidEnd" id="6E0-wz-4E4"/>
+                                                        <action selector="PeriodTextField_end:" destination="NwY-zI-POI" eventType="editingDidEndOnExit" id="rLn-8S-IPQ"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="いつまでに" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="I68-jf-m0t">
@@ -1359,6 +1360,79 @@
     <resources>
         <image name="help.jpg" width="640" height="960"/>
     </resources>
+    <classes>
+        <class className="BudgetViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BudgetViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="DoneButton_down:"/>
+                <relationship kind="action" name="budgetTextField_begin:"/>
+                <relationship kind="action" name="endDateTextField_begin:"/>
+                <relationship kind="action" name="startDateTextField_begin:"/>
+                <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="budgetTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="endDateTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="startDateTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="DepositViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DepositViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="depositTextField_begin:"/>
+                <relationship kind="action" name="doneButton:"/>
+                <relationship kind="action" name="laterButton:"/>
+                <relationship kind="outlet" name="depositTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="depositTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="FirstHelpViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FirstHelpViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="DoneButton_down:"/>
+                <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="GoalViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="DoneButton_down:"/>
+                <relationship kind="action" name="NameTextField_end:"/>
+                <relationship kind="action" name="NameTextField_next:"/>
+                <relationship kind="action" name="PeriodTextField_begin:"/>
+                <relationship kind="action" name="PeriodTextField_end:"/>
+                <relationship kind="action" name="ValueTextField_begin:"/>
+                <relationship kind="action" name="ValueTextField_end:"/>
+                <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="NameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="PeriodTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="ValueTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="MainViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="End_down:"/>
+                <relationship kind="action" name="KindSegment_click:"/>
+                <relationship kind="action" name="expenseTextField_begin:"/>
+                <relationship kind="action" name="valueTextField_begin:"/>
+                <relationship kind="outlet" name="BalanceLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="BudgetLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="ExpenseLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="KindSegment" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="LogScroll" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="MainNavigationBar" candidateClass="UINavigationBar"/>
+                <relationship kind="outlet" name="NormaLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="expenseTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="logTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="OptionViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/OptionViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="deleteDataButton_down:"/>
+                <relationship kind="outlet" name="deleteDataButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

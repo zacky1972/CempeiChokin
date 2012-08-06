@@ -10,12 +10,14 @@
 
 @interface EditLog : NSObject
 
-@property(nonatomic, assign)NSMutableArray *log;
+@property(nonatomic, retain)NSMutableArray *log;
 
 // 配列にデータを追加
 - (void)saveMoneyValue:(NSNumber *)value Date:(NSDate *)date Kind:(NSString *)kind;
 // 配列のデータを削除
 - (void)deleteLogAtIndex:(NSUInteger)index;
+// 中身の数が決められた数を超えてる時に削除する
+- (void)removeObjectsCount:(NSUInteger)count;
 // 消していた配列を復活させる
 - (void)reviveToLog;
 
@@ -28,8 +30,6 @@
 - (NSString *)loadKindAtIndex:(NSUInteger)index;
 
 #pragma mark - その他
-// 中身の数が決められた数を超えてる時に削除する
-- (void)removeObjectsCount:(NSUInteger)count;
 - (void)deleteLogData;
 
 @end

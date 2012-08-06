@@ -7,12 +7,11 @@
 //
 
 #import "EditLog.h"
-#import "TranslateFormat.h"
-#import "Methods.h"
 
 @implementation EditLog{
     NSString *path;
     NSMutableDictionary *root;
+    NSMutableArray *vault;
 }
 
 @synthesize log;
@@ -22,21 +21,11 @@
     self = [super init];
     if(self){
         [self initData];
-        log = [self loadLogFromFile];
     }
     return self;
 }
 
-#pragma mark - ファイルの初期化
-// ファイル名を返す
-- (NSString *)makeDataPathOfLog{
-    NSString *home = NSHomeDirectory();
-    NSString *document = [home stringByAppendingPathComponent:@"Documents"]; // フォルダ名
-    NSString *datePath = [document stringByAppendingPathComponent:@"Log.plist"]; // ファイル名
-    DNSLog(@"ログのファイル: %@",datePath);
-    return datePath;
-}
-
+#pragma mark - ファイルの初期化系
 // ファイルの初期化
 - (void)initData{
     path = [self makeDataPathOfLog]; // ファイルの場所指定
@@ -47,13 +36,21 @@
         [self loadData];
     }
 }
-
+// ファイル名を返す
+- (NSString *)makeDataPathOfLog{
+    NSString *home = NSHomeDirectory();
+    NSString *document = [home stringByAppendingPathComponent:@"Documents"]; // フォルダ名
+    NSString *logPath = [document stringByAppendingPathComponent:@"Log.plist"]; // ファイル名
+    DNSLog(@"ログのファイル: %@",logPath);
+    return logPath;
+}
 // ファイルへデータの保存
 - (void)saveData{
     DNSLog(@"ログのデータ保存！");
+    [self saveLog];
+    [self saveVault];
     [root writeToFile:path atomically:YES];
 }
-
 // ファイルからデータの読み込み
 - (void)loadData{
     DNSLog(@"ログのデータ読み込み！");
@@ -61,22 +58,20 @@
     if(root == NULL){ // 読み込みに失敗した場合
         root = [[NSMutableDictionary alloc] init];
     }
+    [self loadLog];
+    [self loadVault];
 }
 
-#pragma mark - ログ
-// ログの読み込み
-- (NSMutableArray *)loadLogFromFile{
-    NSMutableArray *tempArray = [root objectForKey:@"Log"];
-    if(tempArray == NULL){ // 読み込みに失敗した場合
-        tempArray = [[NSMutableArray alloc] init];
-    }
-    return tempArray;
-}
-
-// ログの保存
-- (void)saveLogToFile{
+#pragma mark - Log
+// ログの保存・読み込み
+- (void)saveLog{
     [root setObject:log forKey:@"Log"];
-    [self saveData];
+}
+- (void)loadLog{
+    log = [root objectForKey:@"Log"];
+    if(log == NULL){ // 読み込みに失敗した場合
+        log = [[NSMutableArray alloc] init];
+    }
 }
 
 #pragma mark - 配列の操作
@@ -105,94 +100,14 @@
     DNSLog(@"log:%@",log);
     [self saveLogToFile]; // プロパティリストに保存
 }
-
-// 削除するやつ
+// 選んで削除するやつ
 - (void)deleteLogAtIndex:(NSUInteger)index{
     DNSLog(@"%d番目のログを削除します！",index);
     [log removeObjectAtIndex:index]; //で，実際にログを消す
-    [self saveLogToFile];
-}
-
-// 削除したあとにお墓から生き返らせる奴
-- (void)reviveToLog{
-    if([self checkVault] == YES){
-        NSDictionary *zombieLog = [self reviveFromVault];
-        [log addObject:zombieLog];
-    }
-}
-
-#pragma mark - 読み込む系
-// 金額を読み込んで返す
-- (NSNumber *)loadMoneyValueAtIndex:(NSUInteger)index{
-    NSDictionary *tempDictionary = [log objectAtIndex:index];
-    NSNumber *tempNumber = [tempDictionary objectForKey:@"MoneyValue"];
-    return tempNumber;
-}
-
-//日付を読み込んで返す
-- (NSDate *)loadDateAtIndex:(NSUInteger)index{
-    NSDictionary *tempDictionary = [log objectAtIndex:index];
-    NSDate *tempDate = [tempDictionary objectForKey:@"Date"];
-    return tempDate;
-}
-
-//種類を読み込んで返す
-- (NSString *)loadKindAtIndex:(NSUInteger)index{
-    NSDictionary *tempDictionary = [log objectAtIndex:index];
-    NSString *tempString = [tempDictionary objectForKey:@"Kind"];
-    return tempString;
-}
-
-#pragma mark - お墓
-// ログのお墓の読み込み
-- (NSMutableArray *)loadVaultFromFile{    
-    NSMutableArray *vault = [root objectForKey:@"Vault"];
-    if(vault == NULL){ // 読み込みに失敗した場合
-        vault = [[NSMutableArray alloc] init];
-    }
-    DNSLog(@"\nVault:%@",vault);
-    return vault;
-}
-
-// ログのお墓の保存
-- (void)saveVaultToFile:(NSMutableArray *)array{
-    [root setObject:array forKey:@"Vault"];
     [self saveData];
-    DNSLog(@"\nRoot:%@",root);
 }
-
-// お墓行き
-- (void)moveToVault:(NSDictionary *)dictionary{
-    NSMutableArray *vault = [self loadVaultFromFile];
-    [vault insertObject:dictionary atIndex:0]; // 墓に入れる
-
-    [self saveVaultToFile:vault]; // プロパティリストに保存
-}
-
-// 生き返り
-- (NSDictionary *)reviveFromVault{
-    NSMutableArray *vault = [self loadVaultFromFile];
-
-    NSDictionary *zombie = [vault objectAtIndex:0];
-    [vault removeObjectAtIndex:0];
-    [self saveVaultToFile:vault]; // プロパティリストに保存
-
-    return zombie;
-}
-
-- (BOOL)checkVault{
-    NSMutableArray *vault = [self loadVaultFromFile];
-    if([vault count] >= 1){
-        return YES;
-    }else{
-        return NO;
-    }
-}
-
-#pragma mark - その他
-// 何個以上だったら消すみたいなやつ
+// 何個以上だったらお墓に送るみたいな
 - (void)removeObjectsCount:(NSUInteger)count{
-    DNSLog(@"配列から消しまーす！");
     NSUInteger startNumber = count - 1;
     NSUInteger endNumber = [log count];
 
@@ -200,11 +115,64 @@
         [self moveToVault:[log objectAtIndex:startNumber]];
         [log removeObjectAtIndex:startNumber];
     }
+    [self saveData];
+}
+// お墓から生き返らせる奴
+- (void)reviveToLog{
+    if([self checkVault] == YES){
+        NSDictionary *zombieLog = [self reviveFromVault];
+        [log addObject:zombieLog];
+        [self saveData];
+    }
 }
 
+#pragma mark - 読み込む系
+// 金額を読み込んで返す
+- (NSNumber *)loadMoneyValueAtIndex:(NSUInteger)index{
+    return [[log objectAtIndex:index] objectForKey:@"MoneyValue"];
+}
+//日付を読み込んで返す
+- (NSDate *)loadDateAtIndex:(NSUInteger)index{
+    return [[log objectAtIndex:index] objectForKey:@"Date"];
+}
+//種類を読み込んで返す
+- (NSString *)loadKindAtIndex:(NSUInteger)index{
+    return [[log objectAtIndex:index] objectForKey:@"Kind"];
+}
+
+#pragma mark - お墓
+// ログのお墓の保存・読み込み
+- (void)saveVault{
+    [root setObject:vault forKey:@"Vault"];
+}
+- (void)loadVault{
+    vault = [root objectForKey:@"Vault"];
+    if(vault == NULL){ // 読み込みに失敗した場合
+        vault = [[NSMutableArray alloc] init];
+    }
+}
+// お墓行き
+- (void)moveToVault:(NSDictionary *)dictionary{
+    [vault insertObject:dictionary atIndex:0]; // 墓に入れる
+}
+// 生き返り
+- (NSDictionary *)reviveFromVault{
+    NSDictionary *zombie = [vault objectAtIndex:0];
+    [vault removeObjectAtIndex:0];
+    return zombie;
+}
+- (BOOL)checkVault{
+    if([vault count] >= 1)
+        return YES;
+    else
+        return NO;
+}
+
+#pragma mark - その他
 - (void)deleteLogData{
     DNSLog(@"データ削除！");
     [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+    [self initData];
 }
 
 @end

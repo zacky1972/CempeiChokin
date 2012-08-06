@@ -76,20 +76,12 @@
         }
     }
     //初期設定から戻ってきた時用
-    budget = [_method loadBudget];   // 予算
-    expense = [_method loadExpense]; // 出費
-    balance = [_method loadBalance]; // 残り
-    norma = [_method loadNorma];     // ノルマ
-    
+    [self labelReflesh];
     NSString *temp;
     DNSLog(@"ナビゲーション：%@から%@",[_method loadStart],[_method loadEnd]);
     temp = [[_translateFormat formatterDateUltimate:[_method loadStart] addYear:NO addMonth:YES addDay:YES addHour:NO addMinute:NO addSecond:NO] stringByAppendingString:@"~"];
     temp = [temp stringByAppendingString:[_translateFormat formatterDateUltimate:[_method loadEnd] addYear:NO addMonth:YES addDay:YES addHour:NO addMinute:NO addSecond:NO]];
     MainNavigationBar.topItem.title = temp;
-    BudgetLabel.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];
-    ExpenseLabel.text = [_translateFormat stringFromNumber:expense addComma:YES addYen:YES];
-    BalanceLabel.text = [_translateFormat stringFromNumber:balance addComma:YES addYen:YES];
-    NormaLabel.text = [_translateFormat stringFromNumber:norma addComma:YES addYen:YES];
     tempKind = @"出費";
     
     [self makeGraph];
@@ -116,20 +108,6 @@
     }else if([segue destinationViewController] == [self.storyboard instantiateViewControllerWithIdentifier:@"Deposit"]){
         // TODO: 貯金画面行くときに渡すデータ
     }
-}
-
-#pragma mark - なんかよくする処理たち
-- (void)makeGraph{
-    if([balance compare:norma] == NSOrderedDescending){
-        balance = @([balance intValue] - [norma intValue]);
-    }else{
-        balance = @0;
-        norma = @([budget intValue] - [expense intValue]);
-    }
-    if(graph != NULL)
-        [graph removeFromSuperview];
-    graph = [_graph makeGraph:expense Balance:balance Norma:norma];
-    [LogScroll addSubview:graph];
 }
 
 #pragma mark - 出費・収入・残高調整 関係
@@ -183,13 +161,7 @@
             [_method calcvalue:tempExpense Kind:KindSegment.selectedSegmentIndex];
             expenseTextField.text = @""; //テキストフィールドの値を消す
 
-            budget = [_method loadBudget];
-            expense = [_method loadExpense];
-            balance = [_method loadBalance];
-
-            BudgetLabel.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];
-            ExpenseLabel.text = [_translateFormat stringFromNumber:expense addComma:YES addYen:YES];
-            BalanceLabel.text = [_translateFormat stringFromNumber:balance addComma:YES addYen:YES];
+            [self labelReflesh];
 
             [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollViewWithCount:[_editLog.log count]])]; //スクロールビューをフィットさせる
 
@@ -223,23 +195,48 @@
     [LogScroll setContentOffset:CGPointZero animated:YES];
 }
 
-#pragma mark - UITableView関係
-- (NSInteger)numberOfSectionsInTableiew:(UITableView *)tableView
-{
-    return 1;
+#pragma mark - なんかよくする処理たち
+- (void)makeGraph{
+    if([balance compare:norma] == NSOrderedDescending){
+        balance = @([balance intValue] - [norma intValue]);
+    }else{
+        balance = @0;
+        norma = @([budget intValue] - [expense intValue]);
+    }
+    if(graph != NULL)
+        [graph removeFromSuperview];
+    graph = [_graph makeGraph:expense Balance:balance Norma:norma];
+    [LogScroll addSubview:graph];
 }
 
+- (void)labelReflesh{
+    budget = [_method loadBudget];   // 予算
+    expense = [_method loadExpense]; // 出費
+    balance = [_method loadBalance]; // 残り
+    norma = [_method loadNorma];     // ノルマ
+
+    BudgetLabel.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];
+    ExpenseLabel.text = [_translateFormat stringFromNumber:expense addComma:YES addYen:YES];
+    BalanceLabel.text = [_translateFormat stringFromNumber:balance addComma:YES addYen:YES];
+    NormaLabel.text = [_translateFormat stringFromNumber:norma addComma:YES addYen:YES];
+}
+
+#pragma mark - UITableView関係
+// セクションの数
+- (NSInteger)numberOfSectionsInTableiew:(UITableView *)tableView
+{
+    return 1; // 1固定
+}
+
+// セルの数
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger count = _editLog.log.count;
-    DNSLog(@"ログの数:%3d",count);
-    return count;
+    return _editLog.log.count;
 }
 
 // セルの内容を返させる
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DNSLog(@"Cell for Row :%d",indexPath.row);
     static NSString *CellIdentifier = @"Log";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if( [_editLog.log count] != 0 ){
