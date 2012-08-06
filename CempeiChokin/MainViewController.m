@@ -120,7 +120,7 @@
             tempKind = @"収入";
             break;
         case 2:
-            tempKind = @"調整";
+            tempKind = @"残高調整";
             break;
     }
 }

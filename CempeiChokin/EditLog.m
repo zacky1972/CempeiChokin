@@ -7,6 +7,7 @@
 //
 
 #import "EditLog.h"
+#import "Methods.h"
 
 @implementation EditLog{
     NSString *path;
@@ -78,6 +79,7 @@
 // 配列に値を追加する
 - (void)saveMoneyValue:(NSNumber *)value Date:(NSDate *)date Kind:(NSString *)kind{
     DNSLog(@"金額のあれこれを保存！");
+    
     NSDictionary *tempDictionary;
     if ([kind isEqualToString:@"調整"] == NO) {
         tempDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -95,10 +97,9 @@
                           kind,  @"Kind",
                           nil];
     }
-    
+     
     [log insertObject:tempDictionary atIndex:0];       // 配列に入れる
-    DNSLog(@"log:%@",log);
-    [self saveLogToFile]; // プロパティリストに保存
+    [self saveData];
 }
 // 選んで削除するやつ
 - (void)deleteLogAtIndex:(NSUInteger)index{

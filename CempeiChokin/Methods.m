@@ -147,7 +147,10 @@
 #pragma mark - 初期設定関係
 //わけわからんくなってきた
 - (NSNumber *)loadExpense{return [root objectForKey:@"Expense"];}   //出費を返す
-- (NSNumber *)loadBalance{return [root objectForKey:@"Balance"];}   //残りを返す
+- (NSNumber *)loadBalance{
+    [self makeDataPath];
+    [self loadData];
+    return [root objectForKey:@"Balance"];}   //残りを返す
 - (NSNumber *)loadNorma{return [root objectForKey:@"Norma"];}     //ノルマを返す
 
 //計算やらやるよ
@@ -171,7 +174,7 @@
             [now setObject:bud forKey:@"Budget"];
             [root setObject:now forKey:@"Now"];
             break;
-        case 2://調整
+        case 2://残高調整
             DNSLog(@"調整の処理！");
             DNSLog(@"誤差:%d", [balance intValue] - [value intValue]);
             expense = @( [expense intValue] + ( [balance intValue] - [value intValue] ) );
@@ -202,7 +205,7 @@
         tempKind = 0;
     if([kind isEqualToString:@"収入"])
         tempKind = 1;
-    if([kind isEqualToString:@"調整"])
+    if([kind isEqualToString:@"残高調整"])
         tempKind = 2;
     
     switch (tempKind) {
