@@ -7,6 +7,7 @@
 //
 
 #import "EditLog.h"
+#import "Methods.h"
 
 @implementation EditLog{
     NSString *path;
@@ -79,11 +80,24 @@
 - (void)saveMoneyValue:(NSNumber *)value Date:(NSDate *)date Kind:(NSString *)kind{
     DNSLog(@"金額のあれこれを保存！");
     
-    NSDictionary *tempDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    value, @"MoneyValue",
-                                    date,  @"Date",
-                                    kind,  @"Kind",
-                                    nil];
+    NSDictionary *tempDictionary;
+    if ([kind isEqualToString:@"調整"] == NO) {
+        tempDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                        value, @"MoneyValue",
+                                        date,  @"Date",
+                                        kind,  @"Kind",
+                                        nil];
+
+    }else{//残高調整の場合，誤差を保存する
+        value = @( [[[Methods alloc] loadBalance] intValue] - [value intValue] );
+        DNSLog(@"balance:%@ \n value:%@",[[Methods alloc] loadBalance],value);
+        tempDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                          value, @"MoneyValue",
+                          date,  @"Date",
+                          kind,  @"Kind",
+                          nil];
+    }
+     
     [log insertObject:tempDictionary atIndex:0];       // 配列に入れる
     [self saveData];
 }

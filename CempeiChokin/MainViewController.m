@@ -61,7 +61,7 @@
 - (void)viewDidAppear:(BOOL)animated{
     // 初期設定画面の表示
     if([_method searchGoal] == 0){//初期設定がまだだったら，設定画面に遷移します
-        [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"First"] animated:YES];
+        [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"First"] animated:NO];
     }else{
         //期限チェック
         if([_method searchNext] == YES){//期限をこえてたとき
@@ -120,7 +120,7 @@
             tempKind = @"収入";
             break;
         case 2:
-            tempKind = @"調整";
+            tempKind = @"残高調整";
             break;
     }
 }
@@ -172,7 +172,7 @@
                                 withRowAnimation: UITableViewRowAnimationRight];
             [self makeGraph];
         }else{ // 100万以上なら
-            // FIXME: 誰かまじめに書いて
+            // FIXME: 誰かまじめに書いて //ワロタ
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"100万以上の出費とか"
                                                             message:@"お前どんだけ金持ちやねん"
                                                            delegate:nil
