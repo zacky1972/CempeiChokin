@@ -173,15 +173,10 @@
             break;
         case 2://調整
             DNSLog(@"調整の処理！");
-            if ([balance intValue] > [value intValue]) {
-                DNSLog(@"誤差:%d", [expense intValue] - [value intValue]);
-                expense = @( [expense intValue] + ( [balance intValue] - [value intValue] ) );
-                balance = @([bud intValue] - [expense intValue]);
-            }else{
-                DNSLog(@"誤差:%d", [expense intValue] - [value intValue]);
-                expense = @( [expense intValue] - ( [value intValue] - [balance intValue] ) );
-                balance = @([bud intValue] - [expense intValue]);
-            }
+            DNSLog(@"誤差:%d", [balance intValue] - [value intValue]);
+            expense = @( [expense intValue] + ( [balance intValue] - [value intValue] ) );
+            balance = @([bud intValue] - [expense intValue]);
+            
             break;
             
     }
@@ -288,7 +283,6 @@
 
 
  #pragma mark - 〆
-//TODO:
 //期限を超えているかどうか調べる
  - (BOOL)searchNext{
      DNSLog(@"期限チェック！");
@@ -305,7 +299,7 @@
          DNSLog(@"同じ日やないわ！");
          if([date earlierDate:[self loadEnd]] != date){//期限日より後
              DNSLog(@"期限きれた！");
-             
+             //ここの処理は引っ越し予定
              if ([self loadNextAlert] == YES) {
                  DNSLog(@"催促するわ！");
                  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"期限が来ました！" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];

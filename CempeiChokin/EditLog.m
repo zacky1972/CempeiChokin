@@ -83,14 +83,26 @@
 // 配列に値を追加する
 - (void)saveMoneyValue:(NSNumber *)value Date:(NSDate *)date Kind:(NSString *)kind{
     DNSLog(@"金額のあれこれを保存！");
+    NSDictionary *tempDictionary;
+    if ([kind isEqualToString:@"調整"] == NO) {
+        tempDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                                        value, @"MoneyValue",
+                                        date,  @"Date",
+                                        kind,  @"Kind",
+                                        nil];
+
+    }else{//残高調整の場合，誤差を保存する
+        value = @( [[[Methods alloc] loadBalance] intValue] - [value intValue] );
+        DNSLog(@"balance:%@ \n value:%@",[[Methods alloc] loadBalance],value);
+        tempDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
+                          value, @"MoneyValue",
+                          date,  @"Date",
+                          kind,  @"Kind",
+                          nil];
+    }
     
-    NSDictionary *tempDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    value, @"MoneyValue",
-                                    date,  @"Date",
-                                    kind,  @"Kind",
-                                    nil];
     [log insertObject:tempDictionary atIndex:0];       // 配列に入れる
-    
+    DNSLog(@"log:%@",log);
     [self saveLogToFile]; // プロパティリストに保存
 }
 
