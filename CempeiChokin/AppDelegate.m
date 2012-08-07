@@ -10,40 +10,41 @@
 #import "EditLog.h"
 
 @implementation AppDelegate{
-
 }
 
 @synthesize window = _window;
 
 // アプリケーションがロードされて起動しようかとしているところ
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    // TODO: ここでデータの読み込みするのが正しいのかな？
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
+    self.editLog = [[EditLog alloc] init];
+
+    // 60秒ごとにオートセーブ
+    NSTimer *saveTimer;
+    saveTimer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(saveAll) userInfo:nil repeats:YES];
+
     return YES;
 }
+// セーブするやつ(自作)
+- (void)saveAll{
+    NSLog(@"セーブやで");
+    [self.editLog saveData];
+}
 // アプリ起動中に電話とかメールとかもしくはホームボタン押してバックグラウンドになる前(ゲームだったらタイマー停止とか)
-- (void)applicationWillResignActive:(UIApplication *)application
-{
+- (void)applicationWillResignActive:(UIApplication *)application{
     // まあ書くことないかな
 }
 // まさにバックグラウンドになろうとしている(ここでデータの保存とか)
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-    // TODO: ここでセーブさせる
+- (void)applicationDidEnterBackground:(UIApplication *)application{
+    // セーブ
+    [self saveAll];
 }
 // バックグラウンドから帰ってくるところ
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-    // ここにも特に無い気がせんでもない
+- (void)applicationWillEnterForeground:(UIApplication *)application{
 }
 // これもバックグラウンドから帰ってくるところ(?) 上のやつのあと？
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    // ここにも特になくね？
+- (void)applicationDidBecomeActive:(UIApplication *)application{
 }
 // アプリが死ぬとき(タスクバーで×押された時)
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    // ここに書く必要ないか
+- (void)applicationWillTerminate:(UIApplication *)application{
 }
 @end

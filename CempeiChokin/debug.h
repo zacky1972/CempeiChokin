@@ -6,7 +6,7 @@
 # define DNSLog(fmt, ...); // NSLog (__VA_ARGS__);
 #endif
 
-#define APP_DELEGATE AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate]
+#define APP_DELEGATE [[UIApplication sharedApplication] delegate]
 
 /*
 DNSLog : NSLogをデバッグ専用にしたもの
