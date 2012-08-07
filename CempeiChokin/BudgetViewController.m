@@ -76,7 +76,7 @@
 
 #pragma mark - Storyboardで画面遷移する前に呼ばれるあれ
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"showMainView"]) {
+    if ([segue.identifier isEqualToString:@"showHelpView"]) {
         //FIXME:ここでデータを渡すといいんじゃないか
     }
     

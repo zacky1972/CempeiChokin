@@ -303,8 +303,11 @@
              //ここの処理は引っ越し予定
              if ([self loadNextAlert] == YES) {
                  DNSLog(@"催促するわ！");
-                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"期限が来ました！" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                 /*
+                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"期限が来ました！"
+                                                                 message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
                  [alert show];
+                  */
                  [root setObject:@1 forKey:@"NextAlert"];   //もう警告がでないようにする
                  [root writeToFile:path atomically:YES];    //それでrootをdata.plistに書き込み
                  return YES;
