@@ -179,7 +179,6 @@
             DNSLog(@"誤差:%d", [balance intValue] - [value intValue]);
             expense = @( [expense intValue] + ( [balance intValue] - [value intValue] ) );
             balance = @([bud intValue] - [expense intValue]);
-            
             break;
             
     }
@@ -223,16 +222,15 @@
             break;
         case 2://調整
             DNSLog(@"調整のdelete処理！");
-            //TODO: いくら誤差があったかがわからないので計算できない
+            DNSLog(@"誤差:%@",value);
+            expense = @( [expense intValue] - [value intValue] );
+            balance = @([bud intValue] - [expense intValue]);
+            
             /*
-             if ([balance intValue] > [value intValue]) {
-             expense = @( [expense intValue] - 誤差 );
+             DNSLog(@"調整の処理！");
+             DNSLog(@"誤差:%d", [balance intValue] - [value intValue]);
+             expense = @( [expense intValue] + ( [balance intValue] - [value intValue] ) );
              balance = @([bud intValue] - [expense intValue]);
-             }else{
-             DNSLog(@"誤差:%d", [expense intValue] - [value intValue]);
-             expense = @( [expense intValue] + 誤差 );
-             balance = @([bud intValue] - [expense intValue]);
-             }
              */
             break;
     }

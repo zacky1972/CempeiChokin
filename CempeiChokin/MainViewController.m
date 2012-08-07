@@ -6,13 +6,14 @@
 //  Copyright (c) 2012年 CEMPEI. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "MainViewController.h"
 
 @interface MainViewController (){
+    AppDelegate *appDelegate;
     Methods *_method;
     AddGraph *_graph;
     TranslateFormat *_translateFormat;
-    EditLog *_editLog;
 
     UIView *graph;
     
@@ -39,22 +40,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    appDelegate = APP_DELEGATE;
     logTableView.delegate = self;
     logTableView.dataSource = self;
-    
     _method = [Methods alloc];
     _translateFormat = [TranslateFormat alloc];
     _graph = [AddGraph alloc];
-    _editLog = [[EditLog alloc] init];
-
     [_method makeDataPath];
     [_method loadData];
-
+    
 
     //スクロールビューをフィットさせる
     [LogScroll setScrollEnabled:YES];
-    [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollViewWithCount:[_editLog.log count]])];
+    [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollViewWithCount:[appDelegate.editLog.log count]])];
     
 }
 
@@ -151,19 +149,19 @@
         NSNumber *tempExpense = [_translateFormat numberFromString:expenseTextField.text];
         if([tempExpense compare:@1000000] == NSOrderedAscending){ // 100万以下なら
             // セルの個数が10個以上のとき9個に減らす
-            if([_editLog.log count] >= 10){
-                [_editLog removeObjectsCount:10];
+            if([appDelegate.editLog.log count] >= 10){
+                [appDelegate.editLog removeObjectsCount:10];
                 [logTableView reloadData];
             }
             NSNumber *tempExpense = [_translateFormat numberFromString:expenseTextField.text];
-            [_editLog saveMoneyValue:tempExpense Date:[NSDate date] Kind:tempKind];
+            [appDelegate.editLog saveMoneyValue:tempExpense Date:[NSDate date] Kind:tempKind];
 
             [_method calcvalue:tempExpense Kind:KindSegment.selectedSegmentIndex];
             expenseTextField.text = @""; //テキストフィールドの値を消す
 
             [self labelReflesh];
 
-            [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollViewWithCount:[_editLog.log count]])]; //スクロールビューをフィットさせる
+            [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollViewWithCount:[appDelegate.editLog.log count]])]; //スクロールビューをフィットさせる
 
             // FIXME: なんかガクッと移動して美しくない
             [LogScroll setContentOffset:CGPointMake(0.0, 45.0) animated:YES];
@@ -231,7 +229,7 @@
 // セルの数
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _editLog.log.count;
+    return appDelegate.editLog.log.count;
 }
 
 // セルの内容を返させる
@@ -239,14 +237,14 @@
 {
     static NSString *CellIdentifier = @"Log";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if( [_editLog.log count] != 0 ){
+    if( [appDelegate.editLog.log count] != 0 ){
         UILabel *logDate      = (UILabel *)[cell viewWithTag:1];
         UILabel *logKind      = (UILabel *)[cell viewWithTag:2];
         UITextField *logValue = (UITextField *)[cell viewWithTag:3];
-        if(_editLog.log != nil){
-            logValue.text = [_translateFormat stringFromNumber:[_editLog loadMoneyValueAtIndex:indexPath.row] addComma:YES addYen:YES];
-            logKind.text = [_editLog loadKindAtIndex:indexPath.row];
-            logDate.text = [_translateFormat formatterDate:[_editLog loadDateAtIndex:indexPath.row]];
+        if(appDelegate.editLog.log != nil){
+            logValue.text = [_translateFormat stringFromNumber:[appDelegate.editLog loadMoneyValueAtIndex:indexPath.row] addComma:YES addYen:YES];
+            logKind.text = [appDelegate.editLog loadKindAtIndex:indexPath.row];
+            logDate.text = [_translateFormat formatterDate:[appDelegate.editLog loadDateAtIndex:indexPath.row]];
         }
     }
     return cell;
@@ -256,12 +254,12 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         DNSLog(@"Delete At %d Row",indexPath.row);
-        [_method calcDeletevalue:[_editLog loadMoneyValueAtIndex:indexPath.row]
-                            Kind:[_editLog loadKindAtIndex:indexPath.row]];
+        [_method calcDeletevalue:[appDelegate.editLog loadMoneyValueAtIndex:indexPath.row]
+                            Kind:[appDelegate.editLog loadKindAtIndex:indexPath.row]];
 
-        [_editLog reviveToLog]; // お墓から生き返らせる
+        [appDelegate.editLog reviveToLog]; // お墓から生き返らせる
         [tableView reloadData]; // 生き返ったのを反映させる
-        [_editLog deleteLogAtIndex:indexPath.row];
+        [appDelegate.editLog deleteLogAtIndex:indexPath.row];
         
         //ラベルの更新
         budget = [_method loadBudget];
@@ -280,7 +278,7 @@
 		[tableView deleteRowsAtIndexPaths: [NSArray arrayWithObject:indexPath] withRowAnimation: UITableViewRowAnimationFade];
 
         //FIXME: なんかキモい
-        [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollViewWithCount:[_editLog.log count]])];
+        [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollViewWithCount:[appDelegate.editLog.log count]])];
     }
 }
 
