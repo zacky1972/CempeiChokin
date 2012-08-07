@@ -1366,12 +1366,9 @@
             <relationships>
                 <relationship kind="action" name="DoneButton_down:"/>
                 <relationship kind="action" name="budgetTextField_begin:"/>
-                <relationship kind="action" name="budgetTextField_end:"/>
                 <relationship kind="action" name="endDateTextField_begin:"/>
-                <relationship kind="action" name="endDateTextField_end:"/>
                 <relationship kind="action" name="laterButton_down:"/>
                 <relationship kind="action" name="startDateTextField_begin:"/>
-                <relationship kind="action" name="startDateTextField_end:"/>
                 <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="budgetTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="endDateTextField" candidateClass="UITextField"/>
