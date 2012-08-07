@@ -147,7 +147,10 @@
 #pragma mark - 初期設定関係
 //わけわからんくなってきた
 - (NSNumber *)loadExpense{return [root objectForKey:@"Expense"];}   //出費を返す
-- (NSNumber *)loadBalance{return [root objectForKey:@"Balance"];}   //残りを返す
+- (NSNumber *)loadBalance{
+    [self makeDataPath];
+    [self loadData];
+    return [root objectForKey:@"Balance"];}   //残りを返す
 - (NSNumber *)loadNorma{return [root objectForKey:@"Norma"];}     //ノルマを返す
 
 //計算やらやるよ
@@ -171,17 +174,11 @@
             [now setObject:bud forKey:@"Budget"];
             [root setObject:now forKey:@"Now"];
             break;
-        case 2://調整
+        case 2://残高調整
             DNSLog(@"調整の処理！");
-            if ([balance intValue] > [value intValue]) {
-                DNSLog(@"誤差:%d", [expense intValue] - [value intValue]);
-                expense = @( [expense intValue] + ( [balance intValue] - [value intValue] ) );
-                balance = @([bud intValue] - [expense intValue]);
-            }else{
-                DNSLog(@"誤差:%d", [expense intValue] - [value intValue]);
-                expense = @( [expense intValue] - ( [value intValue] - [balance intValue] ) );
-                balance = @([bud intValue] - [expense intValue]);
-            }
+            DNSLog(@"誤差:%d", [balance intValue] - [value intValue]);
+            expense = @( [expense intValue] + ( [balance intValue] - [value intValue] ) );
+            balance = @([bud intValue] - [expense intValue]);
             break;
             
     }
@@ -207,7 +204,7 @@
         tempKind = 0;
     if([kind isEqualToString:@"収入"])
         tempKind = 1;
-    if([kind isEqualToString:@"調整"])
+    if([kind isEqualToString:@"残高調整"])
         tempKind = 2;
     
     switch (tempKind) {
@@ -225,16 +222,15 @@
             break;
         case 2://調整
             DNSLog(@"調整のdelete処理！");
-            //TODO: いくら誤差があったかがわからないので計算できない
+            DNSLog(@"誤差:%@",value);
+            expense = @( [expense intValue] - [value intValue] );
+            balance = @([bud intValue] - [expense intValue]);
+            
             /*
-             if ([balance intValue] > [value intValue]) {
-             expense = @( [expense intValue] - 誤差 );
+             DNSLog(@"調整の処理！");
+             DNSLog(@"誤差:%d", [balance intValue] - [value intValue]);
+             expense = @( [expense intValue] + ( [balance intValue] - [value intValue] ) );
              balance = @([bud intValue] - [expense intValue]);
-             }else{
-             DNSLog(@"誤差:%d", [expense intValue] - [value intValue]);
-             expense = @( [expense intValue] + 誤差 );
-             balance = @([bud intValue] - [expense intValue]);
-             }
              */
             break;
     }
@@ -288,7 +284,6 @@
 
 
  #pragma mark - 〆
-//TODO:
 //期限を超えているかどうか調べる
  - (BOOL)searchNext{
      DNSLog(@"期限チェック！");
@@ -301,12 +296,11 @@
      DNSLog(@"はやいほう！：%@",[date earlierDate:[self loadEnd]]);
  
      DNSLog(@"date:%@",[self loadEnd]);
-     //TODO:年月日だけで比較しないと恐ろしいことになる
-     if ([_translateFormat equalDate:date Vs:[self loadEnd]]) {//今日が期限日じゃなくて
+     if ([_translateFormat equalDate:date Vs:[self loadEnd]] == NO) {//今日が期限日じゃなくて
          DNSLog(@"同じ日やないわ！");
          if([date earlierDate:[self loadEnd]] != date){//期限日より後
              DNSLog(@"期限きれた！");
-             
+             //ここの処理は引っ越し予定
              if ([self loadNextAlert] == YES) {
                  DNSLog(@"催促するわ！");
                  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"期限が来ました！" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
