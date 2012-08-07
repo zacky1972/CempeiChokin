@@ -178,6 +178,7 @@
         DoneButton.enabled = YES;
     }
     [PeriodTextField resignFirstResponder];
+    
 
 }
 
