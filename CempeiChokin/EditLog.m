@@ -99,13 +99,11 @@
     }
      
     [log insertObject:tempDictionary atIndex:0];       // 配列に入れる
-    [self saveData];
 }
 // 選んで削除するやつ
 - (void)deleteLogAtIndex:(NSUInteger)index{
     DNSLog(@"%d番目のログを削除します！",index);
     [log removeObjectAtIndex:index]; //で，実際にログを消す
-    [self saveData];
 }
 // 何個以上だったらお墓に送るみたいな
 - (void)removeObjectsCount:(NSUInteger)count{
@@ -116,14 +114,12 @@
         [self moveToVault:[log objectAtIndex:startNumber]];
         [log removeObjectAtIndex:startNumber];
     }
-    [self saveData];
 }
 // お墓から生き返らせる奴
 - (void)reviveToLog{
     if([self checkVault] == YES){
         NSDictionary *zombieLog = [self reviveFromVault];
         [log addObject:zombieLog];
-        [self saveData];
     }
 }
 

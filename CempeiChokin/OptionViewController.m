@@ -5,10 +5,11 @@
 //  Created by CEMPEI on 12/07/25.
 //  Copyright (c) 2012年 CEMPEI. All rights reserved.
 //
-
+#import "AppDelegate.h"
 #import "OptionViewController.h"
 
 @interface OptionViewController (){
+    AppDelegate *appDelegate;
     Methods *_method;
 }
 
@@ -28,6 +29,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    appDelegate = APP_DELEGATE;
+    
     _method = [Methods alloc];
 
     // Uncomment the following line to preserve selection between presentations.

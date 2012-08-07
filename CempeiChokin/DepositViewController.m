@@ -36,12 +36,17 @@
     [self makeNumberPadToolbar:depositTextField Return:@"完了"
                           Done:@selector(doneDepositTextField)
                         Cancel:@selector(cancelDepostiTextField)];
+    
+    if(depositValue == NULL){
+        DoneButton.enabled = NO;
+    }
 }
 
 - (void)viewDidUnload
 {
     depositTextField = nil;
     depositTableView = nil;
+    DoneButton = nil;
     [super viewDidUnload];
 
 }
@@ -74,9 +79,16 @@
 
 #pragma mark - depositTextField関係
 - (IBAction)depositTextField_begin:(id)sender {
+    
     // 既に値が入力されていた場合，表示されている値を数値に戻す
     if(depositValue != NULL)
         depositTextField.text = [NSString stringWithFormat:@"%@",depositValue];
+}
+
+- (IBAction)depositTextField_end:(id)sender {
+    if(depositValue != NULL){
+        DoneButton.enabled = YES;
+    }
 }
 
 -(void)doneDepositTextField{
@@ -100,7 +112,7 @@
 }
 
 #pragma mark - ボタンたち
-- (IBAction)doneButton:(id)sender {
+- (IBAction)DoneButton_down:(id)sender {
     DNSLog(@"完了きたで！");
 
     [_method saveDeposit:depositValue Date:[_method loadEnd] ];
@@ -138,7 +150,7 @@
     }
 }
 
-- (IBAction)laterButton:(id)sender {
+- (IBAction)laterButton_down:(id)sender {
     // ???: ここはどうすんの？
     
 }

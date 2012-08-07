@@ -11,12 +11,14 @@
 #import "TranslateFormat.h"
 
 @interface DepositViewController : UITableViewController{
-    IBOutlet UITableView *depositTableView;
+    __weak IBOutlet UITableView *depositTableView;
     __weak IBOutlet UITextField *depositTextField;
+    __weak IBOutlet UIButton *DoneButton;
 }
 
 - (IBAction)depositTextField_begin:(id)sender;
-- (IBAction)doneButton:(id)sender;
-- (IBAction)laterButton:(id)sender;
+- (IBAction)depositTextField_end:(id)sender;
+- (IBAction)DoneButton_down:(id)sender;
+- (IBAction)laterButton_down:(id)sender;
 
 @end

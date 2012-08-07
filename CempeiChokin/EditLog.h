@@ -12,6 +12,8 @@
 
 @property(nonatomic, retain)NSMutableArray *log;
 
+- (void)saveData;
+
 // 配列にデータを追加
 - (void)saveMoneyValue:(NSNumber *)value Date:(NSDate *)date Kind:(NSString *)kind;
 // 配列のデータを削除
