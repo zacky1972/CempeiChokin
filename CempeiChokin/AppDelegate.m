@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "EditLog.h"
 
 @implementation AppDelegate{
 }
@@ -17,6 +16,7 @@
 // アプリケーションがロードされて起動しようかとしているところ
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
     self.editLog = [[EditLog alloc] init];
+    self.editData = [[EditData alloc] init];
 
     // 60秒ごとにオートセーブ
     NSTimer *saveTimer;
@@ -26,7 +26,8 @@
 }
 // セーブするやつ(自作)
 - (void)saveAll{
-    NSLog(@"セーブやで");
+    DNSLog(@"セーブやで");
+    [self.editData saveData];
     [self.editLog saveData];
 }
 // アプリ起動中に電話とかメールとかもしくはホームボタン押してバックグラウンドになる前(ゲームだったらタイマー停止とか)
