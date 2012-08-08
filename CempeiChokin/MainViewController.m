@@ -266,7 +266,7 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         DNSLog(@"Delete At %d Row",indexPath.row);
-        [_method calcDeletevalue:[appDelegate.editLog loadMoneyValueAtIndex:indexPath.row]
+        [appDelegate.editData calcDeleteValue:[appDelegate.editLog loadMoneyValueAtIndex:indexPath.row]
                             Kind:[appDelegate.editLog loadKindAtIndex:indexPath.row]];
 
         [appDelegate.editLog reviveToLog]; // お墓から生き返らせる

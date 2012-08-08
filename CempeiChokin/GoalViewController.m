@@ -109,8 +109,6 @@
     // 既に値が入力されていた場合，表示されている値を数値に戻す (例)10,000円→10000
     if(value != NULL)
         ValueTextField.text = [_translateFormat stringFromNumber:value addComma:NO addYen:NO];
-    
-
 }
 
 - (IBAction)ValueTextField_end:(id)sender {
