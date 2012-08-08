@@ -31,7 +31,6 @@
 
 - (void)viewDidUnload
 {
-    DoneButton = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -40,8 +39,5 @@
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
-- (IBAction)DoneButton_down:(id)sender {
-    
-    [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Init"] animated:NO];
-}
+
 @end

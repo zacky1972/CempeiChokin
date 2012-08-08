@@ -54,8 +54,9 @@
     
     
     //データが入力されているかどうか判断して、入力されていなければ完了を押せないようにする
-    if(name == NULL || value == NULL || period == NULL){
+    if(name.length == 0 || value == NULL || period == NULL){
         DoneButton.enabled = NO;
+        [DoneButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     }
 
     
@@ -88,14 +89,28 @@
     [ValueTextField becomeFirstResponder];  //ValueTextFieldに移動
     
     //全ての欄が入力されていれば完了を押せるようにする
-    if(name != NULL && value != NULL && period != NULL){
+    if(name.length != 0 && value != NULL && period != NULL){
         DoneButton.enabled = YES;
+        [DoneButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     }
-    [NameTextField resignFirstResponder];}
+    else{
+        DoneButton.enabled = NO;
+    }
+    [NameTextField resignFirstResponder];
+}
 
 - (IBAction)NameTextField_end:(id)sender {
     name = NameTextField.text;
-    
+
+    //全ての欄が入力されていれば完了を押せるようにする
+    if(name.length != 0 && value != NULL && period != NULL){
+        DoneButton.enabled = YES;
+        [DoneButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    }
+    else{
+        DoneButton.enabled = NO;
+    }
+    DNSLog(@"%u",name.length);
 }
 
 #pragma mark - 金額の設定
@@ -119,8 +134,13 @@
 - (IBAction)ValueTextField_end:(id)sender {
 
     //全ての欄が入力されていれば完了を押せるようにする
-    if(name != NULL && value != NULL && period != NULL){
+    if(name.length != 0 && value != NULL && period != NULL){
         DoneButton.enabled = YES;
+        [DoneButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+
+    }
+    else{
+        DoneButton.enabled = NO;
     }
     
     //期限のテキストフィールドを編集できるようにする
@@ -174,9 +194,15 @@
 - (IBAction)PeriodTextField_end:(id)sender {
     
     //全ての欄が入力されていれば完了を押せるようにする
-    if(name != NULL && value != NULL && period != NULL){
+    if(name.length != 0 && value != NULL && period != NULL){
         DoneButton.enabled = YES;
+        [DoneButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+
     }
+    else{
+        DoneButton.enabled = NO;
+    }
+    
     [PeriodTextField resignFirstResponder];
 
 }
