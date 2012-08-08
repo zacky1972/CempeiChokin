@@ -12,7 +12,6 @@
 @interface BudgetViewController (){
     AppDelegate *appDelegate;
 
-    Methods *_method;
     TranslateFormat *_translateFormat;
     
     // 値を保存するための変数
@@ -36,28 +35,25 @@
     appDelegate = APP_DELEGATE;
     _translateFormat = [TranslateFormat alloc];
     
-    _method = [Methods alloc];
-    [_method initData];
     //設定がしてあったらデータをとってくる
     
-    if([_method loadStart]!=nil){
-        startDate = [_method loadStart];
+    if([appDelegate.editData loadStart]!=nil){
+        startDate = [appDelegate.editData loadStart];
         startDateTextField.text = [_translateFormat formatterDate:startDate];
     }else{
         startDate = [NSDate date];
         startDateTextField.text = [_translateFormat formatterDate:startDate];
     }
-    if([_method loadEnd] != nil){
-        endDate = [_method loadEnd];
+    if([appDelegate.editData loadEnd] != nil){
+        endDate = [appDelegate.editData loadEnd];
         endDateTextField.text = [_translateFormat formatterDate:endDate];
     }
-    if([_method loadBudget] != nil){
-        budget = [_method loadBudget];
-        budgetTextField.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];
+    if(appDelegate.editData.budget != 0){
+        budgetTextField.text = [_translateFormat stringFromNumber:appDelegate.editData.budget addComma:YES addYen:YES];
     }
     
     //データが入力されているかどうか判断して、入力されていなければ完了を押せないようにする
-        if(startDate == NULL || endDate == NULL || budget == NULL){
+        if(startDate == NULL || endDate == NULL || appDelegate.editData.budget == 0){
         DoneButton.enabled = NO;
     }
     
@@ -138,7 +134,7 @@
 - (IBAction)endDateTextField_begin:(id)sender {
     
     datePicker.minimumDate = [NSDate dateWithTimeInterval:86400 sinceDate:startDate]; // 設定できる範囲は今日から
-    datePicker.maximumDate = [_method loadPeriod]; // 10年後まで
+    datePicker.maximumDate = [appDelegate.editData loadGoalPeriod]; // 10年後まで
 
     [self makeActionSheetWithDataPicker:@"次へ"
                                    Done:@selector(doneEndDateTextField)
@@ -222,7 +218,6 @@
 
 #pragma mark - ボタン
 - (IBAction)DoneButton_down:(id)sender {
-    [_method saveStart:startDate End:endDate Budget:budget]; // TODO: あとで消す
     [appDelegate.editData saveStart:startDate End:endDate Budget:budget];
 }
 

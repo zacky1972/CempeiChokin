@@ -17,10 +17,6 @@
 
     UIView *graph;
     
-    NSNumber *budget;
-    NSNumber *expense;
-    NSNumber *balance;
-    NSNumber *norma;
     NSString *tempKind;
     
     NSInteger alertType;
@@ -62,7 +58,7 @@
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"First"] animated:NO];
     }else{
         //期限チェック
-        if([_method searchNext] == YES){//期限をこえてたとき
+        if([appDelegate.editData searchNext] == YES){//期限をこえてたとき
             // FIXME: 誰かまじめに書いて
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"今日は"
                                                             message:@"期限日やで！"
@@ -71,7 +67,7 @@
                                                   otherButtonTitles:nil, nil];
             [alert show];
             
-        }else if([_method searchLastNorma] && [[_method loadEnd] isEqualToDate:[NSDate date]]){
+        }else if([_method searchLastNorma] && [[appDelegate.editData loadEnd] isEqualToDate:[NSDate date]]){
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"今日は"
                                                             message:@"目標日やで！"
                                                            delegate:self
@@ -83,9 +79,8 @@
     //初期設定から戻ってきた時用
     [self labelReflesh];
     NSString *temp;
-    DNSLog(@"ナビゲーション：%@から%@",[_method loadStart],[_method loadEnd]);
-    temp = [[_translateFormat formatterDateUltimate:[_method loadStart] addYear:NO addMonth:YES addDay:YES addHour:NO addMinute:NO addSecond:NO] stringByAppendingString:@"~"];
-    temp = [temp stringByAppendingString:[_translateFormat formatterDateUltimate:[_method loadEnd] addYear:NO addMonth:YES addDay:YES addHour:NO addMinute:NO addSecond:NO]];
+    temp = [[_translateFormat formatterDateUltimate:[appDelegate.editData loadStart] addYear:NO addMonth:YES addDay:YES addHour:NO addMinute:NO addSecond:NO] stringByAppendingString:@"~"];
+    temp = [temp stringByAppendingString:[_translateFormat formatterDateUltimate:[appDelegate.editData loadEnd] addYear:NO addMonth:YES addDay:YES addHour:NO addMinute:NO addSecond:NO]];
     MainNavigationBar.topItem.title = temp;
     tempKind = @"出費";
     
@@ -166,7 +161,7 @@
             NSNumber *tempExpense = [_translateFormat numberFromString:expenseTextField.text];
             [appDelegate.editLog saveMoneyValue:tempExpense Date:[NSDate date] Kind:tempKind];
 
-            [_method calcvalue:tempExpense Kind:KindSegment.selectedSegmentIndex];
+            [appDelegate.editData calcValue:tempExpense Kind:KindSegment.selectedSegmentIndex];
             expenseTextField.text = @""; //テキストフィールドの値を消す
 
             [self labelReflesh];
@@ -212,6 +207,11 @@
 
 #pragma mark - なんかよくする処理たち
 - (void)makeGraph{
+    NSNumber *budget = appDelegate.editData.budget;
+    NSNumber *expense = appDelegate.editData.expense;
+    NSNumber *balance = appDelegate.editData.balance;
+    NSNumber *norma = appDelegate.editData.balance;
+
     if([balance compare:norma] == NSOrderedDescending){
         balance = @([balance intValue] - [norma intValue]);
     }else{
@@ -225,15 +225,10 @@
 }
 
 - (void)labelReflesh{
-    budget = [_method loadBudget];   // 予算
-    expense = [_method loadExpense]; // 出費
-    balance = [_method loadBalance]; // 残り
-    norma = [_method loadNorma];     // ノルマ
-
-    BudgetLabel.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];
-    ExpenseLabel.text = [_translateFormat stringFromNumber:expense addComma:YES addYen:YES];
-    BalanceLabel.text = [_translateFormat stringFromNumber:balance addComma:YES addYen:YES];
-    NormaLabel.text = [_translateFormat stringFromNumber:norma addComma:YES addYen:YES];
+    BudgetLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.budget addComma:YES addYen:YES];
+    ExpenseLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.expense addComma:YES addYen:YES];
+    BalanceLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.balance addComma:YES addYen:YES];
+    NormaLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.norma addComma:YES addYen:YES];
 }
 
 #pragma mark - UITableView関係
@@ -277,16 +272,8 @@
         [appDelegate.editLog reviveToLog]; // お墓から生き返らせる
         [tableView reloadData]; // 生き返ったのを反映させる
         [appDelegate.editLog deleteLogAtIndex:indexPath.row];
-        
-        //ラベルの更新
-        budget = [_method loadBudget];
-        expense = [_method loadExpense];
-        balance = [_method loadBalance];
-        norma = [_method loadNorma];
-        BudgetLabel.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];
-        ExpenseLabel.text = [_translateFormat stringFromNumber:expense addComma:YES addYen:YES];
-        BalanceLabel.text = [_translateFormat stringFromNumber:balance addComma:YES addYen:YES];
-        NormaLabel.text = [_translateFormat stringFromNumber:norma addComma:YES addYen:YES];
+
+        [self labelReflesh];
         
         //グラフの更新
         [self makeGraph];

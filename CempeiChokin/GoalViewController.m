@@ -7,11 +7,10 @@
 //
 
 #import "GoalViewController.h"
-#import "Methods.h"
+#import "AppDelegate.h"
 
 @interface GoalViewController (){
-    @private
-    Methods *_method;
+    AppDelegate *appDelegate;
     TranslateFormat *_translateFormat;
     
     // 値を保存するための変数
@@ -31,38 +30,28 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSTimeZone *timeZone = [[NSTimeZone alloc] initWithName:@"Asia/Tokyo"];
-    [NSTimeZone setDefaultTimeZone:timeZone];
-
+    appDelegate = APP_DELEGATE;
 
     _translateFormat = [TranslateFormat alloc];
-    _method = [Methods alloc];
-    
-    [_method initData];
-    if([_method loadName]!=nil){
-        name = [_method loadName];
+
+    if([appDelegate.editData loadGoalName] != nil){
+        name = [appDelegate.editData loadGoalName];
         NameTextField.text = name;
     }
-    if([_method loadValue]!=nil){
-        value = [_method loadValue];
+    if([appDelegate.editData loadGoalValue] != nil){
+        value = [appDelegate.editData loadGoalValue];
         ValueTextField.text = [_translateFormat stringFromNumber:value addComma:YES addYen:YES];
     }
-    if([_method loadPeriod]!=nil){
-        period = [_method loadPeriod];
+    if([appDelegate.editData loadGoalPeriod] != nil){
+        period = [appDelegate.editData loadGoalPeriod];
         PeriodTextField.text = [_translateFormat formatterDate:period];
     }
-    
-    
     //データが入力されているかどうか判断して、入力されていなければ完了を押せないようにする
     if(name.length == 0 || value == NULL || period == NULL){
         DoneButton.enabled = NO;
         [DoneButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     }
-
-    
 }
-
-
 
 - (void)viewDidUnload
 {
@@ -71,16 +60,6 @@
     PeriodTextField = nil;
     DoneButton = nil;
     [super viewDidUnload];
-}
-
-#pragma mark - Storyboardで画面遷移する前に呼ばれるあれ
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"showBudgetView"]) {
-        //FIXME:ここでデータを渡すといいんじゃないか
-    }
-    if ([segue.identifier isEqualToString:@"showMainView"]) {
-        //FIXME:ここでデータを渡すといいんじゃないか
-    }
 }
 
 #pragma mark - 名前の設定
@@ -226,7 +205,7 @@
 #pragma mark - ボタン
 // 決定ボタンが押されたときの
 - (IBAction)DoneButton_down:(id)sender {
-     [_method saveName:name Value:value Period:period];
+    [appDelegate.editData saveName:name Value:value Period:period];
 }
 
 #pragma mark - その他

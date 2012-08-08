@@ -41,5 +41,12 @@
 - (void)calcDeleteValue:(NSNumber *)value Kind:(NSString *)tempKind;
 - (BOOL)searchNext;
 
+- (NSString *)loadGoalName;
+- (NSNumber *)loadGoalValue;
+- (NSDate *)loadGoalPeriod;
+- (NSDate *)loadStart;
+- (NSDate *)loadEnd;
+
+- (void)deleteData;
 
 @end
