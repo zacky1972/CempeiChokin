@@ -117,6 +117,10 @@
 
     [_method saveDeposit:depositValue Date:[_method loadEnd] ];
     if([_method searchFinish] == YES){//終了！
+        //ここで画面遷移
+        
+        
+        /*
         alertType = alertType_a;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"貯金がたまりました！"
                                                         message:@"おめでとうございます！"
@@ -144,7 +148,7 @@
         [alert show];
         UIAlertView *nextalert = [[UIAlertView alloc] initWithTitle:@"どうする？" message:@"あと何円足りません" delegate:nil cancelButtonTitle:@"期限を延ばす" otherButtonTitles:@"あきらめる",nil];
         [nextalert show];
-        
+        */
     }else{
         //まだ終わらないよ！
     }
@@ -156,6 +160,7 @@
 }
 
 #pragma mark - アラート関係
+/*
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
 {
 	switch (alertType) {
@@ -174,6 +179,7 @@
 			break;
 	}
 }
+ */
 
 #pragma mark - その他
 - (void)makeNumberPadToolbar:(UITextField *)textField Return:(NSString *)string Done:(SEL)done Cancel:(SEL)cancel{

@@ -200,7 +200,6 @@
 #pragma mark - アラート関係
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
 {
-    DNSLog(@"ちゃんちゃかちゃん");
     [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Deposit"] animated:NO];
 }
 
