@@ -38,9 +38,8 @@
     if( [[NSFileManager defaultManager] fileExistsAtPath:path] == NO ){ // ファイルがなかったら
         DNSLog(@"メインのデータの初期化！");
         [[NSFileManager defaultManager] createFileAtPath:path contents:nil attributes:nil]; //作成する
-    }else{
-        [self loadData];
     }
+    [self loadData];
 }
 // ファイル名を返す
 - (void)makeDataPath{
@@ -57,6 +56,7 @@
     [self saveNow];
     [self saveNorma];
     [self saveDeposit];
+    [self saveOthers];
     NSLog(@"\nRoot:%@",root);
     [root writeToFile:path atomically:YES];
 }
@@ -73,7 +73,6 @@
     [self loadNorma];
     [self loadDeposit];
     [self loadOthers];
-    NSLog(@"\nRoot2:%@",root);
 }
 
 #pragma mark - 保存・読み込み系
@@ -85,8 +84,14 @@
 }
 - (void)loadValue{
     expense = [root objectForKey:@"Expense"];
+    if(expense == NULL)
+        expense = @0;
     balance = [root objectForKey:@"Balance"];
+    if(balance == NULL)
+        balance = @0;
     budget  = [root objectForKey:@"Budget"];
+    if(budget == NULL)
+        budget = @0;
 }
 // Goal系
 - (void)saveGoal{
@@ -94,10 +99,8 @@
 }
 - (void)loadGoal{
     goal = [root objectForKey:@"Goal"];
-    if(goal == NULL){
+    if(goal == NULL)
         goal = [[NSMutableDictionary alloc] init];
-        defaultSettings = NO;
-    }
 }
 // Now系
 - (void)saveNow{
@@ -105,10 +108,8 @@
 }
 - (void)loadNow{
     now = [root objectForKey:@"Now"];
-    if(now == NULL){
+    if(now == NULL)
         now = [[NSMutableDictionary alloc] init];
-        defaultSettings = NO;
-    }
 }
 // ノルマ
 - (void)saveNorma{
@@ -116,6 +117,8 @@
 }
 - (void)loadNorma{
     norma = [root objectForKey:@"Norma"];
+    if(norma == NULL)
+        norma = @0;
 }
 // 貯金額
 - (void)saveDeposit{
@@ -132,27 +135,17 @@
 }
 // その他
 - (void)saveOthers{
-    NSString *defaultSettingsString;
-    NSString *nextAlertString;
-    if(defaultSettings == YES)
-        defaultSettingsString = @"YES";
-    else
-        defaultSettingsString = @"NO";
-    if(nextAlert == YES)
-        nextAlertString = @"YES";
-    else
-        nextAlertString = @"NO";
-    [root setObject:defaultSettingsString forKey:@"defaultSettings"];
-    [root setObject:nextAlertString forKey:@"nextAlert"];
+    NSNumber *defaultSettingsNum = [NSNumber numberWithBool:defaultSettings];
+    NSNumber *nextAlertNum = [NSNumber numberWithBool:nextAlert];
+    [root setObject:defaultSettingsNum forKey:@"defaultSettings"];
+    [root setObject:nextAlertNum forKey:@"nextAlert"];
 }
 - (void)loadOthers{
-    if([[root objectForKey:@"defaultSettings"] isEqualToString:@"YES"] == YES)
-        defaultSettings = YES;
-    else
+    defaultSettings = [[root objectForKey:@"defaultSettings"] boolValue];
+    if ([root objectForKey:@"defaultSettings"] == NULL)
         defaultSettings = NO;
-    if([[root objectForKey:@"nextAlert"] isEqualToString:@"NO"] == YES)
-        nextAlert = YES;
-    else
+    nextAlert = [[root objectForKey:@"nextAlert"] boolValue];
+    if ([root objectForKey:@"nextAlert"] == NULL)
         nextAlert = NO;
 }
 #pragma mark - 外から書き込む系
@@ -169,6 +162,7 @@
     [now setObject:[_translateFormat dateOnly:[_translateFormat nineHoursLater:start]] forKey:@"Start"];
     [now setObject:[_translateFormat dateOnly:[_translateFormat nineHoursLater:end]] forKey:@"End"];
     budget = tempBudget;
+    [self calcForNextStage];
 }
 // Deposit DepositLog
 - (void)saveDepositDate:(NSDate *)date Value:(NSNumber *)value{
@@ -185,7 +179,7 @@
 }
 #pragma mark - 自動で処理する系
 // 期限が来て設定し終わったあとの処理 (ノルマを決める)
-- (void)calcForNestStage{
+- (void)calcForNextStage{
     NSTimeInterval timeInterval = [[self loadStart] timeIntervalSinceDate:[self loadGoalPeriod]];
     NSInteger daysToPeriod = (int)(timeInterval / (60*60*24)); // 最終期限までの日数
     timeInterval = [[self loadStart] timeIntervalSinceDate:[self loadEnd]];

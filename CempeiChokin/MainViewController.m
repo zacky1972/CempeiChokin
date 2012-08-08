@@ -50,7 +50,6 @@
     _graph = [AddGraph alloc];
     [_method makeDataPath];
     [_method loadData];
-    
 
     //スクロールビューをフィットさせる
     [LogScroll setScrollEnabled:YES];
