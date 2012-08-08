@@ -57,21 +57,41 @@
 
 // グラフの色設定
 -(CPTFill *)sliceFillForPieChart:(CPTPieChart *)pieChart recordIndex:(NSUInteger)index {
+    
+    /*
+     
+     // グラデーションつけてかっこつけてみよう
+     // 青～黒(テーマが黒いから)にわかりづらいけど...
+     CPColor *areaColor1 = [CPColor colorWithComponentRed:0.3 green:0.3 blue:1.0 alpha:0.8];
+     CPGradient *areaGradient1 = [CPGradient gradientWithBeginningColor:areaColor1 endingColor:[CPColor clearColor]];
+     
+     CPFill *areaGradientFill = [CPFill fillWithGradient:areaGradient1];
+     scorePlot.areaFill = areaGradientFill;
+     scorePlot.areaBaseValue = [[NSDecimalNumber zero] decimalValue];
+     
+     */
+    
     CPTColor *color = [[CPTColor alloc] init];
+    CPTFill *fill = [[CPTFill alloc] init];
     switch (index) {
-        case 0:
-            color = [CPTColor redColor];
+        case 0:{
+            color = [CPTColor colorWithComponentRed:0.3 green:0.7 blue:1.0 alpha:10];
+            CPTColor *endingColor = [CPTColor colorWithComponentRed:0.3 green:0.3 blue:1.0 alpha:10];
+            CPTGradient *areaGradient1 = [CPTGradient gradientWithBeginningColor:color endingColor:endingColor];
+            fill = [CPTFill fillWithGradient:areaGradient1];}
             break;
         case 1:
             color = [CPTColor whiteColor];
+            fill = [CPTFill fillWithColor:color];
             break;
         case 2:
-            color = [CPTColor grayColor];
+            color = [CPTColor colorWithComponentRed:0.1 green:0.1 blue:0.1 alpha:0.2];
+            fill = [CPTFill fillWithColor:color];
             break;
     }
     
     // 色を返す
-	return [CPTFill fillWithColor:color];
+	return fill;
 }
 
 // グラフに使用するデータの数を返すように実装します。
