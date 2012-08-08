@@ -50,17 +50,15 @@
     _graph = [AddGraph alloc];
     [_method makeDataPath];
     [_method loadData];
-    
 
     //スクロールビューをフィットさせる
     [LogScroll setScrollEnabled:YES];
     [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollViewWithCount:[appDelegate.editLog.log count]])];
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     // 初期設定画面の表示
-    if([_method searchGoal] == 0){//初期設定がまだだったら，設定画面に遷移します
+    if(appDelegate.editData.defaultSettings == NO){//初期設定がまだだったら，設定画面に遷移します
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"First"] animated:NO];
     }else{
         //期限チェック
@@ -201,7 +199,7 @@
 -(void)cancelExpenseTextField{
     expenseTextField.text = @""; //テキストフィールドの値を消す
     [expenseTextField resignFirstResponder]; // NumberPad消す(=テキストフィールドを選択していない状態にする)
-
+    
     [LogScroll setContentOffset:CGPointZero animated:YES];
 }
 

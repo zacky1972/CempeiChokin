@@ -7,8 +7,11 @@
 //
 
 #import "BudgetViewController.h"
+#import "AppDelegate.h"
 
 @interface BudgetViewController (){
+    AppDelegate *appDelegate;
+
     Methods *_method;
     TranslateFormat *_translateFormat;
     
@@ -30,6 +33,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    appDelegate = APP_DELEGATE;
     _translateFormat = [TranslateFormat alloc];
     
     _method = [Methods alloc];
@@ -218,7 +222,8 @@
 
 #pragma mark - ボタン
 - (IBAction)DoneButton_down:(id)sender {
-    [_method saveStart:startDate End:endDate Budget:budget];
+    [_method saveStart:startDate End:endDate Budget:budget]; // TODO: あとで消す
+    [appDelegate.editData saveStart:startDate End:endDate Budget:budget];
 }
 
 - (IBAction)laterButton_down:(id)sender {
