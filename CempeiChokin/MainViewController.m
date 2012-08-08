@@ -22,6 +22,8 @@
     NSNumber *balance;
     NSNumber *norma;
     NSString *tempKind;
+    
+    NSInteger alertType;
 }
 
 @end
@@ -63,7 +65,6 @@
         //期限チェック
         if([_method searchNext] == YES){//期限をこえてたとき
             // FIXME: 誰かまじめに書いて
-            
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"今日は"
                                                             message:@"期限日やで！"
                                                            delegate:self
@@ -71,6 +72,13 @@
                                                   otherButtonTitles:nil, nil];
             [alert show];
             
+        }else if([_method searchLastNorma] && [[_method loadEnd] isEqualToDate:[NSDate date]]){
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"今日は"
+                                                            message:@"目標日やで！"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"貯金しよう"
+                                                  otherButtonTitles:nil, nil];
+            [alert show];
         }
     }
     //初期設定から戻ってきた時用

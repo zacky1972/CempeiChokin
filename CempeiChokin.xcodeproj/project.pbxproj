@@ -334,6 +334,7 @@
 		E98EA58415BFB8A10019AED5 = {
 			isa = PBXGroup;
 			children = (
+				E9AA9B1315D2454200D5ADD5 /* Default.png */,
 				E98EA59915BFB8A10019AED5 /* CempeiChokin */,
 				E98EA5B715BFB8A20019AED5 /* CempeiChokinTests */,
 				E98EA59215BFB8A10019AED5 /* Frameworks */,
@@ -440,6 +441,8 @@
 				E95EED9A15C26C2600F2A89E /* OptionViewController.m */,
 				E9AFEDEE15C915BA0021815A /* FirstHelpViewController.h */,
 				E9AFEDEF15C915BA0021815A /* FirstHelpViewController.m */,
+				E99F6ED515D22C38006053A6 /* FinishViewController.h */,
+				E99F6ED615D22C3C006053A6 /* FinishViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -533,6 +536,7 @@
 				E98EA5A715BFB8A10019AED5 /* MainStoryboard.storyboard in Resources */,
 				E9AFEDEC15C9151C0021815A /* help.jpg in Resources */,
 				2ACB176D15CA932D00DDA60E /* License.txt in Resources */,
+				E9AA9B1915D245BA00D5ADD5 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
