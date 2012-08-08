@@ -34,6 +34,8 @@
 		E98EA5BC15BFB8A20019AED5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E98EA5BA15BFB8A20019AED5 /* InfoPlist.strings */; };
 		E98EA5BF15BFB8A20019AED5 /* CempeiChokinTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E98EA5BE15BFB8A20019AED5 /* CempeiChokinTests.m */; };
 		E98EA5CC15BFC9E80019AED5 /* graph.png in Resources */ = {isa = PBXBuildFile; fileRef = E98EA5CB15BFC9E80019AED5 /* graph.png */; };
+		E99F6ED715D22C44006053A6 /* FinishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E99F6ED615D22C3C006053A6 /* FinishViewController.m */; };
+		E9AA9B1915D245BA00D5ADD5 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = E9AA9B1315D2454200D5ADD5 /* Default.png */; };
 		E9AFEDEC15C9151C0021815A /* help.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E9AFEDEB15C9151C0021815A /* help.jpg */; };
 		E9AFEDF015C915BA0021815A /* FirstHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AFEDEF15C915BA0021815A /* FirstHelpViewController.m */; };
 /* End PBXBuildFile section */
@@ -172,6 +174,9 @@
 		E98EA5BD15BFB8A20019AED5 /* CempeiChokinTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CempeiChokinTests.h; sourceTree = "<group>"; };
 		E98EA5BE15BFB8A20019AED5 /* CempeiChokinTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CempeiChokinTests.m; sourceTree = "<group>"; };
 		E98EA5CB15BFC9E80019AED5 /* graph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = graph.png; sourceTree = "<group>"; };
+		E99F6ED515D22C38006053A6 /* FinishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinishViewController.h; sourceTree = "<group>"; };
+		E99F6ED615D22C3C006053A6 /* FinishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinishViewController.m; sourceTree = "<group>"; };
+		E9AA9B1315D2454200D5ADD5 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		E9AFEDEB15C9151C0021815A /* help.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = help.jpg; sourceTree = "<group>"; };
 		E9AFEDEE15C915BA0021815A /* FirstHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstHelpViewController.h; sourceTree = "<group>"; };
 		E9AFEDEF15C915BA0021815A /* FirstHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstHelpViewController.m; sourceTree = "<group>"; };
@@ -331,6 +336,7 @@
 		E98EA58415BFB8A10019AED5 = {
 			isa = PBXGroup;
 			children = (
+				E9AA9B1315D2454200D5ADD5 /* Default.png */,
 				E98EA59915BFB8A10019AED5 /* CempeiChokin */,
 				E98EA5B715BFB8A20019AED5 /* CempeiChokinTests */,
 				E98EA59215BFB8A10019AED5 /* Frameworks */,
@@ -438,6 +444,8 @@
 				E95EED9A15C26C2600F2A89E /* OptionViewController.m */,
 				E9AFEDEE15C915BA0021815A /* FirstHelpViewController.h */,
 				E9AFEDEF15C915BA0021815A /* FirstHelpViewController.m */,
+				E99F6ED515D22C38006053A6 /* FinishViewController.h */,
+				E99F6ED615D22C3C006053A6 /* FinishViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -532,6 +540,7 @@
 				E98EA5CC15BFC9E80019AED5 /* graph.png in Resources */,
 				E9AFEDEC15C9151C0021815A /* help.jpg in Resources */,
 				2ACB176D15CA932D00DDA60E /* License.txt in Resources */,
+				E9AA9B1915D245BA00D5ADD5 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,6 +587,7 @@
 				2A86784B15CA2A3F00720B2D /* AddGraph.m in Sources */,
 				2A86784E15CA318B00720B2D /* TranslateFormat.m in Sources */,
 				2A92149015CCBD8700B5B993 /* EditLog.m in Sources */,
+				E99F6ED715D22C44006053A6 /* FinishViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
