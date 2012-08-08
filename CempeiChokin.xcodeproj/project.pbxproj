@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		015D078D15C8F1080005AA87 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 015D078C15C8F1080005AA87 /* libCorePlot-CocoaTouch.a */; };
-		01C65B5F15D24F1800D928A2 /* DoneUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 01C65B5E15D24F1800D928A2 /* DoneUp.png */; };
-		01C65B6115D24F2200D928A2 /* donedown.png in Resources */ = {isa = PBXBuildFile; fileRef = 01C65B6015D24F2200D928A2 /* donedown.png */; };
+		01E6EEE015D25AF3001F5B38 /* CreditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E6EEDF15D25AF3001F5B38 /* CreditViewController.m */; };
 		2A86784815C9518300720B2D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A86784715C9518300720B2D /* QuartzCore.framework */; };
 		2A86784B15CA2A3F00720B2D /* AddGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A86784A15CA2A3F00720B2D /* AddGraph.m */; };
 		2A86784E15CA318B00720B2D /* TranslateFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A86784D15CA318B00720B2D /* TranslateFormat.m */; };
@@ -135,6 +134,8 @@
 		015D078C15C8F1080005AA87 /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libCorePlot-CocoaTouch.a"; sourceTree = "<group>"; };
 		01C65B5E15D24F1800D928A2 /* DoneUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DoneUp.png; sourceTree = "<group>"; };
 		01C65B6015D24F2200D928A2 /* donedown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = donedown.png; sourceTree = "<group>"; };
+		01E6EEDE15D25AF3001F5B38 /* CreditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditViewController.h; sourceTree = "<group>"; };
+		01E6EEDF15D25AF3001F5B38 /* CreditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditViewController.m; sourceTree = "<group>"; };
 		2A86784715C9518300720B2D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		2A86784915CA2A3F00720B2D /* AddGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddGraph.h; sourceTree = "<group>"; };
 		2A86784A15CA2A3F00720B2D /* AddGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddGraph.m; sourceTree = "<group>"; };
@@ -449,9 +450,11 @@
 				E95EED9915C26C2600F2A89E /* OptionViewController.h */,
 				E95EED9A15C26C2600F2A89E /* OptionViewController.m */,
 				E9AFEDEE15C915BA0021815A /* FirstHelpViewController.h */,
-				E9AFEDEF15C915BA0021815A /* FirstHelpViewController.m */,
 				E99F6ED515D22C38006053A6 /* FinishViewController.h */,
 				E99F6ED615D22C3C006053A6 /* FinishViewController.m */,
+				E9AFEDEF15C915BA0021815A /* FirstHelpViewController.m */,
+				01E6EEDE15D25AF3001F5B38 /* CreditViewController.h */,
+				01E6EEDF15D25AF3001F5B38 /* CreditViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -546,8 +549,7 @@
 				E98EA5CC15BFC9E80019AED5 /* graph.png in Resources */,
 				E9AFEDEC15C9151C0021815A /* help.jpg in Resources */,
 				2ACB176D15CA932D00DDA60E /* License.txt in Resources */,
-				01C65B5F15D24F1800D928A2 /* DoneUp.png in Resources */,
-				01C65B6115D24F2200D928A2 /* donedown.png in Resources */,
+				E9AA9B1915D245BA00D5ADD5 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,6 +597,7 @@
 				2A86784E15CA318B00720B2D /* TranslateFormat.m in Sources */,
 				2A92149015CCBD8700B5B993 /* EditLog.m in Sources */,
 				E99F6ED715D22C44006053A6 /* FinishViewController.m in Sources */,
+				01E6EEE015D25AF3001F5B38 /* CreditViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

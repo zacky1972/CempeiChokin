@@ -413,20 +413,48 @@
             </objects>
             <point key="canvasLocation" x="435" y="4102"/>
         </scene>
-        <!--Table View Controller - クレジット-->
+        <!--Credit View Controller - クレジット-->
         <scene sceneID="rWf-lD-HVZ">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1gc-Dh-yMH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="1DZ-f3-aZQ" sceneMemberID="viewController">
+                <tableViewController id="1DZ-f3-aZQ" customClass="CreditViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" bounces="NO" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="J7P-Dy-pyt">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="UGa-4M-f2i">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="140"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Cempei式貯金" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="bvb-8q-OST">
+                                    <rect key="frame" x="166" y="30" width="154" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="version1.0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="uqp-1v-9Un">
+                                    <rect key="frame" x="166" y="59" width="154" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="credit" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="ssZ-Pg-KkF">
+                                    <rect key="frame" x="166" y="88" width="154" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </view>
                         <sections>
                             <tableViewSection headerTitle="CEMPEI" id="AeP-0T-uaK">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="ftc-jJ-WL7" detailTextLabel="yqM-me-O26" style="IBUITableViewCellStyleValue1" id="pBi-nv-nZy">
-                                        <rect key="frame" x="0.0" y="46" width="320" height="46"/>
+                                        <rect key="frame" x="0.0" y="176" width="320" height="46"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
@@ -1653,6 +1681,85 @@
     <resources>
         <image name="help.jpg" width="640" height="960"/>
     </resources>
+    <classes>
+        <class className="BudgetViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BudgetViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="DoneButton_down:"/>
+                <relationship kind="action" name="budgetTextField_begin:"/>
+                <relationship kind="action" name="endDateTextField_begin:"/>
+                <relationship kind="action" name="laterButton_down:"/>
+                <relationship kind="action" name="startDateTextField_begin:"/>
+                <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="budgetTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="endDateTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="laterButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="startDateTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="CreditViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CreditViewController.h"/>
+        </class>
+        <class className="DepositViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DepositViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="DoneButton_down:"/>
+                <relationship kind="action" name="depositTextField_begin:"/>
+                <relationship kind="action" name="depositTextField_end:"/>
+                <relationship kind="action" name="laterButton_down:"/>
+                <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="depositTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="depositTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="FinishViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FinishViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="extendButton_down:"/>
+                <relationship kind="action" name="nextButton_down:"/>
+            </relationships>
+        </class>
+        <class className="FirstHelpViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FirstHelpViewController.h"/>
+        </class>
+        <class className="GoalViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="DoneButton_down:"/>
+                <relationship kind="action" name="NameTextField_end:"/>
+                <relationship kind="action" name="PeriodTextField_begin:"/>
+                <relationship kind="action" name="ValueTextField_begin:"/>
+                <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="NameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="PeriodTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="ValueTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="MainViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="KindSegment_click:"/>
+                <relationship kind="action" name="expenseTextField_begin:"/>
+                <relationship kind="action" name="expenseTextField_end:"/>
+                <relationship kind="outlet" name="BalanceLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="BudgetLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="ExpenseLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="KindSegment" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="LogScroll" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="MainNavigationBar" candidateClass="UINavigationBar"/>
+                <relationship kind="outlet" name="NormaLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="expenseTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="logTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="OptionViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/OptionViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="deleteDataButton_down:"/>
+                <relationship kind="outlet" name="deleteDataButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
