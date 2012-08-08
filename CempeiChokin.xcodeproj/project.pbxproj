@@ -450,8 +450,8 @@
 				E95EEDA915C273B200F2A89E /* Methods.m */,
 				2A86784915CA2A3F00720B2D /* AddGraph.h */,
 				2A86784A15CA2A3F00720B2D /* AddGraph.m */,
-				2A86784C15CA318B00720B2D /* TranslateFormat.h */,
 				2A86784D15CA318B00720B2D /* TranslateFormat.m */,
+				2A86784C15CA318B00720B2D /* TranslateFormat.h */,
 			);
 			name = AddMethods;
 			sourceTree = "<group>";

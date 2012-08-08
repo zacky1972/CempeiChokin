@@ -8,9 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FirstHelpViewController : UIViewController{
-    
-    __weak IBOutlet UIButton *DoneButton;
-}
-- (IBAction)DoneButton_down:(id)sender;
+@interface FirstHelpViewController : UIViewController
+
 @end

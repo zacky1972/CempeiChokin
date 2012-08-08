@@ -64,13 +64,14 @@
         //期限チェック
         if([_method searchNext] == YES){//期限をこえてたとき
             // FIXME: 誰かまじめに書いて
+            
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"今日は"
                                                             message:@"期限日やで！"
-                                                           delegate:nil
-                                                  cancelButtonTitle:nil
-                                                  otherButtonTitles:@"貯金しよう", nil];
+                                                           delegate:self
+                                                  cancelButtonTitle:@"貯金しよう"
+                                                  otherButtonTitles:nil, nil];
             [alert show];
-            [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Deposit"] animated:NO];
+            
         }
     }
     //初期設定から戻ってきた時用
@@ -105,8 +106,11 @@
         //FIXME:ここでデータを渡すといいんじゃないか
     }else if([segue destinationViewController] == [self.storyboard instantiateViewControllerWithIdentifier:@"Deposit"]){
         // TODO: 貯金画面行くときに渡すデータ
+        
     }
 }
+
+
 
 #pragma mark - 出費・収入・残高調整 関係
 - (IBAction)KindSegment_click:(id)sender {
@@ -173,7 +177,7 @@
             // FIXME: 誰かまじめに書いて //ワロタ
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"100万以上の出費とか"
                                                             message:@"お前どんだけ金持ちやねん"
-                                                           delegate:nil
+                                                           delegate:self
                                                   cancelButtonTitle:nil
                                                   otherButtonTitles:@"反省する", nil];
             [alert show];
@@ -192,6 +196,13 @@
 
     [LogScroll setContentOffset:CGPointZero animated:YES];
 }
+
+#pragma mark - アラート関係
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
+{
+    [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Deposit"] animated:NO];
+}
+
 
 #pragma mark - なんかよくする処理たち
 - (void)makeGraph{

@@ -8,11 +8,16 @@
 
 #import "DepositViewController.h"
 
+#define alertType_a 0
+#define alertType_b 1
+#define alertType_c 2
+
 @interface DepositViewController (){
     Methods *_method;
     TranslateFormat *_translateFormat;
     
     NSNumber *depositValue; // 貯金額
+    NSInteger alertType;
 }
 
 @end
@@ -111,19 +116,39 @@
     DNSLog(@"完了きたで！");
 
     [_method saveDeposit:depositValue Date:[_method loadEnd] ];
-    if([_method searchFinish] == YES){ //終了！
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"貯金がたまりました！" message:@"おめでとうございます！" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    if([_method searchFinish] == YES){//終了！
+        //ここで画面遷移
+        
+        
+        /*
+        alertType = alertType_a;
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"貯金がたまりました！"
+                                                        message:@"おめでとうございます！"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
         [alert show];
-        UIAlertView *nextalert = [[UIAlertView alloc] initWithTitle:@"次を決めましょう！" message:nil delegate:nil cancelButtonTitle:@"次のものへ" otherButtonTitles:@"今はいいや",nil];
+        
+        alertType = alertType_b;
+        UIAlertView *nextalert = [[UIAlertView alloc] initWithTitle:@"次を決めましょう！"
+                                                            message:nil
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"次のものへ"
+                                                  otherButtonTitles:@"今はいいや",nil];
         [nextalert show];
         //とりあえず抹消して次にいけるようにしたよ
         
     }else if ([_method searchLastNorma] == YES){
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"最終期限が来てしまいました" message:@"もやし食えよ" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        alertType = alertType_c;
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"最終期限が来てしまいました"
+                                                        message:@"もやし食えよ"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
         [alert show];
         UIAlertView *nextalert = [[UIAlertView alloc] initWithTitle:@"どうする？" message:@"あと何円足りません" delegate:nil cancelButtonTitle:@"期限を延ばす" otherButtonTitles:@"あきらめる",nil];
         [nextalert show];
-        
+        */
     }else{
         //まだ終わらないよ！
     }
@@ -133,6 +158,28 @@
     // ???: ここはどうすんの？
     
 }
+
+#pragma mark - アラート関係
+/*
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
+{
+	switch (alertType) {
+		case alertType_a:
+            //アラートAを表示した後の処理
+            
+			break;
+		case alertType_b:
+            //アラートBを表示した後の処理
+            
+			break;
+        case alertType_c:
+            
+            break;
+		default:
+			break;
+	}
+}
+ */
 
 #pragma mark - その他
 - (void)makeNumberPadToolbar:(UITextField *)textField Return:(NSString *)string Done:(SEL)done Cancel:(SEL)cancel{
