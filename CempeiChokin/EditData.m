@@ -57,6 +57,7 @@
     [self saveNow];
     [self saveNorma];
     [self saveDeposit];
+    NSLog(@"\nRoot:%@",root);
     [root writeToFile:path atomically:YES];
 }
 // ファイルからデータの読み込み
@@ -65,13 +66,14 @@
     root = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
     if(root == NULL){ // 読み込みに失敗した場合
         root = [[NSMutableDictionary alloc] init];
-        defaultSettings = NO;
     }
     [self loadValue];
     [self loadGoal];
     [self loadNow];
     [self loadNorma];
     [self loadDeposit];
+    [self loadOthers];
+    NSLog(@"\nRoot2:%@",root);
 }
 
 #pragma mark - 保存・読み込み系
@@ -130,12 +132,28 @@
 }
 // その他
 - (void)saveOthers{
-    [root setObject:defaultSettings forKey:@"defaultSettings"];
-    [root setObject:nextAlert forKey:@"nextAlert"];
+    NSString *defaultSettingsString;
+    NSString *nextAlertString;
+    if(defaultSettings == YES)
+        defaultSettingsString = @"YES";
+    else
+        defaultSettingsString = @"NO";
+    if(nextAlert == YES)
+        nextAlertString = @"YES";
+    else
+        nextAlertString = @"NO";
+    [root setObject:defaultSettingsString forKey:@"defaultSettings"];
+    [root setObject:nextAlertString forKey:@"nextAlert"];
 }
 - (void)loadOthers{
-    defaultSettings = (BOOL)[root objectForKey:@"defaultSettings"];
-    nextAlert = (BOOL)[root objectForKey:@"nextAlert"];
+    if([[root objectForKey:@"defaultSettings"] isEqualToString:@"YES"] == YES)
+        defaultSettings = YES;
+    else
+        defaultSettings = NO;
+    if([[root objectForKey:@"nextAlert"] isEqualToString:@"NO"] == YES)
+        nextAlert = YES;
+    else
+        nextAlert = NO;
 }
 #pragma mark - 外から書き込む系
 // Goal
@@ -226,22 +244,16 @@
 
     if ([_translateFormat equalDate:date Vs:[self loadEnd]] == NO) {//今日が期限日じゃなくて
         if([date earlierDate:[self loadEnd]] != date){//期限日より後
-            //ここの処理は引っ越し予定
-            if ([self loadNextAlert] == YES) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"期限が来ました！" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                [alert show];
-                [root setObject:@1 forKey:@"NextAlert"];   //もう警告がでないようにする
+            if (nextAlert == NO) {
+                nextAlert = YES;
                 return YES;
             }else{
                 return NO;
             }
         }else{//まだ期限内
-
+            //DNSLog(@"期限内やわ！");
         }
     }
-    DNSLog(@"期限きれてない！");
-    [root setObject:@0 forKey:@"NextAlert"];   //もう警告がでないようにする
-    [root writeToFile:path atomically:YES];    //それでrootをdata.plistに書き込み
     return NO;
 }
 - (Boolean)loadNextAlert{

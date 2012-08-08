@@ -12,6 +12,7 @@
     NSNumber *expense;
     NSNumber *balance;
     NSNumber *norma;
+    NSNumber *budget;
 
     NSNumber *deposit;
     NSMutableArray *depositLog;
@@ -32,5 +33,13 @@
 @property (nonatomic,assign)BOOL nextAlert;
 
 - (void)saveData;
+- (void)saveName:(NSString *)name Value:(NSNumber *)value Period:(NSDate *)period;
+- (void)saveStart:(NSDate *)start End:(NSDate *)end Budget:(NSNumber *)tempBudget;
+- (void)saveDepositDate:(NSDate *)date Value:(NSNumber *)value;
+- (void)calcForNestStage;
+- (void)calcValue:(NSNumber *)value Kind:(NSInteger)kind;
+- (void)calcDeleteValue:(NSNumber *)value Kind:(NSString *)tempKind;
+- (BOOL)searchNext;
+
 
 @end
