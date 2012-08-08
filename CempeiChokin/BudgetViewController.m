@@ -36,6 +36,7 @@
     [_method initData];
     //設定がしてあったらデータをとってくる
     
+    
     if([_method loadStart]!=nil){
         startDate = [_method loadStart];
         startDateTextField.text = [_translateFormat formatterDate:startDate];
@@ -43,6 +44,7 @@
         startDate = [NSDate date];
         startDateTextField.text = [_translateFormat formatterDate:startDate];
     }
+    
     if([_method loadEnd] != nil){
         endDate = [_method loadEnd];
         endDateTextField.text = [_translateFormat formatterDate:endDate];
@@ -51,6 +53,16 @@
         budget = [_method loadBudget];
         budgetTextField.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];
     }
+    
+     /*
+    startDate = [NSData data];
+    startDateTextField.text = [_translateFormat formatterDate:startDate];
+
+    endDate = nil;
+    budget = nil;
+    */
+    
+    
     
     //データが入力されているかどうか判断して、入力されていなければ完了を押せないようにする
         if(startDate == NULL || endDate == NULL || budget == NULL){

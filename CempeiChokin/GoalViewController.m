@@ -107,7 +107,8 @@
     //全ての欄が入力されていれば完了を押せるようにする
     if(name.length != 0 && value != NULL && period != NULL){
         DoneButton.enabled = YES;
-        [DoneButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [DoneButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [DoneButton setTintColor:[UIColor redColor]];
     }
     else{
         DoneButton.enabled = NO;
@@ -138,7 +139,8 @@
     //全ての欄が入力されていれば完了を押せるようにする
     if(name.length != 0 && value != NULL && period != NULL){
         DoneButton.enabled = YES;
-        [DoneButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [DoneButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [DoneButton setTintColor:[UIColor blueColor]];
 
     }
     else{
@@ -198,12 +200,12 @@
     //全ての欄が入力されていれば完了を押せるようにする
     if(name.length != 0 && value != NULL && period != NULL){
         DoneButton.enabled = YES;
-        [DoneButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [DoneButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [DoneButton setTintColor:[UIColor blueColor]];
 
     }
     else{
         DoneButton.enabled = NO;
-        [DoneButton setTintColor:[UIColor blueColor]];
     }
     
     [PeriodTextField resignFirstResponder];
