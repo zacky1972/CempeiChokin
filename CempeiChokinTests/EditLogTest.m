@@ -10,7 +10,7 @@
 #import "../CempeiChokin/EditLog.h"
 
 @implementation EditLogTest{
-    EditLog _editlog;
+    EditLog *_editlog;
 }
 
 - (void)setUp{

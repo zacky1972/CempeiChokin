@@ -29,7 +29,7 @@
 #pragma mark - ファイルの初期化系
 // ファイルの初期化
 - (void)initData{
-    path = [self makeDataPathOfLog]; // ファイルの場所指定
+    [self makeDataPath]; // ファイルの場所指定
     if( [[NSFileManager defaultManager] fileExistsAtPath:path] == NO ){ // ファイルがなかったら
         DNSLog(@"ログのデータの初期化！");
         [[NSFileManager defaultManager] createFileAtPath:path contents:nil attributes:nil]; //作成する
@@ -38,12 +38,11 @@
     }
 }
 // ファイル名を返す
-- (NSString *)makeDataPathOfLog{
+- (void)makeDataPath{
     NSString *home = NSHomeDirectory();
     NSString *document = [home stringByAppendingPathComponent:@"Documents"]; // フォルダ名
-    NSString *logPath = [document stringByAppendingPathComponent:@"Log.plist"]; // ファイル名
-    DNSLog(@"ログのファイル: %@",logPath);
-    return logPath;
+    path = [document stringByAppendingPathComponent:@"Log.plist"]; // ファイル名
+    DNSLog(@"ログのファイル: %@",path);
 }
 // ファイルへデータの保存
 - (void)saveData{
@@ -56,9 +55,8 @@
 - (void)loadData{
     DNSLog(@"ログのデータ読み込み！");
     root = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
-    if(root == NULL){ // 読み込みに失敗した場合
+    if(root == NULL) // 読み込みに失敗した場合
         root = [[NSMutableDictionary alloc] init];
-    }
     [self loadLog];
     [self loadVault];
 }

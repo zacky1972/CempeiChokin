@@ -14,6 +14,7 @@
 		2A92149015CCBD8700B5B993 /* EditLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A92148F15CCBD8700B5B993 /* EditLog.m */; };
 		2ACACC8B15CE2FE200A6FB31 /* TranslateFormatTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ACACC8A15CE2FE200A6FB31 /* TranslateFormatTest.m */; };
 		2ACACC9015CE4BC700A6FB31 /* EditLogTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ACACC8F15CE4BC700A6FB31 /* EditLogTest.m */; };
+		2ACACC9415D0DA6C00A6FB31 /* EditData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ACACC9315D0DA6C00A6FB31 /* EditData.m */; };
 		2ACB176D15CA932D00DDA60E /* License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2ACB176C15CA932D00DDA60E /* License.txt */; };
 		E95EED9515C26A7300F2A89E /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EED9415C26A7300F2A89E /* MainViewController.m */; };
 		E95EED9B15C26C2600F2A89E /* OptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EED9A15C26C2600F2A89E /* OptionViewController.m */; };
@@ -33,7 +34,6 @@
 		E98EA5B415BFB8A20019AED5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98EA59515BFB8A10019AED5 /* Foundation.framework */; };
 		E98EA5BC15BFB8A20019AED5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E98EA5BA15BFB8A20019AED5 /* InfoPlist.strings */; };
 		E98EA5BF15BFB8A20019AED5 /* CempeiChokinTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E98EA5BE15BFB8A20019AED5 /* CempeiChokinTests.m */; };
-		E98EA5CC15BFC9E80019AED5 /* graph.png in Resources */ = {isa = PBXBuildFile; fileRef = E98EA5CB15BFC9E80019AED5 /* graph.png */; };
 		E9AFEDEC15C9151C0021815A /* help.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E9AFEDEB15C9151C0021815A /* help.jpg */; };
 		E9AFEDF015C915BA0021815A /* FirstHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AFEDEF15C915BA0021815A /* FirstHelpViewController.m */; };
 /* End PBXBuildFile section */
@@ -140,6 +140,8 @@
 		2ACACC8A15CE2FE200A6FB31 /* TranslateFormatTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TranslateFormatTest.m; sourceTree = "<group>"; };
 		2ACACC8E15CE4BC700A6FB31 /* EditLogTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditLogTest.h; sourceTree = "<group>"; };
 		2ACACC8F15CE4BC700A6FB31 /* EditLogTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditLogTest.m; sourceTree = "<group>"; };
+		2ACACC9215D0DA6C00A6FB31 /* EditData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditData.h; sourceTree = "<group>"; };
+		2ACACC9315D0DA6C00A6FB31 /* EditData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditData.m; sourceTree = "<group>"; };
 		2ACB176C15CA932D00DDA60E /* License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = License.txt; sourceTree = "<group>"; };
 		2AEA041115C804BF009C9208 /* debug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = debug.h; sourceTree = "<group>"; };
 		E95EED9315C26A7300F2A89E /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -171,7 +173,6 @@
 		E98EA5BB15BFB8A20019AED5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E98EA5BD15BFB8A20019AED5 /* CempeiChokinTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CempeiChokinTests.h; sourceTree = "<group>"; };
 		E98EA5BE15BFB8A20019AED5 /* CempeiChokinTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CempeiChokinTests.m; sourceTree = "<group>"; };
-		E98EA5CB15BFC9E80019AED5 /* graph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = graph.png; sourceTree = "<group>"; };
 		E9AFEDEB15C9151C0021815A /* help.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = help.jpg; sourceTree = "<group>"; };
 		E9AFEDEE15C915BA0021815A /* FirstHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstHelpViewController.h; sourceTree = "<group>"; };
 		E9AFEDEF15C915BA0021815A /* FirstHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstHelpViewController.m; sourceTree = "<group>"; };
@@ -305,6 +306,8 @@
 			children = (
 				2A92148E15CCBD8700B5B993 /* EditLog.h */,
 				2A92148F15CCBD8700B5B993 /* EditLog.m */,
+				2ACACC9215D0DA6C00A6FB31 /* EditData.h */,
+				2ACACC9315D0DA6C00A6FB31 /* EditData.m */,
 			);
 			name = Edit;
 			sourceTree = "<group>";
@@ -418,7 +421,6 @@
 			isa = PBXGroup;
 			children = (
 				E9AFEDEB15C9151C0021815A /* help.jpg */,
-				E98EA5CB15BFC9E80019AED5 /* graph.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -529,7 +531,6 @@
 			files = (
 				E98EA59E15BFB8A10019AED5 /* InfoPlist.strings in Resources */,
 				E98EA5A715BFB8A10019AED5 /* MainStoryboard.storyboard in Resources */,
-				E98EA5CC15BFC9E80019AED5 /* graph.png in Resources */,
 				E9AFEDEC15C9151C0021815A /* help.jpg in Resources */,
 				2ACB176D15CA932D00DDA60E /* License.txt in Resources */,
 			);
@@ -578,6 +579,7 @@
 				2A86784B15CA2A3F00720B2D /* AddGraph.m in Sources */,
 				2A86784E15CA318B00720B2D /* TranslateFormat.m in Sources */,
 				2A92149015CCBD8700B5B993 /* EditLog.m in Sources */,
+				2ACACC9415D0DA6C00A6FB31 /* EditData.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -678,6 +680,7 @@
 		E98EA5C315BFB8A20019AED5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMPRESS_PNG_FILES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CempeiChokin/CempeiChokin-Prefix.pch";
 				INFOPLIST_FILE = "CempeiChokin/CempeiChokin-Info.plist";
@@ -694,6 +697,7 @@
 		E98EA5C415BFB8A20019AED5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMPRESS_PNG_FILES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CempeiChokin/CempeiChokin-Prefix.pch";
 				INFOPLIST_FILE = "CempeiChokin/CempeiChokin-Info.plist";
@@ -711,6 +715,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CempeiChokin.app/CempeiChokin";
+				COMPRESS_PNG_FILES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
@@ -728,6 +733,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/CempeiChokin.app/CempeiChokin";
+				COMPRESS_PNG_FILES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
