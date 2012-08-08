@@ -12,6 +12,7 @@
 @interface GoalViewController (){
     @private
     Methods *_method;
+
     TranslateFormat *_translateFormat;
     
     // 値を保存するための変数
@@ -95,6 +96,7 @@
     }
     else{
         DoneButton.enabled = NO;
+        [DoneButton setTintColor:[UIColor blueColor]];
     }
     [NameTextField resignFirstResponder];
 }
@@ -201,6 +203,7 @@
     }
     else{
         DoneButton.enabled = NO;
+        [DoneButton setTintColor:[UIColor blueColor]];
     }
     
     [PeriodTextField resignFirstResponder];
