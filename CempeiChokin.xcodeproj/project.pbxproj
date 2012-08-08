@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		015D078D15C8F1080005AA87 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 015D078C15C8F1080005AA87 /* libCorePlot-CocoaTouch.a */; };
+		01C65B5F15D24F1800D928A2 /* DoneUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 01C65B5E15D24F1800D928A2 /* DoneUp.png */; };
+		01C65B6115D24F2200D928A2 /* donedown.png in Resources */ = {isa = PBXBuildFile; fileRef = 01C65B6015D24F2200D928A2 /* donedown.png */; };
 		2A86784815C9518300720B2D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A86784715C9518300720B2D /* QuartzCore.framework */; };
 		2A86784B15CA2A3F00720B2D /* AddGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A86784A15CA2A3F00720B2D /* AddGraph.m */; };
 		2A86784E15CA318B00720B2D /* TranslateFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A86784D15CA318B00720B2D /* TranslateFormat.m */; };
@@ -129,6 +131,8 @@
 		015D078A15C8F1080005AA87 /* NSDecimalNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDecimalNumberExtensions.h; sourceTree = "<group>"; };
 		015D078B15C8F1080005AA87 /* NSNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberExtensions.h; sourceTree = "<group>"; };
 		015D078C15C8F1080005AA87 /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libCorePlot-CocoaTouch.a"; sourceTree = "<group>"; };
+		01C65B5E15D24F1800D928A2 /* DoneUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DoneUp.png; sourceTree = "<group>"; };
+		01C65B6015D24F2200D928A2 /* donedown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = donedown.png; sourceTree = "<group>"; };
 		2A86784715C9518300720B2D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		2A86784915CA2A3F00720B2D /* AddGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddGraph.h; sourceTree = "<group>"; };
 		2A86784A15CA2A3F00720B2D /* AddGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddGraph.m; sourceTree = "<group>"; };
@@ -377,6 +381,8 @@
 		E98EA59A15BFB8A10019AED5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				01C65B6015D24F2200D928A2 /* donedown.png */,
+				01C65B5E15D24F1800D928A2 /* DoneUp.png */,
 				E98EA59B15BFB8A10019AED5 /* CempeiChokin-Info.plist */,
 				E98EA59C15BFB8A10019AED5 /* InfoPlist.strings */,
 				E98EA59F15BFB8A10019AED5 /* main.m */,
@@ -532,6 +538,8 @@
 				E98EA5CC15BFC9E80019AED5 /* graph.png in Resources */,
 				E9AFEDEC15C9151C0021815A /* help.jpg in Resources */,
 				2ACB176D15CA932D00DDA60E /* License.txt in Resources */,
+				01C65B5F15D24F1800D928A2 /* DoneUp.png in Resources */,
+				01C65B6115D24F2200D928A2 /* donedown.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
