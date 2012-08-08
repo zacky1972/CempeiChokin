@@ -335,7 +335,7 @@
 //貯金が溜まったかどうか調べる
 - (BOOL)searchFinish{
     DNSLog(@"たまった？");
-    if ([self loadValue] ==  [self loadDeposit]) {
+    if ([self loadValue] <=  [self loadDeposit]) {
         DNSLog(@"たまった！");
         return YES;
     }else{

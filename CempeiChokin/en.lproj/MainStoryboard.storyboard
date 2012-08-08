@@ -1392,11 +1392,11 @@
             </objects>
             <point key="canvasLocation" x="-484" y="1362"/>
         </scene>
-        <!--Deposit View Controller - 目標達成通知-->
+        <!--Finish View Controller - 目標達成通知-->
         <scene sceneID="QrB-rG-yNp">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="twC-Qf-EfW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController storyboardIdentifier="FinishView_miss" id="U21-t4-S2S" customClass="DepositViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="FinishView_miss" id="U21-t4-S2S" customClass="FinishViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" bounces="NO" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Lfa-2X-WtL">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1418,6 +1418,7 @@
                                     </state>
                                     <connections>
                                         <action selector="laterButton_down:" destination="U21-t4-S2S" eventType="touchUpInside" id="uEq-W3-Jco"/>
+                                        <action selector="nextButton_down:" destination="U21-t4-S2S" eventType="touchUpInside" id="QjG-fw-e4o"/>
                                         <segue destination="zXJ-SR-lRM" kind="modal" id="0Xr-BU-pO7"/>
                                     </connections>
                                 </button>
@@ -1434,6 +1435,7 @@
                                     </state>
                                     <connections>
                                         <action selector="DoneButton_down:" destination="U21-t4-S2S" eventType="touchUpInside" id="J0L-xP-X4G"/>
+                                        <action selector="extendButton_down:" destination="U21-t4-S2S" eventType="touchUpInside" id="zf7-16-cGA"/>
                                         <segue destination="IM6-jB-q56" kind="modal" id="Uj0-E1-Eiv"/>
                                     </connections>
                                 </button>
@@ -1460,11 +1462,11 @@
             </objects>
             <point key="canvasLocation" x="1388" y="2562"/>
         </scene>
-        <!--Deposit View Controller - 目標達成通知-->
+        <!--Finish View Controller - 目標達成通知-->
         <scene sceneID="6CG-fC-pnu">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8oM-nF-zmO" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController storyboardIdentifier="FinishView_complete" id="Fh6-YX-9lq" customClass="DepositViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="FinishView_complete" id="Fh6-YX-9lq" customClass="FinishViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" bounces="NO" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="OhT-UB-5gD">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1486,6 +1488,7 @@
                                     </state>
                                     <connections>
                                         <action selector="laterButton_down:" destination="Fh6-YX-9lq" eventType="touchUpInside" id="tM9-nU-HeS"/>
+                                        <action selector="nextButton_down:" destination="Fh6-YX-9lq" eventType="touchUpInside" id="UQ2-t8-v9n"/>
                                         <segue destination="zXJ-SR-lRM" kind="modal" id="k6h-lJ-eW9"/>
                                     </connections>
                                 </button>
@@ -1656,8 +1659,8 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="gv0-sb-DCH"/>
+        <segue reference="gyw-13-KT7"/>
         <segue reference="Thm-lh-qM2"/>
-        <segue reference="k6h-lJ-eW9"/>
+        <segue reference="0Xr-BU-pO7"/>
     </inferredMetricsTieBreakers>
 </document>
