@@ -74,6 +74,7 @@
     }
     else{
         DoneButton.enabled = NO;
+        [DoneButton setTintColor:[UIColor blueColor]];
     }
     [NameTextField resignFirstResponder];
 }
@@ -84,12 +85,12 @@
     //全ての欄が入力されていれば完了を押せるようにする
     if(name.length != 0 && value != NULL && period != NULL){
         DoneButton.enabled = YES;
-        [DoneButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [DoneButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [DoneButton setTintColor:[UIColor redColor]];
     }
     else{
         DoneButton.enabled = NO;
     }
-    DNSLog(@"%u",name.length);
 }
 
 #pragma mark - 金額の設定
@@ -108,6 +109,8 @@
     // 既に値が入力されていた場合，表示されている値を数値に戻す (例)10,000円→10000
     if(value != NULL)
         ValueTextField.text = [_translateFormat stringFromNumber:value addComma:NO addYen:NO];
+    
+
 }
 
 - (IBAction)ValueTextField_end:(id)sender {
@@ -115,7 +118,8 @@
     //全ての欄が入力されていれば完了を押せるようにする
     if(name.length != 0 && value != NULL && period != NULL){
         DoneButton.enabled = YES;
-        [DoneButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+     //   [DoneButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [DoneButton setTintColor:[UIColor blueColor]];
 
     }
     else{
@@ -133,6 +137,7 @@
     else{
         ValueTextField.text = @""; // 値を消す
     }
+
     [ValueTextField resignFirstResponder];
  
 }
@@ -175,7 +180,8 @@
     //全ての欄が入力されていれば完了を押せるようにする
     if(name.length != 0 && value != NULL && period != NULL){
         DoneButton.enabled = YES;
-        [DoneButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [DoneButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [DoneButton setTintColor:[UIColor blueColor]];
 
     }
     else{
@@ -232,6 +238,10 @@
                                                   action: nil];
     numberToolbar.items = @[cancelButton,frexibleSpace,doneButton];
     [numberToolbar sizeToFit];
+    
+    
+    
+
     return numberToolbar;
 }
 
@@ -259,10 +269,9 @@
     
     [actionSheet addSubview: datePickerToolbar]; // Toolbarのっける
     [actionSheet addSubview: datePicker];        // DatePickerのっける
+    
+
 }
-
-
-
 
 
 @end

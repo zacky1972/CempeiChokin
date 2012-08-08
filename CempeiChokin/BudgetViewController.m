@@ -52,6 +52,16 @@
         budgetTextField.text = [_translateFormat stringFromNumber:appDelegate.editData.budget addComma:YES addYen:YES];
     }
     
+     /*
+    startDate = [NSData data];
+    startDateTextField.text = [_translateFormat formatterDate:startDate];
+
+    endDate = nil;
+    budget = nil;
+    */
+    
+    
+    
     //データが入力されているかどうか判断して、入力されていなければ完了を押せないようにする
         if(startDate == NULL || endDate == NULL || appDelegate.editData.budget == 0){
         DoneButton.enabled = NO;
