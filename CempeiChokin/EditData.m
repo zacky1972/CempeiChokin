@@ -186,6 +186,7 @@
     NSInteger daysToEnd = (int)(timeInterval / (60*60*24)); // 今回の期限までの日数
     NSInteger normaOfOneDays = (int)(([[self loadGoalValue] intValue] - [self.deposit intValue]) / daysToPeriod);
     norma = @( normaOfOneDays * daysToEnd );
+    balance = budget;
     defaultSettings = YES;
 }
 // 出費・収入・残高調整
