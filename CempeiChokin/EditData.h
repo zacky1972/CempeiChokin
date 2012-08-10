@@ -34,7 +34,7 @@
 
 - (void)saveData;
 - (void)saveName:(NSString *)name Value:(NSNumber *)value Period:(NSDate *)period;
-- (void)saveStart:(NSDate *)start End:(NSDate *)end Budget:(NSNumber *)tempBudget;
+- (void)saveStart:(NSDate *)start End:(NSDate *)end;
 - (void)saveDepositDate:(NSDate *)date Value:(NSNumber *)value;
 - (void)calcForNextStage;
 - (void)calcValue:(NSNumber *)value Kind:(NSInteger)kind;

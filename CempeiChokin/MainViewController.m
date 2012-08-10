@@ -179,9 +179,9 @@
             // FIXME: 誰かまじめに書いて //ワロタ
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"100万以上の出費とか"
                                                             message:@"お前どんだけ金持ちやねん"
-                                                           delegate:self
-                                                  cancelButtonTitle:nil
-                                                  otherButtonTitles:@"反省する", nil];
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"反省する"
+                                                  otherButtonTitles:nil];
             [alert show];
             return;
         }
@@ -200,8 +200,7 @@
 }
 
 #pragma mark - アラート関係
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
-{
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Deposit"] animated:NO];
 }
 

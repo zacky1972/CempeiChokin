@@ -17,7 +17,6 @@
     // 値を保存するための変数
     NSDate   *startDate;
     NSDate   *endDate;
-    NSNumber *budget;
     
     // パーツたち
     UIActionSheet *actionSheet;
@@ -113,7 +112,7 @@
 }
 
 - (IBAction)startDateTextField_end:(id)sender {
-    if(startDate != NULL && endDate != NULL && budget != NULL){
+    if(startDate != NULL && endDate != NULL && [appDelegate.editData.budget compare:@0] == NSOrderedSame){
         DoneButton.enabled = YES;
     }
     [startDateTextField resignFirstResponder];
@@ -155,7 +154,7 @@
 - (IBAction)endDateTextField_end:(id)sender {
     
     //全ての欄が入力されていれば完了を押せるようにする
-    if(startDate != NULL && endDate != NULL && budget != NULL){
+    if(startDate != NULL && endDate != NULL && [appDelegate.editData.budget compare:@0] == NSOrderedSame){
         DoneButton.enabled = YES;
     }
     [endDateTextField resignFirstResponder];
@@ -181,19 +180,18 @@
     budgetTextField.inputAccessoryView =
     [self makeNumberPadToolbar:@"完了" Done:@selector(doneBudgetTextField) Cancel:@selector(cancelBudgetTextField)];
     // 既に値が入力されていた場合，表示されている値を数値に戻す
-    if(appDelegate.editData.budget != NULL)
+    if(budgetTextField.text != @"" && [appDelegate.editData.budget compare:@0] != NSOrderedSame)
         budgetTextField.text = [_translateFormat stringFromNumber:appDelegate.editData.budget addComma:NO addYen:NO];
 }
 
 - (IBAction)budgetTextField_end:(id)sender{
     
     //全ての欄が入力されていれば完了を押せるようにする
-    if(startDate != NULL && endDate != NULL && budget != NULL){
+    if(startDate != NULL && endDate != NULL && [appDelegate.editData.budget compare:@0] != NSOrderedSame){
         DoneButton.enabled = YES;
     }
-    
-    if(budget != NULL){
-        budgetTextField.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];   // 元に戻す
+    if([appDelegate.editData.budget compare:@0] != NSOrderedSame){
+        budgetTextField.text = [_translateFormat stringFromNumber:appDelegate.editData.budget addComma:YES addYen:YES];   // 元に戻す
     }
     else{
         budgetTextField.text = @"";         // 値を消す
@@ -208,8 +206,8 @@
 -(void)doneBudgetTextField{
     // 値が入っている場合
     if([budgetTextField.text length] >= 1) {
-        budget = [_translateFormat numberFromString:budgetTextField.text];
-        budgetTextField.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];
+        appDelegate.editData.budget = [_translateFormat numberFromString:budgetTextField.text];
+        budgetTextField.text = [_translateFormat stringFromNumber:appDelegate.editData.budget addComma:YES addYen:YES];
         [budgetTextField resignFirstResponder];  // NumberPad消す
     }
     [budgetTextField resignFirstResponder]; // NumberPad消す
@@ -218,8 +216,8 @@
 // Numberpadに追加したキャンセルボタンの動作
 -(void)cancelBudgetTextField{
     // 既に値が入っていた場合
-    if(budget != NULL)
-        budgetTextField.text = [_translateFormat stringFromNumber:budget addComma:YES addYen:YES];   // 元に戻す
+    if(appDelegate.editData.budget != NULL)
+        budgetTextField.text = [_translateFormat stringFromNumber:appDelegate.editData.budget addComma:YES addYen:YES];   // 元に戻す
     else
         budgetTextField.text = @"";         // 値を消す
     [budgetTextField resignFirstResponder]; // NumberPad消す(=テキストフィールドを選択していない状態にする)
@@ -227,7 +225,7 @@
 
 #pragma mark - ボタン
 - (IBAction)DoneButton_down:(id)sender {
-    [appDelegate.editData saveStart:startDate End:endDate Budget:budget];
+    [appDelegate.editData saveStart:startDate End:endDate];
 }
 
 - (IBAction)laterButton_down:(id)sender {

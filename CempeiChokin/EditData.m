@@ -157,11 +157,10 @@
     [goal setObject:[_translateFormat dateOnly:[_translateFormat nineHoursLater:period]] forKey:@"Period"];
 }
 // Now
-- (void)saveStart:(NSDate *)start End:(NSDate *)end Budget:(NSNumber *)tempBudget{
+- (void)saveStart:(NSDate *)start End:(NSDate *)end{
     _translateFormat = [TranslateFormat alloc];
     [now setObject:[_translateFormat dateOnly:[_translateFormat nineHoursLater:start]] forKey:@"Start"];
     [now setObject:[_translateFormat dateOnly:[_translateFormat nineHoursLater:end]] forKey:@"End"];
-    budget = tempBudget;
     [self calcForNextStage];
 }
 // Deposit DepositLog
