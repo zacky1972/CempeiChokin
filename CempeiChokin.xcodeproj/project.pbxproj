@@ -17,6 +17,7 @@
 		2ACACC9015CE4BC700A6FB31 /* EditLogTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ACACC8F15CE4BC700A6FB31 /* EditLogTest.m */; };
 		2ACACC9415D0DA6C00A6FB31 /* EditData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ACACC9315D0DA6C00A6FB31 /* EditData.m */; };
 		2ACB176D15CA932D00DDA60E /* License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2ACB176C15CA932D00DDA60E /* License.txt */; };
+		E945FB5115D4F09C0051C57A /* AddNormaLine.m in Sources */ = {isa = PBXBuildFile; fileRef = E945FB5015D4F09C0051C57A /* AddNormaLine.m */; };
 		E95EED9515C26A7300F2A89E /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EED9415C26A7300F2A89E /* MainViewController.m */; };
 		E95EED9B15C26C2600F2A89E /* OptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EED9A15C26C2600F2A89E /* OptionViewController.m */; };
 		E95EED9E15C26D8D00F2A89E /* BudgetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EED9D15C26D8D00F2A89E /* BudgetViewController.m */; };
@@ -151,6 +152,8 @@
 		2ACACC9315D0DA6C00A6FB31 /* EditData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditData.m; sourceTree = "<group>"; };
 		2ACB176C15CA932D00DDA60E /* License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = License.txt; sourceTree = "<group>"; };
 		2AEA041115C804BF009C9208 /* debug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = debug.h; sourceTree = "<group>"; };
+		E945FB4F15D4F09C0051C57A /* AddNormaLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNormaLine.h; sourceTree = "<group>"; };
+		E945FB5015D4F09C0051C57A /* AddNormaLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNormaLine.m; sourceTree = "<group>"; };
 		E95EED9315C26A7300F2A89E /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		E95EED9415C26A7300F2A89E /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		E95EED9915C26C2600F2A89E /* OptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionViewController.h; sourceTree = "<group>"; };
@@ -469,6 +472,8 @@
 				E95EEDA915C273B200F2A89E /* Methods.m */,
 				2A86784915CA2A3F00720B2D /* AddGraph.h */,
 				2A86784A15CA2A3F00720B2D /* AddGraph.m */,
+				E945FB4F15D4F09C0051C57A /* AddNormaLine.h */,
+				E945FB5015D4F09C0051C57A /* AddNormaLine.m */,
 				2A86784C15CA318B00720B2D /* TranslateFormat.h */,
 				2A86784D15CA318B00720B2D /* TranslateFormat.m */,
 			);
@@ -600,6 +605,7 @@
 				2ACACC9415D0DA6C00A6FB31 /* EditData.m in Sources */,
 				E99F6ED715D22C44006053A6 /* FinishViewController.m in Sources */,
 				01E6EEE015D25AF3001F5B38 /* CreditViewController.m in Sources */,
+				E945FB5115D4F09C0051C57A /* AddNormaLine.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

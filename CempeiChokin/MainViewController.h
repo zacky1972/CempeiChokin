@@ -20,6 +20,7 @@
     __weak IBOutlet UILabel *ExpenseLabel;
     __weak IBOutlet UILabel *BalanceLabel;
     __weak IBOutlet UILabel *NormaLabel;
+    __weak IBOutlet UILabel *DepositLabel;
     __weak IBOutlet UITextField *expenseTextField;
     __weak IBOutlet UISegmentedControl *KindSegment;
     __weak IBOutlet UITableView *logTableView;

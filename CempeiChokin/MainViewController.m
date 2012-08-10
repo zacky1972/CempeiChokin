@@ -97,6 +97,7 @@
     logTableView = nil;
     KindSegment = nil;
     MainNavigationBar = nil;
+    DepositLabel = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
