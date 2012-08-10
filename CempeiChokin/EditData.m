@@ -180,10 +180,14 @@
 #pragma mark - 自動で処理する系
 // 期限が来て設定し終わったあとの処理 (ノルマを決める)
 - (void)calcForNextStage{
-    NSTimeInterval timeInterval = [[self loadStart] timeIntervalSinceDate:[self loadGoalPeriod]];
+    NSTimeInterval timeInterval = [[self loadStart] timeIntervalSinceDate:[[self loadGoalPeriod] initWithTimeInterval:1*24*60*60 sinceDate:[self loadGoalPeriod]]];
     NSInteger daysToPeriod = (int)(timeInterval / (60*60*24)); // 最終期限までの日数
-    timeInterval = [[self loadStart] timeIntervalSinceDate:[self loadEnd]];
+    
+    DNSLog(@"最終期限までの日数:%d",daysToPeriod);
+    
+    timeInterval = [[self loadStart] timeIntervalSinceDate:[[self loadEnd] initWithTimeInterval:1*24*60*60 sinceDate:[self loadEnd]]];
     NSInteger daysToEnd = (int)(timeInterval / (60*60*24)); // 今回の期限までの日数
+    DNSLog(@"今回の期限までの日数:%d",daysToEnd);
     NSInteger normaOfOneDays = (int)(([[self loadGoalValue] intValue] - [self.deposit intValue]) / daysToPeriod);
     norma = @( normaOfOneDays * daysToEnd );
     defaultSettings = YES;

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="raj-cK-qeg">
     <dependencies>
+        <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
     </dependencies>
     <scenes>
@@ -205,6 +206,7 @@
                     <connections>
                         <outlet property="BalanceLabel" destination="8UN-kZ-H61" id="5rx-Sb-sSp"/>
                         <outlet property="BudgetLabel" destination="Kb4-ic-H2e" id="lqB-8S-2Yv"/>
+                        <outlet property="DepositLabel" destination="2ZA-w3-Tuv" id="tS4-ST-2Tr"/>
                         <outlet property="ExpenseLabel" destination="4X5-2C-0ap" id="lMo-cF-2pZ"/>
                         <outlet property="KindSegment" destination="AHs-2z-ikp" id="L3y-qG-y70"/>
                         <outlet property="LogScroll" destination="eGP-ec-UM4" id="NjY-xc-0nw"/>
@@ -1805,6 +1807,7 @@
                 <relationship kind="action" name="expenseTextField_end:"/>
                 <relationship kind="outlet" name="BalanceLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="BudgetLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="DepositLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="ExpenseLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="KindSegment" candidateClass="UISegmentedControl"/>
                 <relationship kind="outlet" name="LogScroll" candidateClass="UIScrollView"/>

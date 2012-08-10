@@ -85,7 +85,7 @@
             fill = [CPTFill fillWithColor:color];
             break;
         case 2:
-            color = [CPTColor colorWithComponentRed:0.1 green:0.1 blue:0.1 alpha:0.2];
+            color = [CPTColor redColor];//colorWithComponentRed:1.0 green:0.1 blue:0.1 alpha:0.2];
             fill = [CPTFill fillWithColor:color];
             break;
     }
