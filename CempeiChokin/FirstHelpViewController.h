@@ -2,8 +2,8 @@
 //  FirstHelpViewController.h
 //  CempeiChokin
 //
-//  Created by 中野 麻美 on 12/08/01.
-//  Copyright (c) 2012年 Nakano Asami. All rights reserved.
+//  Created by CEMPEI on 12/08/01.
+//  Copyright (c) 2012年 CEMPEI. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
