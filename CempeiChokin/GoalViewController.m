@@ -207,10 +207,18 @@
 }
 
 #pragma mark - ボタン
-// 決定ボタンが押されたときの
+// (初回)決定ボタンが押されたときの
 - (IBAction)DoneButton_down:(id)sender {
     [appDelegate.editData saveName:name Value:value Period:period];
 }
+
+// オプション内
+- (IBAction)DoneButton_down_2:(id)sender {
+    [appDelegate.editData saveName:name Value:value Period:period];
+    [appDelegate.editData calcForNextStage];
+}
+
+
 
 #pragma mark - その他
 - (UIToolbar *)makeNumberPadToolbar:(NSString *)string Done:(SEL)done Cancel:(SEL)cancel{
