@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CreditViewController : UITableViewController
+- (IBAction)contactButton_down:(id)sender;
+- (IBAction)aboutButton_down:(id)sender;
 
 @end

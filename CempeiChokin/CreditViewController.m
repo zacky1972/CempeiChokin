@@ -46,4 +46,11 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (IBAction)contactButton_down:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://twitter.com/CEMPEI_official"]];
+}
+
+- (IBAction)aboutButton_down:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.facebook.com/Cempei"]];
+}
 @end
