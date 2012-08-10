@@ -182,8 +182,8 @@
     budgetTextField.inputAccessoryView =
     [self makeNumberPadToolbar:@"完了" Done:@selector(doneBudgetTextField) Cancel:@selector(cancelBudgetTextField)];
     // 既に値が入力されていた場合，表示されている値を数値に戻す
-    if(budget != NULL)
-        budgetTextField.text = [_translateFormat stringFromNumber:budget addComma:NO addYen:NO];
+    if(appDelegate.editData.budget != NULL)
+        budgetTextField.text = [_translateFormat stringFromNumber:appDelegate.editData.budget addComma:NO addYen:NO];
 }
 
 - (IBAction)budgetTextField_end:(id)sender{
