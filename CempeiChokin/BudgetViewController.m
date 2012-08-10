@@ -22,7 +22,6 @@
     // パーツたち
     UIActionSheet *actionSheet;
     UIDatePicker *datePicker;
-    
 }
 
 @end
@@ -48,7 +47,7 @@
         endDate = [appDelegate.editData loadEnd];
         endDateTextField.text = [_translateFormat formatterDate:endDate];
     }
-    if(appDelegate.editData.budget != 0){
+    if([appDelegate.editData.budget compare:@0] != NSOrderedSame){
         budgetTextField.text = [_translateFormat stringFromNumber:appDelegate.editData.budget addComma:YES addYen:YES];
     }
     

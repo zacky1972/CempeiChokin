@@ -210,7 +210,7 @@
     NSNumber *budget = appDelegate.editData.budget;
     NSNumber *expense = appDelegate.editData.expense;
     NSNumber *balance = appDelegate.editData.balance;
-    NSNumber *norma = appDelegate.editData.balance;
+    NSNumber *norma = appDelegate.editData.norma;
 
     if([balance compare:norma] == NSOrderedDescending){
         balance = @([balance intValue] - [norma intValue]);
