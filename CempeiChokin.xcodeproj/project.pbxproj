@@ -35,7 +35,6 @@
 		E98EA5B415BFB8A20019AED5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98EA59515BFB8A10019AED5 /* Foundation.framework */; };
 		E98EA5BC15BFB8A20019AED5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E98EA5BA15BFB8A20019AED5 /* InfoPlist.strings */; };
 		E98EA5BF15BFB8A20019AED5 /* CempeiChokinTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E98EA5BE15BFB8A20019AED5 /* CempeiChokinTests.m */; };
-		E98EA5CC15BFC9E80019AED5 /* graph.png in Resources */ = {isa = PBXBuildFile; fileRef = E98EA5CB15BFC9E80019AED5 /* graph.png */; };
 		E99F6ED715D22C44006053A6 /* FinishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E99F6ED615D22C3C006053A6 /* FinishViewController.m */; };
 		E9AA9B1915D245BA00D5ADD5 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = E9AA9B1315D2454200D5ADD5 /* Default.png */; };
 		E9AFEDEC15C9151C0021815A /* help.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E9AFEDEB15C9151C0021815A /* help.jpg */; };
@@ -181,7 +180,6 @@
 		E98EA5BB15BFB8A20019AED5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		E98EA5BD15BFB8A20019AED5 /* CempeiChokinTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CempeiChokinTests.h; sourceTree = "<group>"; };
 		E98EA5BE15BFB8A20019AED5 /* CempeiChokinTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CempeiChokinTests.m; sourceTree = "<group>"; };
-		E98EA5CB15BFC9E80019AED5 /* graph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = graph.png; sourceTree = "<group>"; };
 		E99F6ED515D22C38006053A6 /* FinishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinishViewController.h; sourceTree = "<group>"; };
 		E99F6ED615D22C3C006053A6 /* FinishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinishViewController.m; sourceTree = "<group>"; };
 		E9AA9B1315D2454200D5ADD5 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -453,9 +451,9 @@
 				E95EEDA615C270B700F2A89E /* DepositViewController.m */,
 				E95EED9915C26C2600F2A89E /* OptionViewController.h */,
 				E95EED9A15C26C2600F2A89E /* OptionViewController.m */,
-				E9AFEDEE15C915BA0021815A /* FirstHelpViewController.h */,
 				E99F6ED515D22C38006053A6 /* FinishViewController.h */,
 				E99F6ED615D22C3C006053A6 /* FinishViewController.m */,
+				E9AFEDEE15C915BA0021815A /* FirstHelpViewController.h */,
 				E9AFEDEF15C915BA0021815A /* FirstHelpViewController.m */,
 				01E6EEDE15D25AF3001F5B38 /* CreditViewController.h */,
 				01E6EEDF15D25AF3001F5B38 /* CreditViewController.m */,
