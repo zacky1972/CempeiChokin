@@ -33,9 +33,8 @@
     if( [[NSFileManager defaultManager] fileExistsAtPath:path] == NO ){ // ファイルがなかったら
         DNSLog(@"ログのデータの初期化！");
         [[NSFileManager defaultManager] createFileAtPath:path contents:nil attributes:nil]; //作成する
-    }else{
-        [self loadData];
     }
+    [self loadData];
 }
 // ファイル名を返す
 - (void)makeDataPath{
@@ -165,7 +164,6 @@
 
 #pragma mark - その他
 - (void)deleteLogData{
-    DNSLog(@"データ削除！");
     [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
     [self initData];
 }

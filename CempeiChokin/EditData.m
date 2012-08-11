@@ -14,12 +14,10 @@
 
     NSString *path;
     NSMutableDictionary *root;
-    NSMutableDictionary *goal;
-    NSMutableDictionary *now;
 }
 
 @synthesize expense,balance,norma,budget;
-@synthesize deposit,depositLog;
+@synthesize deposit;
 @synthesize defaultSettings,nextAlert;
 
 // 初期化
@@ -31,7 +29,7 @@
     return self;
 }
 
-#pragma mark - ファイルの初期化系
+#pragma mark - ファイル操作系
 // ファイルの初期化
 - (void)initData{
     [self makeDataPath]; // ファイルの場所指定
@@ -40,6 +38,13 @@
         [[NSFileManager defaultManager] createFileAtPath:path contents:nil attributes:nil]; //作成する
     }
     [self loadData];
+
+    _translateFormat = [TranslateFormat alloc];
+}
+// ファイルの削除
+- (void)deleteData{
+    [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+    [self initData];
 }
 // ファイル名を返す
 - (void)makeDataPath{
@@ -50,19 +55,17 @@
 }
 // ファイルへデータの保存
 - (void)saveData{
-    DNSLog(@"メインのデータ保存！");
     [self saveValue];
     [self saveGoal];
     [self saveNow];
     [self saveNorma];
     [self saveDeposit];
     [self saveOthers];
-    NSLog(@"\nRoot:%@",root);
+    DNSLog(@"Data.plistに保存\nData.plist:%@",root);
     [root writeToFile:path atomically:YES];
 }
 // ファイルからデータの読み込み
 - (void)loadData{
-    DNSLog(@"メインのデータ読み込み！");
     root = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
     if(root == NULL){ // 読み込みに失敗した場合
         root = [[NSMutableDictionary alloc] init];
@@ -73,6 +76,7 @@
     [self loadNorma];
     [self loadDeposit];
     [self loadOthers];
+    DNSLog(@"Data.plistから読み込み \nData.plist:%@",root);
 }
 
 #pragma mark - 保存・読み込み系
@@ -85,13 +89,13 @@
 - (void)loadValue{
     expense = [root objectForKey:@"Expense"];
     if(expense == NULL)
-        expense = @0;
+        expense = @-1;
     balance = [root objectForKey:@"Balance"];
     if(balance == NULL)
-        balance = @0;
+        balance = @-1;
     budget  = [root objectForKey:@"Budget"];
     if(budget == NULL)
-        budget = @0;
+        budget = @-1;
 }
 // Goal系
 - (void)saveGoal{
@@ -118,7 +122,7 @@
 - (void)loadNorma{
     norma = [root objectForKey:@"Norma"];
     if(norma == NULL)
-        norma = @0;
+        norma = @-1;
 }
 // 貯金額
 - (void)saveDeposit{
@@ -148,45 +152,53 @@
     if ([root objectForKey:@"nextAlert"] == NULL)
         nextAlert = NO;
 }
+
 #pragma mark - 外から書き込む系
-// Goal
+// Goalに
 - (void)saveName:(NSString *)name Value:(NSNumber *)value Period:(NSDate *)period{
-    _translateFormat = [TranslateFormat alloc];
     [goal setObject:name forKey:@"Name"];
     [goal setObject:value forKey:@"Value"];
-    [goal setObject:[_translateFormat dateOnly:[_translateFormat nineHoursLater:period]] forKey:@"Period"];
+    [goal setObject:[_translateFormat dateOnly:period] forKey:@"Period"];
 }
-// Now
+// Nowに
 - (void)saveStart:(NSDate *)start End:(NSDate *)end{
-    _translateFormat = [TranslateFormat alloc];
-    [now setObject:[_translateFormat dateOnly:[_translateFormat nineHoursLater:start]] forKey:@"Start"];
-    [now setObject:[_translateFormat dateOnly:[_translateFormat nineHoursLater:end]] forKey:@"End"];
+    [now setObject:[_translateFormat dateOnly:start] forKey:@"Start"];
+    [now setObject:[_translateFormat dateOnly:end] forKey:@"End"];
     [self calcForNextStage];
 }
-// Deposit DepositLog
+// Deposit,DepositLogに
 - (void)saveDepositDate:(NSDate *)date Value:(NSNumber *)value{
-    _translateFormat = [TranslateFormat alloc];
     NSDictionary *dictionaly = [[NSDictionary alloc] initWithObjectsAndKeys:date, @"Date", value, @"Value",nil];
 
     if([date isEqualToDate:[[depositLog objectAtIndex:0] objectForKey:@"Date"]]){
+        // 既に同じ期間の貯金がしてあった場合
         [depositLog replaceObjectAtIndex:0 withObject:dictionaly]; // 上書きする
-        deposit = @([deposit intValue] - [[[depositLog objectAtIndex:0] objectForKey:@"Value"] intValue] + [value intValue]);
-    }else{
+        deposit = @([deposit intValue] - [[[depositLog objectAtIndex:0] objectForKey:@"Value"] intValue] + [value intValue]); // 貯金額の計算
+    }else{ // 普通に貯金する場合
         [depositLog addObject:dictionaly]; // 新規追加する
-        deposit = @([deposit intValue] + [value intValue]);
+        deposit = @([deposit intValue] + [value intValue]); // 貯金額を増やす
     }
 }
 #pragma mark - 自動で処理する系
 // 期限が来て設定し終わったあとの処理 (ノルマを決める)
 - (void)calcForNextStage{
-    NSTimeInterval timeInterval = [[self loadStart] timeIntervalSinceDate:[[self loadGoalPeriod] initWithTimeInterval:1*24*60*60 sinceDate:[self loadGoalPeriod]]];
-    NSInteger daysToPeriod = (int)(timeInterval / (60*60*24)); // 最終期限までの日数
-    timeInterval = [[self loadStart] timeIntervalSinceDate:[[self loadEnd] initWithTimeInterval:1*24*60*60 sinceDate:[self loadEnd]]];
-    NSInteger daysToEnd = (int)(timeInterval / (60*60*24)); // 今回の期限までの日数
-    NSInteger normaOfOneDays = (int)(([[self loadGoalValue] intValue] - [self.deposit intValue]) / daysToPeriod);
-    norma = @( normaOfOneDays * daysToEnd );
-    balance = budget;
+    // 最終期限までの日数を計算
+    NSTimeInterval timeInterval = [[self loadGoalPeriod] timeIntervalSinceDate:[self loadStart]];
+    NSNumber *daysToPeriod = [NSNumber numberWithInt:(timeInterval / (60*60*24))];
+    // 今回の期限までの日数を計算
+    timeInterval = [[self loadEnd] timeIntervalSinceDate:[self loadStart]];
+    NSNumber *daysToEnd = [NSNumber numberWithInt:(timeInterval / (60*60*24))];
+    // 一日分のノルマの計算
+    NSNumber *normaOfOneDays = [NSNumber numberWithInt:(([[self loadGoalValue] intValue] - [self.deposit intValue]) / [daysToPeriod intValue])];
+    // 値を代入する
+    norma = @([normaOfOneDays intValue] * [daysToEnd intValue]);
+    balance = @([budget intValue] - [expense intValue]);
     defaultSettings = YES;
+
+    NSLog(@"最終期限までの日数:%@",daysToPeriod);
+    NSLog(@"今回期限までの日数:%@",daysToEnd);
+    NSLog(@"一日のノルマ:%@",normaOfOneDays);
+    NSLog(@"今回のノルマ:%@",norma);
 }
 // 出費・収入・残高調整
 - (void)calcValue:(NSNumber *)value Kind:(NSInteger)kind{
@@ -233,7 +245,6 @@
 
 #pragma mark - とりあえずコピーしただけ系シリーズ
 - (BOOL)searchNext{
-    _translateFormat = [TranslateFormat alloc];
     NSDate *date = [_translateFormat dateOnly:[_translateFormat nineHoursLater:[NSDate date]]];
 
     if ([_translateFormat equalDate:date Vs:[self loadEnd]] == NO) {//今日が期限日じゃなくて
@@ -274,13 +285,6 @@
 }
 - (NSDate *)loadEnd{
     return [now objectForKey:@"End"];
-}
-
-#pragma mark - その他
-- (void)deleteData{
-    DNSLog(@"データ削除！");
-    [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
-    [self initData];
 }
 
 @end

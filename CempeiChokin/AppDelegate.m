@@ -18,9 +18,9 @@
     self.editLog = [[EditLog alloc] init];
     self.editData = [[EditData alloc] init];
 
-    // 60秒ごとにオートセーブ
+    // 10秒ごとにオートセーブ
     NSTimer *saveTimer;
-    saveTimer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(saveAll) userInfo:nil repeats:YES];
+    saveTimer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(saveAll) userInfo:nil repeats:YES];
 
     return YES;
 }
