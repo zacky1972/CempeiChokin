@@ -25,7 +25,6 @@
 
 - (void)tearDown{
     [super tearDown];
-
 }
 
 // - (void)saveName:(NSString *)name Value:(NSNumber *)value Period:(NSDate *)period;
@@ -67,22 +66,76 @@
         STAssertEqualObjects(DATE_2, [_editData loadEnd], @"終わりあってねーよ");
     }
 }
-
 // - (void)calcForNextStage;
 -(void) testCalcForNextStage{
     // 値段
     NSNumber *VALUE = @10000;
     // 期限
-    NSDate *DATE = [formatter dateFromString:@"2000-01-20 00:00:00 +0000"];
+    NSDate *DATE = [formatter dateFromString:@"2000-01-20 00:00:00 +0900"];
     // 期間
-    NSDate *START = [formatter dateFromString:@"2000-01-01 00:00:00 +0000"];
-    NSDate *END = [formatter dateFromString:@"2000-01-10 00:00:00 +0000"];
+    NSDate *START = [formatter dateFromString:@"2000-01-01 00:00:00 +0900"];
+    NSDate *END = [formatter dateFromString:@"2000-01-10 00:00:00 +0900"];
     
     [_editData saveName:@"Test" Value:VALUE Period:DATE];
     [_editData saveStart:START End:END];
 
     [_editData calcForNextStage];
-    STAssertEqualObjects(@5000, _editData.norma, @"ノルマ計算ミスってるで");
+    STAssertEqualObjects(_editData.norma,@5000, @"ノルマ計算ミスってるで");
+}
+// - (void)calcValue:(NSNumber *)value Kind:(NSInteger)kind;
+- (void)testCalcValue{
+    _editData.budget = @100000;
+    _editData.expense = @50000;
+    _editData.balance = @50000;
+
+    // 出費
+    [_editData calcValue:@10000 Kind:0];
+    STAssertEqualObjects(_editData.expense, @60000, @"出費が");
+    STAssertEqualObjects(_editData.balance, @40000, @"残金が");
+
+    _editData.budget = @100000;
+    _editData.expense = @50000;
+    _editData.balance = @50000;
+    // 収入
+    [_editData calcValue:@10000 Kind:1];
+    STAssertEqualObjects(_editData.budget, @110000, @"出費が");
+    STAssertEqualObjects(_editData.balance, @60000, @"残金が");
+
+    _editData.budget = @100000;
+    _editData.expense = @50000;
+    _editData.balance = @50000;
+    // 残高調整
+    [_editData calcValue:@10000 Kind:2];
+    STAssertEqualObjects(_editData.expense, @90000, @"出費が");
+    STAssertEqualObjects(_editData.balance, @10000, @"残高が");
+}
+// - (void)calcDeleteValue:(NSNumber *)value Kind:(NSString *)tempKind;
+- (void)testCalcDeleteValue{
+
+    _editData.budget = @100000;
+    _editData.expense = @50000;
+    _editData.balance = @50000;
+
+    // 出費
+    [_editData calcDeleteValue:@10000 Kind:@"出費"];
+    STAssertEqualObjects(_editData.expense, @40000, @"出費が");
+    STAssertEqualObjects(_editData.balance, @60000, @"残金が");
+
+    _editData.budget = @100000;
+    _editData.expense = @50000;
+    _editData.balance = @50000;
+    // 収入
+    [_editData calcDeleteValue:@10000 Kind:@"収入"];
+    STAssertEqualObjects(_editData.budget, @90000, @"出費が");
+    STAssertEqualObjects(_editData.balance, @40000, @"残金が");
+
+    _editData.budget = @100000;
+    _editData.expense = @50000;
+    _editData.balance = @50000;
+    // 残高調整
+    [_editData calcDeleteValue:@10000 Kind:@"残高調整"];
+    STAssertEqualObjects(_editData.expense, @40000, @"出費が");
+    STAssertEqualObjects(_editData.balance, @60000, @"残高が");
 }
 
 @end

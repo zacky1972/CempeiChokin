@@ -164,7 +164,6 @@
 - (void)saveStart:(NSDate *)start End:(NSDate *)end{
     [now setObject:[_translateFormat dateOnly:start] forKey:@"Start"];
     [now setObject:[_translateFormat dateOnly:end] forKey:@"End"];
-    [self calcForNextStage];
 }
 // Deposit,DepositLogに
 - (void)saveDepositDate:(NSDate *)date Value:(NSNumber *)value{
@@ -183,10 +182,10 @@
 // 期限が来て設定し終わったあとの処理 (ノルマを決める)
 - (void)calcForNextStage{
     // 最終期限までの日数を計算
-    NSTimeInterval timeInterval = [[self loadGoalPeriod] timeIntervalSinceDate:[self loadStart]];
+    NSTimeInterval timeInterval = [[self loadGoalPeriod] timeIntervalSinceDate:[self loadStart]] + (60*60*24);
     NSNumber *daysToPeriod = [NSNumber numberWithInt:(timeInterval / (60*60*24))];
     // 今回の期限までの日数を計算
-    timeInterval = [[self loadEnd] timeIntervalSinceDate:[self loadStart]];
+    timeInterval = [[self loadEnd] timeIntervalSinceDate:[self loadStart]] + (60*60*24);
     NSNumber *daysToEnd = [NSNumber numberWithInt:(timeInterval / (60*60*24))];
     // 一日分のノルマの計算
     NSNumber *normaOfOneDays = [NSNumber numberWithInt:(([[self loadGoalValue] intValue] - [self.deposit intValue]) / [daysToPeriod intValue])];
@@ -212,8 +211,8 @@
             balance = @([budget intValue] - [expense intValue]);
             break;
         case 2: // 残高調整
-            expense = @([expense intValue] + [balance intValue] - [value intValue]);
-            balance = @([budget intValue] + [expense intValue]);
+            expense = @([budget intValue] - [value intValue]);
+            balance = value;
             break;
     }
 }

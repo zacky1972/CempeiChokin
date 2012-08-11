@@ -226,6 +226,7 @@
 #pragma mark - ボタン
 - (IBAction)DoneButton_down:(id)sender {
     [appDelegate.editData saveStart:startDate End:endDate];
+    [appDelegate.editData calcForNextStage];
 }
 
 - (IBAction)laterButton_down:(id)sender {
