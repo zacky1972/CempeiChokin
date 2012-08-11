@@ -32,45 +32,14 @@
     [super viewDidLoad];
     appDelegate = APP_DELEGATE;
     _translateFormat = [TranslateFormat alloc];
-    
-    //設定がしてあったらデータをとってくる
-    
-    if([appDelegate.editData loadStart]!=nil){
-        startDate = [appDelegate.editData loadStart];
-        startDateTextField.text = [_translateFormat formatterDate:startDate];
-    }else{
-        startDate = [NSDate date];
-        startDateTextField.text = [_translateFormat formatterDate:startDate];
-    }
-    if([appDelegate.editData loadEnd] != nil){
-        endDate = [appDelegate.editData loadEnd];
-        endDateTextField.text = [_translateFormat formatterDate:endDate];
-    }
-    if([appDelegate.editData.budget compare:@0] != NSOrderedSame){
-        budgetTextField.text = [_translateFormat stringFromNumber:appDelegate.editData.budget addComma:YES addYen:YES];
-    }
-    
-     /*
-    startDate = [NSData data];
-    startDateTextField.text = [_translateFormat formatterDate:startDate];
 
-    endDate = nil;
-    budget = nil;
-    */
-    
-    
-    
-    //データが入力されているかどうか判断して、入力されていなければ完了を押せないようにする
-        if(startDate == NULL || endDate == NULL || appDelegate.editData.budget == 0){
-        DoneButton.enabled = NO;
-    }
-    
-        
+    [self dataInitialize];
+    [self dataCheck];
+
     // ツールバーとかデータピッカー
     datePicker =[[UIDatePicker alloc] initWithFrame: CGRectMake(0, 44, 320, 216)];
     datePicker.datePickerMode = UIDatePickerModeDate;
 }
-
 
 - (void)viewDidUnload
 {
@@ -82,26 +51,48 @@
     [super viewDidUnload];
 }
 
-#pragma mark - Storyboardで画面遷移する前に呼ばれるあれ
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"showHelpView"]) {
-        //FIXME:ここでデータを渡すといいんじゃないか
+#pragma mark - よく使う処理たち
+// 値の読み込みとか
+- (void)dataInitialize{
+    if([appDelegate.editData loadStart] != nil){
+        // Startがある
+        startDate = [appDelegate.editData loadStart];
+        startDateTextField.text = [_translateFormat formatterDate:startDate];
+    }else{
+        // 初期設定
+        startDate = [NSDate date];
+        startDateTextField.text = [_translateFormat formatterDate:startDate];
     }
-    
-    if ([segue.identifier isEqualToString:@"showMainView_done"]) {
-        //FIXME:ここでデータを渡すといいんじゃないか
+    if([appDelegate.editData loadEnd] != nil){
+        // Endがある
+        endDate = [appDelegate.editData loadEnd];
+        endDateTextField.text = [_translateFormat formatterDate:endDate];
     }
-    if ([segue.identifier isEqualToString:@"showMainView_skip"]) {
-        //FIXME:ここでデータを渡すといいんじゃないか
+    if([appDelegate.editData.budget isEqualToNumber:@-1] == NO){
+        // 予算が決まっている
+        budgetTextField.text = [_translateFormat stringFromNumber:appDelegate.editData.budget addComma:YES addYen:YES];
+    }
+}
+// データの確認 & 完了ボタンの設定変更
+- (BOOL)dataCheck{
+    if(startDate == NULL || endDate == NULL || [appDelegate.editData.budget isEqualToNumber:@-1] == YES){
+        // データが揃っていないとき
+        DoneButton.enabled = NO;
+        return NO;
+    }else{
+        // データが揃っているとき
+        DoneButton.enabled = YES;
+        return YES;
     }
 }
 
 #pragma mark - StartDateTextField
+// StartDateTextFieldを選択したとき
 - (IBAction)startDateTextField_begin:(id)sender {
     // DatePickerの設定
     datePicker.date = startDate;
     datePicker.minimumDate = [NSDate date]; // 設定できる範囲は今日から
-    datePicker.maximumDate = [NSDate dateWithTimeIntervalSinceNow:86400*365]; // 1年後まで
+    datePicker.maximumDate = [NSDate dateWithTimeInterval:-60*60*24 sinceDate:[appDelegate.editData loadGoalPeriod]]; // 最終期限の前日まで
 
     // ActionSheetを表示させる
     [self makeActionSheetWithDataPicker:@"次へ"
@@ -110,97 +101,98 @@
     [actionSheet showInView: self.view];         // 画面上に表示させる
     [actionSheet setBounds: CGRectMake(0, 0, 320, 500)]; // 場所とサイズ決める(x,y.width,height)
 }
-
+// StartDateTextField以外を選択した時
 - (IBAction)startDateTextField_end:(id)sender {
-    if(startDate != NULL && endDate != NULL && [appDelegate.editData.budget compare:@0] == NSOrderedSame){
-        DoneButton.enabled = YES;
-    }
-    [startDateTextField resignFirstResponder];
+    // FIXME: ここ実行されないんじゃないか説
 }
 
-
--(void)doneStartDateTextField{ // 値をテキストフィールドに入れる
+// StartDateTextField - DatePicker - Done
+-(void)doneStartDateTextField{
+    // 値をテキストフィールドに入れる
     startDate = datePicker.date;
     startDateTextField.text = [_translateFormat formatterDate:startDate]; // 文字入力する
-    [startDateTextField resignFirstResponder]; // フォーカス外す
+
     if([startDate earlierDate:endDate] == endDate ){
+        // Endより後にStartを設定した時
         endDate = [NSDate dateWithTimeInterval:86400 sinceDate:startDate];
         endDateTextField.text = [_translateFormat formatterDate:endDate];
     }
+    [startDateTextField resignFirstResponder]; // フォーカス外す
     [actionSheet dismissWithClickedButtonIndex:0 animated:YES]; // ActionSheet消す
-    [endDateTextField becomeFirstResponder]; // endDateTextFieldに移動
 
+    if([self dataCheck] == NO){
+        // データが揃っていない時
+        [endDateTextField becomeFirstResponder]; // endDateTextFieldに移動
+    }
 }
-
-// DatePickerがキャンセルした時の
+// StartDateTextField - DatePicker - Cancel
 -(void)cancelStartDateTextField{ // 特に何もしない
     [startDateTextField resignFirstResponder];
     [actionSheet dismissWithClickedButtonIndex:0 animated:YES];
 }
 
 #pragma mark - endDateTextField
+// EndDateTextFieldを選択したとき
 - (IBAction)endDateTextField_begin:(id)sender {
     
-    datePicker.minimumDate = [NSDate dateWithTimeInterval:86400 sinceDate:startDate]; // 設定できる範囲は今日から
-    datePicker.maximumDate = [appDelegate.editData loadGoalPeriod]; // 10年後まで
+    datePicker.minimumDate = [NSDate dateWithTimeInterval:60*60*24 sinceDate:startDate]; // 設定できる範囲はStartの一日後から
+    datePicker.maximumDate = [appDelegate.editData loadGoalPeriod]; // 最終期限まで
 
+    // アクションシートの表示
     [self makeActionSheetWithDataPicker:@"次へ"
                                    Done:@selector(doneEndDateTextField)
                                  Cancel:@selector(cancelEndDateTextField)];
     [actionSheet showInView: self.view];         // 画面上に表示させる
     [actionSheet setBounds: CGRectMake(0, 0, 320, 500)]; // 場所とサイズ決める(x,y.width,height)
 }
-
+// EndDateTextField以外を選択した時
 - (IBAction)endDateTextField_end:(id)sender {
-    
-    //全ての欄が入力されていれば完了を押せるようにする
-    if(startDate != NULL && endDate != NULL && [appDelegate.editData.budget compare:@0] == NSOrderedSame){
-        DoneButton.enabled = YES;
-    }
-    [endDateTextField resignFirstResponder];
+    // FIXME: ここ実行されないんじゃないか説
 }
-
-
-- (void)doneEndDateTextField{ // 値をテキストフィールドに入れる
+// EndDateTextField - DatePicker - Done
+- (void)doneEndDateTextField{
+    // 値をテキストフィールドに入れる
     endDate = datePicker.date;
     endDateTextField.text = [_translateFormat formatterDate:endDate]; // 文字入力する
+
     [endDateTextField resignFirstResponder]; // フォーカス外す
     [actionSheet dismissWithClickedButtonIndex:0 animated:YES]; // ActionSheet消す
-    [budgetTextField becomeFirstResponder];  //budgetTextFieldに移動
+    
+    if([self dataCheck] == NO){
+        // データが揃っていない時
+        [budgetTextField becomeFirstResponder];  //budgetTextFieldに移動
+    }
 }
-
-// DatePickerがキャンセルした時の
+// EndDateTextField - DatePicker - Cancel
 - (void)cancelEndDateTextField{ // 特に何もしない
     [endDateTextField resignFirstResponder];
     [actionSheet dismissWithClickedButtonIndex:0 animated:YES];
 }
 
 #pragma mark - budgetTextField
+// BudgetTextFieldを選択したとき
 - (IBAction)budgetTextField_begin:(id)sender{
-    budgetTextField.inputAccessoryView =
-    [self makeNumberPadToolbar:@"完了" Done:@selector(doneBudgetTextField) Cancel:@selector(cancelBudgetTextField)];
-    // 既に値が入力されていた場合，表示されている値を数値に戻す
-    if(budgetTextField.text != @"" && [appDelegate.editData.budget compare:@0] != NSOrderedSame)
-        budgetTextField.text = [_translateFormat stringFromNumber:appDelegate.editData.budget addComma:NO addYen:NO];
-}
+    budgetTextField.inputAccessoryView = [self makeNumberPadToolbar:@"完了" Done:@selector(doneBudgetTextField) Cancel:@selector(cancelBudgetTextField)];
 
-- (IBAction)budgetTextField_end:(id)sender{
-    
-    //全ての欄が入力されていれば完了を押せるようにする
-    if(startDate != NULL && endDate != NULL && [appDelegate.editData.budget compare:@0] != NSOrderedSame){
-        DoneButton.enabled = YES;
+    // 既に値が入力されていた場合，表示されている値を数値に戻す
+    if([appDelegate.editData.budget isEqualToNumber:@-1] == NO){
+        budgetTextField.text = [_translateFormat stringFromNumber:appDelegate.editData.budget addComma:NO addYen:NO];
+    }else{
+        budgetTextField.text = @"";
     }
-    if([appDelegate.editData.budget compare:@0] != NSOrderedSame){
+}
+// BudgetTextField以外を選択した時
+- (IBAction)budgetTextField_end:(id)sender{
+    [self dataCheck];
+
+    if([appDelegate.editData.budget isEqualToNumber:@-1] == NO){
         budgetTextField.text = [_translateFormat stringFromNumber:appDelegate.editData.budget addComma:YES addYen:YES];   // 元に戻す
     }
     else{
         budgetTextField.text = @"";         // 値を消す
     }
     [budgetTextField resignFirstResponder]; // NumberPad消す(=テキストフィールドを選択していない状態にする)
-
 }
-
-
 
 // Numberpadに追加したボタンの動作
 -(void)doneBudgetTextField{
@@ -208,18 +200,19 @@
     if([budgetTextField.text length] >= 1) {
         appDelegate.editData.budget = [_translateFormat numberFromString:budgetTextField.text];
         budgetTextField.text = [_translateFormat stringFromNumber:appDelegate.editData.budget addComma:YES addYen:YES];
-        [budgetTextField resignFirstResponder];  // NumberPad消す
     }
+    [self dataCheck];
     [budgetTextField resignFirstResponder]; // NumberPad消す
 }
 
 // Numberpadに追加したキャンセルボタンの動作
 -(void)cancelBudgetTextField{
     // 既に値が入っていた場合
-    if(appDelegate.editData.budget != NULL)
+    if([appDelegate.editData.budget isEqualToNumber:@-1] == NO){
         budgetTextField.text = [_translateFormat stringFromNumber:appDelegate.editData.budget addComma:YES addYen:YES];   // 元に戻す
-    else
+    }else{
         budgetTextField.text = @"";         // 値を消す
+    }
     [budgetTextField resignFirstResponder]; // NumberPad消す(=テキストフィールドを選択していない状態にする)
 }
 
@@ -234,6 +227,7 @@
 }
 
 #pragma mark - その他
+// NumberPadにつけるツールバーを生成する
 - (UIToolbar *)makeNumberPadToolbar:(NSString *)string Done:(SEL)done Cancel:(SEL)cancel{
     // Toolbarつくる
     UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
@@ -260,6 +254,7 @@
     return numberToolbar;
 }
 
+// DatePickerつきのアクションシートを生成する
 - (void)makeActionSheetWithDataPicker:(NSString *)string Done:(SEL)done Cancel:(SEL)cancel{
     // 空のActionSheetをつくる
     actionSheet =

@@ -179,7 +179,7 @@
     }
 }
 #pragma mark - 自動で処理する系
-// 期限が来て設定し終わったあとの処理 (ノルマを決める)
+// 設定し終わったあとの処理 (ノルマを決める)
 - (void)calcForNextStage{
     // 最終期限までの日数を計算
     NSTimeInterval timeInterval = [[self loadGoalPeriod] timeIntervalSinceDate:[self loadStart]] + (60*60*24);
@@ -191,6 +191,10 @@
     NSNumber *normaOfOneDays = [NSNumber numberWithInt:(([[self loadGoalValue] intValue] - [self.deposit intValue]) / [daysToPeriod intValue])];
     // 値を代入する
     norma = @([normaOfOneDays intValue] * [daysToEnd intValue]);
+
+    if([expense isEqualToNumber:@-1] == YES){
+        expense = @0;
+    }
     balance = @([budget intValue] - [expense intValue]);
     defaultSettings = YES;
 
@@ -244,29 +248,15 @@
 
 #pragma mark - とりあえずコピーしただけ系シリーズ
 - (BOOL)searchNext{
-    NSDate *date = [_translateFormat dateOnly:[_translateFormat nineHoursLater:[NSDate date]]];
-
-    if ([_translateFormat equalDate:date Vs:[self loadEnd]] == NO) {//今日が期限日じゃなくて
-        if([date earlierDate:[self loadEnd]] != date){//期限日より後
-            if (nextAlert == NO) {
-                nextAlert = YES;
-                return YES;
-            }else{
-                return NO;
-            }
-        }else{//まだ期限内
-            //DNSLog(@"期限内やわ！");
+    NSDate *date = [_translateFormat dateOnly:[NSDate date]];
+    if ([date isEqualToDate:[self loadEnd]] == NO) { //今日が期限日じゃなくて
+        if([date earlierDate:[self loadEnd]] != date){ //期限日より後
+            nextAlert = YES;
+            return YES;
         }
     }
+    // 期限内
     return NO;
-}
-- (Boolean)loadNextAlert{
-    [self makeDataPath];
-    [self loadData];
-    if ([root objectForKey:@"NextAlert"] == @1) {
-        return NO;
-    }
-    return YES;
 }
 
 #pragma mark - 外から読み込む系

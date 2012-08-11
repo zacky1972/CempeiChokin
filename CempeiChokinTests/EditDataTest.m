@@ -8,6 +8,7 @@
 
 #import "EditDataTest.h"
 #import "../CempeiChokin/EditData.h"
+#import "../CempeiChokin/EditData.m"
 
 @implementation EditDataTest{
     EditData *_editData;
@@ -18,7 +19,7 @@
 - (void)setUp{
     [super setUp];
     _editData = [[EditData alloc] init];
-
+    
     formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss ZZZ";
 }
@@ -26,6 +27,7 @@
 - (void)tearDown{
     [super tearDown];
 }
+
 
 // - (void)saveName:(NSString *)name Value:(NSNumber *)value Period:(NSDate *)period;
 - (void)testSaveGoal{
