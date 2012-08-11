@@ -195,10 +195,10 @@
     balance = @([budget intValue] - [expense intValue]);
     defaultSettings = YES;
 
-    NSLog(@"最終期限までの日数:%@",daysToPeriod);
-    NSLog(@"今回期限までの日数:%@",daysToEnd);
-    NSLog(@"一日のノルマ:%@",normaOfOneDays);
-    NSLog(@"今回のノルマ:%@",norma);
+    DNSLog(@"最終期限までの日数:%@",daysToPeriod);
+    DNSLog(@"今回期限までの日数:%@",daysToEnd);
+    DNSLog(@"一日のノルマ:%@",normaOfOneDays);
+    DNSLog(@"今回のノルマ:%@",norma);
 }
 // 出費・収入・残高調整
 - (void)calcValue:(NSNumber *)value Kind:(NSInteger)kind{
