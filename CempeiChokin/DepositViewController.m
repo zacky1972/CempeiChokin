@@ -69,6 +69,7 @@
     return temp;
 }
 //フッターを決定する
+/*
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section{
     NSString *temp;
     temp = [_translateFormat stringFromNumber:[_method loadDeposit] addComma:1 addYen:1];
@@ -76,6 +77,7 @@
     temp = [temp stringByAppendingString:@"です"];
     return temp;
 }
+*/
 
 #pragma mark - depositTextField関係
 - (IBAction)depositTextField_begin:(id)sender {

@@ -112,8 +112,6 @@
     }
 }
 
-
-
 #pragma mark - 出費・収入・残高調整 関係
 - (IBAction)KindSegment_click:(id)sender {
     switch (KindSegment.selectedSegmentIndex) {
