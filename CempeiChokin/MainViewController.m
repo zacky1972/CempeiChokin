@@ -229,6 +229,10 @@
     NormaLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.norma addComma:YES addYen:YES];
 }
 
+#pragma mark - 遷移関係
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    // ???: なんかに使うかも
+}
 #pragma mark - UITableView関係
 // セクションの数
 - (NSInteger)numberOfSectionsInTableiew:(UITableView *)tableView

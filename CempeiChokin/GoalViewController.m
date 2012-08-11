@@ -27,13 +27,26 @@
 
 @implementation GoalViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
     [super viewDidLoad];
     appDelegate = APP_DELEGATE;
 
     _translateFormat = [TranslateFormat alloc];
 
+    [self dateInitialize];
+    [self dateCheck];
+}
+
+- (void)viewDidUnload{
+    NameTextField = nil;
+    ValueTextField = nil;
+    PeriodTextField = nil;
+    DoneButton = nil;
+    [super viewDidUnload];
+}
+
+#pragma mark - よく使う処理たち
+- (void)dateInitialize{
     if([appDelegate.editData loadGoalName] != nil){
         name = [appDelegate.editData loadGoalName];
         NameTextField.text = name;
@@ -46,60 +59,38 @@
         period = [appDelegate.editData loadGoalPeriod];
         PeriodTextField.text = [_translateFormat formatterDate:period];
     }
-    //データが入力されているかどうか判断して、入力されていなければ完了を押せないようにする
+}
+
+- (BOOL)dateCheck{
     if(name.length == 0 || value == NULL || period == NULL){
         DoneButton.enabled = NO;
-        [DoneButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-    }
-}
-
-- (void)viewDidUnload
-{
-    NameTextField = nil;
-    ValueTextField = nil;
-    PeriodTextField = nil;
-    DoneButton = nil;
-    [super viewDidUnload];
-}
-
-#pragma mark - 名前の設定
-- (IBAction)NameTextField_next:(id)sender {
-    name = NameTextField.text;
-    [ValueTextField becomeFirstResponder];  //ValueTextFieldに移動
-    
-    //全ての欄が入力されていれば完了を押せるようにする
-    if(name.length != 0 && value != NULL && period != NULL){
+        //[DoneButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        return NO;
+    }else{
         DoneButton.enabled = YES;
-        [DoneButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        return YES;
     }
-    else{
-        DoneButton.enabled = NO;
-        [DoneButton setTintColor:[UIColor blueColor]];
-    }
+}
+#pragma mark - 名前の設定
+// 次へ押した時
+- (IBAction)NameTextField_next:(id)sender{
+    name = NameTextField.text;
     [NameTextField resignFirstResponder];
+    if([self dateCheck] == NO)
+        [ValueTextField becomeFirstResponder];  //ValueTextFieldに移動
 }
 
+// 別の所押した時
 - (IBAction)NameTextField_end:(id)sender {
     name = NameTextField.text;
-
-    //全ての欄が入力されていれば完了を押せるようにする
-    if(name.length != 0 && value != NULL && period != NULL){
-        DoneButton.enabled = YES;
-        [DoneButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [DoneButton setTintColor:[UIColor redColor]];
-    }
-    else{
-        DoneButton.enabled = NO;
-    }
+    [self dateCheck];
 }
 
 #pragma mark - 金額の設定
 // 金額の設定
 - (IBAction)ValueTextField_begin:(id)sender {
-    
     //期限のテキストフィールドを編集できないようにする
     PeriodTextField.enabled = NO;
-    
     
     // NumberPadにToolbarつける
     ValueTextField.inputAccessoryView =
@@ -112,18 +103,6 @@
 }
 
 - (IBAction)ValueTextField_end:(id)sender {
-
-    //全ての欄が入力されていれば完了を押せるようにする
-    if(name.length != 0 && value != NULL && period != NULL){
-        DoneButton.enabled = YES;
-     //   [DoneButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [DoneButton setTintColor:[UIColor blueColor]];
-
-    }
-    else{
-        DoneButton.enabled = NO;
-    }
-    
     //期限のテキストフィールドを編集できるようにする
     PeriodTextField.enabled = YES;
     
@@ -135,9 +114,8 @@
     else{
         ValueTextField.text = @""; // 値を消す
     }
-
     [ValueTextField resignFirstResponder];
- 
+    [self dateCheck];
 }
 
 // Numberpadに追加したボタンの動作
@@ -146,10 +124,12 @@
     if([ValueTextField.text length] >= 1) {
         value = [_translateFormat numberFromString:ValueTextField.text];
         ValueTextField.text = [_translateFormat stringFromNumber:value addComma:YES addYen:YES]; // 表示変える
-        [ValueTextField resignFirstResponder];  // NumberPad消す
-        [PeriodTextField becomeFirstResponder]; // PeriodTextFieldに移動
+        [ValueTextField resignFirstResponder]; // NumberPad消す
+        if([self dateCheck] == NO)
+            [PeriodTextField becomeFirstResponder]; // PeriodTextFieldに移動
+    }else{
+        [ValueTextField resignFirstResponder]; // NumberPad消す
     }
-    [ValueTextField resignFirstResponder]; // NumberPad消す
 }
 
 // Numberpadに追加したキャンセルボタンの動作
@@ -174,22 +154,8 @@
      
 }
 - (IBAction)PeriodTextField_end:(id)sender {
-    
-    //全ての欄が入力されていれば完了を押せるようにする
-    if(name.length != 0 && value != NULL && period != NULL){
-        DoneButton.enabled = YES;
-        [DoneButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [DoneButton setTintColor:[UIColor blueColor]];
-
-    }
-    else{
-        DoneButton.enabled = NO;
-    }
-    
-    [PeriodTextField resignFirstResponder];
-
+    // FIXME: いらない説
 }
-
 
 // DatePickerが完了したときの
 -(void)doneWithDatePicker{
@@ -197,13 +163,13 @@
     PeriodTextField.text = [_translateFormat formatterDate:period]; // 文字入力する
     [PeriodTextField resignFirstResponder]; // フォーカス外す
     [actionSheet dismissWithClickedButtonIndex:0 animated:YES]; // ActionSheet消す
-  }
+    [self dateCheck];
+}
 
 // DatePickerがキャンセルした時の
 -(void)cancelWithDatePicker{
     [PeriodTextField resignFirstResponder];
     [actionSheet dismissWithClickedButtonIndex:0 animated:YES];
-    
 }
 
 #pragma mark - ボタン
@@ -217,8 +183,6 @@
     [appDelegate.editData saveName:name Value:value Period:period];
     [appDelegate.editData calcForNextStage];
 }
-
-
 
 #pragma mark - その他
 - (UIToolbar *)makeNumberPadToolbar:(NSString *)string Done:(SEL)done Cancel:(SEL)cancel{
@@ -244,9 +208,6 @@
                                                   action: nil];
     numberToolbar.items = @[cancelButton,frexibleSpace,doneButton];
     [numberToolbar sizeToFit];
-    
-    
-    
 
     return numberToolbar;
 }
@@ -275,9 +236,6 @@
     
     [actionSheet addSubview: datePickerToolbar]; // Toolbarのっける
     [actionSheet addSubview: datePicker];        // DatePickerのっける
-    
-
 }
-
 
 @end
