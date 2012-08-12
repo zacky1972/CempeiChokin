@@ -6,13 +6,11 @@
 //  Copyright (c) 2012年 CEMPEI. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "DepositViewController.h"
 
-#define alertType_a 0
-#define alertType_b 1
-#define alertType_c 2
-
 @interface DepositViewController (){
+    AppDelegate *appDelegate;
     Methods *_method;
     TranslateFormat *_translateFormat;
     
@@ -27,6 +25,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    appDelegate = APP_DELEGATE;
     _method = [Methods alloc];
     _translateFormat = [TranslateFormat alloc];
     
@@ -69,15 +68,15 @@
     return temp;
 }
 //フッターを決定する
-/*
+
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section{
     NSString *temp;
-    temp = [_translateFormat stringFromNumber:[_method loadDeposit] addComma:1 addYen:1];
+    temp = [_translateFormat stringFromNumber:[appDelegate.editData loadDepositValue] addComma:1 addYen:1];
     temp = [@"貯金総額は" stringByAppendingString:temp];
     temp = [temp stringByAppendingString:@"です"];
     return temp;
 }
-*/
+
 
 #pragma mark - depositTextField関係
 - (IBAction)depositTextField_begin:(id)sender {
@@ -116,7 +115,7 @@
 #pragma mark - ボタンたち
 - (IBAction)DoneButton_down:(id)sender {
     DNSLog(@"完了きたで！");
-    //[_method saveDeposit:depositValue Date:[_method loadEnd] ];
+    [appDelegate.editData saveDepositDate:[appDelegate.editData loadEnd] Value:depositValue];
     /*
     if([_method searchFinish] == YES){//終了！
         DNSLog(@"達成したよ");
@@ -127,36 +126,13 @@
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"FinishView_miss"] animated:YES];
     }else{
         //まだ終わらないよ！
-    }
-     */
+    }*/
 }
 
 - (IBAction)laterButton_down:(id)sender {
     // ???: ここはどうすんの？
     
 }
-
-#pragma mark - アラート関係
-/*
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
-{
-	switch (alertType) {
-		case alertType_a:
-            //アラートAを表示した後の処理
-            
-			break;
-		case alertType_b:
-            //アラートBを表示した後の処理
-            
-			break;
-        case alertType_c:
-            
-            break;
-		default:
-			break;
-	}
-}
- */
 
 #pragma mark - その他
 - (void)makeNumberPadToolbar:(UITextField *)textField Return:(NSString *)string Done:(SEL)done Cancel:(SEL)cancel{

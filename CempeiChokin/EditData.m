@@ -282,5 +282,9 @@
 - (NSDate *)loadEnd{
     return [now objectForKey:@"End"];
 }
+//FIXME:メソッド名がかぶらないようにとりあえずした
+- (NSNumber *)loadDepositValue{
+    return [root objectForKey:@"Deposit"];
+}
 
 @end
