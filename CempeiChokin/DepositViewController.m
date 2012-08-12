@@ -116,7 +116,8 @@
 #pragma mark - ボタンたち
 - (IBAction)DoneButton_down:(id)sender {
     DNSLog(@"完了きたで！");
-    [_method saveDeposit:depositValue Date:[_method loadEnd] ];
+    //[_method saveDeposit:depositValue Date:[_method loadEnd] ];
+    /*
     if([_method searchFinish] == YES){//終了！
         DNSLog(@"達成したよ");
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"FinishView_complete"] animated:YES];
@@ -127,6 +128,7 @@
     }else{
         //まだ終わらないよ！
     }
+     */
 }
 
 - (IBAction)laterButton_down:(id)sender {

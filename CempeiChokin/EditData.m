@@ -166,16 +166,26 @@
 }
 // Deposit,DepositLogに
 - (void)saveDepositDate:(NSDate *)date Value:(NSNumber *)value{
+    date = [_translateFormat dateOnly:date];
     NSDictionary *dictionaly = [[NSDictionary alloc] initWithObjectsAndKeys:date, @"Date", value, @"Value",nil];
-
-    if([date isEqualToDate:[[depositLog objectAtIndex:0] objectForKey:@"Date"]]){
-        // 既に同じ期間の貯金がしてあった場合
-        [depositLog replaceObjectAtIndex:0 withObject:dictionaly]; // 上書きする
-        deposit = @([deposit intValue] - [[[depositLog objectAtIndex:0] objectForKey:@"Value"] intValue] + [value intValue]); // 貯金額の計算
-    }else{ // 普通に貯金する場合
+    
+    /*
+    if (depositLog == nil){
+        DNSLog(@"貯金総額をリセット！");
+        deposit = @0;    //貯金総額の初期化
         [depositLog addObject:dictionaly]; // 新規追加する
-        deposit = @([deposit intValue] + [value intValue]); // 貯金額を増やす
-    }
+    }else{*/
+        DNSLog(@"貯金しますよ！");
+        /*
+        if ([date isEqualToDate:[[depositLog objectAtIndex:0] objectForKey:@"Date"]]) {// 既に同じ期間の貯金がしてあった場合
+            [depositLog replaceObjectAtIndex:0 withObject:dictionaly]; // 上書きする
+            deposit = @([deposit intValue] - [[[depositLog objectAtIndex:0] objectForKey:@"Value"] intValue] + [value intValue]); // 貯金額の計算
+        }else{ // 普通に貯金する場合
+         */
+            [depositLog addObject:dictionaly]; // 新規追加する
+            deposit = @([deposit intValue] + [value intValue]); // 貯金額を増やす
+        //}
+    //}
 }
 #pragma mark - 自動で処理する系
 // 設定し終わったあとの処理 (ノルマを決める)
