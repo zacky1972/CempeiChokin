@@ -180,26 +180,37 @@
 #pragma mark - 自動で処理する系
 // 設定し終わったあとの処理 (ノルマを決める)
 - (void)calcForNextStage{
-    // 最終期限までの日数を計算
-    NSTimeInterval timeInterval = [[self loadGoalPeriod] timeIntervalSinceDate:[self loadStart]] + (60*60*24);
-    NSNumber *daysToPeriod = [NSNumber numberWithInt:(timeInterval / (60*60*24))];
-    // 今回の期限までの日数を計算
-    timeInterval = [[self loadEnd] timeIntervalSinceDate:[self loadStart]] + (60*60*24);
-    NSNumber *daysToEnd = [NSNumber numberWithInt:(timeInterval / (60*60*24))];
-    // 一日分のノルマの計算
-    NSNumber *normaOfOneDays = [NSNumber numberWithInt:(([[self loadGoalValue] intValue] - [self.deposit intValue]) / [daysToPeriod intValue])];
-    // ノルマの値を代入する
-    norma = @([normaOfOneDays intValue] * [daysToEnd intValue]);
+    // ノルマの計算
+    if([[self loadGoalPeriod] compare:[self loadEnd]] == NSOrderedSame){
+        // 最終期限と今回の期間が同じ場合
+        norma = @([[self loadGoalValue] intValue] - [self.deposit intValue] ); // ノルマは残りの額
+    }else{
+        // 最終期限と今回の期間が同じじゃない場合
+        
+        // 最終期限までの日数を計算
+        NSTimeInterval timeInterval = [[self loadGoalPeriod] timeIntervalSinceDate:[self loadStart]] + (60*60*24);
+        NSNumber *daysToPeriod = [NSNumber numberWithInt:(timeInterval / (60*60*24))];
+        // 今回の期限までの日数を計算
+        timeInterval = [[self loadEnd] timeIntervalSinceDate:[self loadStart]] + (60*60*24);
+        NSNumber *daysToEnd = [NSNumber numberWithInt:(timeInterval / (60*60*24))];
+        // 一日分のノルマの計算
+        NSNumber *normaOfOneDays = [NSNumber numberWithInt:(([[self loadGoalValue] intValue] - [self.deposit intValue]) / [daysToPeriod intValue])];
+        DNSLog(@"最終期限までの日数:%@",daysToPeriod);
+        DNSLog(@"今回期限までの日数:%@",daysToEnd);
+        DNSLog(@"一日のノルマ:%@",normaOfOneDays);
+
+        // ノルマの値を代入する
+        norma = @([normaOfOneDays intValue] * [daysToEnd intValue]);
+    }
+
     // 出費の値を入力
     if([expense isEqualToNumber:@-1] == YES){
         expense = @0;
     }
+    
     balance = @([budget intValue] - [expense intValue]);
     defaultSettings = YES;
 
-    DNSLog(@"最終期限までの日数:%@",daysToPeriod);
-    DNSLog(@"今回期限までの日数:%@",daysToEnd);
-    DNSLog(@"一日のノルマ:%@",normaOfOneDays);
     DNSLog(@"今回のノルマ:%@",norma);
 }
 // 出費・収入・残高調整
