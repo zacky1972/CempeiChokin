@@ -16,8 +16,7 @@
     NSMutableDictionary *root;
 }
 
-@synthesize expense,balance,norma,budget;
-@synthesize deposit;
+@synthesize expense,balance,norma,budget,deposit;
 @synthesize defaultSettings,nextAlert;
 
 // 初期化
@@ -189,9 +188,9 @@
     NSNumber *daysToEnd = [NSNumber numberWithInt:(timeInterval / (60*60*24))];
     // 一日分のノルマの計算
     NSNumber *normaOfOneDays = [NSNumber numberWithInt:(([[self loadGoalValue] intValue] - [self.deposit intValue]) / [daysToPeriod intValue])];
-    // 値を代入する
+    // ノルマの値を代入する
     norma = @([normaOfOneDays intValue] * [daysToEnd intValue]);
-
+    // 出費の値を入力
     if([expense isEqualToNumber:@-1] == YES){
         expense = @0;
     }
