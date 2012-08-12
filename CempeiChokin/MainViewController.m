@@ -70,9 +70,13 @@
     }
     //初期設定から戻ってきた時用
     [self labelReflesh];
-    NSString *temp;
-    temp = [[_translateFormat formatterDateUltimate:[appDelegate.editData loadStart] addYear:NO addMonth:YES addDay:YES addHour:NO addMinute:NO addSecond:NO] stringByAppendingString:@"~"];
-    temp = [temp stringByAppendingString:[_translateFormat formatterDateUltimate:[appDelegate.editData loadEnd] addYear:NO addMonth:YES addDay:YES addHour:NO addMinute:NO addSecond:NO]];
+    NSString *temp = [NSString stringWithFormat:@"%@~%@",
+                      [_translateFormat formatterDateUltimate:[appDelegate.editData loadStart]
+                                                      addYear:NO addMonth:YES addDay:YES
+                                                      addHour:NO addMinute:NO addSecond:NO],
+                      [_translateFormat formatterDateUltimate:[appDelegate.editData loadEnd]
+                                                      addYear:NO addMonth:YES addDay:YES
+                                                      addHour:NO addMinute:NO addSecond:NO]];
     MainNavigationBar.topItem.title = temp;
     tempKind = @"出費";
     
@@ -130,9 +134,11 @@
     // 画面のスクロール
     [LogScroll setContentOffset:CGPointMake(0.0,200.0) animated:YES];   // 入力が見えるところまでスクロールする
 }
-// ExpenseTextField以外を選択した時の動作
+// ExpenseTextFieldの選択が外れたときの動作
 - (IBAction)expenseTextField_end:(id)sender {
+    /*
     [self cancelExpenseTextField]; // キャンセルボタンと同じ動作
+     */
 }
 // Numberpadに追加したボタンの動作
 -(void)doneExpenseTextField{
@@ -181,9 +187,8 @@
         }
     }else{
         // 値が入力されていない場合
-        [LogScroll setContentOffset:CGPointZero animated:YES];  // 画面を一番上に移動
-        // 終了処理
         [expenseTextField resignFirstResponder]; // NumberPad消す
+        [LogScroll setContentOffset:CGPointZero animated:YES];  // 画面を一番上に移動
     }
 }
 // Numberpadに追加したキャンセルボタンの動作
