@@ -7,13 +7,15 @@
 //
 
 #import "DepositViewController.h"
+#import "AppDelegate.h"
 
 #define alertType_a 0
 #define alertType_b 1
 #define alertType_c 2
 
 @interface DepositViewController (){
-    Methods *_method;
+    AppDelegate *appDelegate;
+
     TranslateFormat *_translateFormat;
     
     NSNumber *depositValue; // 貯金額
@@ -27,12 +29,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _method = [Methods alloc];
+    appDelegate = APP_DELEGATE;
     _translateFormat = [TranslateFormat alloc];
-    
-    [_method makeDataPath];
-    [_method loadData];
-    
+        
     [self makeNumberPadToolbar:depositTextField Return:@"完了"
                           Done:@selector(doneDepositTextField)
                         Cancel:@selector(cancelDepostiTextField)];
@@ -64,20 +63,19 @@
 //タイトルを決定する
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     NSString *temp;
-    temp = [[_translateFormat formatterDate:[_method loadStart]] stringByAppendingString:@"~"];
-    temp = [temp stringByAppendingString:[_translateFormat formatterDate:[_method loadEnd]]];
+    temp = [[_translateFormat formatterDate:[appDelegate.editData loadStart]] stringByAppendingString:@"~"];
+    temp = [temp stringByAppendingString:[_translateFormat formatterDate:[appDelegate.editData loadEnd]]];
     return temp;
 }
 //フッターを決定する
-/*
+
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section{
     NSString *temp;
-    temp = [_translateFormat stringFromNumber:[_method loadDeposit] addComma:1 addYen:1];
+    temp = [_translateFormat stringFromNumber:appDelegate.editData.deposit addComma:1 addYen:1];
     temp = [@"貯金総額は" stringByAppendingString:temp];
     temp = [temp stringByAppendingString:@"です"];
     return temp;
 }
-*/
 
 #pragma mark - depositTextField関係
 - (IBAction)depositTextField_begin:(id)sender {
@@ -116,17 +114,18 @@
 #pragma mark - ボタンたち
 - (IBAction)DoneButton_down:(id)sender {
     DNSLog(@"完了きたで！");
-    [_method saveDeposit:depositValue Date:[_method loadEnd] ];
-    if([_method searchFinish] == YES){//終了！
+    [appDelegate.editData saveDepositDate:[appDelegate.editData loadEnd] Value:depositValue];
+    
+    /* // FIXME: なんか落ちる
+    if([appDelegate.editData searchFinish] == YES){//終了！
         DNSLog(@"達成したよ");
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"FinishView_complete"] animated:YES];
-        
-    }else if ([_method searchLastNorma] == YES){
+    }else if ([appDelegate.editData searchLastNorma] == YES){
         DNSLog(@"期限きれんたんですけど");
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"FinishView_miss"] animated:YES];
     }else{
         //まだ終わらないよ！
-    }
+    }*/
 }
 
 - (IBAction)laterButton_down:(id)sender {
