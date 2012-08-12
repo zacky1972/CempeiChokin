@@ -7,9 +7,11 @@
 //
 
 #import "EditLog.h"
-#import "Methods.h"
+#import "AppDelegate.h"
 
 @implementation EditLog{
+    AppDelegate *appDelegate;
+
     NSString *path;
     NSMutableDictionary *root;
     NSMutableArray *vault;
@@ -35,6 +37,7 @@
         [[NSFileManager defaultManager] createFileAtPath:path contents:nil attributes:nil]; //作成する
     }
     [self loadData];
+    appDelegate = APP_DELEGATE;
 }
 // ファイル名を返す
 - (void)makeDataPath{
@@ -49,6 +52,7 @@
     [self saveLog];
     [self saveVault];
     [root writeToFile:path atomically:YES];
+    DNSLog(@"Log.plistに保存 \nLog.plist:%@",root);
 }
 // ファイルからデータの読み込み
 - (void)loadData{
@@ -58,6 +62,7 @@
         root = [[NSMutableDictionary alloc] init];
     [self loadLog];
     [self loadVault];
+    DNSLog(@"Log.plistから読み込み \nLog.plist:%@",root);
 }
 
 #pragma mark - Log
@@ -74,8 +79,21 @@
 
 #pragma mark - 配列の操作
 // 配列に値を追加する
-- (void)saveMoneyValue:(NSNumber *)value Date:(NSDate *)date Kind:(NSString *)kind{
+- (void)saveMoneyValue:(NSNumber *)value Date:(NSDate *)date Kind:(NSInteger)kindNum{
     DNSLog(@"金額のあれこれを保存！");
+
+    NSString *kind = [NSString alloc];
+    switch (kindNum) {
+        case 0:
+            kind = @"出費";
+            break;
+        case 1:
+            kind = @"収入";
+            break;
+        case 2:
+            kind = @"残高調整";
+            break;
+    }
     
     NSDictionary *tempDictionary;
     if ([kind isEqualToString:@"残高調整"] == NO) {
@@ -86,8 +104,8 @@
                                         nil];
 
     }else{//残高調整の場合，誤差を保存する
-        value = @( [[[Methods alloc] loadBalance] intValue] - [value intValue] );
-        DNSLog(@"balance:%@ \n value:%@",[[Methods alloc] loadBalance],value);
+        value = @( [appDelegate.editData.balance intValue] - [value intValue] );
+        DNSLog(@"balance:%@ \n value:%@",appDelegate.editData.balance,value);
         tempDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                           value, @"MoneyValue",
                           date,  @"Date",

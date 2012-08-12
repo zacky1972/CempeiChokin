@@ -258,6 +258,30 @@
     return NO;
 }
 
+//貯金が溜まったかどうか調べる
+- (BOOL)searchFinish{
+    DNSLog(@"たまった？");
+    if ([[self loadGoalValue] compare:deposit] !=  NSOrderedDescending) {
+        DNSLog(@"たまった！");
+        return YES;
+    }else{
+        DNSLog(@"たまってない…");
+        return NO;
+    }
+
+}
+
+- (BOOL)searchLastNorma{
+    DNSLog(@"最後の期間？");
+    if ([[self loadEnd] isEqualToDate:[self loadGoalPeriod]] == YES) {
+        DNSLog(@"最後！");
+        return YES;
+    }else{
+        DNSLog(@"まだまだ！");
+        return NO;
+    }
+}
+
 #pragma mark - 外から読み込む系
 - (NSString *)loadGoalName{
     return [goal objectForKey:@"Name"];

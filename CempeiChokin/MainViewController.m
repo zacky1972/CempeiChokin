@@ -17,8 +17,6 @@
 
     UIView *graph;
     
-    NSString *tempKind;
-    
     NSInteger alertType;
 }
 
@@ -59,7 +57,7 @@
                                                   otherButtonTitles:nil, nil];
             [alert show];
             
-        }else if([_method searchLastNorma] && [[appDelegate.editData loadEnd] isEqualToDate:[NSDate date]]){
+        }else if([appDelegate.editData searchLastNorma] && [[appDelegate.editData loadEnd] isEqualToDate:[NSDate date]]){
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"今日は"
                                                             message:@"目標日やで！"
                                                            delegate:self
@@ -78,8 +76,7 @@
                                                       addYear:NO addMonth:YES addDay:YES
                                                       addHour:NO addMinute:NO addSecond:NO]];
     MainNavigationBar.topItem.title = temp;
-    tempKind = @"出費";
-    
+
     [self makeGraph]; // グラフの表示
 }
 
@@ -109,20 +106,6 @@
 }
 
 #pragma mark - 出費・収入・残高調整 関係
-// 出費・収入・残高調整を選択するボタンの動作
-- (IBAction)KindSegment_click:(id)sender {
-    switch (KindSegment.selectedSegmentIndex) {
-        case 0:
-            tempKind = @"出費";
-            break;
-        case 1:
-            tempKind = @"収入";
-            break;
-        case 2:
-            tempKind = @"残高調整";
-            break;
-    }
-}
 // ExpenseTextFieldを選択した時の動作
 - (IBAction)expenseTextField_begin:(id)sender {
     // Toolbarを作成する
@@ -158,9 +141,8 @@
                 [logTableView reloadData];                   // LogTableViewの更新
             }
             // データの処理
-            [appDelegate.editLog saveMoneyValue:tempExpense Date:[NSDate date] Kind:tempKind];  // Logにデータを追加
+            [appDelegate.editLog saveMoneyValue:tempExpense Date:[NSDate date] Kind:KindSegment.selectedSegmentIndex];  // Logにデータを追加
             [appDelegate.editData calcValue:tempExpense Kind:KindSegment.selectedSegmentIndex]; // 数値の再計算
-
 
             // 表示の処理
             expenseTextField.text = @"";    // テキストフィールドの値を消す
