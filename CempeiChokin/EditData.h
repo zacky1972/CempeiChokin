@@ -2,8 +2,8 @@
 //  EditData.h
 //  CempeiChokin
 //
-//  Created by Takeshi on 12/08/07.
-//  Copyright (c) 2012年 Nakano Asami. All rights reserved.
+//  Created by CEMPEI on 12/07/25.
+//  Copyright (c) 2012年 CEMPEI. All rights reserved.
 //
 
 ////////////////////////////////////////////////////////////

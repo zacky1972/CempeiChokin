@@ -41,6 +41,7 @@
 		E9AA9B1915D245BA00D5ADD5 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = E9AA9B1315D2454200D5ADD5 /* Default.png */; };
 		E9AFEDEC15C9151C0021815A /* help.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E9AFEDEB15C9151C0021815A /* help.jpg */; };
 		E9AFEDF015C915BA0021815A /* FirstHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AFEDEF15C915BA0021815A /* FirstHelpViewController.m */; };
+		E9FB3A8115D947B6003992DE /* GoalDateExtendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9FB3A8015D947B6003992DE /* GoalDateExtendViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -192,6 +193,8 @@
 		E9AFEDEB15C9151C0021815A /* help.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = help.jpg; sourceTree = "<group>"; };
 		E9AFEDEE15C915BA0021815A /* FirstHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstHelpViewController.h; sourceTree = "<group>"; };
 		E9AFEDEF15C915BA0021815A /* FirstHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstHelpViewController.m; sourceTree = "<group>"; };
+		E9FB3A7F15D947B6003992DE /* GoalDateExtendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalDateExtendViewController.h; sourceTree = "<group>"; };
+		E9FB3A8015D947B6003992DE /* GoalDateExtendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalDateExtendViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -453,6 +456,8 @@
 				E95EED9415C26A7300F2A89E /* MainViewController.m */,
 				E95EEDA215C26EAB00F2A89E /* GoalViewController.h */,
 				E95EEDA315C26EAB00F2A89E /* GoalViewController.m */,
+				E9FB3A7F15D947B6003992DE /* GoalDateExtendViewController.h */,
+				E9FB3A8015D947B6003992DE /* GoalDateExtendViewController.m */,
 				E95EED9C15C26D8D00F2A89E /* BudgetViewController.h */,
 				E95EED9D15C26D8D00F2A89E /* BudgetViewController.m */,
 				E95EEDA515C270B700F2A89E /* DepositViewController.h */,
@@ -611,6 +616,7 @@
 				E99F6ED715D22C44006053A6 /* FinishViewController.m in Sources */,
 				01E6EEE015D25AF3001F5B38 /* CreditViewController.m in Sources */,
 				E945FB5115D4F09C0051C57A /* AddNormaLine.m in Sources */,
+				E9FB3A8115D947B6003992DE /* GoalDateExtendViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
