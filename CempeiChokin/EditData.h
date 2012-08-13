@@ -87,5 +87,6 @@
 
 #pragma mark - その他
 - (BOOL)searchNext;
+- (BOOL)searchFinish;
 
 @end
