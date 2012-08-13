@@ -290,43 +290,6 @@
     return NO;
 }
 
-/*
- DNSLog(@"期限チェック！");
- _translateFormat = [TranslateFormat alloc];
- NSDate *date = [_translateFormat dateOnly:[_translateFormat nineHoursLater:[NSDate date]]];
- [self makeDataPath];
- [self loadData];
- DNSLog(@"今日:%@",date);
- DNSLog(@"期限日:%@",[self loadEnd]);
- DNSLog(@"はやいほう！：%@",[date earlierDate:[self loadEnd]]);
- 
- DNSLog(@"date:%@",[self loadEnd]);
- if ([_translateFormat equalDate:date Vs:[self loadEnd]] == NO) {//今日が期限日じゃなくて
- DNSLog(@"同じ日やないわ！");
- if([date earlierDate:[self loadEnd]] != date){//期限日より後
- DNSLog(@"期限きれた！");
- //ここの処理は引っ越し予定
- if ([self loadNextAlert] == YES) {
- DNSLog(@"催促するわ！");
- [root setObject:@1 forKey:@"NextAlert"];   //もう警告がでないようにする
- [root writeToFile:path atomically:YES];    //それでrootをdata.plistに書き込み
- return YES;
- }else{
- DNSLog(@"もう催促したわ！");
- return NO;
- }
- 
- }else{//まだ期限内
- //DNSLog(@"期限内やわ！");
- }
- }
- DNSLog(@"期限きれてない！");
- [root setObject:@0 forKey:@"NextAlert"];   //もう警告がでないようにする
- [root writeToFile:path atomically:YES];    //それでrootをdata.plistに書き込み
- return NO;
- }
- */
-
 //貯金が溜まったかどうかを返す
 - (BOOL)searchFinish{
     DNSLog(@"たまった？");
