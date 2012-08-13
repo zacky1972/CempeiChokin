@@ -162,11 +162,13 @@
     [goal setObject:value forKey:@"Value"];
     [goal setObject:[_translateFormat dateOnly:period] forKey:@"Period"];
 }
+
 // Nowに
 - (void)saveStart:(NSDate *)start End:(NSDate *)end{
     [now setObject:[_translateFormat dateOnly:start] forKey:@"Start"];
     [now setObject:[_translateFormat dateOnly:end] forKey:@"End"];
 }
+
 // Deposit,DepositLogに
 - (void)saveDepositDate:(NSDate *)date Value:(NSNumber *)value{
      date = [_translateFormat dateOnly:date];
@@ -180,17 +182,14 @@
              deposit = @([deposit intValue] - [[[depositLog objectAtIndex:0] objectForKey:@"Value"] intValue] + [value intValue]); // 貯金額の計算
              [depositLog replaceObjectAtIndex:0 withObject:dictionaly]; // 上書きする
          }else{
-             DNSLog(@"貯金します");
              [depositLog addObject:dictionaly]; // 新規追加する
              deposit = @([deposit intValue] + [value intValue]); // 貯金額を増やす
          }
      }else{
-         DNSLog(@"貯金します");
          [depositLog addObject:dictionaly]; // 新規追加する
          deposit = @([deposit intValue] + [value intValue]); // 貯金額を増やす
      }
 }
- 
 
 #pragma mark - 自動で処理する系
 // 設定し終わったあとの処理 (ノルマを決める)
@@ -305,8 +304,6 @@
 //貯金が溜まったかどうかを返す
 - (BOOL)searchFinish{
     DNSLog(@"たまった？");
-    //    if ([[self loadGoalValue] compare:deposit] !=  NSOrderedDescending) {
-    DNSLog(@"%dと%dの比較",[[self loadGoalValue] intValue],[deposit intValue]);
     if ([[self loadGoalValue] intValue] <= [deposit intValue]) {
         DNSLog(@"たまった！");
         return YES;
@@ -315,6 +312,7 @@
         return NO;
     }
 }
+
 // 最後の期間かどうかを返す
 - (BOOL)searchLastNorma{
     DNSLog(@"最後の期間？");
