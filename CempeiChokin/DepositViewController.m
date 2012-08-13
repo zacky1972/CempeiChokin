@@ -115,21 +115,17 @@
 - (IBAction)DoneButton_down:(id)sender {
     DNSLog(@"完了きたで！");
     DNSLog(@"depositValue:%@",depositValue);
-    [appDelegate.editData saveDepositDate:[appDelegate.editData loadEnd] Value:depositValue];
+    [appDelegate.editData saveDepositDate:[appDelegate.editData loadEnd] Value:depositValue]; //とりあえず値を保存
     
     if ([appDelegate.editData searchFinish] == YES) {
         DNSLog(@"達成したよ");
-    }
-    /*
-    if([_method searchFinish] == YES){//終了！
-        DNSLog(@"達成したよ");
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"FinishView_complete"] animated:YES];
-    }else if ([appDelegate.editData searchLastNorma] == YES){
-        DNSLog(@"期限きれんたんですけど");
+    }else if ([appDelegate.editData searchLastNorma] == YES) {
+        DNSLog(@"期限切れましたけど…");
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"FinishView_miss"] animated:YES];
     }else{
-        //まだ終わらないよ！
-    }*/
+        DNSLog(@"そして貯金へ……");
+    }
 }
 
 - (IBAction)laterButton_down:(id)sender {

@@ -176,10 +176,16 @@
          NSDate *recentDeposit = [[depositLog objectAtIndex:0] objectForKey:@"Date"];
          if([date isEqualToDate:recentDeposit] == YES){
              // 既に同じ期間の貯金がしてあった場合
+             DNSLog(@"詐欺貯金駄目ゼッタイ");
              deposit = @([deposit intValue] - [[[depositLog objectAtIndex:0] objectForKey:@"Value"] intValue] + [value intValue]); // 貯金額の計算
              [depositLog replaceObjectAtIndex:0 withObject:dictionaly]; // 上書きする
+         }else{
+             DNSLog(@"貯金します");
+             [depositLog addObject:dictionaly]; // 新規追加する
+             deposit = @([deposit intValue] + [value intValue]); // 貯金額を増やす
          }
      }else{
+         DNSLog(@"貯金します");
          [depositLog addObject:dictionaly]; // 新規追加する
          deposit = @([deposit intValue] + [value intValue]); // 貯金額を増やす
      }
@@ -299,7 +305,9 @@
 //貯金が溜まったかどうかを返す
 - (BOOL)searchFinish{
     DNSLog(@"たまった？");
-    if ([[self loadGoalValue] compare:deposit] !=  NSOrderedDescending) {
+    //    if ([[self loadGoalValue] compare:deposit] !=  NSOrderedDescending) {
+    DNSLog(@"%dと%dの比較",[[self loadGoalValue] intValue],[deposit intValue]);
+    if ([[self loadGoalValue] intValue] <= [deposit intValue]) {
         DNSLog(@"たまった！");
         return YES;
     }else{

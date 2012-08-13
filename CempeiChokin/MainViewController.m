@@ -46,28 +46,9 @@
     // 初期設定画面の表示
     if(appDelegate.editData.defaultSettings == NO){//初期設定がまだだったら，設定画面に遷移します
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"First"] animated:NO];
-    }else{
-        //期限チェック
-        if([appDelegate.editData searchNext] == YES){//期限をこえてたとき
-            // FIXME: 誰かまじめに書いて
-            if([appDelegate.editData searchLastNorma] == YES){
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"今日は"
-                                                                message:@"目標日やで！"
-                                                               delegate:self
-                                                      cancelButtonTitle:@"貯金しよう"
-                                                      otherButtonTitles:nil, nil];
-                [alert show];
-            }else{
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"今日は"
-                                                                message:@"期限日やで！"
-                                                               delegate:self
-                                                      cancelButtonTitle:@"貯金しよう"
-                                                      otherButtonTitles:nil, nil];
-                [alert show];
-            }
-        }
     }
     //初期設定から戻ってきた時用
+    [self timeLimitChecker];
     [self labelReflesh];
     NSString *temp = [NSString stringWithFormat:@"%@~%@",
                       [_translateFormat formatterDateUltimate:[appDelegate.editData loadStart]
@@ -221,7 +202,32 @@
     ExpenseLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.expense addComma:YES addYen:YES];
     BalanceLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.balance addComma:YES addYen:YES];
     NormaLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.norma addComma:YES addYen:YES];
+    DepositLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.deposit addComma:YES addYen:YES];
 }
+
+//FIXME:これお引っ越しすべきか？
+// 期限チェック
+- (void)timeLimitChecker{
+    if([appDelegate.editData searchNext] == YES){//期限をこえてたとき
+        // FIXME: 誰かまじめに書いて
+        if([appDelegate.editData searchLastNorma] == YES){
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"今日は"
+                                                            message:@"目標日やで！"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"貯金しよう"
+                                                  otherButtonTitles:nil, nil];
+            [alert show];
+        }else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"今日は"
+                                                            message:@"期限日やで！"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"貯金しよう"
+                                                  otherButtonTitles:nil, nil];
+            [alert show];
+        }
+    }
+}
+
 
 #pragma mark - UITableView関係
 // セクションの数を返させる
