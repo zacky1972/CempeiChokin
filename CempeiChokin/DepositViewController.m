@@ -116,7 +116,7 @@
     DNSLog(@"完了きたで！");
     [appDelegate.editData saveDepositDate:[appDelegate.editData loadEnd] Value:depositValue];
     
-    /* // FIXME: なんか落ちる
+    // FIXME: なんか落ちる
     if([appDelegate.editData searchFinish] == YES){//終了！
         DNSLog(@"達成したよ");
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"FinishView_complete"] animated:YES];
@@ -125,7 +125,7 @@
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"FinishView_miss"] animated:YES];
     }else{
         //まだ終わらないよ！
-    }*/
+    }
 }
 
 - (IBAction)laterButton_down:(id)sender {

@@ -7,9 +7,11 @@
 //
 
 #import "EditData.h"
+#import "AppDelegate.h"
 #import "TranslateFormat.h"
 
 @implementation EditData{
+    AppDelegate *appDelegate;
     TranslateFormat *_translateFormat;
 
     NSString *path;
@@ -38,6 +40,7 @@
     }
     [self loadData];
 
+    appDelegate = APP_DELEGATE;
     _translateFormat = [TranslateFormat alloc];
 }
 // ファイルの削除
@@ -79,7 +82,7 @@
 }
 
 #pragma mark - 保存・読み込み系
-// Expense & Balance
+// Expense & Balance & Budget
 - (void)saveValue{
     [root setObject:expense forKey:@"Expense"];
     [root setObject:balance forKey:@"Balance"];
@@ -260,10 +263,18 @@
 }
 
 #pragma mark - とりあえずコピーしただけ系シリーズ
+// 期限が来たかどうかを返す
 - (BOOL)searchNext{
     NSDate *date = [_translateFormat dateOnly:[NSDate date]];
-    if ([date isEqualToDate:[self loadEnd]] == NO) { //今日が期限日じゃなくて
-        if([date earlierDate:[self loadEnd]] != date){ //期限日より後
+
+    if(nextAlert == YES)
+        // 既にアラート済みの場合
+        return NO;
+
+    if ([date isEqualToDate:[self loadEnd]] == NO) {
+        //今日が期限日じゃない場合
+        if([date earlierDate:[self loadEnd]] != date){
+            //期限日よりあとの場合
             nextAlert = YES;
             return YES;
         }
@@ -271,8 +282,7 @@
     // 期限内
     return NO;
 }
-
-//貯金が溜まったかどうか調べる
+//貯金が溜まったかどうかを返す
 - (BOOL)searchFinish{
     DNSLog(@"たまった？");
     if ([[self loadGoalValue] compare:deposit] !=  NSOrderedDescending) {
@@ -282,9 +292,8 @@
         DNSLog(@"たまってない…");
         return NO;
     }
-
 }
-
+// 最後の期間かどうかを返す
 - (BOOL)searchLastNorma{
     DNSLog(@"最後の期間？");
     if ([[self loadEnd] isEqualToDate:[self loadGoalPeriod]] == YES) {

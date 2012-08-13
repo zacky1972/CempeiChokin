@@ -1514,7 +1514,6 @@
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="laterButton_down:" destination="U21-t4-S2S" eventType="touchUpInside" id="uEq-W3-Jco"/>
                                         <action selector="nextButton_down:" destination="U21-t4-S2S" eventType="touchUpInside" id="QjG-fw-e4o"/>
                                         <segue destination="zXJ-SR-lRM" kind="modal" id="0Xr-BU-pO7"/>
                                     </connections>
@@ -1531,7 +1530,6 @@
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
-                                        <action selector="DoneButton_down:" destination="U21-t4-S2S" eventType="touchUpInside" id="J0L-xP-X4G"/>
                                         <action selector="extendButton_down:" destination="U21-t4-S2S" eventType="touchUpInside" id="zf7-16-cGA"/>
                                         <segue destination="IM6-jB-q56" kind="modal" id="Uj0-E1-Eiv"/>
                                     </connections>
@@ -1551,10 +1549,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="目標達成通知" id="ihR-Ta-T3d"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                    <connections>
-                        <outlet property="DoneButton" destination="dKk-kq-j8P" id="P2p-uM-axY"/>
-                        <outlet property="depositTableView" destination="Lfa-2X-WtL" id="fM8-DG-JvH"/>
-                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1388" y="2562"/>
@@ -1604,9 +1598,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="目標達成通知" id="dpz-FW-WUK"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                    <connections>
-                        <outlet property="depositTableView" destination="OhT-UB-5gD" id="wAH-vO-3wc"/>
-                    </connections>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1388" y="1970"/>
@@ -1750,6 +1741,93 @@
     <resources>
         <image name="help.jpg" width="640" height="960"/>
     </resources>
+    <classes>
+        <class className="BudgetViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BudgetViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="DoneButton_down:"/>
+                <relationship kind="action" name="budgetTextField_begin:"/>
+                <relationship kind="action" name="endDateTextField_begin:"/>
+                <relationship kind="action" name="laterButton_down:"/>
+                <relationship kind="action" name="startDateTextField_begin:"/>
+                <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="budgetTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="endDateTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="laterButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="startDateTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="CreditViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CreditViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="aboutButton_down:"/>
+                <relationship kind="action" name="contactButton_down:"/>
+            </relationships>
+        </class>
+        <class className="DepositViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/DepositViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="DoneButton_down:"/>
+                <relationship kind="action" name="depositTextField_begin:"/>
+                <relationship kind="action" name="depositTextField_end:"/>
+                <relationship kind="action" name="laterButton_down:"/>
+                <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="depositTableView" candidateClass="UITableView"/>
+                <relationship kind="outlet" name="depositTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="FinishViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FinishViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="extendButton_down:"/>
+                <relationship kind="action" name="nextButton_down:"/>
+            </relationships>
+        </class>
+        <class className="FirstHelpViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FirstHelpViewController.h"/>
+        </class>
+        <class className="GoalViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GoalViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="DoneButton_down:"/>
+                <relationship kind="action" name="DoneButton_down_2:"/>
+                <relationship kind="action" name="NameTextField_end:"/>
+                <relationship kind="action" name="NameTextField_next:"/>
+                <relationship kind="action" name="PeriodTextField_begin:"/>
+                <relationship kind="action" name="PeriodTextField_end:"/>
+                <relationship kind="action" name="ValueTextField_begin:"/>
+                <relationship kind="action" name="ValueTextField_end:"/>
+                <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="NameTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="PeriodTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="ValueTextField" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="MainViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="expenseTextField_begin:"/>
+                <relationship kind="action" name="expenseTextField_end:"/>
+                <relationship kind="outlet" name="BalanceLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="BudgetLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="DepositLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="ExpenseLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="KindSegment" candidateClass="UISegmentedControl"/>
+                <relationship kind="outlet" name="LogScroll" candidateClass="UIScrollView"/>
+                <relationship kind="outlet" name="MainNavigationBar" candidateClass="UINavigationBar"/>
+                <relationship kind="outlet" name="NormaLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="expenseTextField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="logTableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
+        <class className="OptionViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/OptionViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="deleteDataButton_down:"/>
+                <relationship kind="outlet" name="deleteDataButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
@@ -1757,7 +1835,7 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="WA1-tD-icu"/>
-        <segue reference="Thm-lh-qM2"/>
-        <segue reference="k6h-lJ-eW9"/>
+        <segue reference="fhM-kk-tX0"/>
+        <segue reference="0Xr-BU-pO7"/>
     </inferredMetricsTieBreakers>
 </document>

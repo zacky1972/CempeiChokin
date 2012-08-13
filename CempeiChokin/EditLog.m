@@ -8,9 +8,11 @@
 
 #import "EditLog.h"
 #import "AppDelegate.h"
+#import "TranslateFormat.h"
 
 @implementation EditLog{
     AppDelegate *appDelegate;
+    TranslateFormat *translateFormat;
 
     NSString *path;
     NSMutableDictionary *root;
@@ -32,37 +34,56 @@
 // ファイルの初期化
 - (void)initData{
     [self makeDataPath]; // ファイルの場所指定
-    if( [[NSFileManager defaultManager] fileExistsAtPath:path] == NO ){ // ファイルがなかったら
+
+    // ファイルの存在確認
+    if( [[NSFileManager defaultManager] fileExistsAtPath:path] == NO ){
+        // ファイルがなかったら
         DNSLog(@"ログのデータの初期化！");
         [[NSFileManager defaultManager] createFileAtPath:path contents:nil attributes:nil]; //作成する
     }
+
+    // データの読み込み
     [self loadData];
+
+    // 利用するクラスのインスタンス化
     appDelegate = APP_DELEGATE;
+    translateFormat = [TranslateFormat alloc];
 }
 // ファイル名を返す
 - (void)makeDataPath{
-    NSString *home = NSHomeDirectory();
-    NSString *document = [home stringByAppendingPathComponent:@"Documents"]; // フォルダ名
-    path = [document stringByAppendingPathComponent:@"Log.plist"]; // ファイル名
+    NSString *home = NSHomeDirectory();                                         // ホームディレクトリ
+    NSString *document = [home stringByAppendingPathComponent:@"Documents"];    // フォルダ名
+    path = [document stringByAppendingPathComponent:@"Log.plist"];              // ファイル名
     DNSLog(@"ログのファイル: %@",path);
 }
 // ファイルへデータの保存
 - (void)saveData{
     DNSLog(@"ログのデータ保存！");
+    // データをRootに入れる
     [self saveLog];
     [self saveVault];
+
+    // ファイルの保存
     [root writeToFile:path atomically:YES];
-    DNSLog(@"Log.plistに保存 \nLog.plist:%@",root);
+
+    // 中身の確認
+    DNSLog(@"\nLog.plist:%@",root);
 }
 // ファイルからデータの読み込み
 - (void)loadData{
     DNSLog(@"ログのデータ読み込み！");
-    root = [[NSMutableDictionary alloc] initWithContentsOfFile:path];
-    if(root == NULL) // 読み込みに失敗した場合
-        root = [[NSMutableDictionary alloc] init];
+    // データをRootに読み込ませる
+    root = [[NSMutableDictionary alloc] initWithContentsOfFile:path]; // ファイルからRootを作成
+    if(root == NULL)
+        // 読み込みに失敗した場合
+        root = [[NSMutableDictionary alloc] init]; // 空のRootを作成する
+
+    // Rootからデータを読み込む
     [self loadLog];
     [self loadVault];
-    DNSLog(@"Log.plistから読み込み \nLog.plist:%@",root);
+
+    // 中身の確認
+    DNSLog(@"\nLog.plist:%@",root);
 }
 
 #pragma mark - Log
@@ -72,7 +93,10 @@
 }
 - (void)loadLog{
     log = [root objectForKey:@"Log"];
-    if(log == NULL){ // 読み込みに失敗した場合
+
+    // ログの初期化
+    if(log == NULL){
+        // 読み込みに失敗した場合
         log = [[NSMutableArray alloc] init];
     }
 }
@@ -82,6 +106,7 @@
 - (void)saveMoneyValue:(NSNumber *)value Date:(NSDate *)date Kind:(NSInteger)kindNum{
     DNSLog(@"金額のあれこれを保存！");
 
+    // 数値から文字列に変換
     NSString *kind = [NSString alloc];
     switch (kindNum) {
         case 0:
@@ -94,34 +119,41 @@
             kind = @"残高調整";
             break;
     }
-    
-    NSDictionary *tempDictionary;
+
+    // 値の整形
+    date = [translateFormat dateOnly:date];
+    // 入力されたデータからNSDictionaryを作成する
+    NSDictionary *tempDictionary = [NSDictionary alloc];
+
+    // 計算方式の選択
     if ([kind isEqualToString:@"残高調整"] == NO) {
+        // 出費・支出の場合
         tempDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                                         value, @"MoneyValue",
                                         date,  @"Date",
                                         kind,  @"Kind",
                                         nil];
-
-    }else{//残高調整の場合，誤差を保存する
-        value = @( [appDelegate.editData.balance intValue] - [value intValue] );
-        DNSLog(@"balance:%@ \n value:%@",appDelegate.editData.balance,value);
+    }else{
+        //残高調整の場合
+        value = @( [appDelegate.editData.balance intValue] - [value intValue] ); // 誤差を計算してそれを値にする
         tempDictionary = [NSDictionary dictionaryWithObjectsAndKeys:
                           value, @"MoneyValue",
                           date,  @"Date",
                           kind,  @"Kind",
                           nil];
     }
-     
+
+    // ログに入れる
     [log insertObject:tempDictionary atIndex:0];       // 配列に入れる
 }
-// 選んで削除するやつ
+// 選択されたセルを削除
 - (void)deleteLogAtIndex:(NSUInteger)index{
     DNSLog(@"%d番目のログを削除します！",index);
-    [log removeObjectAtIndex:index]; //で，実際にログを消す
+    [log removeObjectAtIndex:index]; // ログを消す
 }
 // 何個以上だったらお墓に送るみたいな
 - (void)removeObjectsCount:(NSUInteger)count{
+    // Countから後の番号の配列をすべてVaultに送る
     NSUInteger startNumber = count - 1;
     NSUInteger endNumber = [log count];
 
@@ -133,8 +165,9 @@
 // お墓から生き返らせる奴
 - (void)reviveToLog{
     if([self checkVault] == YES){
+        // Vaultにデータが存在する場合
         NSDictionary *zombieLog = [self reviveFromVault];
-        [log addObject:zombieLog];
+        [log addObject:zombieLog]; // Vaultからログに移動させる
     }
 }
 

@@ -12,6 +12,7 @@
 
 @property(nonatomic, retain)NSMutableArray *log;
 
+// ファイルにデータを保存する
 - (void)saveData;
 
 // 配列にデータを追加
@@ -32,6 +33,7 @@
 - (NSString *)loadKindAtIndex:(NSUInteger)index;
 
 #pragma mark - その他
+// データ・ファイルを削除する
 - (void)deleteLogData;
 
 @end
