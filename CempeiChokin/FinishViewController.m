@@ -17,15 +17,6 @@
 
 @implementation FinishViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -35,21 +26,13 @@
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
-    
-    //FinishNavigationbar.title = @"目標達成通知";
 }
 
 - (void)viewDidUnload
 {
-    //FinishNavigationbar = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - Storyboardで画面遷移する前に呼ばれるあれ
@@ -60,7 +43,8 @@
 - (IBAction)nextButton_down:(id)sender {
     [_method deleteData];
     // TODO: データ渡すようにしたら治す必要がありまーす
-    [[[EditLog alloc] init] deleteLogData];
+    [appDelegate.editLog deleteLogData];
+    [appDelegate.editData deleteData];
 }
 
 - (IBAction)extendButton_down:(id)sender {

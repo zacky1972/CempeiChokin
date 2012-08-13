@@ -10,7 +10,7 @@
 #import "Methods.h"
 #import "EditLog.h"
 
-@interface FinishViewController : UITableViewController{
+@interface FinishViewController : UIViewController{
 }
 - (IBAction)nextButton_down:(id)sender;
 - (IBAction)extendButton_down:(id)sender;
