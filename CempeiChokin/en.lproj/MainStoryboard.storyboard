@@ -1056,11 +1056,11 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="84"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" id="CSL-Gl-Bgv">
-                                    <rect key="frame" x="10" y="20" width="301" height="64"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <color key="backgroundColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                </imageView>
+                                <view userInteractionEnabled="NO" contentMode="scaleToFill" id="Nc5-K8-yed">
+                                    <rect key="frame" x="10" y="21" width="301" height="62"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         </view>
@@ -1147,6 +1147,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="DoneButton" destination="LTo-l2-TNj" id="OVI-4d-CbD"/>
+                        <outlet property="barGraphView" destination="Nc5-K8-yed" id="sVY-v5-Rd6"/>
                         <outlet property="depositTableView" destination="N65-Gj-lmK" id="z92-7j-qEU"/>
                         <outlet property="depositTextField" destination="cls-ho-OXQ" id="GR4-K8-GSM"/>
                     </connections>
@@ -1602,11 +1603,11 @@
             </objects>
             <point key="canvasLocation" x="1388" y="1970"/>
         </scene>
-        <!--Deposit View Controller - 延期する的なあれ-->
+        <!--Goal View Controller - 延期する的なあれ-->
         <scene sceneID="Oeo-jA-W6F">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gaz-ED-u6R" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController storyboardIdentifier="" id="IM6-jB-q56" customClass="DepositViewController" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="" id="IM6-jB-q56" customClass="GoalViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" bounces="NO" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="NeL-5a-0aP">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1731,6 +1732,10 @@
                     <navigationItem key="navigationItem" title="延期する的なあれ" id="5ne-zZ-mn8"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="DoneButton" destination="O5Q-qm-2It" id="ek3-dN-21w"/>
+                        <outlet property="NameTextField" destination="dqR-Ru-E2q" id="AI0-D6-cVV"/>
+                        <outlet property="PeriodTextField" destination="aZr-lK-sTs" id="hgS-Oo-fcr"/>
+                        <outlet property="ValueTextField" destination="LOs-V4-eW6" id="L8i-nO-LPH"/>
                         <outlet property="depositTableView" destination="NeL-5a-0aP" id="Qf4-8q-8rZ"/>
                     </connections>
                 </tableViewController>
@@ -1772,6 +1777,7 @@
                 <relationship kind="action" name="depositTextField_end:"/>
                 <relationship kind="action" name="laterButton_down:"/>
                 <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="barGraphView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="depositTableView" candidateClass="UITableView"/>
                 <relationship kind="outlet" name="depositTextField" candidateClass="UITextField"/>
             </relationships>
@@ -1834,7 +1840,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="WA1-tD-icu"/>
+        <segue reference="gv0-sb-DCH"/>
         <segue reference="fhM-kk-tX0"/>
         <segue reference="0Xr-BU-pO7"/>
     </inferredMetricsTieBreakers>

@@ -14,6 +14,7 @@
     __weak IBOutlet UITableView *depositTableView;
     __weak IBOutlet UITextField *depositTextField;
     __weak IBOutlet UIButton *DoneButton;
+    __weak IBOutlet UIView *barGraphView;
 }
 
 - (IBAction)depositTextField_begin:(id)sender;

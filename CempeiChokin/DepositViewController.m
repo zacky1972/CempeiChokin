@@ -39,6 +39,9 @@
     if(depositValue == NULL){
         DoneButton.enabled = NO;
     }
+
+    // TODO: 棒グラフの生成
+    
 }
 
 - (void)viewDidUnload
@@ -46,6 +49,7 @@
     depositTextField = nil;
     depositTableView = nil;
     DoneButton = nil;
+    barGraphView = nil;
     [super viewDidUnload];
 
 }
