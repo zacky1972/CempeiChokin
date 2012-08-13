@@ -168,37 +168,6 @@
     [now setObject:[_translateFormat dateOnly:end] forKey:@"End"];
 }
 // Deposit,DepositLogに
-/*
-- (void)saveDepositDate:(NSDate *)date Value:(NSNumber *)value{
-    date = [_translateFormat dateOnly:date];
-    NSDictionary *dictionaly = [[NSDictionary alloc] initWithObjectsAndKeys:date, @"Date", value, @"Value",nil];
-    if ([depositLog count] == 0){
-        DNSLog(@"貯金総額をリセット！");
-        deposit = @0;    //貯金総額の初期化
-        [depositLog addObject:dictionaly]; // 新規追加する
-    }else{
-        DNSLog(@"貯金しますよ！:%@",value);
-        DNSLog(@"%@",[[depositLog objectAtIndex:0] objectForKey:@"Date"]);
-        DNSLog(@"%@",[[depositLog objectAtIndex:0] objectForKey:@"Value"]);
-        
-        if ([date isEqualToDate:[[depositLog objectAtIndex:0] objectForKey:@"Date"]] == YES) {// 既に同じ期間の貯金がしてあった場合
-            DNSLog(@"詐欺貯金よくない！");
-            [depositLog replaceObjectAtIndex:0 withObject:dictionaly]; // 上書きする
-            DNSLog(@"deposit_befo:%@",deposit);
-            deposit = @([deposit intValue] - [[[depositLog objectAtIndex:0] objectForKey:@"Value"] intValue] + [value intValue]); // 貯金額の計算
-            DNSLog(@"depositに入る値:%@",@([deposit intValue] - [[[depositLog objectAtIndex:0] objectForKey:@"Value"] intValue] + [value intValue]));
-            DNSLog(@"deposit_after:%@",deposit);
-        }else{ // 普通に貯金する場合
-            DNSLog(@"普通に貯金,%@",@([deposit intValue] + [value intValue]));
-            [depositLog addObject:dictionaly]; // 新規追加する
-            deposit = @([deposit intValue] + [value intValue]); // 貯金額を増やす
-        }
-    }
-    DNSLog(@"deposit:%@",deposit);
-    DNSLog(@"depositLog:%@",depositLog);
-}
-*/
-
 - (void)saveDepositDate:(NSDate *)date Value:(NSNumber *)value{
      date = [_translateFormat dateOnly:date];
      NSDictionary *dictionaly = [[NSDictionary alloc] initWithObjectsAndKeys:date, @"Date", value, @"Value",nil];
@@ -300,22 +269,64 @@
 // 期限が来たかどうかを返す
 - (BOOL)searchNext{
     NSDate *date = [_translateFormat dateOnly:[NSDate date]];
-
-    if(nextAlert == YES)
-        // 既にアラート済みの場合
-        return NO;
-
     if ([date isEqualToDate:[self loadEnd]] == NO) {
         //今日が期限日じゃない場合
         if([date earlierDate:[self loadEnd]] != date){
             //期限日よりあとの場合
-            nextAlert = YES;
-            return YES;
+            if(nextAlert == YES){
+                // 既にアラート済みの場合
+                DNSLog(@"貯金催促アラートもうしました！");
+                return NO;
+            }else{
+                DNSLog(@"期限すぎてます")
+                nextAlert = YES;
+                return YES;
+            }
         }
     }
     // 期限内
+    DNSLog(@"期限すぎてないよ！");
+    nextAlert = NO;
     return NO;
 }
+
+/*
+ DNSLog(@"期限チェック！");
+ _translateFormat = [TranslateFormat alloc];
+ NSDate *date = [_translateFormat dateOnly:[_translateFormat nineHoursLater:[NSDate date]]];
+ [self makeDataPath];
+ [self loadData];
+ DNSLog(@"今日:%@",date);
+ DNSLog(@"期限日:%@",[self loadEnd]);
+ DNSLog(@"はやいほう！：%@",[date earlierDate:[self loadEnd]]);
+ 
+ DNSLog(@"date:%@",[self loadEnd]);
+ if ([_translateFormat equalDate:date Vs:[self loadEnd]] == NO) {//今日が期限日じゃなくて
+ DNSLog(@"同じ日やないわ！");
+ if([date earlierDate:[self loadEnd]] != date){//期限日より後
+ DNSLog(@"期限きれた！");
+ //ここの処理は引っ越し予定
+ if ([self loadNextAlert] == YES) {
+ DNSLog(@"催促するわ！");
+ [root setObject:@1 forKey:@"NextAlert"];   //もう警告がでないようにする
+ [root writeToFile:path atomically:YES];    //それでrootをdata.plistに書き込み
+ return YES;
+ }else{
+ DNSLog(@"もう催促したわ！");
+ return NO;
+ }
+ 
+ }else{//まだ期限内
+ //DNSLog(@"期限内やわ！");
+ }
+ }
+ DNSLog(@"期限きれてない！");
+ [root setObject:@0 forKey:@"NextAlert"];   //もう警告がでないようにする
+ [root writeToFile:path atomically:YES];    //それでrootをdata.plistに書き込み
+ return NO;
+ }
+ */
+
 //貯金が溜まったかどうかを返す
 - (BOOL)searchFinish{
     DNSLog(@"たまった？");
