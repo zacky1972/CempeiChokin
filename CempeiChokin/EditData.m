@@ -275,8 +275,14 @@
             //期限日よりあとの場合
             if(nextAlert == YES){
                 // 既にアラート済みの場合
-                DNSLog(@"貯金催促アラートもうしました！");
-                return NO;
+                if ([self searchLastNorma] == YES) {
+                    DNSLog(@"はやく貯金しろよ！！！");
+                    nextAlert = YES;
+                    return YES;
+                }else{
+                    DNSLog(@"貯金催促アラートもうしました！");
+                    return NO;
+                }
             }else{
                 DNSLog(@"期限すぎてます")
                 nextAlert = YES;
