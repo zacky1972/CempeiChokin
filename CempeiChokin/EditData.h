@@ -87,6 +87,8 @@
 
 #pragma mark - その他
 - (BOOL)searchNext;
-- (BOOL)searchFinish;
+- (BOOL)searchFinish;       //貯金が溜まったかどうか調べる
+- (BOOL)searchLastNorma;    //最後の期間かどうか調べる
+
 
 @end

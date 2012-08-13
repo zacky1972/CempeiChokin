@@ -8,11 +8,10 @@
 
 #import "AppDelegate.h"
 #import "DepositViewController.h"
-#import "AppDelegate.h"
 
 @interface DepositViewController (){
     AppDelegate *appDelegate;
-    Methods *_method;
+
     TranslateFormat *_translateFormat;
     
     NSNumber *depositValue; // 貯金額
@@ -27,7 +26,6 @@
 {
     [super viewDidLoad];
     appDelegate = APP_DELEGATE;
-    _method = [Methods alloc];
     _translateFormat = [TranslateFormat alloc];
         
     [self makeNumberPadToolbar:depositTextField Return:@"完了"
@@ -69,12 +67,11 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section{
     NSString *temp;
-    temp = [_translateFormat stringFromNumber:[appDelegate.editData loadDepositValue] addComma:1 addYen:1];
+    temp = [_translateFormat stringFromNumber:appDelegate.editData.deposit addComma:1 addYen:1];
     temp = [@"貯金総額は" stringByAppendingString:temp];
     temp = [temp stringByAppendingString:@"です"];
     return temp;
 }
-
 
 #pragma mark - depositTextField関係
 - (IBAction)depositTextField_begin:(id)sender {

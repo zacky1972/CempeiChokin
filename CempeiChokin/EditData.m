@@ -196,6 +196,25 @@
     DNSLog(@"deposit:%@",deposit);
     DNSLog(@"depositLog:%@",depositLog);
 }
+
+/*古いやつ
+ - (void)saveDepositDate:(NSDate *)date Value:(NSNumber *)value{
+ NSDictionary *dictionaly = [[NSDictionary alloc] initWithObjectsAndKeys:date, @"Date", value, @"Value",nil];
+ 
+ if (depositLog.count > 0) {
+ NSDate *recentDeposit = [[depositLog objectAtIndex:0] objectForKey:@"Date"];
+ if([date isEqualToDate:recentDeposit] == YES){
+ // 既に同じ期間の貯金がしてあった場合
+ deposit = @([deposit intValue] - [[[depositLog objectAtIndex:0] objectForKey:@"Value"] intValue] + [value intValue]); // 貯金額の計算
+ [depositLog replaceObjectAtIndex:0 withObject:dictionaly]; // 上書きする
+ }
+ }else{
+ [depositLog addObject:dictionaly]; // 新規追加する
+ deposit = @([deposit intValue] + [value intValue]); // 貯金額を増やす
+ }
+ }
+ */
+
 #pragma mark - 自動で処理する系
 // 設定し終わったあとの処理 (ノルマを決める)
 - (void)calcForNextStage{
@@ -316,19 +335,6 @@
         DNSLog(@"まだまだ！");
         return NO;
     }
-}
-
-//貯金が溜まったかどうか調べる
-- (BOOL)searchFinish{
-    DNSLog(@"たまった？");
-    if ([self loadGoalValue] <=  [self loadDepositValue]) {
-        DNSLog(@"たまった！");
-        return YES;
-    }else{
-        DNSLog(@"たまってない…");
-        return NO;
-    }
-    
 }
 
 #pragma mark - 外から読み込む系
