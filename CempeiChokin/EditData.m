@@ -199,7 +199,7 @@
 }
 */
 
- - (void)saveDepositDate:(NSDate *)date Value:(NSNumber *)value{
+- (void)saveDepositDate:(NSDate *)date Value:(NSNumber *)value{
      date = [_translateFormat dateOnly:date];
      NSDictionary *dictionaly = [[NSDictionary alloc] initWithObjectsAndKeys:date, @"Date", value, @"Value",nil];
  
@@ -214,7 +214,7 @@
          [depositLog addObject:dictionaly]; // 新規追加する
          deposit = @([deposit intValue] + [value intValue]); // 貯金額を増やす
      }
- }
+}
  
 
 #pragma mark - 自動で処理する系
@@ -354,10 +354,6 @@
 }
 - (NSDate *)loadEnd{
     return [now objectForKey:@"End"];
-}
-//FIXME:メソッド名がかぶらないようにとりあえずした
-- (NSNumber *)loadDepositValue{
-    return [root objectForKey:@"Deposit"];
 }
 
 @end

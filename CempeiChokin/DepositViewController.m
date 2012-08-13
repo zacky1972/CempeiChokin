@@ -116,6 +116,7 @@
     DNSLog(@"完了きたで！");
     DNSLog(@"depositValue:%@",depositValue);
     [appDelegate.editData saveDepositDate:[appDelegate.editData loadEnd] Value:depositValue];
+    
     if ([appDelegate.editData searchFinish] == YES) {
         DNSLog(@"達成したよ");
     }
