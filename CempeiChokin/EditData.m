@@ -7,9 +7,11 @@
 //
 
 #import "EditData.h"
+#import "AppDelegate.h"
 #import "TranslateFormat.h"
 
 @implementation EditData{
+    AppDelegate *appDelegate;
     TranslateFormat *_translateFormat;
 
     NSString *path;
@@ -38,6 +40,7 @@
     }
     [self loadData];
 
+    appDelegate = APP_DELEGATE;
     _translateFormat = [TranslateFormat alloc];
 }
 // ファイルの削除
@@ -79,7 +82,7 @@
 }
 
 #pragma mark - 保存・読み込み系
-// Expense & Balance
+// Expense & Balance & Budget
 - (void)saveValue{
     [root setObject:expense forKey:@"Expense"];
     [root setObject:balance forKey:@"Balance"];
@@ -196,26 +199,37 @@
 #pragma mark - 自動で処理する系
 // 設定し終わったあとの処理 (ノルマを決める)
 - (void)calcForNextStage{
-    // 最終期限までの日数を計算
-    NSTimeInterval timeInterval = [[self loadGoalPeriod] timeIntervalSinceDate:[self loadStart]] + (60*60*24);
-    NSNumber *daysToPeriod = [NSNumber numberWithInt:(timeInterval / (60*60*24))];
-    // 今回の期限までの日数を計算
-    timeInterval = [[self loadEnd] timeIntervalSinceDate:[self loadStart]] + (60*60*24);
-    NSNumber *daysToEnd = [NSNumber numberWithInt:(timeInterval / (60*60*24))];
-    // 一日分のノルマの計算
-    NSNumber *normaOfOneDays = [NSNumber numberWithInt:(([[self loadGoalValue] intValue] - [self.deposit intValue]) / [daysToPeriod intValue])];
-    // ノルマの値を代入する
-    norma = @([normaOfOneDays intValue] * [daysToEnd intValue]);
+    // ノルマの計算
+    if([[self loadGoalPeriod] compare:[self loadEnd]] == NSOrderedSame){
+        // 最終期限と今回の期間が同じ場合
+        norma = @([[self loadGoalValue] intValue] - [self.deposit intValue] ); // ノルマは残りの額
+    }else{
+        // 最終期限と今回の期間が同じじゃない場合
+        
+        // 最終期限までの日数を計算
+        NSTimeInterval timeInterval = [[self loadGoalPeriod] timeIntervalSinceDate:[self loadStart]] + (60*60*24);
+        NSNumber *daysToPeriod = [NSNumber numberWithInt:(timeInterval / (60*60*24))];
+        // 今回の期限までの日数を計算
+        timeInterval = [[self loadEnd] timeIntervalSinceDate:[self loadStart]] + (60*60*24);
+        NSNumber *daysToEnd = [NSNumber numberWithInt:(timeInterval / (60*60*24))];
+        // 一日分のノルマの計算
+        NSNumber *normaOfOneDays = [NSNumber numberWithInt:(([[self loadGoalValue] intValue] - [self.deposit intValue]) / [daysToPeriod intValue])];
+        DNSLog(@"最終期限までの日数:%@",daysToPeriod);
+        DNSLog(@"今回期限までの日数:%@",daysToEnd);
+        DNSLog(@"一日のノルマ:%@",normaOfOneDays);
+
+        // ノルマの値を代入する
+        norma = @([normaOfOneDays intValue] * [daysToEnd intValue]);
+    }
+
     // 出費の値を入力
     if([expense isEqualToNumber:@-1] == YES){
         expense = @0;
     }
+    
     balance = @([budget intValue] - [expense intValue]);
     defaultSettings = YES;
 
-    DNSLog(@"最終期限までの日数:%@",daysToPeriod);
-    DNSLog(@"今回期限までの日数:%@",daysToEnd);
-    DNSLog(@"一日のノルマ:%@",normaOfOneDays);
     DNSLog(@"今回のノルマ:%@",norma);
 }
 // 出費・収入・残高調整
@@ -262,16 +276,46 @@
 }
 
 #pragma mark - とりあえずコピーしただけ系シリーズ
+// 期限が来たかどうかを返す
 - (BOOL)searchNext{
     NSDate *date = [_translateFormat dateOnly:[NSDate date]];
-    if ([date isEqualToDate:[self loadEnd]] == NO) { //今日が期限日じゃなくて
-        if([date earlierDate:[self loadEnd]] != date){ //期限日より後
+
+    if(nextAlert == YES)
+        // 既にアラート済みの場合
+        return NO;
+
+    if ([date isEqualToDate:[self loadEnd]] == NO) {
+        //今日が期限日じゃない場合
+        if([date earlierDate:[self loadEnd]] != date){
+            //期限日よりあとの場合
             nextAlert = YES;
             return YES;
         }
     }
     // 期限内
     return NO;
+}
+//貯金が溜まったかどうかを返す
+- (BOOL)searchFinish{
+    DNSLog(@"たまった？");
+    if ([[self loadGoalValue] compare:deposit] !=  NSOrderedDescending) {
+        DNSLog(@"たまった！");
+        return YES;
+    }else{
+        DNSLog(@"たまってない…");
+        return NO;
+    }
+}
+// 最後の期間かどうかを返す
+- (BOOL)searchLastNorma{
+    DNSLog(@"最後の期間？");
+    if ([[self loadEnd] isEqualToDate:[self loadGoalPeriod]] == YES) {
+        DNSLog(@"最後！");
+        return YES;
+    }else{
+        DNSLog(@"まだまだ！");
+        return NO;
+    }
 }
 
 //貯金が溜まったかどうか調べる

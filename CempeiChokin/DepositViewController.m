@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "DepositViewController.h"
+#import "AppDelegate.h"
 
 @interface DepositViewController (){
     AppDelegate *appDelegate;
@@ -28,10 +29,7 @@
     appDelegate = APP_DELEGATE;
     _method = [Methods alloc];
     _translateFormat = [TranslateFormat alloc];
-    
-    [_method makeDataPath];
-    [_method loadData];
-    
+        
     [self makeNumberPadToolbar:depositTextField Return:@"完了"
                           Done:@selector(doneDepositTextField)
                         Cancel:@selector(cancelDepostiTextField)];
@@ -63,8 +61,8 @@
 //タイトルを決定する
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     NSString *temp;
-    temp = [[_translateFormat formatterDate:[_method loadStart]] stringByAppendingString:@"~"];
-    temp = [temp stringByAppendingString:[_translateFormat formatterDate:[_method loadEnd]]];
+    temp = [[_translateFormat formatterDate:[appDelegate.editData loadStart]] stringByAppendingString:@"~"];
+    temp = [temp stringByAppendingString:[_translateFormat formatterDate:[appDelegate.editData loadEnd]]];
     return temp;
 }
 //フッターを決定する
@@ -124,8 +122,7 @@
     if([_method searchFinish] == YES){//終了！
         DNSLog(@"達成したよ");
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"FinishView_complete"] animated:YES];
-        
-    }else if ([_method searchLastNorma] == YES){
+    }else if ([appDelegate.editData searchLastNorma] == YES){
         DNSLog(@"期限きれんたんですけど");
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"FinishView_miss"] animated:YES];
     }else{
