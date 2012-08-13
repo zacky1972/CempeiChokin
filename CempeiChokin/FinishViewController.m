@@ -48,5 +48,6 @@
 }
 
 - (IBAction)extendButton_down:(id)sender {
+    DNSLog(@"あきらめません！");
 }
 @end

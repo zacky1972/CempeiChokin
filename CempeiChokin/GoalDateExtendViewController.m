@@ -7,121 +7,156 @@
 //
 
 #import "GoalDateExtendViewController.h"
+#import "AppDelegate.h"
 
-@interface GoalDateExtendViewController ()
+@interface GoalDateExtendViewController (){
+    AppDelegate *appDelegate;
+    TranslateFormat *_translateFormat;
+    
+    // 値を保存するための変数
+    NSString *name;
+    NSNumber *value;
+    NSDate   *period;
+    
+    // パーツたち
+    UIActionSheet *actionSheet;
+    UIDatePicker *datePicker;
+}
 
 @end
 
 @implementation GoalDateExtendViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    appDelegate = APP_DELEGATE;
+    
+    _translateFormat = [TranslateFormat alloc];
+    
+    [self dateInitialize];
+    [self dateCheck];
 }
 
-- (void)viewDidUnload
-{
+- (void)viewDidUnload{
+    PeriodTextField = nil;
+    DoneButton = nil;
+    DoneButton = nil;
+    NameLabel = nil;
+    ValueLabel = nil;
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-#pragma mark - Table view data source
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+#pragma mark - よく使う処理たち
+- (void)dateInitialize{
+    name = [appDelegate.editData loadGoalName];
+    NameLabel.text = name;
+    value = [appDelegate.editData loadGoalValue];
+    ValueLabel.text = [_translateFormat stringFromNumber:value addComma:YES addYen:YES];
+    /*ここは読み込まなくて委員じゃないか説
+    if([appDelegate.editData loadGoalPeriod] != nil){
+        period = [appDelegate.editData loadGoalPeriod];
+        PeriodTextField.text = [_translateFormat formatterDate:period];
+    }*/
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+- (BOOL)dateCheck{
+    if(period == NULL){
+        DoneButton.enabled = NO;
+        //[DoneButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        return NO;
+    }else{
+        DoneButton.enabled = YES;
+        return YES;
+    }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+#pragma mark - 期日の設定
+- (IBAction)PeriodTextField_down:(id)sender {
     
-    // Configure the cell...
+    [self makeActionSheetWithDataPicker:@"完了"
+                                   Done:@selector(doneWithDatePicker)
+                                 Cancel:@selector(cancelWithDatePicker)];
+    [actionSheet showInView: self.view];         // 画面上に表示させる
+    [actionSheet setBounds: CGRectMake(0, 0, 320, 500)]; // 場所とサイズ決める(x,y.width,height)
     
-    return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+// DatePickerが完了したときの
+-(void)doneWithDatePicker{
+    period = datePicker.date; // 保持しておく
+    PeriodTextField.text = [_translateFormat formatterDate:period]; // 文字入力する
+    [PeriodTextField resignFirstResponder]; // フォーカス外す
+    [actionSheet dismissWithClickedButtonIndex:0 animated:YES]; // ActionSheet消す
+    [self dateCheck];
 }
 
+// DatePickerがキャンセルした時の
+-(void)cancelWithDatePicker{
+    [PeriodTextField resignFirstResponder];
+    [actionSheet dismissWithClickedButtonIndex:0 animated:YES];
+}
+
+
+- (IBAction)DoneButton_down:(id)sender {
+     [appDelegate.editData saveName:name Value:value Period:period];
+     [appDelegate.editData calcForNextStage];
+}
+
+#pragma mark - その他
+- (UIToolbar *)makeNumberPadToolbar:(NSString *)string Done:(SEL)done Cancel:(SEL)cancel{
+    // Toolbarつくる
+    UIToolbar* numberToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 50)];
+    numberToolbar.barStyle = UIBarStyleBlackTranslucent;
+    
+    // Toolbarのボタンたち
+    UIBarButtonItem *doneButton =
+    [[UIBarButtonItem alloc] initWithTitle: string
+                                     style: UIBarButtonItemStyleDone
+                                    target: self
+                                    action: done];
+    UIBarButtonItem *cancelButton =
+    [[UIBarButtonItem alloc] initWithTitle: @"キャンセル"
+                                     style: UIBarButtonItemStyleBordered
+                                    target: self
+                                    action: cancel];
+    
+    UIBarButtonItem *frexibleSpace =
+    [[UIBarButtonItem alloc] initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace
+                                                  target: nil
+                                                  action: nil];
+    numberToolbar.items = @[cancelButton,frexibleSpace,doneButton];
+    [numberToolbar sizeToFit];
+    
+    return numberToolbar;
+}
+
+- (void)makeActionSheetWithDataPicker:(NSString *)string Done:(SEL)done Cancel:(SEL)cancel{
+    // 空のActionSheetをつくる
+    actionSheet =
+    [[UIActionSheet alloc] initWithTitle: nil
+                                delegate: nil
+                       cancelButtonTitle: nil
+                  destructiveButtonTitle: nil
+                       otherButtonTitles: nil];
+    actionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+    
+    // Toolbar作る
+    UIToolbar *datePickerToolbar = [self makeNumberPadToolbar:string Done:done Cancel:cancel];
+    
+    // DatePickerつくる
+    datePicker = [[UIDatePicker alloc] initWithFrame: CGRectMake(0, 44, 320, 216)];
+    datePicker.datePickerMode = UIDatePickerModeDate; // 年月日までモード
+    if(period)
+        datePicker.date = period; // 入力しなおした時の初期値は前に入れた奴にする
+    
+    datePicker.minimumDate = [NSDate dateWithTimeIntervalSinceNow:86400*7]; // 設定できる範囲は来週から
+    datePicker.maximumDate = [NSDate dateWithTimeIntervalSinceNow:86400*365*10]; // 10年後まで
+    
+    [actionSheet addSubview: datePickerToolbar]; // Toolbarのっける
+    [actionSheet addSubview: datePicker];        // DatePickerのっける
+}
 @end
