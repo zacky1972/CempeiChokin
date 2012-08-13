@@ -6,12 +6,8 @@
 //  Copyright (c) 2012年 CEMPEI. All rights reserved.
 //
 
-#import "DepositViewController.h"
 #import "AppDelegate.h"
-
-#define alertType_a 0
-#define alertType_b 1
-#define alertType_c 2
+#import "DepositViewController.h"
 
 @interface DepositViewController (){
     AppDelegate *appDelegate;
@@ -118,10 +114,13 @@
 #pragma mark - ボタンたち
 - (IBAction)DoneButton_down:(id)sender {
     DNSLog(@"完了きたで！");
+    DNSLog(@"depositValue:%@",depositValue);
     [appDelegate.editData saveDepositDate:[appDelegate.editData loadEnd] Value:depositValue];
-    
-    // FIXME: なんか落ちる
-    if([appDelegate.editData searchFinish] == YES){//終了！
+    if ([appDelegate.editData searchFinish] == YES) {
+        DNSLog(@"達成したよ");
+    }
+    /*
+    if([_method searchFinish] == YES){//終了！
         DNSLog(@"達成したよ");
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"FinishView_complete"] animated:YES];
     }else if ([appDelegate.editData searchLastNorma] == YES){
@@ -129,35 +128,13 @@
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"FinishView_miss"] animated:YES];
     }else{
         //まだ終わらないよ！
-    }
+    }*/
 }
 
 - (IBAction)laterButton_down:(id)sender {
     // ???: ここはどうすんの？
     
 }
-
-#pragma mark - アラート関係
-/*
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex;
-{
-	switch (alertType) {
-		case alertType_a:
-            //アラートAを表示した後の処理
-            
-			break;
-		case alertType_b:
-            //アラートBを表示した後の処理
-            
-			break;
-        case alertType_c:
-            
-            break;
-		default:
-			break;
-	}
-}
- */
 
 #pragma mark - その他
 - (void)makeNumberPadToolbar:(UITextField *)textField Return:(NSString *)string Done:(SEL)done Cancel:(SEL)cancel{

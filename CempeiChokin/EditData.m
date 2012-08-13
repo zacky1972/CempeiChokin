@@ -168,21 +168,55 @@
     [now setObject:[_translateFormat dateOnly:end] forKey:@"End"];
 }
 // Deposit,DepositLogに
+/*
 - (void)saveDepositDate:(NSDate *)date Value:(NSNumber *)value{
+    date = [_translateFormat dateOnly:date];
     NSDictionary *dictionaly = [[NSDictionary alloc] initWithObjectsAndKeys:date, @"Date", value, @"Value",nil];
-    
-    if (depositLog.count > 0) {
-        NSDate *recentDeposit = [[depositLog objectAtIndex:0] objectForKey:@"Date"];
-        if([date isEqualToDate:recentDeposit] == YES){
-            // 既に同じ期間の貯金がしてあった場合
-            deposit = @([deposit intValue] - [[[depositLog objectAtIndex:0] objectForKey:@"Value"] intValue] + [value intValue]); // 貯金額の計算
-            [depositLog replaceObjectAtIndex:0 withObject:dictionaly]; // 上書きする
-        }
-    }else{
+    if ([depositLog count] == 0){
+        DNSLog(@"貯金総額をリセット！");
+        deposit = @0;    //貯金総額の初期化
         [depositLog addObject:dictionaly]; // 新規追加する
-        deposit = @([deposit intValue] + [value intValue]); // 貯金額を増やす
+    }else{
+        DNSLog(@"貯金しますよ！:%@",value);
+        DNSLog(@"%@",[[depositLog objectAtIndex:0] objectForKey:@"Date"]);
+        DNSLog(@"%@",[[depositLog objectAtIndex:0] objectForKey:@"Value"]);
+        
+        if ([date isEqualToDate:[[depositLog objectAtIndex:0] objectForKey:@"Date"]] == YES) {// 既に同じ期間の貯金がしてあった場合
+            DNSLog(@"詐欺貯金よくない！");
+            [depositLog replaceObjectAtIndex:0 withObject:dictionaly]; // 上書きする
+            DNSLog(@"deposit_befo:%@",deposit);
+            deposit = @([deposit intValue] - [[[depositLog objectAtIndex:0] objectForKey:@"Value"] intValue] + [value intValue]); // 貯金額の計算
+            DNSLog(@"depositに入る値:%@",@([deposit intValue] - [[[depositLog objectAtIndex:0] objectForKey:@"Value"] intValue] + [value intValue]));
+            DNSLog(@"deposit_after:%@",deposit);
+        }else{ // 普通に貯金する場合
+            DNSLog(@"普通に貯金,%@",@([deposit intValue] + [value intValue]));
+            [depositLog addObject:dictionaly]; // 新規追加する
+            deposit = @([deposit intValue] + [value intValue]); // 貯金額を増やす
+        }
     }
+    DNSLog(@"deposit:%@",deposit);
+    DNSLog(@"depositLog:%@",depositLog);
 }
+*/
+
+ - (void)saveDepositDate:(NSDate *)date Value:(NSNumber *)value{
+     date = [_translateFormat dateOnly:date];
+     NSDictionary *dictionaly = [[NSDictionary alloc] initWithObjectsAndKeys:date, @"Date", value, @"Value",nil];
+ 
+     if (depositLog.count > 0) {
+         NSDate *recentDeposit = [[depositLog objectAtIndex:0] objectForKey:@"Date"];
+         if([date isEqualToDate:recentDeposit] == YES){
+             // 既に同じ期間の貯金がしてあった場合
+             deposit = @([deposit intValue] - [[[depositLog objectAtIndex:0] objectForKey:@"Value"] intValue] + [value intValue]); // 貯金額の計算
+             [depositLog replaceObjectAtIndex:0 withObject:dictionaly]; // 上書きする
+         }
+     }else{
+         [depositLog addObject:dictionaly]; // 新規追加する
+         deposit = @([deposit intValue] + [value intValue]); // 貯金額を増やす
+     }
+ }
+ 
+
 #pragma mark - 自動で処理する系
 // 設定し終わったあとの処理 (ノルマを決める)
 - (void)calcForNextStage{
@@ -320,6 +354,10 @@
 }
 - (NSDate *)loadEnd{
     return [now objectForKey:@"End"];
+}
+//FIXME:メソッド名がかぶらないようにとりあえずした
+- (NSNumber *)loadDepositValue{
+    return [root objectForKey:@"Deposit"];
 }
 
 @end
