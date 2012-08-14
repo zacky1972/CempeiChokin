@@ -171,24 +171,68 @@
 
 // Deposit,DepositLogに
 - (void)saveDepositDate:(NSDate *)date Value:(NSNumber *)value{
-     date = [_translateFormat dateOnly:date];
-     NSDictionary *dictionaly = [[NSDictionary alloc] initWithObjectsAndKeys:date, @"Date", value, @"Value",nil];
- 
-     if (depositLog.count > 0) {
-         NSDate *recentDeposit = [[depositLog objectAtIndex:0] objectForKey:@"Date"];
-         if([date isEqualToDate:recentDeposit] == YES){
-             // 既に同じ期間の貯金がしてあった場合
-             DNSLog(@"詐欺貯金駄目ゼッタイ");
-             deposit = @([deposit intValue] - [[[depositLog objectAtIndex:0] objectForKey:@"Value"] intValue] + [value intValue]); // 貯金額の計算
-             [depositLog replaceObjectAtIndex:0 withObject:dictionaly]; // 上書きする
-         }else{
-             [depositLog addObject:dictionaly]; // 新規追加する
-             deposit = @([deposit intValue] + [value intValue]); // 貯金額を増やす
-         }
-     }else{
-         [depositLog addObject:dictionaly]; // 新規追加する
-         deposit = @([deposit intValue] + [value intValue]); // 貯金額を増やす
-     }
+    // TODO: 分岐の仕方が酷いからそのうち治す
+    date = [_translateFormat dateOnly:date];
+    // 新規の貯金か遅れて貯金かの判定
+    NSMutableDictionary *dictionary = [NSMutableDictionary alloc];
+
+    // 貯金するタイミングの判断
+    if([date isEqualToDate:[self loadEnd]] == YES){
+        // 新規の貯金の場合
+        dictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[self loadStart],@"Start",date,@"End",budget,@"Budget",expense,@"Expense",balance,@"Balance",norma,@"Norma",value,@"Deposit",nil];
+    }else{
+        // 後での貯金の場合
+        dictionary = [[NSMutableDictionary alloc] initWithDictionary:[depositLog objectAtIndex:0]];
+        [dictionary setObject:value forKey:@"Deposit"];
+    }
+
+    // 追加か上書きかの判断
+    if (depositLog.count > 0) {
+        // ログに中身が合った場合
+        NSDate *recentDeposit = [[depositLog objectAtIndex:0] objectForKey:@"End"];
+
+        if([[self loadEnd] isEqualToDate:recentDeposit] == YES){
+            // 既に同じ期間の貯金がしてあった場合
+            DNSLog(@"詐欺貯金駄目ゼッタイ");
+            deposit = @([deposit intValue] - [[[depositLog objectAtIndex:0] objectForKey:@"Deposit"] intValue] + [value intValue]); // 貯金額の計算
+            [depositLog replaceObjectAtIndex:0 withObject:dictionary]; // 上書きする
+        }else{
+            // 新たな貯金の場合
+            [depositLog addObject:dictionary]; // 新規追加する
+            deposit = @([deposit intValue] + [value intValue]); // 貯金額を増やす
+        }
+    }else{
+        // ログに中身が無かった場合
+        [depositLog addObject:dictionary]; // 新規追加する
+        deposit = value;                   // 貯金額を入れる
+    }
+}
+// 後でを押した時の動作
+- (void)skipDepositDate:(NSDate *)date{
+    NSNumber *depositValue = @0;
+    NSDictionary *dictionary =
+    [[NSDictionary alloc] initWithObjectsAndKeys:[self loadStart],@"Start",
+                                                 date   ,@"End",
+                                                 budget ,@"Budget",
+                                                 expense,@"Expense",
+                                                 balance,@"Balance",
+                                                 norma  ,@"Norma",
+                                                 depositValue,@"Deposit",nil];
+    if (depositLog.count > 0) {
+        // ログに中身が合った場合
+        NSDate *recentDeposit = [[depositLog objectAtIndex:0] objectForKey:@"Date"];
+
+        if([date isEqualToDate:recentDeposit] == YES){
+            // 既に同じ期間の貯金がしてあった場合
+            [depositLog replaceObjectAtIndex:0 withObject:dictionary]; // 上書きする
+        }else{
+            // 新たな貯金の場合
+            [depositLog addObject:dictionary]; // 新規追加する
+        }
+    }else{
+        // ログに中身が無かった場合
+        [depositLog addObject:dictionary]; // 新規追加する
+    }
 }
 
 #pragma mark - 自動で処理する系

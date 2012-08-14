@@ -14,14 +14,38 @@
     EditData *_editData;
 
     NSDateFormatter *formatter;
+
+    NSString *NAME;
+    NSNumber *VALUE;
+    NSDate   *PERIOD;
+
+    NSDate *START;
+    NSDate *END;
+
+    NSNumber *BUDGET;
+    NSNumber *EXPENSE;
 }
 
 - (void)setUp{
     [super setUp];
     _editData = [[EditData alloc] init];
+    [_editData deleteData];
     
     formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss ZZZ";
+
+    // 初期設定
+    NAME = @"Test";
+    VALUE = @10000;
+    PERIOD = [formatter dateFromString:@"2000-01-10 00:00:00 +0000"];
+    
+    START = [formatter dateFromString:@"2000-01-01 00:00:00 +0000"];
+    END =   [formatter dateFromString:@"2000-01-05 00:00:00 +0000"];
+    BUDGET = @50000;
+    [_editData saveName:NAME Value:VALUE Period:PERIOD];
+    [_editData saveStart:START End:END];
+
+    [_editData calcForNextStage];
 }
 
 - (void)tearDown{
@@ -30,57 +54,17 @@
 
 // - (void)saveName:(NSString *)name Value:(NSNumber *)value Period:(NSDate *)period;
 - (void)testSaveGoal{
-    NSString *NAME = @"Test";
-    NSNumber *VALUE = @10000;
-    NSDate *DATE = [formatter dateFromString:@"2000-01-01 00:00:00 +0000"];
-    NSDate *inputDate = [NSDate alloc];
-    for(int i = 0; i<24; i++){
-        if(i == 0)
-            inputDate = [formatter dateFromString:@"2000-01-01 00:00:00 +0900"];
-        else
-            inputDate = [inputDate dateByAddingTimeInterval:60*60*1];
-        DNSLog(@"\n【Input】\ninputDate:%@",inputDate);
-        [_editData saveName:NAME Value:VALUE Period:inputDate];
-        STAssertEqualObjects(NAME, [_editData loadGoalName], @"名前あってねーよ");
-        STAssertEqualObjects(VALUE,[_editData loadGoalValue], @"値段あってねーよ");
-        STAssertEqualObjects(DATE, [_editData loadGoalPeriod], @"日付あってねーよ");
-    }
+    STAssertEqualObjects(NAME, [_editData loadGoalName], @"名前あってねーよ");
+    STAssertEqualObjects(VALUE,[_editData loadGoalValue], @"値段あってねーよ");
+    STAssertEqualObjects(PERIOD, [_editData loadGoalPeriod], @"日付あってねーよ");
 }
 // - (void)saveStart:(NSDate *)start End:(NSDate *)end;
 - (void)testSaveNow{
-    NSDate *DATE = [formatter dateFromString:@"2000-01-01 00:00:00 +0000"];
-    NSDate *DATE_2 = [NSDate dateWithTimeInterval:60*60*24*7 sinceDate:DATE];
-    NSDate *inputDate1 = [NSDate alloc];
-    NSDate *inputDate2 = [NSDate alloc];
-    for(int i = 0; i<24; i++){
-        if(i == 0){
-            inputDate1 = [formatter dateFromString:@"2000-01-01 00:00:00 +0900"];
-            inputDate2 = [NSDate dateWithTimeInterval:60*60*24*7 sinceDate:inputDate1];
-        }else{
-            inputDate1 = [inputDate1 dateByAddingTimeInterval:60*60*1];
-            inputDate2 = [NSDate dateWithTimeInterval:60*60*24*7 sinceDate:inputDate1];
-        }
-        DNSLog(@"\n【Input】\nStart:%@ \nEnd  :%@",inputDate1,inputDate2);
-        [_editData saveStart:inputDate1 End:inputDate2];
-        DNSLog(@"\n【Saved】\nStart:%@ \nEnd  :%@",[_editData loadStart],[_editData loadEnd]);
-        STAssertEqualObjects(DATE, [_editData loadStart], @"始まりあってねーよ");
-        STAssertEqualObjects(DATE_2, [_editData loadEnd], @"終わりあってねーよ");
-    }
+    STAssertEqualObjects(START, [_editData loadStart], @"始まりあってねーよ");
+    STAssertEqualObjects(END, [_editData loadEnd], @"終わりあってねーよ");
 }
 // - (void)calcForNextStage;
 -(void) testCalcForNextStage{
-    // 値段
-    NSNumber *VALUE = @10000;
-    // 期限
-    NSDate *DATE = [formatter dateFromString:@"2000-01-20 00:00:00 +0900"];
-    // 期間
-    NSDate *START = [formatter dateFromString:@"2000-01-01 00:00:00 +0900"];
-    NSDate *END = [formatter dateFromString:@"2000-01-10 00:00:00 +0900"];
-    
-    [_editData saveName:@"Test" Value:VALUE Period:DATE];
-    [_editData saveStart:START End:END];
-
-    [_editData calcForNextStage];
     STAssertEqualObjects(_editData.norma,@5000, @"ノルマ計算ミスってるで");
 }
 // - (void)calcValue:(NSNumber *)value Kind:(NSInteger)kind;
@@ -137,6 +121,34 @@
     [_editData calcDeleteValue:@10000 Kind:@"残高調整"];
     STAssertEqualObjects(_editData.expense, @40000, @"出費が");
     STAssertEqualObjects(_editData.balance, @60000, @"残高が");
+}
+// - (void)saveDepositDate:(NSDate *)date Value:(NSNumber *)value;
+- (void)testSaveDeposit{
+    [_editData saveDepositDate:END Value:@1000];
+    STAssertEqualObjects(_editData.deposit, @1000, @"貯金額おかしいで");
+
+    [_editData saveDepositDate:END Value:@1500];
+    STAssertEqualObjects(_editData.deposit, @1500, @"貯金額おかしいで");
+
+    NSDate *END_2 = [NSDate dateWithTimeInterval:60*60*24 sinceDate:END];
+    [_editData saveStart:END End:END_2];
+
+    [_editData saveDepositDate:END_2 Value:@1000];
+    STAssertEqualObjects(_editData.deposit, @2500, @"貯金額おかしいで");
+}
+// - (void)skipDepositDate:(NSDate *)date;
+- (void)testSkipDeposit{
+    [_editData skipDepositDate:END];
+    STAssertEqualObjects(_editData.deposit, @0, @"貯金額おかしいで");
+
+    NSDate *END_2 = [NSDate dateWithTimeInterval:60*60*24 sinceDate:END];
+    [_editData saveStart:END End:END_2];
+
+    [_editData saveDepositDate:END Value:@1000];
+    STAssertEqualObjects(_editData.deposit, @1000, @"貯金額おかしいで");
+
+    [_editData saveDepositDate:END_2 Value:@1500];
+    STAssertEqualObjects(_editData.deposit, @2500, @"貯金額おかしいで");
 }
 
 @end
