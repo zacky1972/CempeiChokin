@@ -32,9 +32,7 @@
                           Done:@selector(doneDepositTextField)
                         Cancel:@selector(cancelDepositTextField)];
     
-    if(depositValue == NULL){
-        DoneButton.enabled = NO;
-    }
+    [self dataCheck];
 
     // TODO: 棒グラフの生成
     
@@ -48,6 +46,19 @@
     barGraphView = nil;
     [super viewDidUnload];
 
+}
+
+#pragma mark - よく使う処理たち
+- (BOOL)dataCheck{
+    if(depositValue == nil){
+        DoneButton.enabled = NO;
+        DoneButton.alpha = 0.3;
+        return NO;
+    }else{
+        DoneButton.enabled = YES;
+        DoneButton.alpha = 1;
+        return YES;
+    }
 }
 
 #pragma mark - Storyboardで画面遷移する前に呼ばれるあれ
@@ -86,9 +97,7 @@
 }
 
 - (IBAction)depositTextField_end:(id)sender {
-    if(depositValue != NULL){
-        DoneButton.enabled = YES;
-    }
+    [self dataCheck];
 }
 
 -(void)doneDepositTextField{
