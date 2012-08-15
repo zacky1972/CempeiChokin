@@ -235,6 +235,32 @@
     }
 }
 
+- (NSDictionary *)loadRecentDepositData{
+    NSDictionary *dictionary = [depositLog objectAtIndex:0];
+    return dictionary;
+}
+- (NSDate *)loadStartFromRecentDepositData{
+    return [[self loadRecentDepositData] objectForKey:@"Start"];
+}
+- (NSDate *)loadEndFromRecentDepositData{
+    return [[self loadRecentDepositData] objectForKey:@"End"];
+}
+- (NSNumber *)loadBudgetFromRecentDepositData{
+    return [[self loadRecentDepositData] objectForKey:@"Budget"];
+}
+- (NSNumber *)loadExpenseFromRecentDepositData{
+    return [[self loadRecentDepositData] objectForKey:@"Expense"];
+}
+- (NSNumber *)loadBalanceFromRecentDepositData{
+    return [[self loadRecentDepositData] objectForKey:@"Balance"];
+}
+- (NSNumber *)loadNormaFromRecentDepositData{
+    return [[self loadRecentDepositData] objectForKey:@"Norma"];
+}
+- (NSNumber *)loadDepositFromRecentDepositData{
+    return [[self loadRecentDepositData] objectForKey:@"Deposit"];
+}
+
 #pragma mark - 自動で処理する系
 // 設定し終わったあとの処理 (ノルマを決める)
 - (void)calcForNextStage{

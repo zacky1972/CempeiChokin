@@ -30,7 +30,7 @@
         
     [self makeNumberPadToolbar:depositTextField Return:@"完了"
                           Done:@selector(doneDepositTextField)
-                        Cancel:@selector(cancelDepostiTextField)];
+                        Cancel:@selector(cancelDepositTextField)];
     
     if(depositValue == NULL){
         DoneButton.enabled = NO;
@@ -102,12 +102,13 @@
 }
 
 -(void)cancelDepositTextField{
-    // 既に値が入っていた場合
-    if(depositValue != NULL)
+    if(depositValue != NULL){
+        // 既に値が入っていた場合
         depositTextField.text = [_translateFormat stringFromNumber:depositValue addComma:YES addYen:YES]; // 元に戻す
-    // そうでもなかった場合
-    else
+    }else{
+        // そうでもなかった場合
         depositTextField.text = @"";         // 値を消す
+    }
     [depositTextField resignFirstResponder]; // NumberPad消す(=テキストフィールドを選択していない状態にする)
 }
 

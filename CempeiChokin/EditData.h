@@ -76,6 +76,14 @@
 // 貯金したときの
 - (void)saveDepositDate:(NSDate *)date Value:(NSNumber *)value;
 - (void)skipDepositDate:(NSDate *)date;
+- (NSDate *)loadStartFromRecentDepositData;
+- (NSDate *)loadEndFromRecentDepositData;
+- (NSNumber *)loadBudgetFromRecentDepositData;
+- (NSNumber *)loadExpenseFromRecentDepositData;
+- (NSNumber *)loadBalanceFromRecentDepositData;
+- (NSNumber *)loadNormaFromRecentDepositData;
+- (NSNumber *)loadDepositFromRecentDepositData;
+
 #pragma mark - 計算系
 // ノルマとかの計算・再計算
 - (void)calcForNextStage;
