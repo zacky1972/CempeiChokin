@@ -26,6 +26,9 @@
 		E95EEDA715C270B700F2A89E /* DepositViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EEDA615C270B700F2A89E /* DepositViewController.m */; };
 		E95EEDAA15C273B200F2A89E /* Methods.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EEDA915C273B200F2A89E /* Methods.m */; };
 		E97FA89815DB894500B58032 /* question.png in Resources */ = {isa = PBXBuildFile; fileRef = E97FA89715DB894500B58032 /* question.png */; };
+		E97FA89C15DB93C500B58032 /* doneblue.png in Resources */ = {isa = PBXBuildFile; fileRef = E97FA89B15DB93C500B58032 /* doneblue.png */; };
+		E97FA89F15DB969100B58032 /* pdeposit.png in Resources */ = {isa = PBXBuildFile; fileRef = E97FA89D15DB969100B58032 /* pdeposit.png */; };
+		E97FA8A015DB969100B58032 /* pnext.png in Resources */ = {isa = PBXBuildFile; fileRef = E97FA89E15DB969100B58032 /* pnext.png */; };
 		E98EA59415BFB8A10019AED5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98EA59315BFB8A10019AED5 /* UIKit.framework */; };
 		E98EA59615BFB8A10019AED5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98EA59515BFB8A10019AED5 /* Foundation.framework */; };
 		E98EA59815BFB8A10019AED5 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E98EA59715BFB8A10019AED5 /* CoreGraphics.framework */; };
@@ -172,6 +175,9 @@
 		E95EEDA815C273B200F2A89E /* Methods.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Methods.h; sourceTree = "<group>"; };
 		E95EEDA915C273B200F2A89E /* Methods.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Methods.m; sourceTree = "<group>"; };
 		E97FA89715DB894500B58032 /* question.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = question.png; sourceTree = "<group>"; };
+		E97FA89B15DB93C500B58032 /* doneblue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = doneblue.png; sourceTree = "<group>"; };
+		E97FA89D15DB969100B58032 /* pdeposit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pdeposit.png; sourceTree = "<group>"; };
+		E97FA89E15DB969100B58032 /* pnext.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pnext.png; sourceTree = "<group>"; };
 		E98EA58F15BFB8A10019AED5 /* CempeiChokin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CempeiChokin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E98EA59315BFB8A10019AED5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E98EA59515BFB8A10019AED5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -446,6 +452,9 @@
 		E98EA5CA15BFC9BE0019AED5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				E97FA89D15DB969100B58032 /* pdeposit.png */,
+				E97FA89E15DB969100B58032 /* pnext.png */,
+				E97FA89B15DB93C500B58032 /* doneblue.png */,
 				E97FA89715DB894500B58032 /* question.png */,
 				E9AFEDEB15C9151C0021815A /* help.jpg */,
 			);
@@ -570,6 +579,9 @@
 				2ACB176D15CA932D00DDA60E /* License.txt in Resources */,
 				E9AA9B1915D245BA00D5ADD5 /* Default.png in Resources */,
 				E97FA89815DB894500B58032 /* question.png in Resources */,
+				E97FA89C15DB93C500B58032 /* doneblue.png in Resources */,
+				E97FA89F15DB969100B58032 /* pdeposit.png in Resources */,
+				E97FA8A015DB969100B58032 /* pnext.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
