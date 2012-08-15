@@ -78,10 +78,12 @@
     if(startDate == NULL || endDate == NULL || [appDelegate.editData.budget isEqualToNumber:@-1] == YES){
         // データが揃っていないとき
         DoneButton.enabled = NO;
+        DoneButton.alpha = 0.3;
         return NO;
     }else{
         // データが揃っているとき
         DoneButton.enabled = YES;
+        DoneButton.alpha = 1;
         return YES;
     }
 }

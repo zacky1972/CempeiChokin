@@ -66,10 +66,11 @@
 - (BOOL)dateCheck{
     if(period == NULL){
         DoneButton.enabled = NO;
-        //[DoneButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        DoneButton.alpha = 0.3;
         return NO;
     }else{
         DoneButton.enabled = YES;
+        DoneButton.alpha = 1;
         return YES;
     }
 }

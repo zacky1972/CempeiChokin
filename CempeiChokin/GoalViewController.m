@@ -64,10 +64,11 @@
 - (BOOL)dateCheck{
     if(name.length == 0 || value == NULL || period == NULL){
         DoneButton.enabled = NO;
-        //[DoneButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        DoneButton.alpha = 0.3;        
         return NO;
     }else{
         DoneButton.enabled = YES;
+        DoneButton.alpha = 1;
         return YES;
     }
 }
@@ -236,6 +237,12 @@
     
     [actionSheet addSubview: datePickerToolbar]; // Toolbarのっける
     [actionSheet addSubview: datePicker];        // DatePickerのっける
+}
+
+//ボタンを青く，文字を白くするよ
+- (void)changeButtonColor{
+    DNSLog(@"ボタン色かえ！");
+    
 }
 
 @end
