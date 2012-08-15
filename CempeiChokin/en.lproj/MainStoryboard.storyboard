@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2549" systemVersion="11E53" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="raj-cK-qeg">
     <dependencies>
+        <deployment defaultVersion="1296" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1498"/>
     </dependencies>
     <scenes>
@@ -1120,7 +1121,7 @@
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
                                                         <action selector="depositTextField_begin:" destination="ppr-eV-5bM" eventType="editingDidBegin" id="VJs-Sg-h0a"/>
-                                                        <action selector="depositTextField_end:" destination="ppr-eV-5bM" eventType="editingDidEnd" id="7Mm-rN-RtX"/>
+                                                        <action selector="depositTextField_end:" destination="ppr-eV-5bM" eventType="editingDidEnd" id="jHS-xs-1qe"/>
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="入金" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="ek8-bC-g4X">
@@ -1804,8 +1805,11 @@
                 <relationship kind="action" name="DoneButton_down:"/>
                 <relationship kind="action" name="DoneButton_down_2:"/>
                 <relationship kind="action" name="NameTextField_end:"/>
+                <relationship kind="action" name="NameTextField_next:"/>
                 <relationship kind="action" name="PeriodTextField_begin:"/>
+                <relationship kind="action" name="PeriodTextField_end:"/>
                 <relationship kind="action" name="ValueTextField_begin:"/>
+                <relationship kind="action" name="ValueTextField_end:"/>
                 <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="NameTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="PeriodTextField" candidateClass="UITextField"/>
