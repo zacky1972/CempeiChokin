@@ -25,8 +25,8 @@
 //          │
 //          ├ defaultSettings (初期設定したかどうか) @property済み
 //          ├ nextAlert (アラートを表示したかどうか) @property済み
-//          ├ pleaseDeposit (アラート表示後，貯金を入力したかどうか) @property済み
-//          └ pleaseNext (アラート表示後，次の期間と予算を入力したかどうか) @property済み
+//          ├ didDeposit (アラート表示後，貯金を入力したかどうか) @property済み
+//          └ didSetPeriod (アラート表示後，次の期間と予算を入力したかどうか) @property済み
 //
 ////////////////////////////////////////////////////////////
 
@@ -46,10 +46,13 @@
     NSNumber *deposit;          // 総貯金額
     NSMutableArray *depositLog; // 貯金履歴
 
-    BOOL defaultSettings;
-    BOOL nextAlert;
-    BOOL pleaseDeposit;
-    BOOL pleaseNext;
+    // フラグ
+    BOOL defaultSettings; // 初期設定をしたかどうか
+
+    BOOL didDeposit;  // 前回の貯金をしたかどうか
+    BOOL didSetPeriod; // 前回の期間の設定をしたかどうか
+
+    BOOL nextAlert;       // 期限日のアラートを表示したかどうか
 }
 
 @property (nonatomic,retain)NSNumber *expense;
@@ -63,8 +66,6 @@
 @property (nonatomic,assign)BOOL didDeposit;
 @property (nonatomic,assign)BOOL didSetPeriod;
 @property (nonatomic,assign)BOOL nextAlert;
-@property (nonatomic,assign)BOOL pleaseDeposit;
-@property (nonatomic,assign)BOOL pleaseNext;
 
 #pragma mark - ファイルの操作
 // データの保存
@@ -103,8 +104,8 @@
 
 #pragma mark - その他
 - (BOOL)searchNext;         //期間が過ぎたかどうか調べる
-- (BOOL)searchPleaseDeposit;//前回の貯金をしたか調べる
-- (BOOL)searchPleaseNext;   //次の期間の設定をしたか調べる
+- (BOOL)searchDidDeposit;//前回の貯金をしたか調べる
+- (BOOL)searchDidSetPeriod;   //次の期間の設定をしたか調べる
 - (BOOL)searchFinish;       //貯金が溜まったかどうか調べる
 - (BOOL)searchLastNorma;    //最後の期間かどうか調べる
 

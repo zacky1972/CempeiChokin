@@ -19,7 +19,7 @@
 }
 
 @synthesize expense,balance,norma,budget,deposit;
-@synthesize defaultSettings,nextAlert,pleaseDeposit,pleaseNext;
+@synthesize defaultSettings,nextAlert,didDeposit,didSetPeriod;
 
 // 初期化
 -(id)init{
@@ -404,12 +404,12 @@
 
 //TODO:コーディング
 //前回の貯金をしたか調べる
-- (BOOL)searchPleaseDeposit{
+- (BOOL)searchDidDeposit{
     
     return YES;
 }
 //次の期間の設定をしたか調べる
-- (BOOL)searchPleaseNext{
+- (BOOL)searchDidSetPeriod{
     
     return YES;
 }
