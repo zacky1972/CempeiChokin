@@ -299,8 +299,8 @@
     }
     
     balance = @([budget intValue] - [expense intValue]);
-    defaultSettings = YES;
-
+    
+    [self flagManagement];
     DNSLog(@"今回のノルマ:%@",norma);
 }
 
@@ -344,6 +344,12 @@
             expense = @([expense intValue] - [value intValue]);
             balance = @([budget intValue] - [expense intValue]);
             break;
+    }
+}
+// フラグ管理
+- (void)flagManagement{
+    if(defaultSettings == NO && goal.count == 3 && now.count == 2){
+        defaultSettings = YES;
     }
 }
 

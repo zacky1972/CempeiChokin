@@ -101,7 +101,6 @@
 - (void)calcValue:(NSNumber *)value Kind:(NSInteger)kind;
 // 出費・収入・残高調整の削除
 - (void)calcDeleteValue:(NSNumber *)value Kind:(NSString *)tempKind;
-
 #pragma mark - その他
 - (BOOL)searchNext;         //期間が過ぎたかどうか調べる
 - (BOOL)searchFinish;       //貯金が溜まったかどうか調べる
