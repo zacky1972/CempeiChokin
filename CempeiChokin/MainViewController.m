@@ -50,6 +50,7 @@
     //初期設定から戻ってきた時用
     [self timeLimitChecker];
     [self labelReflesh];
+    [self depositAndNextChecker];
     NSString *temp = [NSString stringWithFormat:@"%@~%@",
                       [_translateFormat formatterDateUltimate:[appDelegate.editData loadStart]
                                                       addYear:NO addMonth:YES addDay:YES
@@ -73,6 +74,8 @@
     KindSegment = nil;
     MainNavigationBar = nil;
     DepositLabel = nil;
+    pleaseDepositButton = nil;
+    pleaseNextButton = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -105,6 +108,7 @@
     [self cancelExpenseTextField]; // キャンセルボタンと同じ動作
      */
 }
+
 // Numberpadに追加したボタンの動作
 -(void)doneExpenseTextField{
     // 数値の処理
@@ -167,6 +171,27 @@
 // アラートビューのボタンの動作
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Deposit"] animated:NO]; // 貯金画面へ移動する
+}
+
+#pragma mark - 催促ボタン関係
+
+- (void)depositAndNextChecker{
+    //一度催促後，貯金をしたかどうか，と次の期間の設定をしたかどうかをチェックして，まだなら催促ボタンを表示する
+    if ([appDelegate.editData searchPleaseDeposit] == YES) pleaseDepositButton.hidden = NO;//表示
+    else pleaseDepositButton.hidden = YES;                                                 //非表示
+    
+    if ([appDelegate.editData searchPleaseNext] == YES) pleaseNextButton.hidden = NO;//表示
+    else pleaseNextButton.hidden = YES;                                              //非表示
+    
+}
+
+- (IBAction)pleaseDepositButton_down:(id)sender {
+    [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Deposit"] animated:NO]; // 貯金画面へ移動する
+}
+
+- (IBAction)pleaseNextBtton_down:(id)sender {
+    [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"NextBudgetView"] animated:NO]; // 貯金画面へ移動する
+    //次の期間の設定へ
 }
 
 #pragma mark - よく使う処理

@@ -24,7 +24,9 @@
 //          │            └ Date   (貯金したときのStartあたり)
 //          │
 //          ├ defaultSettings (初期設定したかどうか) @property済み
-//          └ nextAlert (アラートを表示したかどうか) @property済み
+//          ├ nextAlert (アラートを表示したかどうか) @property済み
+//          ├ didDeposit (アラート表示後，貯金を入力したかどうか) @property済み
+//          └ didSetPeriod (アラート表示後，次の期間と予算を入力したかどうか) @property済み
 //
 ////////////////////////////////////////////////////////////
 
@@ -103,7 +105,9 @@
 - (void)calcDeleteValue:(NSNumber *)value Kind:(NSString *)tempKind;
 
 #pragma mark - その他
-- (BOOL)searchNext;
+- (BOOL)searchNext;         //期間が過ぎたかどうか調べる
+- (BOOL)searchDidDeposit;//前回の貯金をしたか調べる
+- (BOOL)searchDidSetPeriod;   //次の期間の設定をしたか調べる
 - (BOOL)searchFinish;       //貯金が溜まったかどうか調べる
 - (BOOL)searchLastNorma;    //最後の期間かどうか調べる
 
