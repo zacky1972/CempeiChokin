@@ -182,7 +182,7 @@
 
     NSMutableDictionary *dictionary = [NSMutableDictionary alloc];
 
-    // 貯金するタイミングの判断
+    // 新規の貯金か後回しにした貯金かの判断
     if([date isEqualToDate:[self loadEnd]] == YES){
         // 新規の貯金の場合
         dictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[self loadStart],@"Start",date,@"End",budget,@"Budget",expense,@"Expense",balance,@"Balance",norma,@"Norma",value,@"Deposit",nil];
