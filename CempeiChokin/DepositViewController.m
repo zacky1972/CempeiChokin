@@ -136,14 +136,12 @@
     }else{
         DNSLog(@"そして貯金へ……");
     }
-    appDelegate.editData.didDeposit = YES;   //次の期間と予算の設定しました
+    appDelegate.editData.didDeposit = YES;   //貯金の設定しました
     //FIXME:メソッド化してしまったがよいかな
-    if (appDelegate.editData.didSetPeriod = NO) {
-        [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"NextBudgetView"] animated:YES]; // 貯金画面へ移動する
-        //次の期間の設定へ
+    if (appDelegate.editData.didSetPeriod == NO) {
+        [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"NextBudgetView"] animated:YES];//次の期間の設定へ
     }else{//後で民
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"MainView"] animated:YES]; // メイン画面へ移動する
-        //次の期間の設定へ
     }
 }
 // 後で貯金入力するときの動作 // TODO: あとでやります・・・
@@ -169,12 +167,10 @@
     appDelegate.editData.didDeposit = NO;   //次の期間と予算の設定してない
     
     //FIXME:メソッド化してしまったがよいかな
-    if (appDelegate.editData.didSetPeriod = NO) {
-        [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"NextBudgetView"] animated:YES]; // 貯金画面へ移動する
-        //次の期間の設定へ
+    if (appDelegate.editData.didSetPeriod == NO) {
+        [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"NextBudgetView"] animated:YES];//次の期間の設定へ
     }else{//後で民
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"MainView"] animated:YES]; // メイン画面へ移動する
-        //次の期間の設定へ
     }
 }
 

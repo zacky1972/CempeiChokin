@@ -76,6 +76,8 @@
     DepositLabel = nil;
     pleaseDepositButton = nil;
     pleaseNextButton = nil;
+    Labels = nil;
+    Labels2 = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
