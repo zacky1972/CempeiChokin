@@ -46,6 +46,7 @@
 // ファイルの削除
 - (void)deleteData{
     [[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+    [root removeAllObjects];
     [self initData];
 }
 // ファイル名を返す
@@ -148,22 +149,23 @@
     [self forSaveFlagName:@"pastDue" Flag:pastDue];
 }
 - (void)loadFlags{
-    [self forLoadFlagName:@"defaultSettings" Flag:defaultSettings];
-    [self forLoadFlagName:@"didDeposit" Flag:didDeposit];
-    [self forLoadFlagName:@"didSetPeriod" Flag:didSetPeriod];
-    [self forLoadFlagName:@"nextAlert" Flag:nextAlert];
-    [self forLoadFlagName:@"pastDue" Flag:pastDue];
+    defaultSettings = [self forLoadFlagName:@"defaultSettings" Flag:defaultSettings Default:NO];
+    didDeposit = [self forLoadFlagName:@"didDeposit" Flag:didDeposit Default:YES];
+    didSetPeriod = [self forLoadFlagName:@"didSetPeriod" Flag:didSetPeriod Default:YES];
+    nextAlert = [self forLoadFlagName:@"nextAlert" Flag:nextAlert Default:NO];
+    pastDue = [self forLoadFlagName:@"pastDue" Flag:pastDue Default:NO];
 }
 - (void)forSaveFlagName:(NSString *)name Flag:(BOOL)flag{
     NSNumber *tempNumber = [NSNumber numberWithBool:flag]; // NSNumber型に変換
     [root setObject:tempNumber forKey:name];               // 変換したものを保存
 }
-- (void)forLoadFlagName:(NSString *)name Flag:(BOOL)flag{
+- (BOOL)forLoadFlagName:(NSString *)name Flag:(BOOL)flag Default:(BOOL)defaults{
     flag = [[root objectForKey:name] boolValue]; // BOOL型に戻す
 
     // データがない場合初期化
-    if ([root objectForKey:name] == NULL)
-        flag = NO;
+    if ([root objectForKey:name] == nil)
+        flag = defaults;
+    return flag;
 }
 
 #pragma mark - 外から書き込む系
