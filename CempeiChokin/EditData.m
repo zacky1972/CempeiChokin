@@ -213,7 +213,7 @@
             [depositLog replaceObjectAtIndex:0 withObject:dictionary]; // 上書きする
         }
         // !!!: デバッグ用
-    NSAssert(0, @"締め切りまだ来てねぇから！");
+        NSAssert(0, @"締め切りまだ来てねぇから！");
     }
 }
 // 後でを押した時の動作
@@ -356,7 +356,13 @@
         defaultSettings = YES;
     }
 }
-
+- (void)clearPreviousData{
+    budget = @-1;
+    expense = @-1;
+    balance = @-1;
+    norma = @-1;
+    [now removeAllObjects];
+}
 #pragma mark - とりあえずコピーしただけ系シリーズ
 // 期限が来たかどうかを返す
 - (BOOL)searchNext{

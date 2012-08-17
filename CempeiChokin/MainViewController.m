@@ -222,11 +222,22 @@
 }
 // ラベルの更新
 - (void)labelReflesh{
-    BudgetLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.budget addComma:YES addYen:YES];
-    ExpenseLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.expense addComma:YES addYen:YES];
-    BalanceLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.balance addComma:YES addYen:YES];
-    NormaLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.norma addComma:YES addYen:YES];
-    DepositLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.deposit addComma:YES addYen:YES];
+    if(appDelegate.editData.didSetPeriod == YES){
+        BudgetLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.budget addComma:YES addYen:YES];
+        ExpenseLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.expense addComma:YES addYen:YES];
+        BalanceLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.balance addComma:YES addYen:YES];
+        NormaLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.norma addComma:YES addYen:YES];
+    }else{
+        BudgetLabel.text = @"??????";
+        ExpenseLabel.text = @"??????";
+        BalanceLabel.text = @"??????";
+        NormaLabel.text = @"??????";
+    }
+    if(appDelegate.editData.didDeposit == YES){
+        DepositLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.deposit addComma:YES addYen:YES];
+    }else{
+        DepositLabel.text = @"??????";
+    }
 }
 
 //FIXME:これお引っ越しすべきか？
