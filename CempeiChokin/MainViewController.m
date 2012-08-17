@@ -177,12 +177,11 @@
 
 - (void)depositAndNextChecker{
     //一度催促後，貯金をしたかどうか，と次の期間の設定をしたかどうかをチェックして，まだなら催促ボタンを表示する
-    if ([appDelegate.editData searchPleaseDeposit] == YES) pleaseDepositButton.hidden = NO;//表示
-    else pleaseDepositButton.hidden = YES;                                                 //非表示
+    if (appDelegate.editData.didDeposit == YES) pleaseDepositButton.hidden = YES;
+    else pleaseDepositButton.hidden = NO;
     
-    if ([appDelegate.editData searchPleaseNext] == YES) pleaseNextButton.hidden = NO;//表示
-    else pleaseNextButton.hidden = YES;                                              //非表示
-    
+    if (appDelegate.editData.didSetPeriod == YES) pleaseNextButton.hidden = YES;
+    else pleaseNextButton.hidden = NO;
 }
 
 - (IBAction)pleaseDepositButton_down:(id)sender {
