@@ -224,10 +224,22 @@
 }
 // ラベルの更新
 - (void)labelReflesh{
-    BudgetLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.budget addComma:YES addYen:YES];
-    ExpenseLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.expense addComma:YES addYen:YES];
-    BalanceLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.balance addComma:YES addYen:YES];
-    NormaLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.norma addComma:YES addYen:YES];
+    if([appDelegate.editData.budget isEqualToNumber:@-1] == NO)
+        BudgetLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.budget addComma:YES addYen:YES];
+    else
+        BudgetLabel.text = @"??????";
+    if([appDelegate.editData.expense isEqualToNumber:@-1] == NO)
+        ExpenseLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.expense addComma:YES addYen:YES];
+    else
+        ExpenseLabel.text = @"??????";
+    if([appDelegate.editData.balance isEqualToNumber:@-1] == NO)
+        BalanceLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.balance addComma:YES addYen:YES];
+    else
+        BalanceLabel.text = @"??????";
+    if([appDelegate.editData.norma isEqualToNumber:@-1] == NO)
+        NormaLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.norma addComma:YES addYen:YES];
+    else
+        NormaLabel.text = @"??????";
     DepositLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.deposit addComma:YES addYen:YES];
 }
 
