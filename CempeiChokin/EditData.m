@@ -405,7 +405,6 @@
 //TODO:コーディング
 //前回の貯金をしたか調べる
 - (BOOL)searchDidDeposit{
-    
     return YES;
 }
 //次の期間の設定をしたか調べる
