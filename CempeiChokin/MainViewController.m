@@ -59,8 +59,8 @@
                                                       addYear:NO addMonth:YES addDay:YES
                                                       addHour:NO addMinute:NO addSecond:NO]];
     MainNavigationBar.topItem.title = temp;
-
-    [self makeGraph]; // グラフの表示
+    [self makeGraphChecker];
+    //[self makeGraph]; // グラフの表示
 }
 
 - (void)viewDidUnload
@@ -133,7 +133,8 @@
             // 表示の処理
             expenseTextField.text = @"";    // テキストフィールドの値を消す
             [self labelReflesh];            // 数値の更新
-            [self makeGraph];               // グラフの更新
+            [self makeGraphChecker];
+            //[self makeGraph];               // グラフの更新
             [expenseTextField resignFirstResponder]; // NumberPad消す
             [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollViewWithCount:[appDelegate.editLog.log count]])];    // LogScrollのサイズ調整
             [LogScroll setContentOffset:CGPointMake(0.0, 45.0) animated:YES];   // 一個目のセルまでスクロール
@@ -194,6 +195,10 @@
 }
 
 #pragma mark - よく使う処理
+- (void)makeGraphChecker{
+    if (appDelegate.editData.didDeposit == YES && appDelegate.editData.didSetPeriod == YES)[self makeGraph];
+}
+
 // グラフの表示
 - (void)makeGraph{
     // 計算用に数値を確保
@@ -310,7 +315,8 @@
         [appDelegate.editLog deleteLogAtIndex:indexPath.row];   // ログを削除する
         [self labelReflesh];
         // グラフの更新
-        [self makeGraph];
+        [self makeGraphChecker];
+        //[self makeGraph];
         // セルを削除するアニメーションの実行
 		[tableView deleteRowsAtIndexPaths: [NSArray arrayWithObject:indexPath] withRowAnimation: UITableViewRowAnimationFade];
         // LogScrollのサイズを再計算 // FIXME: 一個目とかのせる消した時にガクってなる
