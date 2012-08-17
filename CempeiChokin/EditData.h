@@ -52,7 +52,8 @@
     BOOL didDeposit;  // 前回の貯金をしたかどうか
     BOOL didSetPeriod; // 前回の期間の設定をしたかどうか
 
-    BOOL nextAlert;       // 期限日のアラートを表示したかどうか
+    BOOL pastDue;   // 期限日が来たかどうか
+    BOOL nextAlert; // 期限日のアラートを表示したかどうか
 }
 
 @property (nonatomic,retain)NSNumber *expense;
@@ -65,6 +66,7 @@
 @property (nonatomic,assign)BOOL defaultSettings;
 @property (nonatomic,assign)BOOL didDeposit;
 @property (nonatomic,assign)BOOL didSetPeriod;
+@property (nonatomic,assign)BOOL pastDue;
 @property (nonatomic,assign)BOOL nextAlert;
 
 #pragma mark - ファイルの操作
