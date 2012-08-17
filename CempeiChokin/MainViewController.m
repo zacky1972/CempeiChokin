@@ -234,6 +234,10 @@
 - (void)timeLimitChecker{
     if([appDelegate.editData searchNext] == YES){//期限をこえてたとき
         // FIXME: 誰かまじめに書いて
+        //フラグをNOにする
+        appDelegate.editData.didDeposit = NO;
+        appDelegate.editData.didSetPeriod = NO;
+        
         if([appDelegate.editData searchLastNorma] == YES){
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"今日は"
                                                             message:@"目標日やで！"

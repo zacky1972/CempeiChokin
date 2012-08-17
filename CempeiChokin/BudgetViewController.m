@@ -222,10 +222,12 @@
 - (IBAction)DoneButton_down:(id)sender {
     [appDelegate.editData saveStart:startDate End:endDate];
     [appDelegate.editData calcForNextStage];
+    
+    appDelegate.editData.didSetPeriod = YES;    //貯金した
 }
 
 - (IBAction)laterButton_down:(id)sender {
-    appDelegate.editData.didSetPeriod = NO;
+    appDelegate.editData.didSetPeriod = NO;     //貯金してない
 }
 
 #pragma mark - その他

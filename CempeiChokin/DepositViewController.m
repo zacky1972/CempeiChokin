@@ -136,6 +136,7 @@
     }else{
         DNSLog(@"そして貯金へ……");
     }
+    appDelegate.editData.didDeposit = YES;   //次の期間と予算の設定しました
 }
 // 後で貯金入力するときの動作 // TODO: あとでやります・・・
 /*
@@ -157,7 +158,7 @@
 
 - (IBAction)laterButton_down:(id)sender {
     [appDelegate.editData skipDepositDate:[appDelegate.editData loadEnd]];
-    appDelegate.editData.didDeposit = NO;
+    appDelegate.editData.didDeposit = NO;   //次の期間と予算の設定してない
 }
 
 #pragma mark - その他
