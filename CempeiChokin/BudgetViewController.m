@@ -225,7 +225,7 @@
 }
 
 - (IBAction)laterButton_down:(id)sender {
-    
+    appDelegate.editData.didSetPeriod = NO;
 }
 
 #pragma mark - その他

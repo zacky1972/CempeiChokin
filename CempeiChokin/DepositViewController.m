@@ -157,6 +157,7 @@
 
 - (IBAction)laterButton_down:(id)sender {
     [appDelegate.editData skipDepositDate:[appDelegate.editData loadEnd]];
+    appDelegate.editData.didDeposit = NO;
 }
 
 #pragma mark - その他
