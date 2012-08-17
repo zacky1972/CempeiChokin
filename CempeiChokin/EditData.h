@@ -24,7 +24,9 @@
 //          │            └ Date   (貯金したときのStartあたり)
 //          │
 //          ├ defaultSettings (初期設定したかどうか) @property済み
-//          └ nextAlert (アラートを表示したかどうか) @property済み
+//          ├ nextAlert (アラートを表示したかどうか) @property済み
+//          ├ pleaseDeposit (アラート表示後，貯金を入力したかどうか) @property済み
+//          └ pleaseNext (アラート表示後，次の期間と予算を入力したかどうか) @property済み
 //
 ////////////////////////////////////////////////////////////
 
@@ -45,6 +47,8 @@
 
     BOOL defaultSettings;
     BOOL nextAlert;
+    BOOL pleaseDeposit;
+    BOOL pleaseNext;
 }
 
 @property (nonatomic,retain)NSNumber *expense;
@@ -56,6 +60,8 @@
 
 @property (nonatomic,assign)BOOL defaultSettings;
 @property (nonatomic,assign)BOOL nextAlert;
+@property (nonatomic,assign)BOOL pleaseDeposit;
+@property (nonatomic,assign)BOOL pleaseNext;
 
 #pragma mark - ファイルの操作
 // データの保存
@@ -93,7 +99,9 @@
 - (void)calcDeleteValue:(NSNumber *)value Kind:(NSString *)tempKind;
 
 #pragma mark - その他
-- (BOOL)searchNext;
+- (BOOL)searchNext;         //期間が過ぎたかどうか調べる
+- (BOOL)searchPleaseDeposit;//前回の貯金をしたか調べる
+- (BOOL)searchPleaseNext;   //次の期間の設定をしたか調べる
 - (BOOL)searchFinish;       //貯金が溜まったかどうか調べる
 - (BOOL)searchLastNorma;    //最後の期間かどうか調べる
 

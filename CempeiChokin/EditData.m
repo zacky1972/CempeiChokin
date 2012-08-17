@@ -19,7 +19,7 @@
 }
 
 @synthesize expense,balance,norma,budget,deposit;
-@synthesize defaultSettings,nextAlert;
+@synthesize defaultSettings,nextAlert,pleaseDeposit,pleaseNext;
 
 // 初期化
 -(id)init{
@@ -393,6 +393,18 @@
         DNSLog(@"まだまだ！");
         return NO;
     }
+}
+
+//TODO:コーディング
+//前回の貯金をしたか調べる
+- (BOOL)searchPleaseDeposit{
+    
+    return YES;
+}
+//次の期間の設定をしたか調べる
+- (BOOL)searchPleaseNext{
+    
+    return YES;
 }
 
 #pragma mark - 外から読み込む系

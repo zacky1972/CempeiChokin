@@ -176,12 +176,12 @@
 #pragma mark - 催促ボタン関係
 
 - (void)depositAndNextChecker{
-    //TODO:一度催促後，貯金をしたかどうか，と次の期間の設定をしたかどうかをチェックして，催促ボタンを表示するかどうか書く
-    if (0) pleaseDepositButton.hidden = NO;
-    else pleaseDepositButton.hidden = YES;
+    //一度催促後，貯金をしたかどうか，と次の期間の設定をしたかどうかをチェックして，まだなら催促ボタンを表示する
+    if ([appDelegate.editData searchPleaseDeposit] == YES) pleaseDepositButton.hidden = NO;//表示
+    else pleaseDepositButton.hidden = YES;                                                 //非表示
     
-    if (0) pleaseNextButton.hidden = NO;
-    else pleaseNextButton.hidden = YES;
+    if ([appDelegate.editData searchPleaseNext] == YES) pleaseNextButton.hidden = NO;//表示
+    else pleaseNextButton.hidden = YES;                                              //非表示
     
 }
 
