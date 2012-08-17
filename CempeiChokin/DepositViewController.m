@@ -140,6 +140,7 @@
     //FIXME:メソッド化してしまったがよいかな
     if (appDelegate.editData.didSetPeriod == NO) {
         [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"NextBudgetView"] animated:YES];//次の期間の設定へ
+        [appDelegate.editData clearPreviousData];
     }else{//後で民
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"MainView"] animated:YES]; // メイン画面へ移動する
     }
@@ -169,6 +170,7 @@
     //FIXME:メソッド化してしまったがよいかな
     if (appDelegate.editData.didSetPeriod == NO) {
         [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"NextBudgetView"] animated:YES];//次の期間の設定へ
+        [appDelegate.editData clearPreviousData];
     }else{//後で民
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"MainView"] animated:YES]; // メイン画面へ移動する
     }

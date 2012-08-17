@@ -356,7 +356,13 @@
         defaultSettings = YES;
     }
 }
-
+- (void)clearPreviousData{
+    budget = @-1;
+    expense = @-1;
+    balance = @-1;
+    norma = @-1;
+    [now removeAllObjects];
+}
 #pragma mark - とりあえずコピーしただけ系シリーズ
 // 期限が来たかどうかを返す
 - (BOOL)searchNext{
