@@ -62,7 +62,7 @@
     [self saveNow];
     [self saveNorma];
     [self saveDeposit];
-    [self saveOthers];
+    [self saveFlags];
     DNSLog(@"Data.plistに保存\nData.plist:%@",root);
     [root writeToFile:path atomically:YES];
 }
@@ -77,7 +77,7 @@
     [self loadNow];
     [self loadNorma];
     [self loadDeposit];
-    [self loadOthers];
+    [self loadFlags];
     DNSLog(@"Data.plistから読み込み \nData.plist:%@",root);
 }
 
@@ -139,20 +139,27 @@
     if(depositLog == NULL)
         depositLog = [[NSMutableArray alloc] init];
 }
-// その他
-- (void)saveOthers{
-    NSNumber *defaultSettingsNum = [NSNumber numberWithBool:defaultSettings];
-    NSNumber *nextAlertNum = [NSNumber numberWithBool:nextAlert];
-    [root setObject:defaultSettingsNum forKey:@"defaultSettings"];
-    [root setObject:nextAlertNum forKey:@"nextAlert"];
+// フラグ
+- (void)saveFlags{
+    [self forSaveFlagName:@"defaultSettings" Flag:defaultSettings];
+    [self forSaveFlagName:@"didDeposit" Flag:didDeposit];
+    [self forSaveFlagName:@"didSetPeriod" Flag:didSetPeriod];
+    [self forSaveFlagName:@"nextAlert" Flag:nextAlert];
 }
-- (void)loadOthers{
-    defaultSettings = [[root objectForKey:@"defaultSettings"] boolValue];
-    if ([root objectForKey:@"defaultSettings"] == NULL)
-        defaultSettings = NO;
-    nextAlert = [[root objectForKey:@"nextAlert"] boolValue];
-    if ([root objectForKey:@"nextAlert"] == NULL)
-        nextAlert = NO;
+- (void)loadFlags{
+    [self forLoadFlagName:@"defaultSettings" Flag:defaultSettings];
+    [self forLoadFlagName:@"didDeposit" Flag:didDeposit];
+    [self forLoadFlagName:@"didSetPeriod" Flag:didSetPeriod];
+    [self forLoadFlagName:@"nextAlert" Flag:nextAlert];
+}
+- (void)forSaveFlagName:(NSString *)name Flag:(BOOL)flag{
+    NSNumber *tempNumber = [NSNumber numberWithBool:flag];
+    [root setObject:tempNumber forKey:name];
+}
+- (void)forLoadFlagName:(NSString *)name Flag:(BOOL)flag{
+    flag = [[root objectForKey:name] boolValue];
+    if ([root objectForKey:name] == NULL)
+        flag = NO;
 }
 
 #pragma mark - 外から書き込む系
@@ -171,12 +178,11 @@
 
 // Deposit,DepositLogに
 - (void)saveDepositDate:(NSDate *)date Value:(NSNumber *)value{
-    // TODO: 分岐の仕方が酷いからそのうち治す
     date = [_translateFormat dateOnly:date];
-    // 新規の貯金か遅れて貯金かの判定
+
     NSMutableDictionary *dictionary = [NSMutableDictionary alloc];
 
-    // 貯金するタイミングの判断
+    // 新規の貯金か後回しにした貯金かの判断
     if([date isEqualToDate:[self loadEnd]] == YES){
         // 新規の貯金の場合
         dictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[self loadStart],@"Start",date,@"End",budget,@"Budget",expense,@"Expense",balance,@"Balance",norma,@"Norma",value,@"Deposit",nil];
@@ -234,7 +240,7 @@
         [depositLog addObject:dictionary]; // 新規追加する
     }
 }
-
+// DepositLog読み込み系
 - (NSDictionary *)loadRecentDepositData{
     NSDictionary *dictionary = [depositLog objectAtIndex:0];
     return dictionary;
@@ -297,6 +303,7 @@
 
     DNSLog(@"今回のノルマ:%@",norma);
 }
+
 // 出費・収入・残高調整
 - (void)calcValue:(NSNumber *)value Kind:(NSInteger)kind{
     switch (kind){

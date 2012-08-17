@@ -34,16 +34,17 @@
 #import <Foundation/Foundation.h>
 
 @interface EditData : NSObject{
-    NSNumber *expense;
-    NSNumber *balance;
-    NSNumber *norma;
-    NSNumber *budget;
+    // 基本のデータ
+    NSNumber *budget;  // 予算
+    NSNumber *expense; // 出費
+    NSNumber *balance; // 残額
+    NSNumber *norma;   // 今回のノルマ
 
-    NSMutableDictionary *goal;
-    NSMutableDictionary *now;
+    NSMutableDictionary *goal; // 最終的な目標
+    NSMutableDictionary *now;  // 今回の期間
 
-    NSNumber *deposit;
-    NSMutableArray *depositLog;
+    NSNumber *deposit;          // 総貯金額
+    NSMutableArray *depositLog; // 貯金履歴
 
     BOOL defaultSettings;
     BOOL nextAlert;
@@ -59,6 +60,8 @@
 @property (nonatomic,retain)NSNumber *deposit;
 
 @property (nonatomic,assign)BOOL defaultSettings;
+@property (nonatomic,assign)BOOL didDeposit;
+@property (nonatomic,assign)BOOL didSetPeriod;
 @property (nonatomic,assign)BOOL nextAlert;
 @property (nonatomic,assign)BOOL pleaseDeposit;
 @property (nonatomic,assign)BOOL pleaseNext;
