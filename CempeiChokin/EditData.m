@@ -19,7 +19,7 @@
 }
 
 @synthesize expense,balance,norma,budget,deposit;
-@synthesize defaultSettings,nextAlert;
+@synthesize defaultSettings,didDeposit,didSetPeriod,pastDue,nextAlert;
 
 // 初期化
 -(id)init{
@@ -145,19 +145,23 @@
     [self forSaveFlagName:@"didDeposit" Flag:didDeposit];
     [self forSaveFlagName:@"didSetPeriod" Flag:didSetPeriod];
     [self forSaveFlagName:@"nextAlert" Flag:nextAlert];
+    [self forSaveFlagName:@"pastDue" Flag:pastDue];
 }
 - (void)loadFlags{
     [self forLoadFlagName:@"defaultSettings" Flag:defaultSettings];
     [self forLoadFlagName:@"didDeposit" Flag:didDeposit];
     [self forLoadFlagName:@"didSetPeriod" Flag:didSetPeriod];
     [self forLoadFlagName:@"nextAlert" Flag:nextAlert];
+    [self forLoadFlagName:@"pastDue" Flag:pastDue];
 }
 - (void)forSaveFlagName:(NSString *)name Flag:(BOOL)flag{
-    NSNumber *tempNumber = [NSNumber numberWithBool:flag];
-    [root setObject:tempNumber forKey:name];
+    NSNumber *tempNumber = [NSNumber numberWithBool:flag]; // NSNumber型に変換
+    [root setObject:tempNumber forKey:name];               // 変換したものを保存
 }
 - (void)forLoadFlagName:(NSString *)name Flag:(BOOL)flag{
-    flag = [[root objectForKey:name] boolValue];
+    flag = [[root objectForKey:name] boolValue]; // BOOL型に戻す
+
+    // データがない場合初期化
     if ([root objectForKey:name] == NULL)
         flag = NO;
 }
@@ -276,7 +280,6 @@
         norma = @([[self loadGoalValue] intValue] - [self.deposit intValue] ); // ノルマは残りの額
     }else{
         // 最終期限と今回の期間が同じじゃない場合
-        
         // 最終期限までの日数を計算
         NSTimeInterval timeInterval = [[self loadGoalPeriod] timeIntervalSinceDate:[self loadStart]] + (60*60*24);
         NSNumber *daysToPeriod = [NSNumber numberWithInt:(timeInterval / (60*60*24))];
