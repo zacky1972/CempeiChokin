@@ -104,8 +104,6 @@
 
 #pragma mark - その他
 - (BOOL)searchNext;         //期間が過ぎたかどうか調べる
-- (BOOL)searchDidDeposit;//前回の貯金をしたか調べる
-- (BOOL)searchDidSetPeriod;   //次の期間の設定をしたか調べる
 - (BOOL)searchFinish;       //貯金が溜まったかどうか調べる
 - (BOOL)searchLastNorma;    //最後の期間かどうか調べる
 
