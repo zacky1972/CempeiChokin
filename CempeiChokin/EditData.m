@@ -206,10 +206,14 @@
     }else{
         // 貯金を修正する場合
         DNSLog(@"貯金の修正");
-        dictionary = [[NSMutableDictionary alloc] initWithDictionary:[depositLog objectAtIndex:0]];
-        [dictionary setObject:value forKey:@"Deposit"];
-        deposit = @([deposit intValue] - [[[depositLog objectAtIndex:0] objectForKey:@"Deposit"] intValue] + [value intValue]); // 貯金額の計算
-        [depositLog replaceObjectAtIndex:0 withObject:dictionary]; // 上書きする
+        if(depositLog.count > 0){
+            dictionary = [[NSMutableDictionary alloc] initWithDictionary:[depositLog objectAtIndex:0]];
+            [dictionary setObject:value forKey:@"Deposit"];
+            deposit = @([deposit intValue] - [[[depositLog objectAtIndex:0] objectForKey:@"Deposit"] intValue] + [value intValue]); // 貯金額の計算
+            [depositLog replaceObjectAtIndex:0 withObject:dictionary]; // 上書きする
+        }
+        // !!!: デバッグ用
+    NSAssert(0, @"締め切りまだ来てねぇから！");
     }
 }
 // 後でを押した時の動作
