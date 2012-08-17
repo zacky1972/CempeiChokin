@@ -377,7 +377,7 @@
                 }
             }else{
                 DNSLog(@"期限すぎてます")
-                nextAlert = YES;
+                //nextAlert = YES;
                 return YES;
             }
         }

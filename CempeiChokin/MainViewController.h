@@ -16,8 +16,6 @@
 {
     __weak IBOutlet UINavigationBar *MainNavigationBar;
     __weak IBOutlet UIScrollView *LogScroll;
-    __weak IBOutlet UILabel *Labels;
-    __weak IBOutlet UILabel *Labels2;
     __weak IBOutlet UILabel *BudgetLabel;
     __weak IBOutlet UILabel *ExpenseLabel;
     __weak IBOutlet UILabel *BalanceLabel;

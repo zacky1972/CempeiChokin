@@ -224,10 +224,12 @@
     [appDelegate.editData calcForNextStage];
     
     appDelegate.editData.didSetPeriod = YES;    //貯金した
+    appDelegate.editData.nextAlert = YES;
 }
 
 - (IBAction)laterButton_down:(id)sender {
     appDelegate.editData.didSetPeriod = NO;     //貯金してない
+    appDelegate.editData.nextAlert = YES;
 }
 
 #pragma mark - その他
