@@ -52,7 +52,6 @@
     BOOL didDeposit;  // 前回の貯金をしたかどうか
     BOOL didSetPeriod; // 前回の期間の設定をしたかどうか
 
-    BOOL pastDue;   // 期限日が来たかどうか
     BOOL nextAlert; // 期限日のアラートを表示したかどうか
 }
 
@@ -66,7 +65,6 @@
 @property (nonatomic,assign)BOOL defaultSettings;
 @property (nonatomic,assign)BOOL didDeposit;
 @property (nonatomic,assign)BOOL didSetPeriod;
-@property (nonatomic,assign)BOOL pastDue;
 @property (nonatomic,assign)BOOL nextAlert;
 
 #pragma mark - ファイルの操作
@@ -103,7 +101,6 @@
 - (void)calcValue:(NSNumber *)value Kind:(NSInteger)kind;
 // 出費・収入・残高調整の削除
 - (void)calcDeleteValue:(NSNumber *)value Kind:(NSString *)tempKind;
-
 #pragma mark - その他
 - (BOOL)searchNext;         //期間が過ぎたかどうか調べる
 - (BOOL)searchFinish;       //貯金が溜まったかどうか調べる

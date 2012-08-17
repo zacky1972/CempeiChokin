@@ -19,7 +19,7 @@
 }
 
 @synthesize expense,balance,norma,budget,deposit;
-@synthesize defaultSettings,didDeposit,didSetPeriod,pastDue,nextAlert;
+@synthesize defaultSettings,didDeposit,didSetPeriod,nextAlert;
 
 // 初期化
 -(id)init{
@@ -146,14 +146,12 @@
     [self forSaveFlagName:@"didDeposit" Flag:didDeposit];
     [self forSaveFlagName:@"didSetPeriod" Flag:didSetPeriod];
     [self forSaveFlagName:@"nextAlert" Flag:nextAlert];
-    [self forSaveFlagName:@"pastDue" Flag:pastDue];
 }
 - (void)loadFlags{
     defaultSettings = [self forLoadFlagName:@"defaultSettings" Flag:defaultSettings Default:NO];
     didDeposit = [self forLoadFlagName:@"didDeposit" Flag:didDeposit Default:YES];
     didSetPeriod = [self forLoadFlagName:@"didSetPeriod" Flag:didSetPeriod Default:YES];
     nextAlert = [self forLoadFlagName:@"nextAlert" Flag:nextAlert Default:NO];
-    pastDue = [self forLoadFlagName:@"pastDue" Flag:pastDue Default:NO];
 }
 - (void)forSaveFlagName:(NSString *)name Flag:(BOOL)flag{
     NSNumber *tempNumber = [NSNumber numberWithBool:flag]; // NSNumber型に変換
@@ -186,42 +184,37 @@
 - (void)saveDepositDate:(NSDate *)date Value:(NSNumber *)value{
     date = [_translateFormat dateOnly:date];
 
-    NSMutableDictionary *dictionary = [NSMutableDictionary alloc];
+    NSMutableDictionary *dictionary;
 
-    // 新規の貯金か後回しにした貯金かの判断
-    if([date isEqualToDate:[self loadEnd]] == YES){
-        // 新規の貯金の場合
-        dictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[self loadStart],@"Start",date,@"End",budget,@"Budget",expense,@"Expense",balance,@"Balance",norma,@"Norma",value,@"Deposit",nil];
-    }else{
-        // 後での貯金の場合
-        dictionary = [[NSMutableDictionary alloc] initWithDictionary:[depositLog objectAtIndex:0]];
-        [dictionary setObject:value forKey:@"Deposit"];
-    }
-
-    // 追加か上書きかの判断
-    if (depositLog.count > 0) {
-        // ログに中身が合った場合
-        NSDate *recentDeposit = [[depositLog objectAtIndex:0] objectForKey:@"End"];
-
-        if([[self loadEnd] isEqualToDate:recentDeposit] == YES){
-            // 既に同じ期間の貯金がしてあった場合
-            DNSLog(@"詐欺貯金駄目ゼッタイ");
-            deposit = @([deposit intValue] - [[[depositLog objectAtIndex:0] objectForKey:@"Deposit"] intValue] + [value intValue]); // 貯金額の計算
-            [depositLog replaceObjectAtIndex:0 withObject:dictionary]; // 上書きする
-        }else{
-            // 新たな貯金の場合
+    // 貯金を追加するか修正するかの判断
+    if(didDeposit == NO){
+        if ([[self loadDepositFromRecentDepositData] isEqualToNumber:@-1] == NO){
+            // 新規の貯金の場合
+            DNSLog(@"貯金の追加");
+            dictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[self loadStart],@"Start",[self loadEnd],@"End",budget,@"Budget",expense,@"Expense",balance,@"Balance",norma,@"Norma",value,@"Deposit",nil];
             [depositLog addObject:dictionary]; // 新規追加する
             deposit = @([deposit intValue] + [value intValue]); // 貯金額を増やす
+        }else{
+            // 後回しにした貯金の場合
+            DNSLog(@"後回しにした貯金の入力");
+            dictionary = [[NSMutableDictionary alloc] initWithDictionary:[depositLog objectAtIndex:0]];
+            [dictionary setObject:value forKey:@"Deposit"];
+            deposit = @([deposit intValue] + [value intValue]); // 貯金額の計算
+            [depositLog replaceObjectAtIndex:0 withObject:dictionary]; // 上書きする
         }
+        didDeposit = YES;
     }else{
-        // ログに中身が無かった場合
-        [depositLog addObject:dictionary]; // 新規追加する
-        deposit = value;                   // 貯金額を入れる
+        // 貯金を修正する場合
+        DNSLog(@"貯金の修正");
+        dictionary = [[NSMutableDictionary alloc] initWithDictionary:[depositLog objectAtIndex:0]];
+        [dictionary setObject:value forKey:@"Deposit"];
+        deposit = @([deposit intValue] - [[[depositLog objectAtIndex:0] objectForKey:@"Deposit"] intValue] + [value intValue]); // 貯金額の計算
+        [depositLog replaceObjectAtIndex:0 withObject:dictionary]; // 上書きする
     }
 }
 // 後でを押した時の動作
 - (void)skipDepositDate:(NSDate *)date{
-    NSNumber *depositValue = @0;
+    NSNumber *depositValue = @-1;
     NSDictionary *dictionary =
     [[NSDictionary alloc] initWithObjectsAndKeys:[self loadStart],@"Start",
                                                  date   ,@"End",
@@ -248,8 +241,10 @@
 }
 // DepositLog読み込み系
 - (NSDictionary *)loadRecentDepositData{
-    NSDictionary *dictionary = [depositLog objectAtIndex:0];
-    return dictionary;
+    if(depositLog.count > 0)
+        return [depositLog objectAtIndex:0];
+    else
+        return nil;
 }
 - (NSDate *)loadStartFromRecentDepositData{
     return [[self loadRecentDepositData] objectForKey:@"Start"];
@@ -304,8 +299,8 @@
     }
     
     balance = @([budget intValue] - [expense intValue]);
-    defaultSettings = YES;
-
+    
+    [self flagManagement];
     DNSLog(@"今回のノルマ:%@",norma);
 }
 
@@ -349,6 +344,12 @@
             expense = @([expense intValue] - [value intValue]);
             balance = @([budget intValue] - [expense intValue]);
             break;
+    }
+}
+// フラグ管理
+- (void)flagManagement{
+    if(defaultSettings == NO && goal.count == 3 && now.count == 2){
+        defaultSettings = YES;
     }
 }
 
