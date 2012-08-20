@@ -31,8 +31,8 @@
     [self makeNumberPadToolbar:depositTextField Return:@"完了"
                           Done:@selector(doneDepositTextField)
                         Cancel:@selector(cancelDepositTextField)];
-    
     [self dataCheck];
+    depositTextField.placeholder = [_translateFormat stringFromNumber:appDelegate.editData.balance addComma:YES addYen:YES];
     // TODO: 棒グラフの生成
 }
 
