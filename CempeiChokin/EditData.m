@@ -372,6 +372,7 @@
         //今日が期限日じゃない場合
         if([date earlierDate:[self loadEnd]] != date){
             //期限日よりあとの場合
+            // ???: ここもう使ってないんじゃないか説
             if(nextAlert == YES){
                 // 既にアラート済みの場合
                 if ([self searchLastNorma] == YES) {

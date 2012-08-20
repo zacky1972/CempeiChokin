@@ -33,9 +33,7 @@
                         Cancel:@selector(cancelDepositTextField)];
     
     [self dataCheck];
-
     // TODO: 棒グラフの生成
-    
 }
 
 - (void)viewDidUnload

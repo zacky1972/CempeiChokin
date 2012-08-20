@@ -171,11 +171,12 @@
 #pragma mark - UIAlertView関係
 // アラートビューのボタンの動作
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    appDelegate.editData.didDeposit= NO;
+    appDelegate.editData.didSetPeriod = NO;
     [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Deposit"] animated:NO]; // 貯金画面へ移動する
 }
 
 #pragma mark - 催促ボタン関係
-
 - (void)depositAndNextChecker{
     //一度催促後，貯金をしたかどうか，と次の期間の設定をしたかどうかをチェックして，まだなら催促ボタンを表示する
     if (appDelegate.editData.didDeposit == YES) pleaseDepositButton.hidden = YES;
@@ -250,8 +251,6 @@
 - (void)timeLimitChecker{
     if([appDelegate.editData searchNext] == YES){//期限をこえてたとき
         // FIXME: 誰かまじめに書いて
-        appDelegate.editData.didDeposit = NO;
-        appDelegate.editData.didSetPeriod = NO;
         if([appDelegate.editData searchLastNorma] == YES){
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"今日は"
                                                             message:@"目標日やで！"
