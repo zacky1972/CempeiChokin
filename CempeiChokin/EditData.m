@@ -212,8 +212,8 @@
             deposit = @([deposit intValue] - [[[depositLog objectAtIndex:0] objectForKey:@"Deposit"] intValue] + [value intValue]); // 貯金額の計算
             [depositLog replaceObjectAtIndex:0 withObject:dictionary]; // 上書きする
         }else{
-            // !!!: デバッグ用
-            NSAssert(0, @"締め切りまだ来てねぇから！");
+            // デバッグ用
+            NSAssert(0, @"締め切りまだ来てねぇから！エラー出るから！");
         }
     }
 }
@@ -372,27 +372,10 @@
         //今日が期限日じゃない場合
         if([date earlierDate:[self loadEnd]] != date){
             //期限日よりあとの場合
-            // ???: ここもう使ってないんじゃないか説
-            if(nextAlert == YES){
-                // 既にアラート済みの場合
-                if ([self searchLastNorma] == YES) {
-                    DNSLog(@"はやく貯金しろよ！！！");
-                    nextAlert = YES;
-                    return YES;
-                }else{
-                    DNSLog(@"貯金催促アラートもうしました！");
-                    return NO;
-                }
-            }else{
-                DNSLog(@"期限すぎてます")
-                //nextAlert = YES;
-                return YES;
-            }
+            return YES;
         }
     }
-    // 期限内
-    DNSLog(@"期限すぎてないよ！");
-    nextAlert = NO;
+    // 期限内の場合
     return NO;
 }
 
