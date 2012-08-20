@@ -211,9 +211,10 @@
             [dictionary setObject:value forKey:@"Deposit"];
             deposit = @([deposit intValue] - [[[depositLog objectAtIndex:0] objectForKey:@"Deposit"] intValue] + [value intValue]); // 貯金額の計算
             [depositLog replaceObjectAtIndex:0 withObject:dictionary]; // 上書きする
+        }else{
+            // !!!: デバッグ用
+            NSAssert(0, @"締め切りまだ来てねぇから！");
         }
-        // !!!: デバッグ用
-        NSAssert(0, @"締め切りまだ来てねぇから！");
     }
 }
 // 後でを押した時の動作
