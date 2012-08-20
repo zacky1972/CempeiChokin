@@ -50,6 +50,7 @@
     //初期設定から戻ってきた時用
     [self timeLimitChecker];
     [self labelReflesh];
+    [self depositAndNextChecker];
     NSString *temp = [NSString stringWithFormat:@"%@~%@",
                       [_translateFormat formatterDateUltimate:[appDelegate.editData loadStart]
                                                       addYear:NO addMonth:YES addDay:YES
@@ -58,8 +59,8 @@
                                                       addYear:NO addMonth:YES addDay:YES
                                                       addHour:NO addMinute:NO addSecond:NO]];
     MainNavigationBar.topItem.title = temp;
-
-    [self makeGraph]; // グラフの表示
+    [self makeGraphChecker];
+    //[self makeGraph]; // グラフの表示
 }
 
 - (void)viewDidUnload
@@ -73,6 +74,8 @@
     KindSegment = nil;
     MainNavigationBar = nil;
     DepositLabel = nil;
+    pleaseDepositButton = nil;
+    pleaseNextButton = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -105,6 +108,7 @@
     [self cancelExpenseTextField]; // キャンセルボタンと同じ動作
      */
 }
+
 // Numberpadに追加したボタンの動作
 -(void)doneExpenseTextField{
     // 数値の処理
@@ -129,7 +133,8 @@
             // 表示の処理
             expenseTextField.text = @"";    // テキストフィールドの値を消す
             [self labelReflesh];            // 数値の更新
-            [self makeGraph];               // グラフの更新
+            [self makeGraphChecker];
+            //[self makeGraph];               // グラフの更新
             [expenseTextField resignFirstResponder]; // NumberPad消す
             [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollViewWithCount:[appDelegate.editLog.log count]])];    // LogScrollのサイズ調整
             [LogScroll setContentOffset:CGPointMake(0.0, 45.0) animated:YES];   // 一個目のセルまでスクロール
@@ -169,7 +174,31 @@
     [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Deposit"] animated:NO]; // 貯金画面へ移動する
 }
 
+#pragma mark - 催促ボタン関係
+
+- (void)depositAndNextChecker{
+    //一度催促後，貯金をしたかどうか，と次の期間の設定をしたかどうかをチェックして，まだなら催促ボタンを表示する
+    if (appDelegate.editData.didDeposit == YES) pleaseDepositButton.hidden = YES;
+    else pleaseDepositButton.hidden = NO;
+    
+    if (appDelegate.editData.didSetPeriod == YES) pleaseNextButton.hidden = YES;
+    else pleaseNextButton.hidden = NO;
+}
+
+- (IBAction)pleaseDepositButton_down:(id)sender {
+    [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Deposit"] animated:NO]; // 貯金画面へ移動する
+}
+
+- (IBAction)pleaseNextBtton_down:(id)sender {
+    [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"NextBudgetView"] animated:NO]; // 貯金画面へ移動する
+    //次の期間の設定へ
+}
+
 #pragma mark - よく使う処理
+- (void)makeGraphChecker{
+    if (appDelegate.editData.didDeposit == YES && appDelegate.editData.didSetPeriod == YES)[self makeGraph];
+}
+
 // グラフの表示
 - (void)makeGraph{
     // 計算用に数値を確保
@@ -198,11 +227,22 @@
 }
 // ラベルの更新
 - (void)labelReflesh{
-    BudgetLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.budget addComma:YES addYen:YES];
-    ExpenseLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.expense addComma:YES addYen:YES];
-    BalanceLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.balance addComma:YES addYen:YES];
-    NormaLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.norma addComma:YES addYen:YES];
-    DepositLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.deposit addComma:YES addYen:YES];
+    if(appDelegate.editData.didSetPeriod == YES){
+        BudgetLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.budget addComma:YES addYen:YES];
+        ExpenseLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.expense addComma:YES addYen:YES];
+        BalanceLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.balance addComma:YES addYen:YES];
+        NormaLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.norma addComma:YES addYen:YES];
+    }else{
+        BudgetLabel.text = @"??????";
+        ExpenseLabel.text = @"??????";
+        BalanceLabel.text = @"??????";
+        NormaLabel.text = @"??????";
+    }
+    if(appDelegate.editData.didDeposit == YES){
+        DepositLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.deposit addComma:YES addYen:YES];
+    }else{
+        DepositLabel.text = @"??????";
+    }
 }
 
 //FIXME:これお引っ越しすべきか？
@@ -210,6 +250,7 @@
 - (void)timeLimitChecker{
     if([appDelegate.editData searchNext] == YES){//期限をこえてたとき
         // FIXME: 誰かまじめに書いて
+        
         if([appDelegate.editData searchLastNorma] == YES){
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"今日は"
                                                             message:@"目標日やで！"
@@ -274,7 +315,8 @@
         [appDelegate.editLog deleteLogAtIndex:indexPath.row];   // ログを削除する
         [self labelReflesh];
         // グラフの更新
-        [self makeGraph];
+        [self makeGraphChecker];
+        //[self makeGraph];
         // セルを削除するアニメーションの実行
 		[tableView deleteRowsAtIndexPaths: [NSArray arrayWithObject:indexPath] withRowAnimation: UITableViewRowAnimationFade];
         // LogScrollのサイズを再計算 // FIXME: 一個目とかのせる消した時にガクってなる

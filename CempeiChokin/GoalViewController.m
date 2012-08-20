@@ -34,7 +34,7 @@
     _translateFormat = [TranslateFormat alloc];
 
     [self dateInitialize];
-    [self dateCheck];
+    [self dataCheck];
 }
 
 - (void)viewDidUnload{
@@ -61,13 +61,14 @@
     }
 }
 
-- (BOOL)dateCheck{
+- (BOOL)dataCheck{
     if(name.length == 0 || value == NULL || period == NULL){
         DoneButton.enabled = NO;
-        //[DoneButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        DoneButton.alpha = 0.3;        
         return NO;
     }else{
         DoneButton.enabled = YES;
+        DoneButton.alpha = 1;
         return YES;
     }
 }
@@ -76,14 +77,14 @@
 - (IBAction)NameTextField_next:(id)sender{
     name = NameTextField.text;
     [NameTextField resignFirstResponder];
-    if([self dateCheck] == NO)
+    if([self dataCheck] == NO)
         [ValueTextField becomeFirstResponder];  //ValueTextFieldに移動
 }
 
 // 別の所押した時
 - (IBAction)NameTextField_end:(id)sender {
     name = NameTextField.text;
-    [self dateCheck];
+    [self dataCheck];
 }
 
 #pragma mark - 金額の設定
@@ -115,7 +116,7 @@
         ValueTextField.text = @""; // 値を消す
     }
     [ValueTextField resignFirstResponder];
-    [self dateCheck];
+    [self dataCheck];
 }
 
 // Numberpadに追加したボタンの動作
@@ -125,7 +126,7 @@
         value = [_translateFormat numberFromString:ValueTextField.text];
         ValueTextField.text = [_translateFormat stringFromNumber:value addComma:YES addYen:YES]; // 表示変える
         [ValueTextField resignFirstResponder]; // NumberPad消す
-        if([self dateCheck] == NO)
+        if([self dataCheck] == NO)
             [PeriodTextField becomeFirstResponder]; // PeriodTextFieldに移動
     }else{
         [ValueTextField resignFirstResponder]; // NumberPad消す
@@ -163,7 +164,7 @@
     PeriodTextField.text = [_translateFormat formatterDate:period]; // 文字入力する
     [PeriodTextField resignFirstResponder]; // フォーカス外す
     [actionSheet dismissWithClickedButtonIndex:0 animated:YES]; // ActionSheet消す
-    [self dateCheck];
+    [self dataCheck];
 }
 
 // DatePickerがキャンセルした時の
@@ -236,6 +237,12 @@
     
     [actionSheet addSubview: datePickerToolbar]; // Toolbarのっける
     [actionSheet addSubview: datePicker];        // DatePickerのっける
+}
+
+//ボタンを青く，文字を白くするよ
+- (void)changeButtonColor{
+    DNSLog(@"ボタン色かえ！");
+    
 }
 
 @end

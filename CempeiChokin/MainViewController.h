@@ -24,9 +24,15 @@
     __weak IBOutlet UITextField *expenseTextField;
     __weak IBOutlet UISegmentedControl *KindSegment;
     __weak IBOutlet UITableView *logTableView;
+    
+    __weak IBOutlet UIButton *pleaseDepositButton;
+    __weak IBOutlet UIButton *pleaseNextButton;
+    
 }
 
 - (IBAction)expenseTextField_begin:(id)sender;
 - (IBAction)expenseTextField_end:(id)sender;
+- (IBAction)pleaseDepositButton_down:(id)sender;
+- (IBAction)pleaseNextBtton_down:(id)sender;
 
 @end

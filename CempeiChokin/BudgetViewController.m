@@ -78,10 +78,12 @@
     if(startDate == NULL || endDate == NULL || [appDelegate.editData.budget isEqualToNumber:@-1] == YES){
         // データが揃っていないとき
         DoneButton.enabled = NO;
+        DoneButton.alpha = 0.3;
         return NO;
     }else{
         // データが揃っているとき
         DoneButton.enabled = YES;
+        DoneButton.alpha = 1;
         return YES;
     }
 }
@@ -220,10 +222,14 @@
 - (IBAction)DoneButton_down:(id)sender {
     [appDelegate.editData saveStart:startDate End:endDate];
     [appDelegate.editData calcForNextStage];
+    
+    appDelegate.editData.didSetPeriod = YES;    //貯金した
+    appDelegate.editData.nextAlert = YES;
 }
 
 - (IBAction)laterButton_down:(id)sender {
-    
+    appDelegate.editData.didSetPeriod = NO;     //貯金してない
+    appDelegate.editData.nextAlert = YES;
 }
 
 #pragma mark - その他

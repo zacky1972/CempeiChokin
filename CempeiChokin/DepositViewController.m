@@ -32,9 +32,7 @@
                           Done:@selector(doneDepositTextField)
                         Cancel:@selector(cancelDepositTextField)];
     
-    if(depositValue == NULL){
-        DoneButton.enabled = NO;
-    }
+    [self dataCheck];
 
     // TODO: 棒グラフの生成
     
@@ -48,6 +46,19 @@
     barGraphView = nil;
     [super viewDidUnload];
 
+}
+
+#pragma mark - よく使う処理たち
+- (BOOL)dataCheck{
+    if(depositValue == nil){
+        DoneButton.enabled = NO;
+        DoneButton.alpha = 0.3;
+        return NO;
+    }else{
+        DoneButton.enabled = YES;
+        DoneButton.alpha = 1;
+        return YES;
+    }
 }
 
 #pragma mark - Storyboardで画面遷移する前に呼ばれるあれ
@@ -86,9 +97,7 @@
 }
 
 - (IBAction)depositTextField_end:(id)sender {
-    if(depositValue != NULL){
-        DoneButton.enabled = YES;
-    }
+    [self dataCheck];
 }
 
 -(void)doneDepositTextField{
@@ -127,6 +136,14 @@
     }else{
         DNSLog(@"そして貯金へ……");
     }
+    appDelegate.editData.didDeposit = YES;   //貯金の設定しました
+    //FIXME:メソッド化してしまったがよいかな
+    if (appDelegate.editData.nextAlert == NO) {
+        [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"NextBudgetView"] animated:YES];//次の期間の設定へ
+        [appDelegate.editData clearPreviousData];
+    }else{//後で民
+        [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"MainView"] animated:YES]; // メイン画面へ移動する
+    }
 }
 // 後で貯金入力するときの動作 // TODO: あとでやります・・・
 /*
@@ -148,6 +165,15 @@
 
 - (IBAction)laterButton_down:(id)sender {
     [appDelegate.editData skipDepositDate:[appDelegate.editData loadEnd]];
+    appDelegate.editData.didDeposit = NO;   //次の期間と予算の設定してない
+    
+    //FIXME:メソッド化してしまったがよいかな
+    if (appDelegate.editData.nextAlert == NO) {
+        [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"NextBudgetView"] animated:YES];//次の期間の設定へ
+        [appDelegate.editData clearPreviousData];
+    }else{//後で民
+        [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"MainView"] animated:YES]; // メイン画面へ移動する
+    }
 }
 
 #pragma mark - その他

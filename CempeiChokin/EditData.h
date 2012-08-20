@@ -24,7 +24,9 @@
 //          │            └ Date   (貯金したときのStartあたり)
 //          │
 //          ├ defaultSettings (初期設定したかどうか) @property済み
-//          └ nextAlert (アラートを表示したかどうか) @property済み
+//          ├ nextAlert (アラートを表示したかどうか) @property済み
+//          ├ didDeposit (アラート表示後，貯金を入力したかどうか) @property済み
+//          └ didSetPeriod (アラート表示後，次の期間と予算を入力したかどうか) @property済み
 //
 ////////////////////////////////////////////////////////////
 
@@ -32,19 +34,25 @@
 #import <Foundation/Foundation.h>
 
 @interface EditData : NSObject{
-    NSNumber *expense;
-    NSNumber *balance;
-    NSNumber *norma;
-    NSNumber *budget;
+    // 基本のデータ
+    NSNumber *budget;  // 予算
+    NSNumber *expense; // 出費
+    NSNumber *balance; // 残額
+    NSNumber *norma;   // 今回のノルマ
 
-    NSMutableDictionary *goal;
-    NSMutableDictionary *now;
+    NSMutableDictionary *goal; // 最終的な目標
+    NSMutableDictionary *now;  // 今回の期間
 
-    NSNumber *deposit;
-    NSMutableArray *depositLog;
+    NSNumber *deposit;          // 総貯金額
+    NSMutableArray *depositLog; // 貯金履歴
 
-    BOOL defaultSettings;
-    BOOL nextAlert;
+    // フラグ
+    BOOL defaultSettings; // 初期設定をしたかどうか
+
+    BOOL didDeposit;  // 前回の貯金をしたかどうか
+    BOOL didSetPeriod; // 前回の期間の設定をしたかどうか
+
+    BOOL nextAlert; // 期限日のアラートを表示したかどうか
 }
 
 @property (nonatomic,retain)NSNumber *expense;
@@ -55,6 +63,8 @@
 @property (nonatomic,retain)NSNumber *deposit;
 
 @property (nonatomic,assign)BOOL defaultSettings;
+@property (nonatomic,assign)BOOL didDeposit;
+@property (nonatomic,assign)BOOL didSetPeriod;
 @property (nonatomic,assign)BOOL nextAlert;
 
 #pragma mark - ファイルの操作
@@ -91,9 +101,9 @@
 - (void)calcValue:(NSNumber *)value Kind:(NSInteger)kind;
 // 出費・収入・残高調整の削除
 - (void)calcDeleteValue:(NSNumber *)value Kind:(NSString *)tempKind;
-
+- (void)clearPreviousData;
 #pragma mark - その他
-- (BOOL)searchNext;
+- (BOOL)searchNext;         //期間が過ぎたかどうか調べる
 - (BOOL)searchFinish;       //貯金が溜まったかどうか調べる
 - (BOOL)searchLastNorma;    //最後の期間かどうか調べる
 

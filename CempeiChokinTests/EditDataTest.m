@@ -124,12 +124,14 @@
 }
 // - (void)saveDepositDate:(NSDate *)date Value:(NSNumber *)value;
 - (void)testSaveDeposit{
+    _editData.didDeposit = NO;
     [_editData saveDepositDate:END Value:@1000];
     STAssertEqualObjects(_editData.deposit, @1000, @"貯金額おかしいで");
 
     [_editData saveDepositDate:END Value:@1500];
     STAssertEqualObjects(_editData.deposit, @1500, @"貯金額おかしいで");
 
+    _editData.didDeposit = NO;
     NSDate *END_2 = [NSDate dateWithTimeInterval:60*60*24 sinceDate:END];
     [_editData saveStart:END End:END_2];
 
@@ -138,6 +140,7 @@
 }
 // - (void)skipDepositDate:(NSDate *)date;
 - (void)testSkipDeposit{
+    _editData.didDeposit = NO;
     [_editData skipDepositDate:END];
     STAssertEqualObjects(_editData.deposit, @0, @"貯金額おかしいで");
 
@@ -146,7 +149,8 @@
 
     [_editData saveDepositDate:END Value:@1000];
     STAssertEqualObjects(_editData.deposit, @1000, @"貯金額おかしいで");
-
+    
+    _editData.didDeposit = NO;
     [_editData saveDepositDate:END_2 Value:@1500];
     STAssertEqualObjects(_editData.deposit, @2500, @"貯金額おかしいで");
 }

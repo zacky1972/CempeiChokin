@@ -34,7 +34,7 @@
     _translateFormat = [TranslateFormat alloc];
     
     [self dateInitialize];
-    [self dateCheck];
+    [self dataCheck];
 }
 
 - (void)viewDidUnload{
@@ -63,13 +63,14 @@
     }*/
 }
 
-- (BOOL)dateCheck{
+- (BOOL)dataCheck{
     if(period == NULL){
         DoneButton.enabled = NO;
-        //[DoneButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        DoneButton.alpha = 0.3;
         return NO;
     }else{
         DoneButton.enabled = YES;
+        DoneButton.alpha = 1;
         return YES;
     }
 }
@@ -91,7 +92,7 @@
     PeriodTextField.text = [_translateFormat formatterDate:period]; // 文字入力する
     [PeriodTextField resignFirstResponder]; // フォーカス外す
     [actionSheet dismissWithClickedButtonIndex:0 animated:YES]; // ActionSheet消す
-    [self dateCheck];
+    [self dataCheck];
 }
 
 // DatePickerがキャンセルした時の
