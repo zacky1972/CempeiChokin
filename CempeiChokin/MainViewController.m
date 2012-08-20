@@ -18,6 +18,8 @@
     UIView *graph;
     
     NSInteger alertType;
+    
+    SystemSoundID soundID; // 効果音用
 }
 
 @end
@@ -36,10 +38,15 @@
     _method = [Methods alloc];
     _translateFormat = [TranslateFormat alloc];
     _graph = [AddGraph alloc];
-
+    
     //スクロールビューをフィットさせる
     [LogScroll setScrollEnabled:YES];
     [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollViewWithCount:[appDelegate.editLog.log count]])];
+    
+    //効果音のセット
+    NSString *path = [[NSBundle mainBundle]pathForResource:@"se_click" ofType:@"mp3"];
+    NSURL *url = [NSURL fileURLWithPath:path];
+    AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &soundID);
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -148,7 +155,10 @@
             [expenseTextField resignFirstResponder]; // NumberPad消す
             [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollViewWithCount:[appDelegate.editLog.log count]])];    // LogScrollのサイズ調整
             [LogScroll setContentOffset:CGPointMake(0.0, 45.0) animated:YES];   // 一個目のセルまでスクロール
-
+            
+            //効果音の処理
+            AudioServicesPlaySystemSound(soundID);
+            
             // アニメーションの処理
             [logTableView insertRowsAtIndexPaths: [NSArray arrayWithObject:[NSIndexPath indexPathForRow:0 inSection:0]]
                                 withRowAnimation: UITableViewRowAnimationRight]; // 一個目のセルにアニメーションさせてセルを追加

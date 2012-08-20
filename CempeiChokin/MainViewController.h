@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CorePlot-CocoaTouch.h"
+#import <AudioToolbox/AudioServices.h>
 #import "Methods.h"
 #import "AddGraph.h"
 #import "TranslateFormat.h"
