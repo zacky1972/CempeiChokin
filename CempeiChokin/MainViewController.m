@@ -193,6 +193,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     appDelegate.editData.didDeposit= NO;
     appDelegate.editData.didSetPeriod = NO;
+    [appDelegate.editLog deleteLogData];
     [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Deposit"] animated:NO]; // 貯金画面へ移動する
 }
 
