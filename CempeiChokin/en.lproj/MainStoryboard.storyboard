@@ -194,8 +194,8 @@
                                             <segue destination="1EJ-OK-hO4" kind="modal" id="I7u-22-JVx"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="question.png" id="ViA-Hy-P6c">
-                                        <rect key="frame" x="21" y="35" width="183" height="182"/>
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" image="question.png" id="ViA-Hy-P6c">
+                                        <rect key="frame" x="22" y="34" width="183" height="182"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                 </subviews>
@@ -220,7 +220,7 @@
                                 </items>
                             </navigationBar>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     </view>
                     <connections>
                         <outlet property="BalanceLabel" destination="8UN-kZ-H61" id="5rx-Sb-sSp"/>

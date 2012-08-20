@@ -42,7 +42,17 @@
     [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollViewWithCount:[appDelegate.editLog.log count]])];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    DNSLog(@"viewWillAppear");
+    // 初期設定画面の表示
+    if(appDelegate.editData.defaultSettings == NO){//初期設定がまだだったら，設定画面に遷移します
+        [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"First"] animated:NO];
+    }
+    [self depositAndNextChecker];
+}
+
 - (void)viewDidAppear:(BOOL)animated{
+    DNSLog(@"viewDidAppear");
     // 初期設定画面の表示
     if(appDelegate.editData.defaultSettings == NO){//初期設定がまだだったら，設定画面に遷移します
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"First"] animated:NO];

@@ -75,18 +75,20 @@
     CPTFill *fill = [[CPTFill alloc] init];
     switch (index) {
         case 0:{
-            color = [CPTColor colorWithComponentRed:0.3 green:0.7 blue:1.0 alpha:10];
-            CPTColor *endingColor = [CPTColor colorWithComponentRed:0.3 green:0.3 blue:1.0 alpha:10];
+            color = [CPTColor colorWithComponentRed:1.0 green:0.5 blue:0.3 alpha:10];
+            CPTColor *endingColor = [CPTColor colorWithComponentRed:1.0 green:0.2 blue:0.3 alpha:10];
             CPTGradient *areaGradient1 = [CPTGradient gradientWithBeginningColor:color endingColor:endingColor];
             fill = [CPTFill fillWithGradient:areaGradient1];}
             break;
         case 1:
-            color = [CPTColor whiteColor];
+            color = [CPTColor colorWithComponentRed:1.0 green:1.0 blue:1.0 alpha:0.5];
             fill = [CPTFill fillWithColor:color];
             break;
-        case 2:
-            color = [CPTColor redColor];//colorWithComponentRed:1.0 green:0.1 blue:0.1 alpha:0.2];
-            fill = [CPTFill fillWithColor:color];
+        case 2:{
+            color = [CPTColor colorWithComponentRed:0.3 green:0.7 blue:1.0 alpha:10];
+            CPTColor *endingColor = [CPTColor colorWithComponentRed:0.3 green:0.3 blue:1.0 alpha:10];
+            CPTGradient *areaGradient1 = [CPTGradient gradientWithBeginningColor:color endingColor:endingColor];
+            fill = [CPTFill fillWithGradient:areaGradient1];}
             break;
     }
     
