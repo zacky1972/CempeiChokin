@@ -268,7 +268,7 @@
     // Toolbar作る
     UIToolbar *datePickerToolbar = [self makeNumberPadToolbar:string Done:done Cancel:cancel];
         
-    [actionSheet addSubview: datePickerToolbar]; // Toolbarのっける
+    [actionSheet addSubview: datePickerToolbar]; // Toolbarのっける　
     [actionSheet addSubview: datePicker];        // DatePickerのっける
 }
 
