@@ -213,7 +213,7 @@
             [depositLog replaceObjectAtIndex:0 withObject:dictionary]; // 上書きする
         }
         // !!!: デバッグ用
-        NSAssert(0, @"締め切りまだ来てねぇから！");
+        //NSAssert(0, @"締め切りまだ来てねぇから！");
     }
 }
 // 後でを押した時の動作
