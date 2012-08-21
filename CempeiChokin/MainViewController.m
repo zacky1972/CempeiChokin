@@ -93,6 +93,7 @@
     DepositLabel = nil;
     pleaseDepositButton = nil;
     pleaseNextButton = nil;
+    exclamationImageView = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -233,20 +234,38 @@
     if([balance compare:norma] == NSOrderedDescending){
         // (残金)＞(ノルマ) の時
         balance = @([balance intValue] - [norma intValue]); // 残金 - ノルマ
+    
+        // グラフの表示
+        if(graph != NULL){
+            // グラフが既に存在していた時
+            [graph removeFromSuperview]; // グラフを消去する
+        }
+        graph = [_graph makeGraph:expense Balance:balance Norma:norma]; // グラフを生成
+        [LogScroll addSubview:graph];                                   // LogScrollにグラフを表示させる
+        exclamationImageView.hidden = YES;
     }else{
         // (残金)≦(ノルマ) の時
-        balance = @0;                                       // 残金を 0
-        norma = @([budget intValue] - [expense intValue]);  // 残りを全部ノルマに
+        if ([balance intValue] <= 0) {//残金が0以下のとき
+            [graph removeFromSuperview]; // グラフを消去する
+            exclamationImageView.hidden = NO;
+        }else{
+            
+            balance = @0;                                       // 残金を 0
+            norma = @([budget intValue] - [expense intValue]);  // 残りを全部ノルマに
+            // グラフの表示
+            if(graph != NULL){
+                // グラフが既に存在していた時
+                [graph removeFromSuperview]; // グラフを消去する
+            }
+            graph = [_graph makeGraph:expense Balance:balance Norma:norma]; // グラフを生成
+            [LogScroll addSubview:graph];                                   // LogScrollにグラフを表示させる
+            exclamationImageView.hidden = YES;
+        }
+        
     }
-
-    // グラフの表示
-    if(graph != NULL){
-        // グラフが既に存在していた時
-        [graph removeFromSuperview]; // グラフを消去する
-    }
-    graph = [_graph makeGraph:expense Balance:balance Norma:norma]; // グラフを生成
-    [LogScroll addSubview:graph];                                   // LogScrollにグラフを表示させる
+    
 }
+
 // ラベルの更新
 - (void)labelReflesh{
     if(appDelegate.editData.didSetPeriod == YES){

@@ -25,6 +25,7 @@
     __weak IBOutlet UITextField *expenseTextField;
     __weak IBOutlet UISegmentedControl *KindSegment;
     __weak IBOutlet UITableView *logTableView;
+    __weak IBOutlet UIImageView *exclamationImageView;
     
     __weak IBOutlet UIButton *pleaseDepositButton;
     __weak IBOutlet UIButton *pleaseNextButton;
