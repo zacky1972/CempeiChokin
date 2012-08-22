@@ -364,6 +364,7 @@
     norma = @-1;
     [now removeAllObjects];
 }
+
 #pragma mark - とりあえずコピーしただけ系シリーズ
 // 期限が来たかどうかを返す
 - (BOOL)searchNext{
@@ -375,6 +376,12 @@
             return YES;
         }
     }
+
+    // 目標達成日を過ぎ去っている場合
+    if([[NSDate date] earlierDate:[self loadGoalPeriod]] != [NSDate date]){
+        return YES;
+    }
+
     // 期限内の場合
     return NO;
 }
