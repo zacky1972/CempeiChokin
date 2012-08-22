@@ -89,6 +89,7 @@
     pleaseDepositButton = nil;
     pleaseNextButton = nil;
     exclamationImageView = nil;
+    questionImageView = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -215,7 +216,11 @@
 
 #pragma mark - よく使う処理
 - (void)makeGraphChecker{
-    if (appDelegate.editData.didDeposit == YES && appDelegate.editData.didSetPeriod == YES)[self makeGraph];
+    if (appDelegate.editData.didDeposit == YES && appDelegate.editData.didSetPeriod == YES){
+        [self makeGraph];
+        questionImageView.hidden = YES;
+    }
+    else questionImageView.hidden = NO;
 }
 
 // グラフの表示
@@ -289,7 +294,13 @@
 
     if(appDelegate.editData.didDeposit == YES){
         DepositLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.deposit addComma:YES addYen:YES];
-    }else{
+    }
+    if (appDelegate.editData.didDeposit == NO && appDelegate.editData.didSetPeriod == NO) {
+        BudgetLabel.text = @"??????";
+        ExpenseLabel.text = @"??????";
+        BalanceLabel.text = @"??????";
+        NormaLabel.text = @"??????";
+        
         DepositLabel.text = @"??????";
     }
     if(appDelegate.editData.didDeposit == YES && appDelegate.editData.didSetPeriod == YES){
