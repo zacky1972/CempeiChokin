@@ -56,7 +56,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="0円" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="4X5-2C-0ap">
-                                        <rect key="frame" x="231" y="246" width="80" height="21"/>
+                                        <rect key="frame" x="231" y="246" width="74" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -70,14 +70,14 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="120,000円" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="Kb4-ic-H2e">
-                                        <rect key="frame" x="231" y="223" width="80" height="21"/>
+                                        <rect key="frame" x="231" y="223" width="74" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="110,000円" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="8UN-kZ-H61">
-                                        <rect key="frame" x="231" y="268" width="80" height="21"/>
+                                        <rect key="frame" x="231" y="268" width="74" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -98,7 +98,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="10,000円" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="gnA-AP-iVj">
-                                        <rect key="frame" x="231" y="289" width="80" height="21"/>
+                                        <rect key="frame" x="231" y="289" width="74" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -246,41 +246,6 @@
             </objects>
             <point key="canvasLocation" x="41" y="4102"/>
         </scene>
-        <!--Table View Controller - ヘルプ-->
-        <scene sceneID="gDR-dc-QuB">
-            <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2kC-j3-1He" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="JdI-Z6-HOp" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" bounces="NO" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="AoO-ZO-cLe">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <sections>
-                            <tableViewSection headerTitle="詳細は決まっておりません！" id="Ga1-2g-hcQ">
-                                <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="KUn-cj-R38">
-                                        <rect key="frame" x="0.0" y="46" width="320" height="46"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
-                                    </tableViewCell>
-                                </cells>
-                            </tableViewSection>
-                        </sections>
-                        <connections>
-                            <outlet property="dataSource" destination="JdI-Z6-HOp" id="Nwo-h0-ofe"/>
-                            <outlet property="delegate" destination="JdI-Z6-HOp" id="WYM-Jw-IXf"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="ヘルプ" id="Ku2-vt-F16"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-                </tableViewController>
-            </objects>
-            <point key="canvasLocation" x="1388" y="4400"/>
-        </scene>
         <!--Option View Controller - オプション-->
         <scene sceneID="vhf-gC-qbQ">
             <objects>
@@ -368,7 +333,7 @@
                                             <rect key="frame" x="10" y="1" width="280" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="ヘルプ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="s6f-cN-TQW">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="用語の説明" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="s6f-cN-TQW">
                                                     <rect key="frame" x="10" y="0.0" width="260" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -379,7 +344,7 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <connections>
-                                            <segue destination="JdI-Z6-HOp" kind="push" identifier="showHelp" id="q4t-4R-eG5"/>
+                                            <segue destination="vNH-Rj-KHL" kind="push" id="N7Q-P5-h7b"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Fj5-yq-POP" style="IBUITableViewCellStyleDefault" id="Mcm-H3-AWI">
@@ -425,6 +390,40 @@
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="435" y="4102"/>
+        </scene>
+        <!--Table View Controller - 用語の説明-->
+        <scene sceneID="qAq-d9-xPS">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="moM-wd-Sn9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="vNH-Rj-KHL" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="RGX-da-472">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection id="dtO-op-7eS">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" id="ohD-Yx-Tvq">
+                                        <rect key="frame" x="0.0" y="10" width="320" height="46"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="10" y="1" width="300" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="vNH-Rj-KHL" id="TkU-Mz-NVs"/>
+                            <outlet property="delegate" destination="vNH-Rj-KHL" id="663-RU-Pis"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="用語の説明" id="KVv-bJ-YtV"/>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="1388" y="4415"/>
         </scene>
         <!--Credit View Controller - クレジット-->
         <scene sceneID="rWf-lD-HVZ">
@@ -1718,7 +1717,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="VUD-Mx-Hmb"/>
+        <segue reference="k0a-gN-RJK"/>
         <segue reference="a8X-A1-VZc"/>
     </inferredMetricsTieBreakers>
 </document>
