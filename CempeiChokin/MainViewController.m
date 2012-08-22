@@ -94,6 +94,7 @@
     pleaseDepositButton = nil;
     pleaseNextButton = nil;
     exclamationImageView = nil;
+    questionImageView = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -219,7 +220,11 @@
 
 #pragma mark - よく使う処理
 - (void)makeGraphChecker{
-    if (appDelegate.editData.didDeposit == YES && appDelegate.editData.didSetPeriod == YES)[self makeGraph];
+    if (appDelegate.editData.didDeposit == YES && appDelegate.editData.didSetPeriod == YES){
+        [self makeGraph];
+        questionImageView.hidden = YES;
+    }
+    else questionImageView.hidden = NO;
 }
 
 // グラフの表示
