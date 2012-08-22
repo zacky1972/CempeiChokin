@@ -273,20 +273,36 @@
 
 // ラベルの更新
 - (void)labelReflesh{
-    if(appDelegate.editData.didSetPeriod == YES){
+    if (appDelegate.editData.didDeposit == YES && appDelegate.editData.didSetPeriod == YES) {
         BudgetLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.budget addComma:YES addYen:YES];
         ExpenseLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.expense addComma:YES addYen:YES];
         BalanceLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.balance addComma:YES addYen:YES];
         NormaLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.norma addComma:YES addYen:YES];
-    }else{
+        
+        DepositLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.deposit addComma:YES addYen:YES];
+    }
+    if (appDelegate.editData.didDeposit == NO && appDelegate.editData.didSetPeriod == YES) {
+        BudgetLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.budget addComma:YES addYen:YES];
+        ExpenseLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.expense addComma:YES addYen:YES];
+        BalanceLabel.text = @"??????";
+        NormaLabel.text = @"??????";
+        
+        DepositLabel.text = @"??????";
+    }
+    if (appDelegate.editData.didDeposit == YES && appDelegate.editData.didSetPeriod == NO) {
         BudgetLabel.text = @"??????";
         ExpenseLabel.text = @"??????";
         BalanceLabel.text = @"??????";
         NormaLabel.text = @"??????";
-    }
-    if(appDelegate.editData.didDeposit == YES){
+        
         DepositLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.deposit addComma:YES addYen:YES];
-    }else{
+    }
+    if (appDelegate.editData.didDeposit == NO && appDelegate.editData.didSetPeriod == NO) {
+        BudgetLabel.text = @"??????";
+        ExpenseLabel.text = @"??????";
+        BalanceLabel.text = @"??????";
+        NormaLabel.text = @"??????";
+        
         DepositLabel.text = @"??????";
     }
 }
