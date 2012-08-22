@@ -378,8 +378,10 @@
     }
 
     // 目標達成日を過ぎ去っている場合
-    if([[NSDate date] earlierDate:[self loadGoalPeriod]] != [NSDate date]){
-        return YES;
+    if([self loadGoalPeriod] != nil){
+        if([[NSDate date] earlierDate:[self loadGoalPeriod]] != [NSDate date]){
+            return YES;
+        }
     }
 
     // 期限内の場合
