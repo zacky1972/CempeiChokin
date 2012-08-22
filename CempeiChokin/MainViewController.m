@@ -262,9 +262,7 @@
             [LogScroll addSubview:graph];                                   // LogScrollにグラフを表示させる
             exclamationImageView.hidden = YES;
         }
-        
     }
-    
 }
 
 // ラベルの更新
