@@ -44,6 +44,7 @@
 }
 // これもバックグラウンドから帰ってくるところ(?) 上のやつのあと？
 - (void)applicationDidBecomeActive:(UIApplication *)application{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"applicationDidBecomeActive" object:nil];
 }
 // アプリが死ぬとき(タスクバーで×押された時)
 - (void)applicationWillTerminate:(UIApplication *)application{

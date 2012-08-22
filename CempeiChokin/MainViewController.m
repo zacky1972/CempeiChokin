@@ -18,6 +18,7 @@
     UIView *graph;
     
     NSInteger alertType;
+    BOOL didAlert;
     
     SystemSoundID soundID; // 効果音用
 }
@@ -47,11 +48,16 @@
     NSString *path = [[NSBundle mainBundle]pathForResource:@"se_click" ofType:@"mp3"];
     NSURL *url = [NSURL fileURLWithPath:path];
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &soundID);
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(timeLimitChecker)
+                                                 name:@"applicationDidBecomeActive"
+                                               object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     DNSLog(@"viewWillAppear");
-    [self depositAndNextChecker];
+    [self timeLimitChecker];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -61,18 +67,10 @@
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"First"] animated:NO];
     }
     [self depositAndNextChecker];
+    
     //初期設定から戻ってきた時用
-    [self timeLimitChecker];
     [self labelReflesh];
     [self depositAndNextChecker];
-    NSString *temp = [NSString stringWithFormat:@"%@~%@",
-                      [_translateFormat formatterDateUltimate:[appDelegate.editData loadStart]
-                                                      addYear:NO addMonth:YES addDay:YES
-                                                      addHour:NO addMinute:NO addSecond:NO],
-                      [_translateFormat formatterDateUltimate:[appDelegate.editData loadEnd]
-                                                      addYear:NO addMonth:YES addDay:YES
-                                                      addHour:NO addMinute:NO addSecond:NO]];
-    MainNavigationBar.topItem.title = temp;
     [self makeGraphChecker];
     //[self makeGraph]; // グラフの表示
 }
@@ -98,7 +96,7 @@
 #pragma mark - Storyboardで画面遷移する前に呼ばれるあれ
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"showOptionView"]) {
-        //FIXME:ここでデータを渡すといいんじゃないか
+        // FIXME:ここでデータを渡すといいんじゃないか
     }else if([segue destinationViewController] == [self.storyboard instantiateViewControllerWithIdentifier:@"Deposit"]){
         // TODO: 貯金画面行くときに渡すデータ
         
@@ -191,6 +189,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     appDelegate.editData.didDeposit= NO;
     appDelegate.editData.didSetPeriod = NO;
+    appDelegate.editData.nextAlert = NO;
     [appDelegate.editLog deleteLogData];
     [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Deposit"] animated:NO]; // 貯金画面へ移動する
 }
@@ -265,43 +264,64 @@
 
 // ラベルの更新
 - (void)labelReflesh{
+    NSString *temp;
+    
     if(appDelegate.editData.didSetPeriod == YES){
         BudgetLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.budget addComma:YES addYen:YES];
         ExpenseLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.expense addComma:YES addYen:YES];
         BalanceLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.balance addComma:YES addYen:YES];
+        
+        temp = [NSString stringWithFormat:@"%@~%@",
+                [_translateFormat formatterDateUltimate:[appDelegate.editData loadStart]
+                                                addYear:NO addMonth:YES addDay:YES
+                                                addHour:NO addMinute:NO addSecond:NO],
+                [_translateFormat formatterDateUltimate:[appDelegate.editData loadEnd]
+                                                addYear:NO addMonth:YES addDay:YES
+                                                addHour:NO addMinute:NO addSecond:NO]];
     }else{
         BudgetLabel.text = @"??????";
         ExpenseLabel.text = @"??????";
         BalanceLabel.text = @"??????";
+
+        temp = @"??月??日~??月??日";
     }
+    MainNavigationBar.topItem.title = temp;
+
     if(appDelegate.editData.didDeposit == YES){
-        NormaLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.norma addComma:YES addYen:YES];
         DepositLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.deposit addComma:YES addYen:YES];
     }else{
-        NormaLabel.text = @"??????";
         DepositLabel.text = @"??????";
+    }
+    if(appDelegate.editData.didDeposit == YES && appDelegate.editData.didSetPeriod == YES){
+        NormaLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.norma addComma:YES addYen:YES];
+    }else{
+        NormaLabel.text = @"??????";
     }
 }
 
 //FIXME:これお引っ越しすべきか？
 // 期限チェック
 - (void)timeLimitChecker{
-    if([appDelegate.editData searchNext] == YES){//期限をこえてたとき
+    //期限をこえてたとき
+    if([appDelegate.editData searchNext] == YES){
         // FIXME: 誰かまじめに書いて
-        if([appDelegate.editData searchLastNorma] == YES){
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"今日は"
-                                                            message:@"目標日やで！"
-                                                           delegate:self
-                                                  cancelButtonTitle:@"貯金しよう"
-                                                  otherButtonTitles:nil, nil];
-            [alert show];
-        }else{
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"今日は"
-                                                            message:@"期限日やで！"
-                                                           delegate:self
-                                                  cancelButtonTitle:@"貯金しよう"
-                                                  otherButtonTitles:nil, nil];
-            [alert show];
+        if(appDelegate.editData.nextAlert == NO){
+            appDelegate.editData.nextAlert = YES;
+            if([appDelegate.editData searchLastNorma] == YES){
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"今日は"
+                                                                message:@"目標日やで！"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"貯金しよう"
+                                                      otherButtonTitles:nil, nil];
+                [alert show];
+            }else{
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"今日は"
+                                                                message:@"期限日やで！"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"貯金しよう"
+                                                      otherButtonTitles:nil, nil];
+                [alert show];
+            }
         }
     }
 }
