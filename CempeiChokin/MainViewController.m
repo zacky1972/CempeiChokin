@@ -294,13 +294,7 @@
 
     if(appDelegate.editData.didDeposit == YES){
         DepositLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.deposit addComma:YES addYen:YES];
-    }
-    if (appDelegate.editData.didDeposit == NO && appDelegate.editData.didSetPeriod == NO) {
-        BudgetLabel.text = @"??????";
-        ExpenseLabel.text = @"??????";
-        BalanceLabel.text = @"??????";
-        NormaLabel.text = @"??????";
-        
+    }else{
         DepositLabel.text = @"??????";
     }
     if(appDelegate.editData.didDeposit == YES && appDelegate.editData.didSetPeriod == YES){
