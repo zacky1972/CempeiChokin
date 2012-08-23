@@ -85,7 +85,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section{
     NSString *temp;
-    temp = [@"残金は" stringByAppendingString:[_translateFormat stringFromNumber:appDelegate.editData.deposit addComma:1 addYen:1]];
+    temp = [@"残金は" stringByAppendingString:[_translateFormat stringFromNumber:appDelegate.editData.balance addComma:1 addYen:1]];
     temp = [temp stringByAppendingString:@"です．貯金総額は"];
     temp = [temp stringByAppendingString:[_translateFormat stringFromNumber:appDelegate.editData.deposit addComma:1 addYen:1]];
     temp = [temp stringByAppendingString:@"です"];
