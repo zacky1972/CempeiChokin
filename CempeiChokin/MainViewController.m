@@ -49,10 +49,6 @@
     NSURL *url = [NSURL fileURLWithPath:path];
     AudioServicesCreateSystemSoundID((__bridge CFURLRef)url, &soundID);
 
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(timeLimitChecker)
-                                                 name:@"applicationDidBecomeActive"
-                                               object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -163,13 +159,12 @@
             // 100万以上の場合
 
             // アラートの表示 // FIXME: 誰かまじめに書いて
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"100万以上の出費とか"
+            UIAlertView *expenseAlert = [[UIAlertView alloc] initWithTitle:@"100万以上の出費とか"
                                                             message:@"お前どんだけ金持ちやねん"
                                                            delegate:nil
                                                   cancelButtonTitle:@"反省する"
                                                   otherButtonTitles:nil];
-            [alert show];   // アラートを表示
-            // FIXME: なんか固まる
+            [expenseAlert show];   // アラートを表示
         }
     }else{
         // 値が入力されていない場合

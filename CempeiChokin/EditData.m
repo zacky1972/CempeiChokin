@@ -377,9 +377,11 @@
         }
     }
 
-    // 目標達成日を過ぎ去っている場合
+    // 目標達成日を過ぎ去っているかの判断
     if([self loadGoalPeriod] != nil){
+        // 期限日が存在する場合
         if([[NSDate date] earlierDate:[self loadGoalPeriod]] == [self loadGoalPeriod]){
+            // 期限日を過ぎ去っている場合
             return YES;
         }
     }

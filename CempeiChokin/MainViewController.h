@@ -38,4 +38,5 @@
 - (IBAction)pleaseDepositButton_down:(id)sender;
 - (IBAction)pleaseNextBtton_down:(id)sender;
 
+- (void)timeLimitChecker;
 @end
