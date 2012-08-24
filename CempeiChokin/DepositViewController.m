@@ -31,11 +31,14 @@
     [self makeNumberPadToolbar:depositTextField Return:@"完了"
                           Done:@selector(doneDepositTextField)
                         Cancel:@selector(cancelDepositTextField)];
-    
     [self dataCheck];
-
+    // TODO: あとでちゃんとします
+    if([appDelegate.editData.balance isEqualToNumber:@-1] == NO){
+        depositTextField.placeholder = [_translateFormat stringFromNumber:appDelegate.editData.balance addComma:YES addYen:YES];
+    }else{
+        depositTextField.placeholder = [_translateFormat stringFromNumber:[appDelegate.editData loadBalanceFromRecentDepositData] addComma:YES addYen:YES];
+    }
     // TODO: 棒グラフの生成
-    
 }
 
 - (void)viewDidUnload
@@ -82,8 +85,9 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section{
     NSString *temp;
-    temp = [_translateFormat stringFromNumber:appDelegate.editData.deposit addComma:1 addYen:1];
-    temp = [@"貯金総額は" stringByAppendingString:temp];
+    temp = [@"残金は" stringByAppendingString:[_translateFormat stringFromNumber:appDelegate.editData.balance addComma:1 addYen:1]];
+    temp = [temp stringByAppendingString:@"です．貯金総額は"];
+    temp = [temp stringByAppendingString:[_translateFormat stringFromNumber:appDelegate.editData.deposit addComma:1 addYen:1]];
     temp = [temp stringByAppendingString:@"です"];
     return temp;
 }
@@ -124,34 +128,10 @@
 #pragma mark - ボタンたち
 - (IBAction)DoneButton_down:(id)sender {
     DNSLog(@"完了きたで！");
-    DNSLog(@"depositValue:%@",depositValue);
-    [appDelegate.editData saveDepositDate:[appDelegate.editData loadEnd] Value:depositValue]; //とりあえず値を保存
     
-    if ([appDelegate.editData searchFinish] == YES) {
-        DNSLog(@"達成したよ");
-        [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"FinishView_complete"] animated:YES];
-    }else if ([appDelegate.editData searchLastNorma] == YES) {
-        DNSLog(@"期限切れましたけど…");
-        [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"FinishView_miss"] animated:YES];
-    }else{
-        DNSLog(@"そして貯金へ……");
-    }
-    appDelegate.editData.didDeposit = YES;   //貯金の設定しました
-    //FIXME:メソッド化してしまったがよいかな
-    if (appDelegate.editData.nextAlert == NO) {
-        [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"NextBudgetView"] animated:YES];//次の期間の設定へ
-        [appDelegate.editData clearPreviousData];
-    }else{//後で民
-        [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"MainView"] animated:YES]; // メイン画面へ移動する
-    }
-}
-// 後で貯金入力するときの動作 // TODO: あとでやります・・・
-/*
-- (IBAction)DoneButton2_down:(id)sender {
-    DNSLog(@"完了きたで！");
-    DNSLog(@"depositValue:%@",depositValue);
-    [appDelegate.editData saveDepositDate:[ここで前回の期間のEndを入れるようにする] Value:depositValue]; //とりあえず値を保存
+    [appDelegate.editData saveDepositDate:[appDelegate.editData loadEnd] Value:depositValue]; // 貯金を保存
 
+    // 目標日が来たかどうかの判断
     if ([appDelegate.editData searchFinish] == YES) {
         DNSLog(@"達成したよ");
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"FinishView_complete"] animated:YES];
@@ -161,17 +141,23 @@
     }else{
         DNSLog(@"そして貯金へ……");
     }
-}*/
+    
+    appDelegate.editData.didDeposit = YES; // 貯金の設定したフラグを立てる
+    [self decideNextViewController];       // 次の画面へ
+}
 
 - (IBAction)laterButton_down:(id)sender {
-    [appDelegate.editData skipDepositDate:[appDelegate.editData loadEnd]];
-    appDelegate.editData.didDeposit = NO;   //次の期間と予算の設定してない
-    
-    //FIXME:メソッド化してしまったがよいかな
-    if (appDelegate.editData.nextAlert == NO) {
-        [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"NextBudgetView"] animated:YES];//次の期間の設定へ
-        [appDelegate.editData clearPreviousData];
-    }else{//後で民
+    [appDelegate.editData skipDepositDate:[appDelegate.editData loadEnd]]; // 貯金せずにそれまでの状態を保存する
+    [self decideNextViewController];                                       // 次の画面へ
+}
+- (void)decideNextViewController{
+    // どの画面に行くかの判断
+    if (appDelegate.editData.didSetPeriod == NO){
+        // 次の期間を設定していない場合
+        [self.navigationController pushViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"NextBudgetView"] animated:YES]; // 次の期間の設定へ
+        [appDelegate.editData clearPreviousData]; // 前回のデータを消す
+    }else{
+        // 次の期間の設定が終わっていた場合
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"MainView"] animated:YES]; // メイン画面へ移動する
     }
 }

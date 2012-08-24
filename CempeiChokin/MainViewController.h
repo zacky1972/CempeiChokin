@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "CorePlot-CocoaTouch.h"
+#import <AudioToolbox/AudioServices.h>
 #import "Methods.h"
 #import "AddGraph.h"
 #import "TranslateFormat.h"
@@ -24,6 +25,8 @@
     __weak IBOutlet UITextField *expenseTextField;
     __weak IBOutlet UISegmentedControl *KindSegment;
     __weak IBOutlet UITableView *logTableView;
+    __weak IBOutlet UIImageView *exclamationImageView;
+    __weak IBOutlet UIImageView *questionImageView;
     
     __weak IBOutlet UIButton *pleaseDepositButton;
     __weak IBOutlet UIButton *pleaseNextButton;
@@ -35,4 +38,5 @@
 - (IBAction)pleaseDepositButton_down:(id)sender;
 - (IBAction)pleaseNextBtton_down:(id)sender;
 
+- (void)timeLimitChecker;
 @end

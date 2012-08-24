@@ -211,9 +211,10 @@
             [dictionary setObject:value forKey:@"Deposit"];
             deposit = @([deposit intValue] - [[[depositLog objectAtIndex:0] objectForKey:@"Deposit"] intValue] + [value intValue]); // 貯金額の計算
             [depositLog replaceObjectAtIndex:0 withObject:dictionary]; // 上書きする
+        }else{
+            // デバッグ用
+            NSAssert(0, @"締め切りまだ来てねぇから！エラー出るから！");
         }
-        // !!!: デバッグ用
-        NSAssert(0, @"締め切りまだ来てねぇから！");
     }
 }
 // 後でを押した時の動作
@@ -363,6 +364,7 @@
     norma = @-1;
     [now removeAllObjects];
 }
+
 #pragma mark - とりあえずコピーしただけ系シリーズ
 // 期限が来たかどうかを返す
 - (BOOL)searchNext{
@@ -371,26 +373,20 @@
         //今日が期限日じゃない場合
         if([date earlierDate:[self loadEnd]] != date){
             //期限日よりあとの場合
-            if(nextAlert == YES){
-                // 既にアラート済みの場合
-                if ([self searchLastNorma] == YES) {
-                    DNSLog(@"はやく貯金しろよ！！！");
-                    nextAlert = YES;
-                    return YES;
-                }else{
-                    DNSLog(@"貯金催促アラートもうしました！");
-                    return NO;
-                }
-            }else{
-                DNSLog(@"期限すぎてます")
-                //nextAlert = YES;
-                return YES;
-            }
+            return YES;
         }
     }
-    // 期限内
-    DNSLog(@"期限すぎてないよ！");
-    nextAlert = NO;
+
+    // 目標達成日を過ぎ去っているかの判断
+    if([self loadGoalPeriod] != nil){
+        // 期限日が存在する場合
+        if([[NSDate date] earlierDate:[self loadGoalPeriod]] == [self loadGoalPeriod]){
+            // 期限日を過ぎ去っている場合
+            return YES;
+        }
+    }
+
+    // 期限内の場合
     return NO;
 }
 
