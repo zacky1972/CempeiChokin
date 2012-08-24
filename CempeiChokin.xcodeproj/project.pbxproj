@@ -49,6 +49,7 @@
 		E99F6ED715D22C44006053A6 /* FinishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E99F6ED615D22C3C006053A6 /* FinishViewController.m */; };
 		E9AA9B1915D245BA00D5ADD5 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = E9AA9B1315D2454200D5ADD5 /* Default.png */; };
 		E9AFEDF015C915BA0021815A /* FirstHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AFEDEF15C915BA0021815A /* FirstHelpViewController.m */; };
+		E9C30DC415E73CD3009BA0FF /* WordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C30DC315E73CD3009BA0FF /* WordsViewController.m */; };
 		E9FB3A8115D947B6003992DE /* GoalDateExtendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9FB3A8015D947B6003992DE /* GoalDateExtendViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -209,6 +210,8 @@
 		E9AA9B1315D2454200D5ADD5 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		E9AFEDEE15C915BA0021815A /* FirstHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstHelpViewController.h; sourceTree = "<group>"; };
 		E9AFEDEF15C915BA0021815A /* FirstHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstHelpViewController.m; sourceTree = "<group>"; };
+		E9C30DC215E73CD3009BA0FF /* WordsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordsViewController.h; sourceTree = "<group>"; };
+		E9C30DC315E73CD3009BA0FF /* WordsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordsViewController.m; sourceTree = "<group>"; };
 		E9FB3A7F15D947B6003992DE /* GoalDateExtendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalDateExtendViewController.h; sourceTree = "<group>"; };
 		E9FB3A8015D947B6003992DE /* GoalDateExtendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalDateExtendViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -503,6 +506,8 @@
 				E9AFEDEF15C915BA0021815A /* FirstHelpViewController.m */,
 				01E6EEDE15D25AF3001F5B38 /* CreditViewController.h */,
 				01E6EEDF15D25AF3001F5B38 /* CreditViewController.m */,
+				E9C30DC215E73CD3009BA0FF /* WordsViewController.h */,
+				E9C30DC315E73CD3009BA0FF /* WordsViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -657,6 +662,7 @@
 				01E6EEE015D25AF3001F5B38 /* CreditViewController.m in Sources */,
 				E945FB5115D4F09C0051C57A /* AddNormaLine.m in Sources */,
 				E9FB3A8115D947B6003992DE /* GoalDateExtendViewController.m in Sources */,
+				E9C30DC415E73CD3009BA0FF /* WordsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
