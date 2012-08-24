@@ -392,11 +392,11 @@
             </objects>
             <point key="canvasLocation" x="435" y="4102"/>
         </scene>
-        <!--Table View Controller - 用語の説明-->
+        <!--Words View Controller - 用語の説明-->
         <scene sceneID="qAq-d9-xPS">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="moM-wd-Sn9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="vNH-Rj-KHL" sceneMemberID="viewController">
+                <tableViewController id="vNH-Rj-KHL" customClass="WordsViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="RGX-da-472">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1804,6 +1804,9 @@
                 <relationship kind="action" name="deleteDataButton_down:"/>
                 <relationship kind="outlet" name="deleteDataButton" candidateClass="UIButton"/>
             </relationships>
+        </class>
+        <class className="WordsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/WordsViewController.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
