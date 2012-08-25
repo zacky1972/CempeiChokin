@@ -54,23 +54,29 @@
 #pragma mark - よく使う処理たち
 // 値の読み込みとか
 - (void)dataInitialize{
-    if([appDelegate.editData loadStart] != nil){
-        // Startがある
-        startDate = [appDelegate.editData loadStart];
-        startDateTextField.text = [_translateFormat formatterDate:startDate];
+    if (appDelegate.editData.didSetPeriod == YES) {
+        if([appDelegate.editData loadStart] != nil){
+            // Startがある
+            startDate = [appDelegate.editData loadStart];
+            startDateTextField.text = [_translateFormat formatterDate:startDate];
+        }else{
+            // 初期設定
+            startDate = [NSDate date];
+            startDateTextField.text = [_translateFormat formatterDate:startDate];
+        }
+        if([appDelegate.editData loadEnd] != nil){
+            // Endがある
+            endDate = [appDelegate.editData loadEnd];
+            endDateTextField.text = [_translateFormat formatterDate:endDate];
+        }
+        if([appDelegate.editData.budget isEqualToNumber:@-1] == NO){
+            // 予算が決まっている
+            budgetTextField.text = [_translateFormat stringFromNumber:appDelegate.editData.budget addComma:YES addYen:YES];
+        }
     }else{
-        // 初期設定
+        //次の期間の設定
         startDate = [NSDate date];
         startDateTextField.text = [_translateFormat formatterDate:startDate];
-    }
-    if([appDelegate.editData loadEnd] != nil){
-        // Endがある
-        endDate = [appDelegate.editData loadEnd];
-        endDateTextField.text = [_translateFormat formatterDate:endDate];
-    }
-    if([appDelegate.editData.budget isEqualToNumber:@-1] == NO){
-        // 予算が決まっている
-        budgetTextField.text = [_translateFormat stringFromNumber:appDelegate.editData.budget addComma:YES addYen:YES];
     }
 }
 // データの確認 & 完了ボタンの設定変更
