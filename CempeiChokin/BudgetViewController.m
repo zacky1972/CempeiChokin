@@ -35,7 +35,6 @@
 
     [self dataInitialize];
     [self dataCheck];
-
     // ツールバーとかデータピッカー
     datePicker =[[UIDatePicker alloc] initWithFrame: CGRectMake(0, 44, 320, 216)];
     datePicker.datePickerMode = UIDatePickerModeDate;

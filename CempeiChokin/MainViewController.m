@@ -201,11 +201,11 @@
 }
 
 - (IBAction)pleaseDepositButton_down:(id)sender {
-    [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Deposit"] animated:NO]; // 貯金画面へ移動する
+    [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Deposit"] animated:YES]; // 貯金画面へ移動する
 }
 
 - (IBAction)pleaseNextBtton_down:(id)sender {
-    [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"NextBudgetView"] animated:NO]; // 貯金画面へ移動する
+    [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"NextBudget"] animated:YES]; // 貯金画面へ移動する
     //次の期間の設定へ
 }
 
