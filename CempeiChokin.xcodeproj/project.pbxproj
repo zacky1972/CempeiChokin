@@ -47,7 +47,7 @@
 		E9AA9B1915D245BA00D5ADD5 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = E9AA9B1315D2454200D5ADD5 /* Default.png */; };
 		E9AFEDF015C915BA0021815A /* FirstHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AFEDEF15C915BA0021815A /* FirstHelpViewController.m */; };
 		E9C30DC415E73CD3009BA0FF /* WordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C30DC315E73CD3009BA0FF /* WordsViewController.m */; };
-		E9C30DCB15E76589009BA0FF /* アイコン.png in Resources */ = {isa = PBXBuildFile; fileRef = E9C30DCA15E76589009BA0FF /* アイコン.png */; };
+		E9C30DCB15E76589009BA0FF /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E9C30DCA15E76589009BA0FF /* icon.png */; };
 		E9C30DCD15E781E3009BA0FF /* pdeposit.png in Resources */ = {isa = PBXBuildFile; fileRef = E9C30DCC15E781E3009BA0FF /* pdeposit.png */; };
 		E9C30DCF15E782A7009BA0FF /* pnext.png in Resources */ = {isa = PBXBuildFile; fileRef = E9C30DCE15E782A7009BA0FF /* pnext.png */; };
 		E9C30DD115E78357009BA0FF /* question.png in Resources */ = {isa = PBXBuildFile; fileRef = E9C30DD015E78357009BA0FF /* question.png */; };
@@ -210,7 +210,7 @@
 		E9AFEDEF15C915BA0021815A /* FirstHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstHelpViewController.m; sourceTree = "<group>"; };
 		E9C30DC215E73CD3009BA0FF /* WordsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordsViewController.h; sourceTree = "<group>"; };
 		E9C30DC315E73CD3009BA0FF /* WordsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordsViewController.m; sourceTree = "<group>"; };
-		E9C30DCA15E76589009BA0FF /* アイコン.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "アイコン.png"; sourceTree = "<group>"; };
+		E9C30DCA15E76589009BA0FF /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		E9C30DCC15E781E3009BA0FF /* pdeposit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pdeposit.png; sourceTree = "<group>"; };
 		E9C30DCE15E782A7009BA0FF /* pnext.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pnext.png; sourceTree = "<group>"; };
 		E9C30DD015E78357009BA0FF /* question.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = question.png; sourceTree = "<group>"; };
@@ -385,7 +385,7 @@
 		E98EA58415BFB8A10019AED5 = {
 			isa = PBXGroup;
 			children = (
-				E9C30DCA15E76589009BA0FF /* アイコン.png */,
+				E9C30DCA15E76589009BA0FF /* icon.png */,
 				E96F51E815E235C100648F32 /* AudioToolbox.framework */,
 				E9AA9B1315D2454200D5ADD5 /* Default.png */,
 				E98EA59915BFB8A10019AED5 /* CempeiChokin */,
@@ -611,7 +611,7 @@
 				E96F51F115E3672000648F32 /* help_main.png in Resources */,
 				E96F51F215E3672000648F32 /* help.png in Resources */,
 				E96F51F515E3738000648F32 /* exclamation.png in Resources */,
-				E9C30DCB15E76589009BA0FF /* アイコン.png in Resources */,
+				E9C30DCB15E76589009BA0FF /* icon.png in Resources */,
 				E9C30DCD15E781E3009BA0FF /* pdeposit.png in Resources */,
 				E9C30DCF15E782A7009BA0FF /* pnext.png in Resources */,
 				E9C30DD115E78357009BA0FF /* question.png in Resources */,
