@@ -60,10 +60,6 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     DNSLog(@"viewDidAppear");
-    // 初期設定画面の表示
-    if(appDelegate.editData.defaultSettings == NO){//初期設定がまだだったら，設定画面に遷移します
-        [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"First"] animated:NO];
-    }
     //初期設定から戻ってきた時用
     [self timeLimitChecker];
     [self labelReflesh];
