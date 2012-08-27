@@ -26,7 +26,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    
+    //アラートの表示
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ヘルプ"
+                                                    message:@"せんちょをダウンロードして頂き，ありがとうございます．\nこのアプリはあなたの貯金をサポートするためにあります．これから，一緒に頑張っていきましょう！\nお気づきの点があれば，Twitterアカウント(@CEMPEI_official)までお知らせください．"
+                                                   delegate:self
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil, nil];
+    [alert show];
 }
 
 - (void)viewDidUnload
@@ -38,6 +45,12 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark - UIAlertView関係
+// アラートビューのボタンの動作
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"Init"] animated:NO]; // 貯金画面へ移動する
 }
 
 @end
