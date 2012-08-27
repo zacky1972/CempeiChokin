@@ -222,8 +222,13 @@
 - (IBAction)DoneButton_down:(id)sender {
     [appDelegate.editData saveStart:startDate End:endDate];
     [appDelegate.editData calcForNextStage];
-    
-    appDelegate.editData.didSetPeriod = YES;    //貯金した
+
+    // (初回以外)期限をセットした時
+    if (appDelegate.editData.didSetPeriod == NO) {
+        [appDelegate.editLog deleteLogData];
+        appDelegate.editData.didSetPeriod = YES;    //貯金した
+    }
+
 }
 
 - (IBAction)laterButton_down:(id)sender {
