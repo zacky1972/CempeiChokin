@@ -13,6 +13,8 @@
 @interface DepositViewController : UITableViewController{
     __weak IBOutlet UITableView *depositTableView;
     __weak IBOutlet UITextField *depositTextField;
+    __weak IBOutlet UILabel *balanceLabel;
+    __weak IBOutlet UILabel *depositLabel;
     __weak IBOutlet UIButton *DoneButton;
     __weak IBOutlet UIView *barGraphView;
 }

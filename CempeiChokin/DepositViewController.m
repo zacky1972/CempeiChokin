@@ -38,6 +38,7 @@
     }else{
         depositTextField.placeholder = [_translateFormat stringFromNumber:[appDelegate.editData loadBalanceFromRecentDepositData] addComma:YES addYen:YES];
     }
+    [self setLabel];
     // TODO: 棒グラフの生成
 }
 
@@ -47,6 +48,8 @@
     depositTableView = nil;
     DoneButton = nil;
     barGraphView = nil;
+    balanceLabel = nil;
+    depositLabel = nil;
     [super viewDidUnload];
 
 }
@@ -76,20 +79,23 @@
 
 //タイトルを決定する
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    //後での時値がおかしい
     NSString *temp;
     temp = [[_translateFormat formatterDate:[appDelegate.editData loadStart]] stringByAppendingString:@"~"];
     temp = [temp stringByAppendingString:[_translateFormat formatterDate:[appDelegate.editData loadEnd]]];
     return temp;
 }
-//フッターを決定する
 
-- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section{
+//フッターを決定する
+- (void)setLabel{
     NSString *temp;
+    //TODO:値がおかしい
     temp = [@"残金は" stringByAppendingString:[_translateFormat stringFromNumber:appDelegate.editData.balance addComma:1 addYen:1]];
-    temp = [temp stringByAppendingString:@"です．貯金総額は"];
-    temp = [temp stringByAppendingString:[_translateFormat stringFromNumber:appDelegate.editData.deposit addComma:1 addYen:1]];
-    temp = [temp stringByAppendingString:@"です"];
-    return temp;
+    temp = [temp stringByAppendingString:@"です．"];
+    balanceLabel.text = temp;
+    temp = [@"貯金総額は" stringByAppendingString:[_translateFormat stringFromNumber:appDelegate.editData.deposit addComma:1 addYen:1]];
+    temp = [temp stringByAppendingString:@"です."];
+    depositLabel.text = temp;
 }
 
 #pragma mark - depositTextField関係
