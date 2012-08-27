@@ -51,15 +51,16 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     DNSLog(@"viewWillAppear");
-    // 初期設定画面の表示
-    if(appDelegate.editData.defaultSettings == NO){//初期設定がまだだったら，設定画面に遷移します
-        [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"First"] animated:NO];
-    }
     [self depositAndNextChecker];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     DNSLog(@"viewDidAppear");
+    // 初期設定画面の表示
+    if(appDelegate.editData.defaultSettings == NO){//初期設定がまだだったら，設定画面に遷移します
+        [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"First"] animated:NO];
+    }
+    [self depositAndNextChecker];
     //初期設定から戻ってきた時用
     [self timeLimitChecker];
     [self labelReflesh];
@@ -268,16 +269,16 @@
         BudgetLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.budget addComma:YES addYen:YES];
         ExpenseLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.expense addComma:YES addYen:YES];
         BalanceLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.balance addComma:YES addYen:YES];
-        NormaLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.norma addComma:YES addYen:YES];
     }else{
         BudgetLabel.text = @"??????";
         ExpenseLabel.text = @"??????";
         BalanceLabel.text = @"??????";
-        NormaLabel.text = @"??????";
     }
     if(appDelegate.editData.didDeposit == YES){
+        NormaLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.norma addComma:YES addYen:YES];
         DepositLabel.text = [_translateFormat stringFromNumber:appDelegate.editData.deposit addComma:YES addYen:YES];
     }else{
+        NormaLabel.text = @"??????";
         DepositLabel.text = @"??????";
     }
 }
