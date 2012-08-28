@@ -32,7 +32,6 @@
                           Done:@selector(doneDepositTextField)
                         Cancel:@selector(cancelDepositTextField)];
     [self dataCheck];
-    // TODO: あとでちゃんとします
     if([appDelegate.editData.balance isEqualToNumber:@-1] == NO){
         depositTextField.placeholder = [_translateFormat stringFromNumber:appDelegate.editData.balance addComma:YES addYen:YES];
     }else{

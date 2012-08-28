@@ -50,7 +50,8 @@
 		E9C30DCD15E781E3009BA0FF /* pdeposit.png in Resources */ = {isa = PBXBuildFile; fileRef = E9C30DCC15E781E3009BA0FF /* pdeposit.png */; };
 		E9C30DCF15E782A7009BA0FF /* pnext.png in Resources */ = {isa = PBXBuildFile; fileRef = E9C30DCE15E782A7009BA0FF /* pnext.png */; };
 		E9C30DD115E78357009BA0FF /* question.png in Resources */ = {isa = PBXBuildFile; fileRef = E9C30DD015E78357009BA0FF /* question.png */; };
-		E9EEAE6015EB610D000C0742 /* help_main.png in Resources */ = {isa = PBXBuildFile; fileRef = E9EEAE5F15EB610D000C0742 /* help_main.png */; };
+		E9EEAE6215EB7C7F000C0742 /* help_main.png in Resources */ = {isa = PBXBuildFile; fileRef = E9EEAE6115EB7C7F000C0742 /* help_main.png */; };
+		E9EEAE6415EC99D6000C0742 /* push.png in Resources */ = {isa = PBXBuildFile; fileRef = E9EEAE6315EC99D6000C0742 /* push.png */; };
 		E9FB3A8115D947B6003992DE /* GoalDateExtendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9FB3A8015D947B6003992DE /* GoalDateExtendViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -213,7 +214,8 @@
 		E9C30DCC15E781E3009BA0FF /* pdeposit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pdeposit.png; sourceTree = "<group>"; };
 		E9C30DCE15E782A7009BA0FF /* pnext.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pnext.png; sourceTree = "<group>"; };
 		E9C30DD015E78357009BA0FF /* question.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = question.png; sourceTree = "<group>"; };
-		E9EEAE5F15EB610D000C0742 /* help_main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help_main.png; sourceTree = "<group>"; };
+		E9EEAE6115EB7C7F000C0742 /* help_main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help_main.png; sourceTree = "<group>"; };
+		E9EEAE6315EC99D6000C0742 /* push.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = push.png; sourceTree = "<group>"; };
 		E9FB3A7F15D947B6003992DE /* GoalDateExtendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalDateExtendViewController.h; sourceTree = "<group>"; };
 		E9FB3A8015D947B6003992DE /* GoalDateExtendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalDateExtendViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -479,7 +481,8 @@
 			children = (
 				E96F51F415E3738000648F32 /* exclamation.png */,
 				E96F51EE15E3671F00648F32 /* help.png */,
-				E9EEAE5F15EB610D000C0742 /* help_main.png */,
+				E9EEAE6115EB7C7F000C0742 /* help_main.png */,
+				E9EEAE6315EC99D6000C0742 /* push.png */,
 				E9C30DD015E78357009BA0FF /* question.png */,
 				E9C30DCC15E781E3009BA0FF /* pdeposit.png */,
 				E9C30DCE15E782A7009BA0FF /* pnext.png */,
@@ -614,7 +617,8 @@
 				E9C30DCD15E781E3009BA0FF /* pdeposit.png in Resources */,
 				E9C30DCF15E782A7009BA0FF /* pnext.png in Resources */,
 				E9C30DD115E78357009BA0FF /* question.png in Resources */,
-				E9EEAE6015EB610D000C0742 /* help_main.png in Resources */,
+				E9EEAE6215EB7C7F000C0742 /* help_main.png in Resources */,
+				E9EEAE6415EC99D6000C0742 /* push.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

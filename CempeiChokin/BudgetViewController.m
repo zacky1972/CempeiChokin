@@ -62,6 +62,14 @@
             // 初期設定
             startDate = [NSDate date];
             startDateTextField.text = [_translateFormat formatterDate:startDate];
+            
+            //ポップアップの表示
+            UIAlertView *expenseAlert = [[UIAlertView alloc] initWithTitle:nil
+                                                                   message:@"例：「次の給料日までの10日間を5000円で過ごす」この時の10日間が期間で、5000円が予算です。"
+                                                                  delegate:nil
+                                                         cancelButtonTitle:@"OK"
+                                                         otherButtonTitles:nil];
+            [expenseAlert show];   // アラートを表示
         }
         if([appDelegate.editData loadEnd] != nil){
             // Endがある
