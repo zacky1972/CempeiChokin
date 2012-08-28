@@ -90,6 +90,9 @@
 - (void)setLabel{
     NSString *temp;
     //TODO:値がおかしい
+    if([appDelegate.editData.loadDepositFromRecentDepositData isEqualToNumber:@-1] == NO){
+        
+    }
     temp = [@"残金は" stringByAppendingString:[_translateFormat stringFromNumber:appDelegate.editData.balance addComma:1 addYen:1]];
     temp = [temp stringByAppendingString:@"です．"];
     balanceLabel.text = temp;
