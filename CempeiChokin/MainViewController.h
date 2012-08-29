@@ -29,7 +29,9 @@
     __weak IBOutlet UIImageView *questionImageView;
     
     __weak IBOutlet UIButton *pleaseDepositButton;
+    __weak IBOutlet UIImageView *pushDepositImage;
     __weak IBOutlet UIButton *pleaseNextButton;
+    __weak IBOutlet UIImageView *pleaseNextImage;
     
 }
 

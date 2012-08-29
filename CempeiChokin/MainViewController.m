@@ -86,6 +86,8 @@
     pleaseNextButton = nil;
     exclamationImageView = nil;
     questionImageView = nil;
+    pushDepositImage = nil;
+    pleaseNextImage = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -194,11 +196,19 @@
 #pragma mark - 催促ボタン関係
 - (void)depositAndNextChecker{
     //一度催促後，貯金をしたかどうか，と次の期間の設定をしたかどうかをチェックして，まだなら催促ボタンを表示する
-    if (appDelegate.editData.didDeposit == YES) pleaseDepositButton.hidden = YES;
-    else pleaseDepositButton.hidden = NO;
-    
-    if (appDelegate.editData.didSetPeriod == YES) pleaseNextButton.hidden = YES;
-    else pleaseNextButton.hidden = NO;
+    if (appDelegate.editData.didDeposit == YES){ pleaseDepositButton.hidden = YES;
+        pushDepositImage.hidden = YES;
+    }else{
+        pleaseDepositButton.hidden = NO;
+        pushDepositImage.hidden = NO;
+    }
+    if (appDelegate.editData.didSetPeriod == YES) {
+        pleaseNextButton.hidden = YES;
+        pleaseNextImage.hidden = YES;
+    }else{
+        pleaseNextButton.hidden = NO;
+        pleaseNextImage.hidden = NO;
+    }
 }
 
 - (IBAction)pleaseDepositButton_down:(id)sender {
@@ -206,6 +216,7 @@
 }
 
 - (IBAction)pleaseNextBtton_down:(id)sender {
+    
     [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"NextBudget"] animated:YES]; // 貯金画面へ移動する
     //次の期間の設定へ
 }
