@@ -53,15 +53,33 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     DNSLog(@"viewWillAppear");
+    
     [self timeLimitChecker];
-}
-
-- (void)viewDidAppear:(BOOL)animated{
-    DNSLog(@"viewDidAppear");
+    /*
     // 初期設定画面の表示
     if(appDelegate.editData.defaultSettings == NO){//初期設定がまだだったら，設定画面に遷移します
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"First"] animated:NO];
     }
+    
+    [self depositAndNextChecker];
+    
+    //初期設定から戻ってきた時用
+    [self labelReflesh];
+    [self depositAndNextChecker];
+    [self makeGraphChecker];
+    */
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    DNSLog(@"viewDidAppear");
+    
+    
+    // 初期設定画面の表示
+    
+    if(appDelegate.editData.defaultSettings == NO){//初期設定がまだだったら，設定画面に遷移します
+        [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"First"] animated:NO];
+    }
+     
     [self depositAndNextChecker];
     
     //初期設定から戻ってきた時用
@@ -69,6 +87,7 @@
     [self depositAndNextChecker];
     [self makeGraphChecker];
     //[self makeGraph]; // グラフの表示
+     
 }
 
 - (void)viewDidUnload
