@@ -18,6 +18,7 @@
     UIView *graph;
     
     NSInteger alertType;
+    NSTimer *timeLimitCheckTimer;
     BOOL didAlert;
     
     SystemSoundID soundID; // 効果音用
@@ -40,6 +41,8 @@
     _translateFormat = [TranslateFormat alloc];
     _graph = [AddGraph alloc];
     
+    timeLimitCheckTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeLimitChecker) userInfo:nil repeats:YES];
+    
     //スクロールビューをフィットさせる
     [LogScroll setScrollEnabled:YES];
     [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollViewWithCount:[appDelegate.editLog.log count]])];
@@ -55,39 +58,20 @@
     DNSLog(@"viewWillAppear");
     
     [self timeLimitChecker];
-    /*
-    // 初期設定画面の表示
-    if(appDelegate.editData.defaultSettings == NO){//初期設定がまだだったら，設定画面に遷移します
-        [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"First"] animated:NO];
-    }
     
-    [self depositAndNextChecker];
-    
-    //初期設定から戻ってきた時用
     [self labelReflesh];
     [self depositAndNextChecker];
     [self makeGraphChecker];
-    */
+    [timeLimitCheckTimer fire];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     DNSLog(@"viewDidAppear");
-    
-    
+
     // 初期設定画面の表示
-    
     if(appDelegate.editData.defaultSettings == NO){//初期設定がまだだったら，設定画面に遷移します
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"First"] animated:NO];
     }
-     
-    [self depositAndNextChecker];
-    
-    //初期設定から戻ってきた時用
-    [self labelReflesh];
-    [self depositAndNextChecker];
-    [self makeGraphChecker];
-    //[self makeGraph]; // グラフの表示
-     
 }
 
 - (void)viewDidUnload
@@ -328,13 +312,15 @@
     }
 }
 
-//FIXME:これお引っ越しすべきか？
 // 期限チェック
 - (void)timeLimitChecker{
+    DNSLog(@"期限のチェック");
     //期限をこえてたとき
     if([appDelegate.editData searchNext] == YES){
-        // FIXME: 誰かまじめに書いて
+        DNSLog(@"期限のチェック2");
+        [timeLimitCheckTimer invalidate];
         if(appDelegate.editData.nextAlert == NO){
+            DNSLog(@"期限のチェック3");
             appDelegate.editData.nextAlert = YES;
             if([appDelegate.editData searchLastNorma] == YES){
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"目標日を過ぎました"

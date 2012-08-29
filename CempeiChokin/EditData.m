@@ -372,6 +372,7 @@
 #pragma mark - とりあえずコピーしただけ系シリーズ
 // 期限が来たかどうかを返す
 - (BOOL)searchNext{
+    DNSLog(@"期限の確認");
     NSDate *date = [_translateFormat dateOnly:[NSDate date]];
     if ([date isEqualToDate:[self loadEnd]] == NO) {
         //今日が期限日じゃない場合

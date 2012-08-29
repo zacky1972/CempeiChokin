@@ -33,6 +33,15 @@
                         Cancel:@selector(cancelDepositTextField)];
     [self dataCheck];
 
+    // 後でボタンは最後の時
+    if([appDelegate.editData searchLastNorma] == YES){
+        LaterButton.enabled = NO;
+        LaterButton.alpha = 0.0;
+    }else{
+        LaterButton.enabled = YES;
+        LaterButton.alpha = 1;
+    }
+
     [self setLabel];
     // TODO: 棒グラフの生成
 }
@@ -45,6 +54,7 @@
     barGraphView = nil;
     balanceLabel = nil;
     depositLabel = nil;
+    LaterButton = nil;
     [super viewDidUnload];
 
 }
@@ -76,8 +86,11 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     //後での時値がおかしい
     NSString *temp;
-    temp = [[_translateFormat formatterDate:[appDelegate.editData loadStart]] stringByAppendingString:@"~"];
-    temp = [temp stringByAppendingString:[_translateFormat formatterDate:[appDelegate.editData loadEnd]]];
+    if(appDelegate.editData.skipDeposit == NO){
+        temp = [NSString stringWithFormat:@"%@~%@",[_translateFormat formatterDate:[appDelegate.editData loadStart]],[_translateFormat formatterDate:[appDelegate.editData loadEnd]]];
+    }else{
+        temp = [NSString stringWithFormat:@"%@~%@",[_translateFormat formatterDate:[appDelegate.editData loadStartFromRecentDepositData]],[_translateFormat formatterDate:[appDelegate.editData loadEndFromRecentDepositData]]];
+    }
     return temp;
 }
 

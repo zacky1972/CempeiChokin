@@ -16,6 +16,7 @@
     __weak IBOutlet UILabel *balanceLabel;
     __weak IBOutlet UILabel *depositLabel;
     __weak IBOutlet UIButton *DoneButton;
+    __weak IBOutlet UIButton *LaterButton;
     __weak IBOutlet UIView *barGraphView;
 }
 

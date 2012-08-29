@@ -45,8 +45,6 @@
 }
 // これもバックグラウンドから帰ってくるところ(?) 上のやつのあと？
 - (void)applicationDidBecomeActive:(UIApplication *)application{
-    MainViewController *mainViewController;
-    [mainViewController timeLimitChecker];
 }
 // アプリが死ぬとき(タスクバーで×押された時)
 - (void)applicationWillTerminate:(UIApplication *)application{
