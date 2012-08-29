@@ -337,17 +337,17 @@
         if(appDelegate.editData.nextAlert == NO){
             appDelegate.editData.nextAlert = YES;
             if([appDelegate.editData searchLastNorma] == YES){
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"今日は"
-                                                                message:@"目標日やで！"
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"目標日を過ぎました"
+                                                                message:nil
                                                                delegate:self
-                                                      cancelButtonTitle:@"貯金しよう"
+                                                      cancelButtonTitle:@"貯金する"
                                                       otherButtonTitles:nil, nil];
                 [alert show];
             }else{
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"今日は"
-                                                                message:@"期限日やで！"
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"期限日を過ぎました"
+                                                                message:nil
                                                                delegate:self
-                                                      cancelButtonTitle:@"貯金しよう"
+                                                      cancelButtonTitle:@"貯金する"
                                                       otherButtonTitles:nil, nil];
                 [alert show];
             }

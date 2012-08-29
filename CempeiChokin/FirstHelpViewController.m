@@ -28,7 +28,7 @@
     [super viewDidLoad];
     
     //アラートの表示
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"ヘルプ"
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
                                                     message:@"せんちょをダウンロードして頂き，ありがとうございます．\nこのアプリはあなたの貯金をサポートするためにあります．これから，一緒に頑張っていきましょう！\nお気づきの点があれば，Twitterアカウント(@CEMPEI_official)までお知らせください．"
                                                    delegate:self
                                           cancelButtonTitle:@"OK"
