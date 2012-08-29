@@ -19,7 +19,7 @@
 }
 
 @synthesize expense,balance,norma,budget,deposit;
-@synthesize defaultSettings,didDeposit,didSetPeriod,nextAlert;
+@synthesize defaultSettings,didDeposit,didSetPeriod,skipDeposit,nextAlert;
 
 // 初期化
 -(id)init{
@@ -145,12 +145,14 @@
     [self forSaveFlagName:@"defaultSettings" Flag:defaultSettings];
     [self forSaveFlagName:@"didDeposit" Flag:didDeposit];
     [self forSaveFlagName:@"didSetPeriod" Flag:didSetPeriod];
+    [self forSaveFlagName:@"skipDeposit" Flag:skipDeposit];
     [self forSaveFlagName:@"nextAlert" Flag:nextAlert];
 }
 - (void)loadFlags{
     defaultSettings = [self forLoadFlagName:@"defaultSettings" Flag:defaultSettings Default:NO];
     didDeposit = [self forLoadFlagName:@"didDeposit" Flag:didDeposit Default:YES];
     didSetPeriod = [self forLoadFlagName:@"didSetPeriod" Flag:didSetPeriod Default:YES];
+    skipDeposit = [self forLoadFlagName:@"skipDeposit" Flag:skipDeposit Default:NO];
     nextAlert = [self forLoadFlagName:@"nextAlert" Flag:nextAlert Default:NO];
 }
 - (void)forSaveFlagName:(NSString *)name Flag:(BOOL)flag{
@@ -188,7 +190,7 @@
 
     // 貯金を追加するか修正するかの判断
     if(didDeposit == NO){
-        if ([[self loadDepositFromRecentDepositData] isEqualToNumber:@-1] == NO){
+        if (skipDeposit == NO){
             // 新規の貯金の場合
             DNSLog(@"貯金の追加");
             dictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[self loadStart],@"Start",[self loadEnd],@"End",budget,@"Budget",expense,@"Expense",balance,@"Balance",norma,@"Norma",value,@"Deposit",nil];
@@ -216,6 +218,7 @@
             NSAssert(0, @"締め切りまだ来てねぇから！エラー出るから！");
         }
     }
+    skipDeposit = NO;
 }
 // 後でを押した時の動作
 - (void)skipDepositDate:(NSDate *)date{
@@ -243,6 +246,7 @@
         // ログに中身が無かった場合
         [depositLog addObject:dictionary]; // 新規追加する
     }
+    skipDeposit = YES;
 }
 // DepositLog読み込み系
 - (NSDictionary *)loadRecentDepositData{
