@@ -52,6 +52,7 @@
     BOOL didDeposit;  // 前回の貯金をしたかどうか
     BOOL didSetPeriod; // 前回の期間の設定をしたかどうか
 
+    BOOL skipDeposit; // スキップしたかどうか
     BOOL nextAlert; // 期限日のアラートを表示したかどうか
 }
 
@@ -65,6 +66,7 @@
 @property (nonatomic,assign)BOOL defaultSettings;
 @property (nonatomic,assign)BOOL didDeposit;
 @property (nonatomic,assign)BOOL didSetPeriod;
+@property (nonatomic,assign)BOOL skipDeposit;
 @property (nonatomic,assign)BOOL nextAlert;
 
 #pragma mark - ファイルの操作
