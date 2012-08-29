@@ -85,14 +85,14 @@
 - (void)setLabel{
     if(appDelegate.editData.skipDeposit == NO){
         // 普通の場合
-        balanceLabel.text = [NSString stringWithFormat:@"残金は%@円です。",[_translateFormat stringFromNumber:appDelegate.editData.balance addComma:YES addYen:YES]];
+        balanceLabel.text = [NSString stringWithFormat:@"残金は%@です。",[_translateFormat stringFromNumber:appDelegate.editData.balance addComma:YES addYen:YES]];
         depositTextField.placeholder = [_translateFormat stringFromNumber:appDelegate.editData.norma addComma:YES addYen:YES];
     }else{
         // 後での場合(前回の値を表示)
-        balanceLabel.text = [NSString stringWithFormat:@"残金は%@円です。",[_translateFormat stringFromNumber:[appDelegate.editData loadBalanceFromRecentDepositData] addComma:YES addYen:YES]];
+        balanceLabel.text = [NSString stringWithFormat:@"残金は%@です。",[_translateFormat stringFromNumber:[appDelegate.editData loadBalanceFromRecentDepositData] addComma:YES addYen:YES]];
         depositTextField.placeholder = [_translateFormat stringFromNumber:[appDelegate.editData loadNormaFromRecentDepositData] addComma:YES addYen:YES];
     }
-    depositLabel.text = [NSString stringWithFormat:@"貯金総額は%@円です。",[_translateFormat stringFromNumber:appDelegate.editData.deposit addComma:YES addYen:YES]];
+    depositLabel.text = [NSString stringWithFormat:@"貯金総額は%@です。",[_translateFormat stringFromNumber:appDelegate.editData.deposit addComma:YES addYen:YES]];
 }
 
 #pragma mark - depositTextField関係
