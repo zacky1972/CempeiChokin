@@ -409,7 +409,7 @@
 // 最後の期間かどうかを返す
 - (BOOL)searchLastNorma{
     DNSLog(@"最後の期間？");
-    if ([[self loadEnd] isEqualToDate:[self loadGoalPeriod]] == YES) {
+    if ([[self loadEnd] isEqualToDate:[self loadGoalPeriod]] == YES || [[self loadEnd] earlierDate:[self loadGoalPeriod]] == [self loadGoalPeriod]) {
         DNSLog(@"最後！");
         return YES;
     }else{
