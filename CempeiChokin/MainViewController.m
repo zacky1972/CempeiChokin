@@ -18,6 +18,7 @@
     UIView *graph;
     
     NSInteger alertType;
+    NSTimer *timeLimitCheckTimer;
     BOOL didAlert;
     
     SystemSoundID soundID; // 効果音用
@@ -39,6 +40,8 @@
     _method = [Methods alloc];
     _translateFormat = [TranslateFormat alloc];
     _graph = [AddGraph alloc];
+
+    timeLimitCheckTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeLimitChecker) userInfo:nil repeats:YES];
     
     //スクロールビューをフィットさせる
     [LogScroll setScrollEnabled:YES];
@@ -55,41 +58,25 @@
     DNSLog(@"viewWillAppear");
     
     [self timeLimitChecker];
-    /*
-    // 初期設定画面の表示
-    if(appDelegate.editData.defaultSettings == NO){//初期設定がまだだったら，設定画面に遷移します
-        [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"First"] animated:NO];
-    }
     
-    [self depositAndNextChecker];
-    
-    //初期設定から戻ってきた時用
     [self labelReflesh];
     [self depositAndNextChecker];
     [self makeGraphChecker];
-    */
+    [timeLimitCheckTimer fire];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
     DNSLog(@"viewDidAppear");
-    
-    
+
     // 初期設定画面の表示
-    
     if(appDelegate.editData.defaultSettings == NO){//初期設定がまだだったら，設定画面に遷移します
         [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"First"] animated:NO];
     }
-     
-    [self depositAndNextChecker];
-    
-    //初期設定から戻ってきた時用
-    [self labelReflesh];
-    [self depositAndNextChecker];
-    [self makeGraphChecker];
-    //[self makeGraph]; // グラフの表示
-     
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [timeLimitCheckTimer invalidate];
+}
 - (void)viewDidUnload
 {
     expenseTextField = nil;
@@ -148,9 +135,16 @@
         NSNumber *tempExpense = [_translateFormat numberFromString:expenseTextField.text];  // tempExpenseに値を保存
 
         // 入力されたデータの処理
-        if([tempExpense compare:@1000000] == NSOrderedAscending){
-            // 100万以下の場合
-
+        if(KindSegment.selectedSegmentIndex == 2 && [tempExpense compare:appDelegate.editData.budget] == NSOrderedDescending){
+            // 残高調整で予算以上になる場合
+            // 100万以下の場合 // TODO: なんか書き方がアレかな
+            UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"入力エラー"
+                                                                   message:@"残高が予算を超えています"
+                                                                  delegate:nil
+                                                         cancelButtonTitle:@"OK"
+                                                         otherButtonTitles:nil];
+            [errorAlert show];   // アラートを表示
+        }else if([tempExpense compare:@1000000] == NSOrderedAscending){
             // ログの数を調整
             if([appDelegate.editLog.log count] >= 10){
                 // セルの個数が10個以上の場合
@@ -178,7 +172,6 @@
                                 withRowAnimation: UITableViewRowAnimationRight]; // 一個目のセルにアニメーションさせてセルを追加
         }else{
             // 100万以上の場合
-
             // アラートの表示 // FIXME: 誰かまじめに書いて
             UIAlertView *expenseAlert = [[UIAlertView alloc] initWithTitle:@"100万以上の出費とか"
                                                             message:@"お前どんだけ金持ちやねん"
@@ -328,13 +321,15 @@
     }
 }
 
-//FIXME:これお引っ越しすべきか？
 // 期限チェック
 - (void)timeLimitChecker{
+    DNSLog(@"期限のチェック");
     //期限をこえてたとき
     if([appDelegate.editData searchNext] == YES){
-        // FIXME: 誰かまじめに書いて
+        DNSLog(@"期限のチェック2");
+        [timeLimitCheckTimer invalidate];
         if(appDelegate.editData.nextAlert == NO){
+            DNSLog(@"期限のチェック3");
             appDelegate.editData.nextAlert = YES;
             if([appDelegate.editData searchLastNorma] == YES){
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"目標日を過ぎました"

@@ -38,6 +38,14 @@
     // ツールバーとかデータピッカー
     datePicker =[[UIDatePicker alloc] initWithFrame: CGRectMake(0, 44, 320, 216)];
     datePicker.datePickerMode = UIDatePickerModeDate;
+
+    if([appDelegate.editData searchLastNorma] == YES){
+        laterButton.enabled = NO;
+        laterButton.alpha = 0.0;
+    }else{
+        laterButton.enabled = YES;
+        laterButton.alpha = 1;
+    }
 }
 
 - (void)viewDidUnload

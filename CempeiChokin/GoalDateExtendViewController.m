@@ -56,11 +56,7 @@
     NameLabel.text = name;
     value = [appDelegate.editData loadGoalValue];
     ValueLabel.text = [_translateFormat stringFromNumber:value addComma:YES addYen:YES];
-    /*ここは読み込まなくて委員じゃないか説
-    if([appDelegate.editData loadGoalPeriod] != nil){
-        period = [appDelegate.editData loadGoalPeriod];
-        PeriodTextField.text = [_translateFormat formatterDate:period];
-    }*/
+    PeriodTextField.text = @"";
 }
 
 - (BOOL)dataCheck{

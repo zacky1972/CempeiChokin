@@ -372,6 +372,7 @@
 #pragma mark - とりあえずコピーしただけ系シリーズ
 // 期限が来たかどうかを返す
 - (BOOL)searchNext{
+    DNSLog(@"期限の確認");
     NSDate *date = [_translateFormat dateOnly:[NSDate date]];
     if ([date isEqualToDate:[self loadEnd]] == NO) {
         //今日が期限日じゃない場合
@@ -384,7 +385,7 @@
     // 目標達成日を過ぎ去っているかの判断
     if([self loadGoalPeriod] != nil){
         // 期限日が存在する場合
-        if([[NSDate date] earlierDate:[self loadGoalPeriod]] == [self loadGoalPeriod]){
+        if([date isEqualToDate:[self loadEnd]] == NO && [date earlierDate:[self loadGoalPeriod]] != date){
             // 期限日を過ぎ去っている場合
             return YES;
         }
@@ -409,7 +410,7 @@
 // 最後の期間かどうかを返す
 - (BOOL)searchLastNorma{
     DNSLog(@"最後の期間？");
-    if ([[self loadEnd] isEqualToDate:[self loadGoalPeriod]] == YES || [[self loadEnd] earlierDate:[self loadGoalPeriod]] == [self loadGoalPeriod]) {
+    if ([[_translateFormat dateOnly:[NSDate date]] earlierDate:[self loadGoalPeriod]] == [self loadGoalPeriod]) {
         DNSLog(@"最後！");
         return YES;
     }else{
