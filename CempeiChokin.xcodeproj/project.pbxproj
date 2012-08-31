@@ -44,7 +44,6 @@
 		E9AA9B1915D245BA00D5ADD5 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = E9AA9B1315D2454200D5ADD5 /* Default.png */; };
 		E9AFEDF015C915BA0021815A /* FirstHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AFEDEF15C915BA0021815A /* FirstHelpViewController.m */; };
 		E9B4360B15EF029500862274 /* icon_credit.png in Resources */ = {isa = PBXBuildFile; fileRef = E9B4360A15EF029500862274 /* icon_credit.png */; };
-		E9C30DC415E73CD3009BA0FF /* WordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C30DC315E73CD3009BA0FF /* WordsViewController.m */; };
 		E9C30DCB15E76589009BA0FF /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E9C30DCA15E76589009BA0FF /* icon.png */; };
 		E9C30DD115E78357009BA0FF /* question.png in Resources */ = {isa = PBXBuildFile; fileRef = E9C30DD015E78357009BA0FF /* question.png */; };
 		E9EEAE6215EB7C7F000C0742 /* help_main.png in Resources */ = {isa = PBXBuildFile; fileRef = E9EEAE6115EB7C7F000C0742 /* help_main.png */; };
@@ -146,8 +145,6 @@
 		015D078A15C8F1080005AA87 /* NSDecimalNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDecimalNumberExtensions.h; sourceTree = "<group>"; };
 		015D078B15C8F1080005AA87 /* NSNumberExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberExtensions.h; sourceTree = "<group>"; };
 		015D078C15C8F1080005AA87 /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libCorePlot-CocoaTouch.a"; sourceTree = "<group>"; };
-		01C65B5E15D24F1800D928A2 /* DoneUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DoneUp.png; sourceTree = "<group>"; };
-		01C65B6015D24F2200D928A2 /* donedown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = donedown.png; sourceTree = "<group>"; };
 		01E6EEDE15D25AF3001F5B38 /* CreditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditViewController.h; sourceTree = "<group>"; };
 		01E6EEDF15D25AF3001F5B38 /* CreditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditViewController.m; sourceTree = "<group>"; };
 		2A86784715C9518300720B2D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -436,8 +433,6 @@
 		E98EA59A15BFB8A10019AED5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				01C65B6015D24F2200D928A2 /* donedown.png */,
-				01C65B5E15D24F1800D928A2 /* DoneUp.png */,
 				E98EA59B15BFB8A10019AED5 /* CempeiChokin-Info.plist */,
 				E98EA59C15BFB8A10019AED5 /* InfoPlist.strings */,
 				E98EA59F15BFB8A10019AED5 /* main.m */,
