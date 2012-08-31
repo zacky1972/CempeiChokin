@@ -41,7 +41,6 @@
 }
 
 - (IBAction)nextButton_down:(id)sender {
-    [_method deleteData];
     // TODO: データ渡すようにしたら治す必要がありまーす
     [appDelegate.editLog deleteLogData];
     [appDelegate.editData deleteData];
