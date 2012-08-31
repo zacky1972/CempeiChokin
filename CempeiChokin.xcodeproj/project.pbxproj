@@ -670,7 +670,6 @@
 				01E6EEE015D25AF3001F5B38 /* CreditViewController.m in Sources */,
 				E945FB5115D4F09C0051C57A /* AddNormaLine.m in Sources */,
 				E9FB3A8115D947B6003992DE /* GoalDateExtendViewController.m in Sources */,
-				E9C30DC415E73CD3009BA0FF /* WordsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
