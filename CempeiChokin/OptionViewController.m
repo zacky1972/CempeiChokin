@@ -58,6 +58,7 @@
     // TODO: データ渡すようにしたら治す必要がありまーす
     [appDelegate.editLog deleteLogData];
     [appDelegate.editData deleteData];
+    [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"MainView"] animated:YES];
 }
 
 
