@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CreditViewController : UITableViewController
+@interface CreditViewController : UITableViewController{
+    __weak IBOutlet UILabel *versionLabel;
+}
 - (IBAction)contactButton_down:(id)sender;
 - (IBAction)aboutButton_down:(id)sender;
 
