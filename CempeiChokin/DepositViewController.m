@@ -32,12 +32,17 @@
                           Done:@selector(doneDepositTextField)
                         Cancel:@selector(cancelDepositTextField)];
     [self dataCheck];
-    // TODO: あとでちゃんとします
-    if([appDelegate.editData.balance isEqualToNumber:@-1] == NO){
-        depositTextField.placeholder = [_translateFormat stringFromNumber:appDelegate.editData.balance addComma:YES addYen:YES];
+
+    // 後でボタンは最後の時
+    if([appDelegate.editData searchLastNorma] == YES){
+        LaterButton.enabled = NO;
+        LaterButton.alpha = 0.0;
     }else{
-        depositTextField.placeholder = [_translateFormat stringFromNumber:[appDelegate.editData loadBalanceFromRecentDepositData] addComma:YES addYen:YES];
+        LaterButton.enabled = YES;
+        LaterButton.alpha = 1;
     }
+
+    [self setLabel];
     // TODO: 棒グラフの生成
 }
 
@@ -47,6 +52,9 @@
     depositTableView = nil;
     DoneButton = nil;
     barGraphView = nil;
+    balanceLabel = nil;
+    depositLabel = nil;
+    LaterButton = nil;
     [super viewDidUnload];
 
 }
@@ -76,20 +84,28 @@
 
 //タイトルを決定する
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    //後での時値がおかしい
     NSString *temp;
-    temp = [[_translateFormat formatterDate:[appDelegate.editData loadStart]] stringByAppendingString:@"~"];
-    temp = [temp stringByAppendingString:[_translateFormat formatterDate:[appDelegate.editData loadEnd]]];
+    if(appDelegate.editData.skipDeposit == NO){
+        temp = [NSString stringWithFormat:@"%@~%@",[_translateFormat formatterDate:[appDelegate.editData loadStart]],[_translateFormat formatterDate:[appDelegate.editData loadEnd]]];
+    }else{
+        temp = [NSString stringWithFormat:@"%@~%@",[_translateFormat formatterDate:[appDelegate.editData loadStartFromRecentDepositData]],[_translateFormat formatterDate:[appDelegate.editData loadEndFromRecentDepositData]]];
+    }
     return temp;
 }
-//フッターを決定する
 
-- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section{
-    NSString *temp;
-    temp = [@"残金は" stringByAppendingString:[_translateFormat stringFromNumber:appDelegate.editData.balance addComma:1 addYen:1]];
-    temp = [temp stringByAppendingString:@"です．貯金総額は"];
-    temp = [temp stringByAppendingString:[_translateFormat stringFromNumber:appDelegate.editData.deposit addComma:1 addYen:1]];
-    temp = [temp stringByAppendingString:@"です"];
-    return temp;
+//フッターを決定する
+- (void)setLabel{
+    if(appDelegate.editData.skipDeposit == NO){
+        // 普通の場合
+        balanceLabel.text = [NSString stringWithFormat:@"残金は%@です。",[_translateFormat stringFromNumber:appDelegate.editData.balance addComma:YES addYen:YES]];
+        depositTextField.placeholder = [_translateFormat stringFromNumber:appDelegate.editData.norma addComma:YES addYen:YES];
+    }else{
+        // 後での場合(前回の値を表示)
+        balanceLabel.text = [NSString stringWithFormat:@"残金は%@です。",[_translateFormat stringFromNumber:[appDelegate.editData loadBalanceFromRecentDepositData] addComma:YES addYen:YES]];
+        depositTextField.placeholder = [_translateFormat stringFromNumber:[appDelegate.editData loadNormaFromRecentDepositData] addComma:YES addYen:YES];
+    }
+    depositLabel.text = [NSString stringWithFormat:@"貯金総額は%@です。",[_translateFormat stringFromNumber:appDelegate.editData.deposit addComma:YES addYen:YES]];
 }
 
 #pragma mark - depositTextField関係

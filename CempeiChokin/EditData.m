@@ -19,7 +19,7 @@
 }
 
 @synthesize expense,balance,norma,budget,deposit;
-@synthesize defaultSettings,didDeposit,didSetPeriod,nextAlert;
+@synthesize defaultSettings,didDeposit,didSetPeriod,skipDeposit,nextAlert;
 
 // 初期化
 -(id)init{
@@ -145,12 +145,14 @@
     [self forSaveFlagName:@"defaultSettings" Flag:defaultSettings];
     [self forSaveFlagName:@"didDeposit" Flag:didDeposit];
     [self forSaveFlagName:@"didSetPeriod" Flag:didSetPeriod];
+    [self forSaveFlagName:@"skipDeposit" Flag:skipDeposit];
     [self forSaveFlagName:@"nextAlert" Flag:nextAlert];
 }
 - (void)loadFlags{
     defaultSettings = [self forLoadFlagName:@"defaultSettings" Flag:defaultSettings Default:NO];
     didDeposit = [self forLoadFlagName:@"didDeposit" Flag:didDeposit Default:YES];
     didSetPeriod = [self forLoadFlagName:@"didSetPeriod" Flag:didSetPeriod Default:YES];
+    skipDeposit = [self forLoadFlagName:@"skipDeposit" Flag:skipDeposit Default:NO];
     nextAlert = [self forLoadFlagName:@"nextAlert" Flag:nextAlert Default:NO];
 }
 - (void)forSaveFlagName:(NSString *)name Flag:(BOOL)flag{
@@ -188,7 +190,7 @@
 
     // 貯金を追加するか修正するかの判断
     if(didDeposit == NO){
-        if ([[self loadDepositFromRecentDepositData] isEqualToNumber:@-1] == NO){
+        if (skipDeposit == NO){
             // 新規の貯金の場合
             DNSLog(@"貯金の追加");
             dictionary = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[self loadStart],@"Start",[self loadEnd],@"End",budget,@"Budget",expense,@"Expense",balance,@"Balance",norma,@"Norma",value,@"Deposit",nil];
@@ -216,6 +218,7 @@
             NSAssert(0, @"締め切りまだ来てねぇから！エラー出るから！");
         }
     }
+    skipDeposit = NO;
 }
 // 後でを押した時の動作
 - (void)skipDepositDate:(NSDate *)date{
@@ -243,6 +246,7 @@
         // ログに中身が無かった場合
         [depositLog addObject:dictionary]; // 新規追加する
     }
+    skipDeposit = YES;
 }
 // DepositLog読み込み系
 - (NSDictionary *)loadRecentDepositData{
@@ -368,6 +372,7 @@
 #pragma mark - とりあえずコピーしただけ系シリーズ
 // 期限が来たかどうかを返す
 - (BOOL)searchNext{
+    DNSLog(@"期限の確認");
     NSDate *date = [_translateFormat dateOnly:[NSDate date]];
     if ([date isEqualToDate:[self loadEnd]] == NO) {
         //今日が期限日じゃない場合
@@ -380,7 +385,7 @@
     // 目標達成日を過ぎ去っているかの判断
     if([self loadGoalPeriod] != nil){
         // 期限日が存在する場合
-        if([[NSDate date] earlierDate:[self loadGoalPeriod]] == [self loadGoalPeriod]){
+        if([date isEqualToDate:[self loadEnd]] == NO && [date earlierDate:[self loadGoalPeriod]] != date){
             // 期限日を過ぎ去っている場合
             return YES;
         }
@@ -405,7 +410,7 @@
 // 最後の期間かどうかを返す
 - (BOOL)searchLastNorma{
     DNSLog(@"最後の期間？");
-    if ([[self loadEnd] isEqualToDate:[self loadGoalPeriod]] == YES) {
+    if ([[_translateFormat dateOnly:[NSDate date]] earlierDate:[self loadGoalPeriod]] == [self loadGoalPeriod]) {
         DNSLog(@"最後！");
         return YES;
     }else{
