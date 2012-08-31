@@ -119,12 +119,14 @@
 
     // 画面のスクロール
     [LogScroll setContentOffset:CGPointMake(0.0,200.0) animated:YES];   // 入力が見えるところまでスクロールする
+    [LogScroll setContentSize:CGSizeMake(320,230+[_method fitScrollViewWithCount:[appDelegate.editLog.log count]])];
 }
 // ExpenseTextFieldの選択が外れたときの動作
 - (IBAction)expenseTextField_end:(id)sender {
     /*
     [self cancelExpenseTextField]; // キャンセルボタンと同じ動作
      */
+    [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollViewWithCount:[appDelegate.editLog.log count]])];
 }
 
 // Numberpadに追加したボタンの動作
