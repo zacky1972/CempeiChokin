@@ -40,7 +40,7 @@
     _method = [Methods alloc];
     _translateFormat = [TranslateFormat alloc];
     _graph = [AddGraph alloc];
-    
+
     timeLimitCheckTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timeLimitChecker) userInfo:nil repeats:YES];
     
     //スクロールビューをフィットさせる
@@ -74,6 +74,9 @@
     }
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    [timeLimitCheckTimer invalidate];
+}
 - (void)viewDidUnload
 {
     expenseTextField = nil;

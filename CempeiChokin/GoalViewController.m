@@ -56,8 +56,14 @@
         ValueTextField.text = [_translateFormat stringFromNumber:value addComma:YES addYen:YES];
     }
     if([appDelegate.editData loadGoalPeriod] != nil){
-        period = [appDelegate.editData loadGoalPeriod];
-        PeriodTextField.text = [_translateFormat formatterDate:period];
+        if([[_translateFormat dateOnly:[NSDate date]] earlierDate:[appDelegate.editData loadGoalPeriod]] == [appDelegate.editData loadGoalPeriod]){
+            // 諦めなかった場合
+            period = nil;
+            PeriodTextField.text = @"";
+        }else{
+            period = [appDelegate.editData loadGoalPeriod];
+            PeriodTextField.text = [_translateFormat formatterDate:period];
+        }
     }
 }
 
