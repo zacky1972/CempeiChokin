@@ -189,6 +189,9 @@
 - (IBAction)DoneButton_down_2:(id)sender {
     [appDelegate.editData saveName:name Value:value Period:period];
     [appDelegate.editData calcForNextStage];
+    if([appDelegate.editData.deposit compare:value] == NSOrderedDescending){
+        [self presentModalViewController:[self.storyboard instantiateViewControllerWithIdentifier:@"FinishView_complete"] animated:YES];
+    }
 }
 
 #pragma mark - その他

@@ -135,9 +135,16 @@
         NSNumber *tempExpense = [_translateFormat numberFromString:expenseTextField.text];  // tempExpenseに値を保存
 
         // 入力されたデータの処理
-        if([tempExpense compare:@1000000] == NSOrderedAscending){
-            // 100万以下の場合
-
+        if(KindSegment.selectedSegmentIndex == 2 && [tempExpense compare:appDelegate.editData.budget] == NSOrderedDescending){
+            // 残高調整で予算以上になる場合
+            // 100万以下の場合 // TODO: なんか書き方がアレかな
+            UIAlertView *errorAlert = [[UIAlertView alloc] initWithTitle:@"入力エラー"
+                                                                   message:@"残高が予算を超えています"
+                                                                  delegate:nil
+                                                         cancelButtonTitle:@"OK"
+                                                         otherButtonTitles:nil];
+            [errorAlert show];   // アラートを表示
+        }else if([tempExpense compare:@1000000] == NSOrderedAscending){
             // ログの数を調整
             if([appDelegate.editLog.log count] >= 10){
                 // セルの個数が10個以上の場合
@@ -165,7 +172,6 @@
                                 withRowAnimation: UITableViewRowAnimationRight]; // 一個目のセルにアニメーションさせてセルを追加
         }else{
             // 100万以上の場合
-
             // アラートの表示 // FIXME: 誰かまじめに書いて
             UIAlertView *expenseAlert = [[UIAlertView alloc] initWithTitle:@"100万以上の出費とか"
                                                             message:@"お前どんだけ金持ちやねん"
