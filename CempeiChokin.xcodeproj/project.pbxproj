@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		015D078D15C8F1080005AA87 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 015D078C15C8F1080005AA87 /* libCorePlot-CocoaTouch.a */; };
 		01E6EEE015D25AF3001F5B38 /* CreditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E6EEDF15D25AF3001F5B38 /* CreditViewController.m */; };
-		01E6EEF315DB588E001F5B38 /* AddDepositGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E6EEF215DB588E001F5B38 /* AddDepositGraph.m */; };
 		2A86784815C9518300720B2D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A86784715C9518300720B2D /* QuartzCore.framework */; };
 		2A86784B15CA2A3F00720B2D /* AddGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A86784A15CA2A3F00720B2D /* AddGraph.m */; };
 		2A86784E15CA318B00720B2D /* TranslateFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A86784D15CA318B00720B2D /* TranslateFormat.m */; };
@@ -45,7 +44,6 @@
 		E99F6ED715D22C44006053A6 /* FinishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E99F6ED615D22C3C006053A6 /* FinishViewController.m */; };
 		E9AA9B1915D245BA00D5ADD5 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = E9AA9B1315D2454200D5ADD5 /* Default.png */; };
 		E9AFEDF015C915BA0021815A /* FirstHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9AFEDEF15C915BA0021815A /* FirstHelpViewController.m */; };
-		E9C30DC415E73CD3009BA0FF /* WordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C30DC315E73CD3009BA0FF /* WordsViewController.m */; };
 		E9C30DCB15E76589009BA0FF /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = E9C30DCA15E76589009BA0FF /* icon.png */; };
 		E9C30DCD15E781E3009BA0FF /* pdeposit.png in Resources */ = {isa = PBXBuildFile; fileRef = E9C30DCC15E781E3009BA0FF /* pdeposit.png */; };
 		E9C30DCF15E782A7009BA0FF /* pnext.png in Resources */ = {isa = PBXBuildFile; fileRef = E9C30DCE15E782A7009BA0FF /* pnext.png */; };
@@ -153,8 +151,6 @@
 		01C65B6015D24F2200D928A2 /* donedown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = donedown.png; sourceTree = "<group>"; };
 		01E6EEDE15D25AF3001F5B38 /* CreditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditViewController.h; sourceTree = "<group>"; };
 		01E6EEDF15D25AF3001F5B38 /* CreditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditViewController.m; sourceTree = "<group>"; };
-		01E6EEF115DB588E001F5B38 /* AddDepositGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddDepositGraph.h; sourceTree = "<group>"; };
-		01E6EEF215DB588E001F5B38 /* AddDepositGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddDepositGraph.m; sourceTree = "<group>"; };
 		2A86784715C9518300720B2D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		2A86784915CA2A3F00720B2D /* AddGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddGraph.h; sourceTree = "<group>"; };
 		2A86784A15CA2A3F00720B2D /* AddGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddGraph.m; sourceTree = "<group>"; };
@@ -358,8 +354,6 @@
 				2A92148F15CCBD8700B5B993 /* EditLog.m */,
 				2ACACC9215D0DA6C00A6FB31 /* EditData.h */,
 				2ACACC9315D0DA6C00A6FB31 /* EditData.m */,
-				01E6EEF115DB588E001F5B38 /* AddDepositGraph.h */,
-				01E6EEF215DB588E001F5B38 /* AddDepositGraph.m */,
 			);
 			name = Edit;
 			sourceTree = "<group>";
@@ -683,7 +677,6 @@
 				01E6EEE015D25AF3001F5B38 /* CreditViewController.m in Sources */,
 				E945FB5115D4F09C0051C57A /* AddNormaLine.m in Sources */,
 				E9FB3A8115D947B6003992DE /* GoalDateExtendViewController.m in Sources */,
-				01E6EEF315DB588E001F5B38 /* AddDepositGraph.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
