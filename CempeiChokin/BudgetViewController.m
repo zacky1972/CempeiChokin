@@ -195,6 +195,8 @@
 #pragma mark - budgetTextField
 // BudgetTextFieldを選択したとき
 - (IBAction)budgetTextField_begin:(id)sender{
+    startDateTextField.enabled = NO;
+    endDateTextField.enabled = NO;
     budgetTextField.inputAccessoryView = [self makeNumberPadToolbar:@"完了" Done:@selector(doneBudgetTextField) Cancel:@selector(cancelBudgetTextField)];
 
     // 既に値が入力されていた場合，表示されている値を数値に戻す
@@ -207,6 +209,8 @@
 // BudgetTextField以外を選択した時
 - (IBAction)budgetTextField_end:(id)sender{
     [self dataCheck];
+    startDateTextField.enabled = YES;
+    endDateTextField.enabled = YES;
 
     if([appDelegate.editData.budget isEqualToNumber:@-1] == NO){
         budgetTextField.text = [_translateFormat stringFromNumber:appDelegate.editData.budget addComma:YES addYen:YES];   // 元に戻す
