@@ -52,6 +52,8 @@
 		E9EEAE6215EB7C7F000C0742 /* help_main.png in Resources */ = {isa = PBXBuildFile; fileRef = E9EEAE6115EB7C7F000C0742 /* help_main.png */; };
 		E9EEAE6415EC99D6000C0742 /* push.png in Resources */ = {isa = PBXBuildFile; fileRef = E9EEAE6315EC99D6000C0742 /* push.png */; };
 		E9EEAE6815EDD583000C0742 /* help.png in Resources */ = {isa = PBXBuildFile; fileRef = E9EEAE6715EDD583000C0742 /* help.png */; };
+		E9EEAE7115EEF79D000C0742 /* cemcho_good.png in Resources */ = {isa = PBXBuildFile; fileRef = E9EEAE6F15EEF79D000C0742 /* cemcho_good.png */; };
+		E9EEAE7215EEF79D000C0742 /* cemcho_nogood.png in Resources */ = {isa = PBXBuildFile; fileRef = E9EEAE7015EEF79D000C0742 /* cemcho_nogood.png */; };
 		E9FB3A8115D947B6003992DE /* GoalDateExtendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E9FB3A8015D947B6003992DE /* GoalDateExtendViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -216,6 +218,8 @@
 		E9EEAE6115EB7C7F000C0742 /* help_main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help_main.png; sourceTree = "<group>"; };
 		E9EEAE6315EC99D6000C0742 /* push.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = push.png; sourceTree = "<group>"; };
 		E9EEAE6715EDD583000C0742 /* help.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help.png; sourceTree = "<group>"; };
+		E9EEAE6F15EEF79D000C0742 /* cemcho_good.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cemcho_good.png; sourceTree = "<group>"; };
+		E9EEAE7015EEF79D000C0742 /* cemcho_nogood.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cemcho_nogood.png; sourceTree = "<group>"; };
 		E9FB3A7F15D947B6003992DE /* GoalDateExtendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalDateExtendViewController.h; sourceTree = "<group>"; };
 		E9FB3A8015D947B6003992DE /* GoalDateExtendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoalDateExtendViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -479,6 +483,8 @@
 		E98EA5CA15BFC9BE0019AED5 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				E9EEAE6F15EEF79D000C0742 /* cemcho_good.png */,
+				E9EEAE7015EEF79D000C0742 /* cemcho_nogood.png */,
 				E96F51F415E3738000648F32 /* exclamation.png */,
 				E9EEAE6115EB7C7F000C0742 /* help_main.png */,
 				E9EEAE6715EDD583000C0742 /* help.png */,
@@ -619,6 +625,8 @@
 				E9EEAE6215EB7C7F000C0742 /* help_main.png in Resources */,
 				E9EEAE6415EC99D6000C0742 /* push.png in Resources */,
 				E9EEAE6815EDD583000C0742 /* help.png in Resources */,
+				E9EEAE7115EEF79D000C0742 /* cemcho_good.png in Resources */,
+				E9EEAE7215EEF79D000C0742 /* cemcho_nogood.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
