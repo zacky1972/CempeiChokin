@@ -734,11 +734,11 @@
                             </tableViewSection>
                             <tableViewSection id="GcR-fR-HJN">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="99" id="xpT-V1-5fH">
-                                        <rect key="frame" x="0.0" y="307" width="320" height="101"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="1079" id="xpT-V1-5fH">
+                                        <rect key="frame" x="0.0" y="307" width="320" height="1081"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="10" y="1" width="300" height="98"/>
+                                            <rect key="frame" x="10" y="1" width="300" height="1078"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="ライセンス" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsFontSizeToFit="NO" id="MbS-4s-Ogz">
@@ -749,7 +749,7 @@
                                                     <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </label>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" id="gWP-E2-BQR">
-                                                    <rect key="frame" x="13" y="25" width="275" height="66"/>
+                                                    <rect key="frame" x="13" y="20" width="275" height="1059"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                     <string key="text">効果音:魔王魂
 http://maoudamashii.jokersounds.com/
@@ -2028,8 +2028,11 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
                 <relationship kind="action" name="DoneButton_down:"/>
                 <relationship kind="action" name="DoneButton_down_2:"/>
                 <relationship kind="action" name="NameTextField_end:"/>
+                <relationship kind="action" name="NameTextField_next:"/>
                 <relationship kind="action" name="PeriodTextField_begin:"/>
+                <relationship kind="action" name="PeriodTextField_end:"/>
                 <relationship kind="action" name="ValueTextField_begin:"/>
+                <relationship kind="action" name="ValueTextField_end:"/>
                 <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="NameTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="PeriodTextField" candidateClass="UITextField"/>
