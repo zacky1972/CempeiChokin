@@ -27,11 +27,24 @@
 {
     [super viewDidLoad];
     versionLabel.text = [NSString stringWithFormat:@"Version %@",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
+    
+    //クレジットをフィット
+    CGSize result = [[UIScreen mainScreen] bounds].size; //ビューの大きさを取ってくる
+    
+    if(result.height == 568 || result.height == 548)
+    {
+        //iPhone5のとき
+        //セルをのばす
+        //licenceCell.
+    }
+    
 }
 
 - (void)viewDidUnload
 {
     versionLabel = nil;
+    licenceCell = nil;
+    licenceTextView = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

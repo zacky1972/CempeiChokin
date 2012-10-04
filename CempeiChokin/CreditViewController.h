@@ -10,6 +10,8 @@
 
 @interface CreditViewController : UITableViewController{
     __weak IBOutlet UILabel *versionLabel;
+    __weak IBOutlet UITableViewCell *licenceCell;
+    __weak IBOutlet UITextView *licenceTextView;
 }
 - (IBAction)contactButton_down:(id)sender;
 - (IBAction)aboutButton_down:(id)sender;
