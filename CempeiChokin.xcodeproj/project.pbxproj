@@ -18,6 +18,7 @@
 		2ACACC9015CE4BC700A6FB31 /* EditLogTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ACACC8F15CE4BC700A6FB31 /* EditLogTest.m */; };
 		2ACACC9415D0DA6C00A6FB31 /* EditData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ACACC9315D0DA6C00A6FB31 /* EditData.m */; };
 		2ACB176D15CA932D00DDA60E /* License.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2ACB176C15CA932D00DDA60E /* License.txt */; };
+		E91048E8161E727B0094D7BA /* BackGround_stripe.png in Resources */ = {isa = PBXBuildFile; fileRef = E91048E7161E727B0094D7BA /* BackGround_stripe.png */; };
 		E945FB5115D4F09C0051C57A /* AddNormaLine.m in Sources */ = {isa = PBXBuildFile; fileRef = E945FB5015D4F09C0051C57A /* AddNormaLine.m */; };
 		E95EED9515C26A7300F2A89E /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EED9415C26A7300F2A89E /* MainViewController.m */; };
 		E95EED9B15C26C2600F2A89E /* OptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E95EED9A15C26C2600F2A89E /* OptionViewController.m */; };
@@ -167,6 +168,7 @@
 		2ACACC9315D0DA6C00A6FB31 /* EditData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditData.m; sourceTree = "<group>"; };
 		2ACB176C15CA932D00DDA60E /* License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = License.txt; sourceTree = "<group>"; };
 		2AEA041115C804BF009C9208 /* debug.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = debug.h; sourceTree = "<group>"; };
+		E91048E7161E727B0094D7BA /* BackGround_stripe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackGround_stripe.png; sourceTree = "<group>"; };
 		E945FB4F15D4F09C0051C57A /* AddNormaLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddNormaLine.h; sourceTree = "<group>"; };
 		E945FB5015D4F09C0051C57A /* AddNormaLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNormaLine.m; sourceTree = "<group>"; };
 		E95EED9315C26A7300F2A89E /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -484,6 +486,7 @@
 			isa = PBXGroup;
 			children = (
 				E9C30DD015E78357009BA0FF /* question.png */,
+				E91048E7161E727B0094D7BA /* BackGround_stripe.png */,
 				E96F51F415E3738000648F32 /* exclamation.png */,
 				E9EEAE6115EB7C7F000C0742 /* help_main.png */,
 				E9EEAE6715EDD583000C0742 /* help.png */,
@@ -626,6 +629,7 @@
 				E9B4361915F0AC1800862274 /* Default@2x.png in Resources */,
 				E9B4361B15F0AD5300862274 /* Default.png in Resources */,
 				E9BB9F8C161191C200AFC5FB /* Default-568h@2x.png in Resources */,
+				E91048E8161E727B0094D7BA /* BackGround_stripe.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
