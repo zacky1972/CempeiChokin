@@ -48,7 +48,7 @@
     [LogScroll setContentSize:CGSizeMake(320,[_method fitScrollViewWithCount:[appDelegate.editLog.log count]])];
     
     //背景画像のセット
-    //[view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"BackGround_stripe.png"]]];
+    [view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"BackGround_stripe.png"]]];
     
     //効果音のセット
     NSString *path = [[NSBundle mainBundle]pathForResource:@"se_click" ofType:@"mp3"];
@@ -97,6 +97,7 @@
     questionImageView = nil;
     pushDepositImage = nil;
     pleaseNextImage = nil;
+    view = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }

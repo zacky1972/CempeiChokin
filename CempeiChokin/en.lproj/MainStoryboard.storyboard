@@ -272,7 +272,7 @@
                                 </items>
                             </navigationBar>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="XW8-Tb-4XM" firstAttribute="top" secondItem="NLR-e6-dBe" secondAttribute="top" type="default" id="BWj-bA-8pc"/>
                             <constraint firstItem="XW8-Tb-4XM" firstAttribute="trailing" secondItem="NLR-e6-dBe" secondAttribute="trailing" type="default" id="Dot-5j-Imo"/>
@@ -303,6 +303,7 @@
                         <outlet property="pleaseNextImage" destination="2yE-9z-rK8" id="8Nk-KX-4fa"/>
                         <outlet property="pushDepositImage" destination="S1J-QN-nCp" id="GdH-aR-Udz"/>
                         <outlet property="questionImageView" destination="ViA-Hy-P6c" id="mmH-pG-xxP"/>
+                        <outlet property="view" destination="NLR-e6-dBe" id="bjs-SJ-rZw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qtH-Ps-AuJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -908,7 +909,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" bounces="NO" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="nDO-Xl-Wov">
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="CWF-mF-I0F">
                             <rect key="frame" x="0.0" y="154" width="320" height="263"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2308,12 +2309,9 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
             <relationships>
                 <relationship kind="action" name="DoneButton_down:"/>
                 <relationship kind="action" name="budgetTextField_begin:"/>
-                <relationship kind="action" name="budgetTextField_end:"/>
                 <relationship kind="action" name="endDateTextField_begin:"/>
-                <relationship kind="action" name="endDateTextField_end:"/>
                 <relationship kind="action" name="laterButton_down:"/>
                 <relationship kind="action" name="startDateTextField_begin:"/>
-                <relationship kind="action" name="startDateTextField_end:"/>
                 <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="budgetTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="endDateTextField" candidateClass="UITextField"/>
@@ -2363,11 +2361,8 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
                 <relationship kind="action" name="DoneButton_down:"/>
                 <relationship kind="action" name="DoneButton_down_2:"/>
                 <relationship kind="action" name="NameTextField_end:"/>
-                <relationship kind="action" name="NameTextField_next:"/>
                 <relationship kind="action" name="PeriodTextField_begin:"/>
-                <relationship kind="action" name="PeriodTextField_end:"/>
                 <relationship kind="action" name="ValueTextField_begin:"/>
-                <relationship kind="action" name="ValueTextField_end:"/>
                 <relationship kind="outlet" name="DoneButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="NameTextField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="PeriodTextField" candidateClass="UITextField"/>
@@ -2397,6 +2392,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
                 <relationship kind="outlet" name="pleaseNextImage" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="pushDepositImage" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="questionImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="view" candidateClass="UIView"/>
             </relationships>
         </class>
         <class className="NSLayoutConstraint" superclassName="NSObject">
@@ -2420,7 +2416,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="g87-xS-w6p"/>
-        <segue reference="gv0-sb-DCH"/>
+        <segue reference="VUD-Mx-Hmb"/>
         <segue reference="a8X-A1-VZc"/>
     </inferredMetricsTieBreakers>
 </document>

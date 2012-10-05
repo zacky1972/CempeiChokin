@@ -11,8 +11,6 @@
 #import "EditData.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>{
-    EditLog *editLog;
-    EditData *editData;
 }
 
 @property (strong, nonatomic) UIWindow *window;
